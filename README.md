@@ -41,3 +41,71 @@ If you do not want the current scene to be active when you run the game, and pre
 - BlastBender(in the menu bar) -> LoadSceneOnPlay -> Loading Scene
 
 This feature allows you to debug quickly without having to open the "Loading Scene" every time.
+
+#### Board Data Structure
+
+```mermaid
+flowchart LR
+
+A[IBoardItem] --> B[IBoardItem< TPoolItem >] 
+B --> C[BaseBoardItem< TPoolItem >]
+
+C--> G[SpaceArea]
+C--> D[Bead]
+C--> E[PowerUp]
+C--> F[Obstacle]
+
+E--> P1[Rocket]
+E--> P2[Bomb]
+E--> P3[Light Ball]
+
+F--> O1[Box]
+F--> O2[X1]
+F--> O3[X2]
+F--> O4[...]
+
+
+
+```
+
+<br />
+
+The diagram here displays the class hierarchy. Each class is a Controller and manages its associated Item. The TPoolItem item serves as the View of the Item and is its physical form.
+
+ I can store an IBoardData array for each level.To make an Item meaningful, I need to know its Row, Column, and the type of the Item.IBoardData contains all of these.As you can see, it is simple.
+
+```csharp
+namespace BoardItems.LevelData
+{
+    [CreateAssetMenu(fileName = "Levels", menuName = "Level")]
+    public class LevelData : ScriptableObject
+    {
+        public int RowLength;
+        public int ColumnLength;
+
+        [SerializeReference] 
+        public IBoardItem[] BoardItems;
+
+        public Border.Border[] Border;
+    }
+}
+```
+
+Now let’s examine how Unity stores this data in YAML format.
+
+```yaml
+- rid: 7831880784201908428
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 0
+        _column: 4
+        _color: 1
+
+- rid: 7831880784201908429
+      type: {class: SpaceArea, ns: BoardItems.Void, asm: Assembly-CSharp}
+      data:
+        _row: 0
+        _column: 5
+```
+
+Holding a reference with [SerializeReference] makes our work easier. There is color in Bead, but it is not necessary for SpaceArea.
