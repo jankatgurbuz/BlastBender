@@ -35,9 +35,14 @@ namespace Blast.Controller
             }
         }
 
-        public async UniTask AdjustUIAfterFrame()
+        private async UniTask AdjustUIAfterFrame()
         {
             await UniTask.Yield();
+            Adjust();
+        }
+
+        protected void Adjust()
+        {
             _canvases.ForEach(x => x.Adjust());
         }
 

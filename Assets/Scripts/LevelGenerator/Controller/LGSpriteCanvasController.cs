@@ -17,7 +17,7 @@ namespace LevelGenerator.Controller
         }
         public void LateTick()
         {
-            AdjustUIAfterFrame().Forget();
+            Adjust();
         }
     }
 }
