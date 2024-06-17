@@ -3,7 +3,6 @@ using Cysharp.Threading.Tasks;
 using Global.Controller;
 using SC.Core.UI;
 using Signals;
-using UnityEngine;
 using Zenject;
 
 namespace Blast.Controller

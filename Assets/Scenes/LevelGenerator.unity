@@ -252,7 +252,19 @@ MonoBehaviour:
       m_Calls: []
   ClickEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 22932697}
+        m_TargetAssemblyTypeName: LevelGenerator.Buttons.RowAndColumnButton, Assembly-CSharp
+        m_MethodName: DecreaseRow
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   references:
     version: 2
     RefIds:
@@ -2017,7 +2029,19 @@ MonoBehaviour:
       m_Calls: []
   ClickEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 779357649}
+        m_TargetAssemblyTypeName: LevelGenerator.Buttons.RowAndColumnButton, Assembly-CSharp
+        m_MethodName: DecreaseColumn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   references:
     version: 2
     RefIds:
@@ -4503,7 +4527,19 @@ MonoBehaviour:
       m_Calls: []
   ClickEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1712470740}
+        m_TargetAssemblyTypeName: LevelGenerator.Buttons.RowAndColumnButton, Assembly-CSharp
+        m_MethodName: IncreaseColumn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   references:
     version: 2
     RefIds:
@@ -5017,7 +5053,19 @@ MonoBehaviour:
       m_Calls: []
   ClickEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1763364911}
+        m_TargetAssemblyTypeName: LevelGenerator.Buttons.RowAndColumnButton, Assembly-CSharp
+        m_MethodName: IncreaseRow
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   references:
     version: 2
     RefIds:
