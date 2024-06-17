@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 22932696}
   - component: {fileID: 22932697}
   - component: {fileID: 22932698}
+  - component: {fileID: 22932699}
   m_Layer: 0
   m_Name: RowDecreaseButton
   m_TagString: Untagged
@@ -274,6 +275,18 @@ MonoBehaviour:
         LocalScale: {x: 1, y: 1, z: 1}
         _topOffset: 0.07
         _horizontalOffset: 0.61
+--- !u!114 &22932699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 22932692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fe13f1f30c8b4a048aba62730f12450, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &72592647
 GameObject:
   m_ObjectHideFlags: 0
@@ -286,6 +299,7 @@ GameObject:
   - component: {fileID: 72592650}
   - component: {fileID: 72592652}
   - component: {fileID: 72592653}
+  - component: {fileID: 72592654}
   m_Layer: 0
   m_Name: Bead1
   m_TagString: Untagged
@@ -414,6 +428,18 @@ MonoBehaviour:
         LocalScale: {x: 0.35, y: 0.35, z: 0.35}
         _topOffset: 0.1
         _horizontalOffset: 0.1
+--- !u!114 &72592654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 72592647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fe13f1f30c8b4a048aba62730f12450, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &135776499
 GameObject:
   m_ObjectHideFlags: 0
@@ -835,6 +861,7 @@ GameObject:
   - component: {fileID: 273817227}
   - component: {fileID: 273817229}
   - component: {fileID: 273817230}
+  - component: {fileID: 273817231}
   m_Layer: 0
   m_Name: Bead4
   m_TagString: Untagged
@@ -963,6 +990,18 @@ MonoBehaviour:
         LocalScale: {x: 0.35, y: 0.35, z: 0.35}
         _topOffset: 0.07
         _horizontalOffset: 0.1
+--- !u!114 &273817231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 273817224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fe13f1f30c8b4a048aba62730f12450, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &505463420
 GameObject:
   m_ObjectHideFlags: 0
@@ -1940,6 +1979,7 @@ GameObject:
   - component: {fileID: 779357647}
   - component: {fileID: 779357649}
   - component: {fileID: 779357648}
+  - component: {fileID: 779357651}
   m_Layer: 0
   m_Name: ColumnDecreaseButton
   m_TagString: Untagged
@@ -2079,6 +2119,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2088879650}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &779357651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 779357646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fe13f1f30c8b4a048aba62730f12450, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &850981183
 GameObject:
   m_ObjectHideFlags: 0
@@ -2486,6 +2538,7 @@ GameObject:
   - component: {fileID: 981883254}
   - component: {fileID: 981883258}
   - component: {fileID: 981883259}
+  - component: {fileID: 981883260}
   m_Layer: 0
   m_Name: SaveButton
   m_TagString: Untagged
@@ -2613,6 +2666,18 @@ MonoBehaviour:
         LocalScale: {x: 0.4, y: 0.4, z: 1}
         _topOffset: 0.06
         _horizontalOffset: 0.2
+--- !u!114 &981883260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 981883253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fe13f1f30c8b4a048aba62730f12450, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &996384963
 GameObject:
   m_ObjectHideFlags: 0
@@ -2983,6 +3048,7 @@ GameObject:
   - component: {fileID: 1243359555}
   - component: {fileID: 1243359557}
   - component: {fileID: 1243359558}
+  - component: {fileID: 1243359559}
   m_Layer: 0
   m_Name: Bead6
   m_TagString: Untagged
@@ -3111,6 +3177,18 @@ MonoBehaviour:
         LocalScale: {x: 0.35, y: 0.35, z: 0.35}
         _topOffset: 0.07
         _horizontalOffset: 0.1
+--- !u!114 &1243359559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1243359552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fe13f1f30c8b4a048aba62730f12450, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1253869556
 GameObject:
   m_ObjectHideFlags: 0
@@ -3449,6 +3527,7 @@ GameObject:
   - component: {fileID: 1286410108}
   - component: {fileID: 1286410110}
   - component: {fileID: 1286410111}
+  - component: {fileID: 1286410112}
   m_Layer: 0
   m_Name: Bead3
   m_TagString: Untagged
@@ -3577,6 +3656,18 @@ MonoBehaviour:
         LocalScale: {x: 0.35, y: 0.35, z: 0.35}
         _topOffset: 0.1
         _horizontalOffset: 0.1
+--- !u!114 &1286410112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1286410105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fe13f1f30c8b4a048aba62730f12450, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1409817806
 GameObject:
   m_ObjectHideFlags: 0
@@ -3796,6 +3887,7 @@ GameObject:
   - component: {fileID: 1445374147}
   - component: {fileID: 1445374149}
   - component: {fileID: 1445374150}
+  - component: {fileID: 1445374151}
   m_Layer: 0
   m_Name: Bead5
   m_TagString: Untagged
@@ -3924,6 +4016,18 @@ MonoBehaviour:
         LocalScale: {x: 0.35, y: 0.35, z: 0.35}
         _topOffset: 0.07
         _horizontalOffset: 0
+--- !u!114 &1445374151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1445374144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fe13f1f30c8b4a048aba62730f12450, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1497849989
 GameObject:
   m_ObjectHideFlags: 0
@@ -4264,6 +4368,7 @@ GameObject:
   - component: {fileID: 1622917533}
   - component: {fileID: 1622917535}
   - component: {fileID: 1622917534}
+  - component: {fileID: 1622917536}
   m_Layer: 0
   m_Name: Space Cell
   m_TagString: Untagged
@@ -4393,6 +4498,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SelectedType: BoardItems.Void.SpaceArea
   ItemColors: 0
+--- !u!114 &1622917536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1622917531}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fe13f1f30c8b4a048aba62730f12450, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1691936018
 GameObject:
   m_ObjectHideFlags: 0
@@ -4438,6 +4555,7 @@ GameObject:
   - component: {fileID: 1712470738}
   - component: {fileID: 1712470740}
   - component: {fileID: 1712470739}
+  - component: {fileID: 1712470742}
   m_Layer: 0
   m_Name: ColumnIncreaseButton
   m_TagString: Untagged
@@ -4577,6 +4695,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2088879650}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1712470742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1712470737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fe13f1f30c8b4a048aba62730f12450, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1733323141
 GameObject:
   m_ObjectHideFlags: 0
@@ -4589,6 +4719,7 @@ GameObject:
   - component: {fileID: 1733323144}
   - component: {fileID: 1733323146}
   - component: {fileID: 1733323147}
+  - component: {fileID: 1733323148}
   m_Layer: 0
   m_Name: Bead2
   m_TagString: Untagged
@@ -4717,6 +4848,18 @@ MonoBehaviour:
         LocalScale: {x: 0.35, y: 0.35, z: 0.35}
         _topOffset: 0.1
         _horizontalOffset: 0
+--- !u!114 &1733323148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1733323141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fe13f1f30c8b4a048aba62730f12450, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1745328312
 GameObject:
   m_ObjectHideFlags: 0
@@ -4936,6 +5079,7 @@ GameObject:
   - component: {fileID: 1763364910}
   - component: {fileID: 1763364911}
   - component: {fileID: 1763364912}
+  - component: {fileID: 1763364913}
   m_Layer: 0
   m_Name: RowIncreaseButton
   m_TagString: Untagged
@@ -5075,6 +5219,18 @@ MonoBehaviour:
         LocalScale: {x: 1, y: 1, z: 1}
         _topOffset: 0.07
         _horizontalOffset: 0.15
+--- !u!114 &1763364913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1763364906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fe13f1f30c8b4a048aba62730f12450, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1850686858
 GameObject:
   m_ObjectHideFlags: 0
@@ -5413,6 +5569,7 @@ GameObject:
   - component: {fileID: 1950218890}
   - component: {fileID: 1950218894}
   - component: {fileID: 1950218895}
+  - component: {fileID: 1950218896}
   m_Layer: 0
   m_Name: VoidButton
   m_TagString: Untagged
@@ -5542,6 +5699,18 @@ MonoBehaviour:
         LocalScale: {x: 0.4, y: 0.4, z: 1}
         _topOffset: 0.51
         _horizontalOffset: 0.29
+--- !u!114 &1950218896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1950218889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fe13f1f30c8b4a048aba62730f12450, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2049260239
 GameObject:
   m_ObjectHideFlags: 0
