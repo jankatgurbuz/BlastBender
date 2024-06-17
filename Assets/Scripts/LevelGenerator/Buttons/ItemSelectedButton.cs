@@ -1,8 +1,9 @@
 using UnityEngine;
 using NaughtyAttributes;
-using SpriteCanvasSystem;
+
 using System;
 using LevelGenerator.Controller;
+using SC.Core.UI;
 using Zenject;
 
 namespace LevelGenerator.Buttons
@@ -18,10 +19,10 @@ namespace LevelGenerator.Buttons
         private void Awake()
         {
             _button = GetComponent<UIButton>();
-            _button.OnClick.AddListener(OnClick);
+            _button.ClickEvent.AddListener(OnClick);
         }
 
-        private void OnClick(Vector3 arg0)
+        private void OnClick()
         {
             _levelGeneratorController.SelectedType = Type.GetType(SelectedType);
             _levelGeneratorController.ItemColors = ItemColors;

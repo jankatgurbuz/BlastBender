@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using Global.Controller;
+using SC.Core.UI;
 using Signals;
-using SpriteCanvasSystem;
+using UnityEngine;
 using Zenject;
 
 namespace Blast.Controller
@@ -12,10 +13,12 @@ namespace Blast.Controller
         public void Enable();
         public void Disable();
     }
+
     public class SpriteCanvasController : ISpriteCanvasController
     {
         private readonly List<SpriteCanvas> _canvases;
-        public SpriteCanvasController(SignalBus signalBus,List<SpriteCanvas> canvases)
+
+        public SpriteCanvasController(SignalBus signalBus, List<SpriteCanvas> canvases)
         {
             _canvases = canvases;
             signalBus.Subscribe<GameStateReaction>(OnReaction);
@@ -27,6 +30,10 @@ namespace Blast.Controller
             {
                 AdjustUIAfterFrame().Forget();
             }
+            else if (reaction.GameStatus == GameStatus.LevelGenerator)
+            {
+                AdjustUIAfterFrame().Forget();
+            }
         }
 
         public async UniTask AdjustUIAfterFrame()
@@ -35,7 +42,7 @@ namespace Blast.Controller
             _canvases.ForEach(x => x.Adjust());
         }
 
-        public void Disable() => _canvases.ForEach(x => x.DisableUI());
-        public void Enable() => _canvases.ForEach(x => x.EnableUI());
+        public void Disable() => _canvases.ForEach(x => x.HideAllUIs());
+        public void Enable() => _canvases.ForEach(x => x.ShowAllUIs());
     }
 }

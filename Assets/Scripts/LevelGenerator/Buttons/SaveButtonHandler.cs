@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using LevelGenerator.Controller;
-using SpriteCanvasSystem;
+using SC.Core.UI;
 using UnityEngine;
-using UnityEngine.UI;
 using Zenject;
 
 namespace LevelGenerator.Buttons
@@ -22,7 +19,7 @@ namespace LevelGenerator.Buttons
         {
             if (TryGetComponent<UIButton>(out var button))
             {
-                button.OnClick.AddListener(_saveController.SaveOnClick);
+                button.ClickEvent.AddListener(_saveController.SaveOnClick);
             }
         }
     }

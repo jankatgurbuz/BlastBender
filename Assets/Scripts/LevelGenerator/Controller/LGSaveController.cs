@@ -8,7 +8,7 @@ namespace LevelGenerator.Controller
 {
     public interface ILGSaveController
     {
-        public void SaveOnClick(Vector3 vec);
+        public void SaveOnClick();
     }
     public class LGSaveController : ILGSaveController
     {
@@ -19,7 +19,7 @@ namespace LevelGenerator.Controller
         {
             _levelGeneratorController = levelGeneratorController;
         }
-        public void SaveOnClick(Vector3 vec)
+        public void SaveOnClick()
         {
             CreateMyAsset();
         }

@@ -3,7 +3,8 @@ using Blast.Controller;
 using BoardItems.Border;
 using LevelGenerator.Controller;
 using LevelGenerator.GridSystem.View;
-using SpriteCanvasSystem;
+using NaughtyAttributes;
+using SC.Core.UI;
 using UnityEngine;
 using Zenject;
 
