@@ -43,7 +43,7 @@ namespace Blast.Controller
 
         protected void Adjust()
         {
-            _canvases.ForEach(x => x.Adjust());
+            _canvases.ForEach(x => x.AdjustDependentUIElements());
         }
 
         public void Disable() => _canvases.ForEach(x => x.HideAllUIs());

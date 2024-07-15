@@ -31,7 +31,7 @@ namespace MenuScene.NavigatorPanel.View
             public NavigationItem Item;
         }
 
-        [Button]
+        [NaughtyAttributes.Button]
         private void Start()
         {
             _unselectedPositions = CreatePositions(6);

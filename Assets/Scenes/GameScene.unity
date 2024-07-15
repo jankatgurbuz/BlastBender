@@ -181,7 +181,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 90d19bb0badc94e2aac143ea43afecc0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -222,12 +222,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _responsiveOperation:
     rid: 7568872387487989916
-  _registerType: 0
-  _canvasKey: 
-  _spriteCanvas: {fileID: 0}
-  _targetKey: 
+  _register:
+    _registerType: 0
+    _canvasKey: 
+    _spriteCanvas: {fileID: 333832017}
+  _uIElementProperties:
+    _orderInLayer: 0
+    _ignoreXPosition: 0
+    _ignoreYPosition: 0
+    _ignoreXScale: 0
+    _ignoreYScale: 0
+    _useInitialCameraPosition: 0
+    _targetKey: 
   _itemPosition: {fileID: 120220223}
-  _orderInLayer: 1
   _hasReference: 0
   _referenceElement: {fileID: 0}
   _alpha: 1
@@ -239,8 +246,9 @@ MonoBehaviour:
     - rid: 7568872387487989916
       type: {class: Center, ns: SC.Core.ResponsiveOperations, asm: SC.Core}
       data:
-        LocalScale: {x: 1, y: 1, z: 1}
+        _localScale: {x: 1, y: 1, z: 1}
         _topOffset: 0
+        _isOffsetProportionalToScreenWidth: 0
         _horizontalOffset: 0
 --- !u!1 &312358209
 GameObject:
@@ -426,14 +434,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canvasKey: 
+  _runOnAwake: 1
+  _isVirtualCamera: 0
+  _virtualCamera:
+    _transform: {fileID: 0}
+    _orthographicSize: 5
+    _screenWidth: 1920
+    _screenHeight: 1080
   _camera: {fileID: 312358212}
   _planeDistance: 10
+  _canvasScaler: 0
   _sortingLayerName: Default
   _sortingLayerOrder: 0
-  _canvasScaler: 0
   _uIElementProperties:
-    Alpha: 1
-    Interactable: 1
+    _alpha: 1
+    _interactable: 1
+  _uiElements:
+  - {fileID: 120220224}
+  - {fileID: 388459836}
 --- !u!1 &388459833
 GameObject:
   m_ObjectHideFlags: 0
@@ -461,8 +479,8 @@ Transform:
   m_GameObject: {fileID: 388459833}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.5, y: 9.6524, z: 0}
-  m_LocalScale: {x: 540.8878, y: 17.38, z: 1}
+  m_LocalPosition: {x: 4.5, y: 9.560801, z: 0}
+  m_LocalScale: {x: 541.02563, y: 21.96, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 333832016}
@@ -507,8 +525,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 5
-  m_Sprite: {fileID: 21300000, guid: 286930ec4d0de43e9a5de7c262c4df21, type: 3}
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: ba2852294ca59463b98c62c86cd04d7e, type: 3}
   m_Color: {r: 0.7529412, g: 0.21568628, b: 0.30980393, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -533,12 +551,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _responsiveOperation:
     rid: 7568872387487989914
-  _registerType: 0
-  _canvasKey: 
-  _spriteCanvas: {fileID: 0}
-  _targetKey: 
+  _register:
+    _registerType: 0
+    _canvasKey: 
+    _spriteCanvas: {fileID: 333832017}
+  _uIElementProperties:
+    _orderInLayer: 0
+    _ignoreXPosition: 0
+    _ignoreYPosition: 0
+    _ignoreXScale: 0
+    _ignoreYScale: 0
+    _useInitialCameraPosition: 0
+    _targetKey: 
   _itemPosition: {fileID: 388459834}
-  _orderInLayer: 5
   _hasReference: 0
   _referenceElement: {fileID: 0}
   _alpha: 1
@@ -550,8 +575,9 @@ MonoBehaviour:
     - rid: 7568872387487989914
       type: {class: TopStretch, ns: SC.Core.ResponsiveOperations, asm: SC.Core}
       data:
-        LocalScale: {x: 1, y: 17.38, z: 1}
+        _localScale: {x: 1, y: 21.96, z: 1}
         _topOffset: 0
+        _isOffsetProportionalToScreenWidth: 0
         _horizontalOffset: 0
         _edgeOffset: 0
         _maxSize: 10000
