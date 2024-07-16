@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7023121071158606325}
   - component: {fileID: 4643392125330111744}
   - component: {fileID: 2274813245595547406}
+  - component: {fileID: 3417121777148780381}
   m_Layer: 0
   m_Name: NavigatorItem
   m_TagString: Untagged
@@ -26,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2792882458197779396}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1, y: 1, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
@@ -36,7 +37,7 @@ Transform:
   - {fileID: 2447590706718122145}
   - {fileID: 1422949332165785662}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0.79, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4643392125330111744
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -137,6 +138,21 @@ MonoBehaviour:
         _topOffset: 0
         _isOffsetProportionalToScreenWidth: 0
         _horizontalOffset: 0
+--- !u!114 &3417121777148780381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2792882458197779396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fba597712fef452ba2848a4edb5f267, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _textMeshProObj: {fileID: 6665850659079149992}
+  _iconObj: {fileID: 1422949332165785662}
+  _uiElement: {fileID: 2599614422378773567}
 --- !u!1 &6061321870743108290
 GameObject:
   m_ObjectHideFlags: 0
@@ -391,8 +407,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 2
-  m_fontSizeBase: 2
+  m_fontSize: 1.9
+  m_fontSizeBase: 1.9
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -433,7 +449,7 @@ MonoBehaviour:
   _SortingLayer: 0
   _SortingLayerID: 0
   _SortingOrder: 5
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_renderer: {fileID: 4769501237551060972}
   m_maskType: 0
 --- !u!114 &1251734405211915071
@@ -477,7 +493,7 @@ MonoBehaviour:
         _localScale: {x: 1, y: 1, z: 1}
         _topOffset: 0
         _isOffsetProportionalToScreenWidth: 0
-        _horizontalOffset: 0
+        _horizontalOffset: -0.01
 --- !u!1 &7504408228996149689
 GameObject:
   m_ObjectHideFlags: 0
