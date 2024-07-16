@@ -2,9 +2,8 @@ using System.Collections.Generic;
 using Blast.Controller;
 using Blast.View;
 using BoardItems.Border;
-using SpriteCanvasSystem;
+using SC.Core.UI;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Zenject;
 
 namespace Blast.Installer

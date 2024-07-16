@@ -10,10 +10,11 @@ namespace Blast.Controller
         private readonly IInGameController _inGameController;
 
         public CameraController(SignalBus signalBus, Camera camera, IGridController gridController,
-            IInGameController inGameController) : base(camera, gridController)
+            IInGameController inGameController,IMainMenuCameraController mainMenuCameraController) : base(camera, gridController)
         {
             _inGameController = inGameController;
             signalBus.Subscribe<GameStateReaction>(OnReaction);
+            mainMenuCameraController.AddCamera(camera);
         }
 
         private void OnReaction(GameStateReaction reaction)

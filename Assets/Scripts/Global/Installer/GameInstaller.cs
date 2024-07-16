@@ -16,6 +16,7 @@ namespace Global.Installer
             Container.BindInterfacesAndSelfTo<GameController>().AsSingle().NonLazy();
             Container.Bind<LayersController>().To<LayersController>().AsSingle().WithArguments(_layersProperties)
                 .NonLazy();
+            Container.Bind<IMainMenuCameraController>().To<MainMenuCameraController>().AsSingle().NonLazy();
             Container.DeclareSignal<GameStateReaction>().OptionalSubscriber();
         }
     }
