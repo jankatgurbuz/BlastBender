@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using Global.Controller;
 using MenuScene.MenuCanvas.Controller;
@@ -11,7 +12,7 @@ namespace MenuScene.Installer
     {
         // [SerializeField] private NavigationView _navigationView;
         // [SerializeField] private MenuPanelsHandler _menuPanelsHandler;
-        [SerializeField] private NavigationCanvasView navigationCanvasView;
+        [SerializeField] private List<NavigationCanvasView> navigationCanvasView;
 
         public override void InstallBindings()
         {

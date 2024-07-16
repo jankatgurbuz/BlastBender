@@ -1,19 +1,13 @@
+using SC.Core.Helper.Groups;
 using SC.Core.UI;
 using UnityEngine;
 
 namespace MenuScene.MenuCanvas.View
 {
-    public interface INavigationCanvasView
-    {
-        public SpriteCanvas SpriteCanvas { get; }
-        public void Show();
-        public void Hide();
-    }
-
-    public class NavigationCanvasView : MonoBehaviour, INavigationCanvasView
+    public class NavigationCanvasView : MonoBehaviour
     {
         [SerializeField] private SpriteCanvas _spriteCanvas;
-
+        [SerializeField] private GroupSelector _groupSelector;
         public SpriteCanvas SpriteCanvas => _spriteCanvas;
 
         public void Hide()
@@ -24,6 +18,11 @@ namespace MenuScene.MenuCanvas.View
         public void Show()
         {
             _spriteCanvas.ShowAllUIs();
+        }
+
+        public void SelectedNavigation(int selectedItemIndex)
+        {
+            _groupSelector.UpdateItemScales(selectedItemIndex);
         }
     }
 }

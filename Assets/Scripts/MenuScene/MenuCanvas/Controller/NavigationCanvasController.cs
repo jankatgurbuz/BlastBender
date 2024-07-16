@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using Global.Controller;
 
@@ -15,13 +16,17 @@ namespace MenuScene.MenuCanvas.Controller
     }
     public class NavigationCanvasController : INavigationCanvasController
     {
-         private readonly INavigationCanvasView _navigationCanvasView;
+         private readonly List<NavigationCanvasView> _navigationCanvasViews;
 
-        public NavigationCanvasController(SignalBus signalBus,INavigationCanvasView navigationCanvasView,IMainMenuCameraController mainMenuCameraHandler)
+        public NavigationCanvasController(SignalBus signalBus,List<NavigationCanvasView> navigationCanvasViews,IMainMenuCameraController mainMenuCameraHandler)
         {
-            _navigationCanvasView = navigationCanvasView;
+            _navigationCanvasViews = navigationCanvasViews;
             signalBus.Subscribe<GameStateReaction>(OnReaction);
-            mainMenuCameraHandler.Register(_navigationCanvasView.SpriteCanvas);
+            foreach (var canvasItem in navigationCanvasViews)
+            {
+                mainMenuCameraHandler.Register(canvasItem.SpriteCanvas);
+            }
+           
         }
         private void OnReaction(GameStateReaction reaction)
         {
@@ -41,12 +46,18 @@ namespace MenuScene.MenuCanvas.Controller
 
         public void Hide()
         {
-            _navigationCanvasView.Hide();
+            foreach (var canvasItem in _navigationCanvasViews)
+            {
+                canvasItem.Hide();
+            }
         }
 
         public void Show()
         {
-            _navigationCanvasView.Show();
+            foreach (var canvasItem in _navigationCanvasViews)
+            {
+                canvasItem.Show();
+            }
             // _navigationPanelController.DirectChange(2);
         }
     }

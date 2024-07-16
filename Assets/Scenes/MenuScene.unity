@@ -382,6 +382,38 @@ PrefabInstance:
       propertyPath: _register._spriteCanvas
       value: 
       objectReference: {fileID: 365248816}
+    - target: {fileID: 9186039050939826771, guid: 31cb647fa8fa14a87a38690f9cf69784, type: 3}
+      propertyPath: DownEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9186039050939826771, guid: 31cb647fa8fa14a87a38690f9cf69784, type: 3}
+      propertyPath: DownEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9186039050939826771, guid: 31cb647fa8fa14a87a38690f9cf69784, type: 3}
+      propertyPath: DownEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 365248818}
+    - target: {fileID: 9186039050939826771, guid: 31cb647fa8fa14a87a38690f9cf69784, type: 3}
+      propertyPath: DownEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9186039050939826771, guid: 31cb647fa8fa14a87a38690f9cf69784, type: 3}
+      propertyPath: DownEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SelectedNavigation
+      objectReference: {fileID: 0}
+    - target: {fileID: 9186039050939826771, guid: 31cb647fa8fa14a87a38690f9cf69784, type: 3}
+      propertyPath: DownEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: MenuScene.MenuCanvas.View.NavigationCanvasView, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 9186039050939826771, guid: 31cb647fa8fa14a87a38690f9cf69784, type: 3}
+      propertyPath: DownEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9186039050939826771, guid: 31cb647fa8fa14a87a38690f9cf69784, type: 3}
+      propertyPath: DownEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3307,16 +3339,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 308ad33d636b544d48865df6cfc2e713, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _navigationSubPanel: {fileID: 214867628}
-  _navigationItemList:
-  - {RectTransform: {fileID: 1412690160}, Item: {fileID: 1412690165}}
-  - {RectTransform: {fileID: 1144908356}, Item: {fileID: 1550647775}}
-  - {RectTransform: {fileID: 1015375809}, Item: {fileID: 1279067176}}
-  - {RectTransform: {fileID: 664130328}, Item: {fileID: 664130331}}
-  - {RectTransform: {fileID: 546584361}, Item: {fileID: 2015717702}}
-  _indicator: {fileID: 1643259213}
-  _unselectedPositions: []
-  _selectedPositions: []
 --- !u!1 &222116146
 GameObject:
   m_ObjectHideFlags: 0
@@ -4403,6 +4425,34 @@ PrefabInstance:
       propertyPath: _register._spriteCanvas
       value: 
       objectReference: {fileID: 365248816}
+    - target: {fileID: 5594128507999494680, guid: 0bab3e912a56a48d78ad47b1c1ef2a74, type: 3}
+      propertyPath: DownEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5594128507999494680, guid: 0bab3e912a56a48d78ad47b1c1ef2a74, type: 3}
+      propertyPath: DownEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5594128507999494680, guid: 0bab3e912a56a48d78ad47b1c1ef2a74, type: 3}
+      propertyPath: DownEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 365248818}
+    - target: {fileID: 5594128507999494680, guid: 0bab3e912a56a48d78ad47b1c1ef2a74, type: 3}
+      propertyPath: DownEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5594128507999494680, guid: 0bab3e912a56a48d78ad47b1c1ef2a74, type: 3}
+      propertyPath: DownEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SelectedNavigation
+      objectReference: {fileID: 0}
+    - target: {fileID: 5594128507999494680, guid: 0bab3e912a56a48d78ad47b1c1ef2a74, type: 3}
+      propertyPath: DownEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: MenuScene.MenuCanvas.View.NavigationCanvasView, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5594128507999494680, guid: 0bab3e912a56a48d78ad47b1c1ef2a74, type: 3}
+      propertyPath: DownEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 6398527932538969064, guid: 0bab3e912a56a48d78ad47b1c1ef2a74, type: 3}
       propertyPath: m_LocalScale.x
       value: -0.002128972
@@ -10335,17 +10385,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2530996623818465908, guid: 93d255255ab1643119abc526c06fc176, type: 3}
   m_PrefabInstance: {fileID: 1740873037}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &664130331 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4538304551706566422, guid: 93d255255ab1643119abc526c06fc176, type: 3}
-  m_PrefabInstance: {fileID: 1740873037}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7c613768d23c45c9a967a93ae088d78, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &673391547
 GameObject:
   m_ObjectHideFlags: 0
@@ -11961,6 +12000,38 @@ PrefabInstance:
       propertyPath: _register._spriteCanvas
       value: 
       objectReference: {fileID: 365248816}
+    - target: {fileID: 5265582998870738546, guid: be8f8206ca8194e3d819137a58b08c2d, type: 3}
+      propertyPath: DownEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5265582998870738546, guid: be8f8206ca8194e3d819137a58b08c2d, type: 3}
+      propertyPath: DownEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5265582998870738546, guid: be8f8206ca8194e3d819137a58b08c2d, type: 3}
+      propertyPath: DownEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 365248818}
+    - target: {fileID: 5265582998870738546, guid: be8f8206ca8194e3d819137a58b08c2d, type: 3}
+      propertyPath: DownEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5265582998870738546, guid: be8f8206ca8194e3d819137a58b08c2d, type: 3}
+      propertyPath: DownEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SelectedNavigation
+      objectReference: {fileID: 0}
+    - target: {fileID: 5265582998870738546, guid: be8f8206ca8194e3d819137a58b08c2d, type: 3}
+      propertyPath: DownEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: MenuScene.MenuCanvas.View.NavigationCanvasView, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5265582998870738546, guid: be8f8206ca8194e3d819137a58b08c2d, type: 3}
+      propertyPath: DownEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5265582998870738546, guid: be8f8206ca8194e3d819137a58b08c2d, type: 3}
+      propertyPath: DownEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 6664604704771850114, guid: be8f8206ca8194e3d819137a58b08c2d, type: 3}
       propertyPath: m_LocalScale.x
       value: -0.002128972
@@ -18804,6 +18875,38 @@ PrefabInstance:
       propertyPath: _register._spriteCanvas
       value: 
       objectReference: {fileID: 365248816}
+    - target: {fileID: 8697462285022761998, guid: b141650c287da4724b9977b0b89aacf5, type: 3}
+      propertyPath: DownEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8697462285022761998, guid: b141650c287da4724b9977b0b89aacf5, type: 3}
+      propertyPath: DownEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8697462285022761998, guid: b141650c287da4724b9977b0b89aacf5, type: 3}
+      propertyPath: DownEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 365248818}
+    - target: {fileID: 8697462285022761998, guid: b141650c287da4724b9977b0b89aacf5, type: 3}
+      propertyPath: DownEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8697462285022761998, guid: b141650c287da4724b9977b0b89aacf5, type: 3}
+      propertyPath: DownEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SelectedNavigation
+      objectReference: {fileID: 0}
+    - target: {fileID: 8697462285022761998, guid: b141650c287da4724b9977b0b89aacf5, type: 3}
+      propertyPath: DownEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: MenuScene.MenuCanvas.View.NavigationCanvasView, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8697462285022761998, guid: b141650c287da4724b9977b0b89aacf5, type: 3}
+      propertyPath: DownEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8697462285022761998, guid: b141650c287da4724b9977b0b89aacf5, type: 3}
+      propertyPath: DownEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -19966,17 +20069,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1277169947}
   m_CullTransparentMesh: 1
---- !u!114 &1279067176 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4197947086592184949, guid: 121fdd72118804bfb95d43938ac3c3b6, type: 3}
-  m_PrefabInstance: {fileID: 1015375808}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7c613768d23c45c9a967a93ae088d78, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1299326395
 GameObject:
   m_ObjectHideFlags: 0
@@ -23070,17 +23162,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5473743659501223163, guid: 05008ba6840f64d04ab42e95fa1a20f4, type: 3}
   m_PrefabInstance: {fileID: 1412690159}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1412690165 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6202027538197660057, guid: 05008ba6840f64d04ab42e95fa1a20f4, type: 3}
-  m_PrefabInstance: {fileID: 1412690159}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7c613768d23c45c9a967a93ae088d78, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1430667668
 GameObject:
   m_ObjectHideFlags: 0
@@ -23267,6 +23348,38 @@ PrefabInstance:
       propertyPath: _register._spriteCanvas
       value: 
       objectReference: {fileID: 365248816}
+    - target: {fileID: 587500596645129163, guid: f906bf73325f44351a074f3742dbfdc0, type: 3}
+      propertyPath: DownEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 587500596645129163, guid: f906bf73325f44351a074f3742dbfdc0, type: 3}
+      propertyPath: DownEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 587500596645129163, guid: f906bf73325f44351a074f3742dbfdc0, type: 3}
+      propertyPath: DownEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 365248818}
+    - target: {fileID: 587500596645129163, guid: f906bf73325f44351a074f3742dbfdc0, type: 3}
+      propertyPath: DownEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 587500596645129163, guid: f906bf73325f44351a074f3742dbfdc0, type: 3}
+      propertyPath: DownEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SelectedNavigation
+      objectReference: {fileID: 0}
+    - target: {fileID: 587500596645129163, guid: f906bf73325f44351a074f3742dbfdc0, type: 3}
+      propertyPath: DownEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: MenuScene.MenuCanvas.View.NavigationCanvasView, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 587500596645129163, guid: f906bf73325f44351a074f3742dbfdc0, type: 3}
+      propertyPath: DownEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 587500596645129163, guid: f906bf73325f44351a074f3742dbfdc0, type: 3}
+      propertyPath: DownEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 2110303472707998267, guid: f906bf73325f44351a074f3742dbfdc0, type: 3}
       propertyPath: m_LocalScale.x
       value: -0.002128972
@@ -24219,6 +24332,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1513486356}
   - component: {fileID: 1513486355}
+  - component: {fileID: 1513486357}
   m_Layer: 0
   m_Name: SpriteCanvas
   m_TagString: Untagged
@@ -24282,6 +24396,19 @@ Transform:
   - {fileID: 477784069}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1513486357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1513486354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1dcefdec53df40deb7347a876bdd5d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spriteCanvas: {fileID: 1513486355}
 --- !u!1 &1516800437
 GameObject:
   m_ObjectHideFlags: 0
@@ -24663,17 +24790,6 @@ MonoBehaviour:
   m_EffectColor: {r: 1, g: 0.50181097, b: 0, a: 1}
   m_EffectDistance: {x: 5, y: 5}
   m_UseGraphicAlpha: 1
---- !u!114 &1550647775 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 721641998819985710, guid: 737e7f9ba7c56410ba62661b200f3d0a, type: 3}
-  m_PrefabInstance: {fileID: 1144908355}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7c613768d23c45c9a967a93ae088d78, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1553343990
 GameObject:
   m_ObjectHideFlags: 0
@@ -25584,7 +25700,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f2252338b8ac4210b4d250fb2c7daf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  navigationCanvasView: {fileID: 365248818}
+  navigationCanvasView:
+  - {fileID: 365248818}
+  - {fileID: 1513486357}
 --- !u!114 &1607554552
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30821,17 +30939,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1988554310}
   m_CullTransparentMesh: 1
---- !u!114 &2015717702 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3592161277295228304, guid: 98d8317d19744431fabaaa9dcf89d75c, type: 3}
-  m_PrefabInstance: {fileID: 546584360}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7c613768d23c45c9a967a93ae088d78, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2023453004
 GameObject:
   m_ObjectHideFlags: 0
