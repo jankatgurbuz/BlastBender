@@ -21,7 +21,7 @@ namespace LevelGenerator.Controller
         }
         public void Initialize()
         {
-            _container.Resolve<ILGGridController>().Start();
+            _container.Resolve<LGPointIndicatorController>().Start();
             _container.Resolve<ILevelGeneratorController>().Start();
             _container.Resolve<ILGGridInteractionController>().Start();
         }

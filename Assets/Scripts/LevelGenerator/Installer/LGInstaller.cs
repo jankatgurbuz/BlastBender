@@ -30,11 +30,15 @@ namespace LevelGenerator.Installers
                 .WithArguments(_camera, true)
                 .NonLazy();
             Container.Bind<BorderProperties>().FromInstance(_borderProperties);
-            Container.Bind(typeof(ILGGridController), typeof(IGridController)).To<LGGridController>().AsSingle()
-                .WithArguments(_gridView);
+
+
             Container.BindInterfacesAndSelfTo<LGSpriteCanvasController>().AsSingle().WithArguments(_canvases);
             Container.BindInterfacesAndSelfTo<LGInitialize>().AsSingle();
-            Container.Bind<LGSpawnerController>().To<LGSpawnerController>().AsSingle().WithArguments(_spawnerView).NonLazy();
+            Container.Bind<LGSpawnerController>().To<LGSpawnerController>().AsSingle().WithArguments(_spawnerView)
+                .NonLazy();
+
+            Container.BindInterfacesAndSelfTo<LGPointIndicatorController>().AsSingle().NonLazy();
+            Container.Bind<LGGridController>().To<LGGridController>().AsSingle().WithArguments(_gridView);
         }
     }
 }

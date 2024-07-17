@@ -33,7 +33,7 @@ namespace LevelGenerator.Controller
     {
         private readonly LGBorderController _borderController;
         private readonly ISpriteCanvasController _spriteCanvasController;
-        private readonly ILGGridController _gridController;
+        private readonly LGGridController _gridController;
         private readonly LGBoardItemController _boardItemController;
 
         private int _rowLength = 10;
@@ -97,7 +97,7 @@ namespace LevelGenerator.Controller
 
         public LevelGeneratorController(SignalBus signalBus,
             LGBorderController borderController, ISpriteCanvasController spriteCanvasController,
-            ILGGridController gridController, ILGGridInteractionController gridInteractionSystem,
+            LGGridController gridController, ILGGridInteractionController gridInteractionSystem,
             LGBoardItemController boardItemController)
         {
             _borderController = borderController;
@@ -159,7 +159,7 @@ namespace LevelGenerator.Controller
             _boardItemController.AssignBoardItem(_levelData, _boardItem);
             _borderController.CreateBorderMatrix(_levelData, _rowLength, _columnLength);
             _borderController.CreateBorder(_levelData.Border);
-            _gridController.CreateIndicators();
+            // _gridController.CreateIndicators();
             ForeachBoardItem(_boardItem,
                 x => x.RetrieveFromPool(),
                 x => x.SetPosition(_gridController.CellToLocal(x.Row, x.Column)),

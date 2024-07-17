@@ -44,9 +44,6 @@ TagManager:
   - name: LevelUI
     uniqueID: 1394360297
     locked: 0
-  - name: LevelGeneratorUI
-    uniqueID: 2849418047
-    locked: 0
   - name: Border
     uniqueID: 3959977181
     locked: 0
