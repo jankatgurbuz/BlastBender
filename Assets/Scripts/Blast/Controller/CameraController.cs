@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using Global.Controller;
+using SC.Core.UI;
 using Signals;
 using UnityEngine;
 using Zenject;
@@ -8,13 +10,14 @@ namespace Blast.Controller
     public class CameraController : BaseCameraController
     {
         private readonly IInGameController _inGameController;
+        private List<SpriteCanvas> _canvases;
 
         public CameraController(SignalBus signalBus, Camera camera, IGridController gridController,
-            IInGameController inGameController,IMainMenuCameraController mainMenuCameraController) : base(camera, gridController)
+            IInGameController inGameController, List<SpriteCanvas> canvases) : base(camera, gridController)
         {
             _inGameController = inGameController;
+            _canvases = canvases;
             signalBus.Subscribe<GameStateReaction>(OnReaction);
-            mainMenuCameraController.AddCamera(camera);
         }
 
         private void OnReaction(GameStateReaction reaction)
@@ -26,6 +29,12 @@ namespace Blast.Controller
                 var columnLength = levelData.ColumnLength;
                 FitCameraToGrid(rowLength, columnLength);
                 SetOrto(columnLength);
+                Camera.gameObject.SetActive(true);
+                _canvases.ForEach(x => { x.AdjustDependentUIElements(); });
+            }
+            else if (reaction.GameStatus == GameStatus.MenuInitialize)
+            {
+                Camera.gameObject.SetActive(false);
             }
         }
     }

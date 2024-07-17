@@ -35,11 +35,11 @@ namespace Blast.Controller
 
             if (!isLevelGenerator)
             {
-                SmoothMovement(new Vector3(cameraX, cameraY, c.z));
+                Camera.transform.position = new Vector3(cameraX, cameraY, c.z);
             }
             else
             {
-                SmoothMovement(new Vector3(cameraX - screenWidth / 4f, cameraY, c.z));
+                Camera.transform.DOMove(new Vector3(cameraX - screenWidth / 4f, cameraY, c.z), 0.25f);
             }
         }
 
@@ -48,11 +48,6 @@ namespace Blast.Controller
             var grid = _gridController.GetGridView<IGridView>().Grid;
             var gridWidth = grid.cellSize.x * columnLength + grid.cellSize.x;
             Camera.orthographicSize = gridWidth / 2 / Camera.aspect;
-        }
-
-        private void SmoothMovement(Vector3 vec)
-        {
-            Camera.transform.DOMove(vec, 0.25f);
         }
     }
 }

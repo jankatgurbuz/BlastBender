@@ -20,7 +20,7 @@ namespace Blast.Installer
         {
             Container.Bind<BoardItemController>().To<BoardItemController>().AsSingle().NonLazy();
             Container.Bind<ISpriteCanvasController>().To<SpriteCanvasController>().AsSingle().WithArguments(_canvases);
-            Container.Bind<CameraController>().To<CameraController>().AsSingle().WithArguments(_camera).NonLazy();
+            Container.Bind<CameraController>().To<CameraController>().AsSingle().WithArguments(_camera,_canvases).NonLazy();
 
             Container.BindInterfacesAndSelfTo<BoardClickController>().AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<MovementController>().AsSingle().WithArguments(_movementSettings)
