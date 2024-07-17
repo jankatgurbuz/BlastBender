@@ -6,10 +6,12 @@ using System;
 using BoardItems.LevelData;
 using System.Linq;
 using Blast.Controller;
+using BoardItems.Spawner;
 using BoardItems.Void;
 using Zenject;
 using Signals;
 using Global.Controller;
+using LevelGenerator.Utility;
 
 namespace LevelGenerator.Controller
 {
@@ -23,8 +25,10 @@ namespace LevelGenerator.Controller
         public int ColumnLength { get; set; }
         public Type SelectedType { get; set; }
         public ItemColors ItemColors { get; set; }
+        public TaskLocation TaskLocation { get; set; }
         public LevelData LevelData { get; }
     }
+
     public class LevelGeneratorController : ILevelGeneratorController
     {
         private readonly LGBorderController _borderController;
@@ -37,9 +41,11 @@ namespace LevelGenerator.Controller
 
         private LevelData _levelData;
         private IBoardItem[,] _boardItem;
+        private SpawnerData _spawnerData;
 
         private Type _selectedType;
         private ItemColors _itemColors;
+        private TaskLocation _taskLocation;
 
         public event Action OnChangeState;
 
@@ -48,10 +54,17 @@ namespace LevelGenerator.Controller
             get => _selectedType;
             set => _selectedType = value;
         }
+
         public ItemColors ItemColors
         {
             get => _itemColors;
             set => _itemColors = value;
+        }
+
+        public TaskLocation TaskLocation
+        {
+            get => _taskLocation;
+            set => _taskLocation = value;
         }
 
         public int RowLength
@@ -84,7 +97,8 @@ namespace LevelGenerator.Controller
 
         public LevelGeneratorController(SignalBus signalBus,
             LGBorderController borderController, ISpriteCanvasController spriteCanvasController,
-            ILGGridController gridController, ILGGridInteractionController gridInteractionSystem, LGBoardItemController boardItemController)
+            ILGGridController gridController, ILGGridInteractionController gridInteractionSystem,
+            LGBoardItemController boardItemController)
         {
             _borderController = borderController;
             _spriteCanvasController = spriteCanvasController;
@@ -119,6 +133,10 @@ namespace LevelGenerator.Controller
             {
                 _levelData = ScriptableObject.CreateInstance<LevelData>();
                 _boardItem = new IBoardItem[RowLength, ColumnLength];
+                _spawnerData = new()
+                {
+                    Spawners = new List<SpawnerPosition>()
+                };
             }
 
             OnChangeState += ChangeState;
@@ -148,7 +166,7 @@ namespace LevelGenerator.Controller
                 x => x.BoardVisitor?.Bead?.SetColorAndAddSprite(),
                 x => x.SetActive(true));
         }
-       
+
 
         public void ForeachBoardItem(IBoardItem[,] boardItem, params Action<IBoardItem>[] itemActions)
         {
@@ -165,8 +183,24 @@ namespace LevelGenerator.Controller
 
         private void ItemInstance(IBoardItem[,] boardItem, int row, int column)
         {
-            boardItem[row, column].ReturnToPool();
-            boardItem[row, column] = _boardItemController.CreateInstance(_selectedType, row, column, _itemColors) as IBoardItem;
+            if (TaskLocation == TaskLocation.Board)
+            {
+                boardItem[row, column].ReturnToPool();
+                boardItem[row, column] =
+                    _boardItemController.CreateInstance(_selectedType, row, column, _itemColors) as IBoardItem;
+
+                Debug.Log(_selectedType + " <---- type");
+            }
+            else if (TaskLocation == TaskLocation.Spawner)
+            {
+                var spawnerPosition = new SpawnerPosition()
+                {
+                    Row = row,
+                    Column = column
+                };
+                _spawnerData.Spawners.Add(spawnerPosition);
+                _boardItemController.CreateSpawner(spawnerPosition);
+            }
         }
     }
 }

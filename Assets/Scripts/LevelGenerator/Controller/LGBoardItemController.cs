@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using BoardItems;
 using BoardItems.LevelData;
+using BoardItems.Spawner;
 using BoardItems.Void;
 using UnityEngine;
 
@@ -83,6 +84,11 @@ namespace LevelGenerator.Controller
         private T CreateInstance<T>(params object[] constructorArgs) where T : IBoardItem
         {
             return (T)CreateInstance(typeof(T), constructorArgs);
+        }
+
+        public void CreateSpawner(SpawnerPosition spawnerPosition)
+        {
+            
         }
     }
 }

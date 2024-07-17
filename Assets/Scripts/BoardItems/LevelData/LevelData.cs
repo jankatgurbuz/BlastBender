@@ -1,3 +1,4 @@
+using BoardItems.Spawner;
 using UnityEngine;
 
 namespace BoardItems.LevelData
@@ -9,5 +10,6 @@ namespace BoardItems.LevelData
         public int ColumnLength;
         [SerializeReference] public IBoardItem[] BoardItem;
         public Border.Border[] Border;
+        public SpawnerData SpawnerData;
     }
 }

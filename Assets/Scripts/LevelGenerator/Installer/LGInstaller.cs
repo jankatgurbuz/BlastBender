@@ -3,6 +3,7 @@ using Blast.Controller;
 using BoardItems.Border;
 using LevelGenerator.Controller;
 using LevelGenerator.GridSystem.View;
+using LevelGenerator.View;
 using NaughtyAttributes;
 using SC.Core.UI;
 using UnityEngine;
@@ -16,6 +17,7 @@ namespace LevelGenerator.Installers
         [SerializeField] private BorderProperties _borderProperties;
         [SerializeField] private List<SpriteCanvas> _canvases;
         [SerializeField] private Camera _camera;
+        [SerializeField] private SpawnerView _spawnerView;
 
         public override void InstallBindings()
         {
@@ -32,6 +34,7 @@ namespace LevelGenerator.Installers
                 .WithArguments(_gridView);
             Container.BindInterfacesAndSelfTo<LGSpriteCanvasController>().AsSingle().WithArguments(_canvases);
             Container.BindInterfacesAndSelfTo<LGInitialize>().AsSingle();
+            Container.Bind<LGSpawnerController>().To<LGSpawnerController>().AsSingle().WithArguments(_spawnerView).NonLazy();
         }
     }
 }

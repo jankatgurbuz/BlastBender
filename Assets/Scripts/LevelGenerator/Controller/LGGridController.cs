@@ -22,6 +22,13 @@ namespace LevelGenerator.Controller
         private GridIndicator[,] _gridIndicator;
         private DiContainer _container;
 
+        private const int _lgStartRow = -25;
+        private const int _lgStartColumn = -25;
+        private const int _lgFinishRow = 25;
+        private const int _lgFinishColumn = 25;
+        private int _rowLength;
+        private int _columnLength;
+
         public LGGridController(DiContainer container, IGridView gridView) : base(gridView)
         {
             _container = container;
@@ -33,31 +40,32 @@ namespace LevelGenerator.Controller
             _gridInteractionController = _container.Resolve<ILGGridInteractionController>();
 
             _gridView.SetPosition();
-            _gridIndicator =
-                new GridIndicator[_levelGeneratorController.RowLength, _levelGeneratorController.ColumnLength];
+            _rowLength = Mathf.Abs(_lgStartRow) + Mathf.Abs(_lgFinishRow);
+            _columnLength = Mathf.Abs(-_lgStartColumn) + Mathf.Abs(_lgFinishColumn);
+            _gridIndicator = new GridIndicator[_rowLength, _columnLength];
             CreateIndicators();
 
             _gridInteractionController.NoneTouch += NoneTouch;
         }
 
-        private void NoneTouch(int row, int column)
+        private void NoneTouch(int indicatorRow, int indicatorColumn)
         {
-            if (row < 0 || column < 0 || row >= _gridIndicator.GetLength(0) || column >= _gridIndicator.GetLength(1))
-            {
-                return;
-            }
+            // if (row < 0 || column < 0 || row >= _gridIndicator.GetLength(0) || column >= _gridIndicator.GetLength(1))
+            // {
+            //     return;
+            // }
 
-            for (int i = 0; i < _levelGeneratorController.RowLength; i++)
+            for (int row = 0; row < _rowLength; row++)
             {
-                for (int j = 0; j < _levelGeneratorController.ColumnLength; j++)
+                for (int column = 0; column < _columnLength; column++)
                 {
-                    if (i == row && j == column)
+                    if (row + _lgStartRow == indicatorRow && column + _lgStartColumn == indicatorColumn)
                     {
-                        _gridIndicator[i, j].SetColor(Color.red);
+                        _gridIndicator[row, column].SetColor(Color.red);
                     }
                     else
                     {
-                        _gridIndicator[i, j].SetColor(Color.white);
+                        _gridIndicator[row, column].SetColor(Color.white);
                     }
                 }
             }
@@ -66,33 +74,38 @@ namespace LevelGenerator.Controller
         public void CreateIndicators()
         {
             Destroy();
-            for (int i = 0; i < _levelGeneratorController.RowLength; i++)
+            var gridview = GetGridView<LGGridView>();
+
+            for (int row = 0; row < _rowLength; row++)
             {
-                for (int k = 0; k < _levelGeneratorController.ColumnLength; k++)
+                for (int column = 0; column < _columnLength; column++)
                 {
-                    var gridview = GetGridView<LGGridView>();
-                    _gridIndicator[i, k] = Object.Instantiate(gridview.GridIndicatorPrefab);
-                    _gridIndicator[i, k].transform.SetParent(gridview.transform);
-                    _gridIndicator[i, k].SetPosition(CellToLocal(i, k));
+                    _gridIndicator[row, column] = Object.Instantiate(gridview.GridIndicatorPrefab);
+                    _gridIndicator[row, column].transform.SetParent(gridview.transform);
+                    _gridIndicator[row, column].SetPosition(CellToLocal(row + _lgStartRow, column + _lgStartColumn));
+
+                    if (!(row + _lgStartRow >= 0 && row + _lgStartRow < _levelGeneratorController.RowLength &&
+                          column + _lgStartColumn >= 0 &&
+                          column + _lgStartColumn < _levelGeneratorController.ColumnLength))
+                    {
+                        _gridIndicator[row, column].transform.localScale *= 0.5f;
+                    }
                 }
             }
         }
 
         private void Destroy()
         {
-            for (int i = 0; i < _gridIndicator.GetLength(0); i++)
+            for (int row = 0; row < _rowLength; row++)
             {
-                for (int j = 0; j < _gridIndicator.GetLength(1); j++)
+                for (int column = 0; column < _columnLength; column++)
                 {
-                    if (_gridIndicator[i, j] == null)
+                    if (_gridIndicator[row, column] == null)
                         continue;
 
-                    Object.Destroy(_gridIndicator[i, j].gameObject);
+                    Object.Destroy(_gridIndicator[row, column].gameObject);
                 }
             }
-
-            _gridIndicator =
-                new GridIndicator[_levelGeneratorController.RowLength, _levelGeneratorController.ColumnLength];
         }
     }
 }
