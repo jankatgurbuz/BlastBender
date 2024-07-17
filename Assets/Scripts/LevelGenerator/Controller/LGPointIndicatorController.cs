@@ -1,5 +1,6 @@
 using System;
-using LevelGenerator.GridSystem.View;
+using LevelGenerator.LGPool;
+using LevelGenerator.LGPool.IndicatorPool;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -12,7 +13,7 @@ namespace LevelGenerator.Controller
         private const int _lgFinishRow = 25;
         private const int _lgFinishColumn = 25;
 
-        private GridIndicator[,] _gridIndicator;
+        private LGPointIndicatorView[,] _gridIndicator;
 
         private ILevelGeneratorController _levelGeneratorController;
         private LGGridController _gridController;
@@ -39,20 +40,17 @@ namespace LevelGenerator.Controller
         {
             _rowLength = Mathf.Abs(_lgStartRow) + Mathf.Abs(_lgFinishRow);
             _columnLength = Mathf.Abs(-_lgStartColumn) + Mathf.Abs(_lgFinishColumn);
-            _gridIndicator = new GridIndicator[_rowLength, _columnLength];
+            _gridIndicator = new LGPointIndicatorView[_rowLength, _columnLength];
         }
 
         private void CreateIndicators()
         {
             Destroy();
-            var gridview = _gridController.GetGridView<LGGridView>();
-
             IteratePoints((row, column) =>
             {
-                _gridIndicator[row, column] = Object.Instantiate(gridview.GridIndicatorPrefab);
-                _gridIndicator[row, column].transform.SetParent(gridview.transform);
-                _gridIndicator[row, column]
-                    .SetPosition(_gridController.CellToLocal(row + _lgStartRow, column + _lgStartColumn));
+                _gridIndicator[row, column] = LGPointIndicatorPool.Instance.Retrieve();
+                _gridIndicator[row, column] .SetPosition(
+                    _gridController.CellToLocal(row + _lgStartRow, column + _lgStartColumn));
 
                 if (!(row + _lgStartRow >= 0 && row + _lgStartRow < _levelGeneratorController.RowLength &&
                       column + _lgStartColumn >= 0 &&

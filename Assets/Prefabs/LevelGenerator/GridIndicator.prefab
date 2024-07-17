@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4476953042341249672}
   - component: {fileID: 1751595312004061161}
-  - component: {fileID: 6809590492929249699}
+  - component: {fileID: 5940114664458991750}
   m_Layer: 0
   m_Name: GridIndicator
   m_TagString: Untagged
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &6809590492929249699
+--- !u!114 &5940114664458991750
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,6 +94,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 3498046121526067192}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 55f32800c63234b7abe48b487924f937, type: 3}
+  m_Script: {fileID: 11500000, guid: 5f6907240c9a94f2f8574f8cb626739c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
