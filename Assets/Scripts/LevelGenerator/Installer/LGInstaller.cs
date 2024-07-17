@@ -6,6 +6,7 @@ using LevelGenerator.View;
 using NaughtyAttributes;
 using SC.Core.UI;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Zenject;
 
 namespace LevelGenerator.Installers
@@ -16,7 +17,6 @@ namespace LevelGenerator.Installers
         [SerializeField] private BorderProperties _borderProperties;
         [SerializeField] private List<SpriteCanvas> _canvases;
         [SerializeField] private Camera _camera;
-        [SerializeField] private SpawnerView _spawnerView;
 
         public override void InstallBindings()
         {
@@ -31,8 +31,7 @@ namespace LevelGenerator.Installers
 
             Container.BindInterfacesAndSelfTo<LGSpriteCanvasController>().AsSingle().WithArguments(_canvases);
             Container.BindInterfacesAndSelfTo<LGInitialize>().AsSingle();
-            Container.Bind<LGSpawnerController>().To<LGSpawnerController>().AsSingle().WithArguments(_spawnerView)
-                .NonLazy();
+            Container.Bind<LGSpawnerController>().To<LGSpawnerController>().AsSingle().NonLazy();
 
             Container.BindInterfacesAndSelfTo<LGPointIndicatorController>().AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<LGBorderController>().AsSingle().NonLazy();

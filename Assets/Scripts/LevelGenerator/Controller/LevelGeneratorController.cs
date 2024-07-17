@@ -36,6 +36,7 @@ namespace LevelGenerator.Controller
         private readonly ISpriteCanvasController _spriteCanvasController;
         private readonly LGGridController _gridController;
         private readonly ILGGridInteractionController _gridInteractionController;
+        private readonly LGSpawnerController _spawnerController;
 
         private int _rowLength = 10;
         private int _columnLength = 10;
@@ -76,11 +77,13 @@ namespace LevelGenerator.Controller
         public event Action OnChangeState;
 
         public LevelGeneratorController(SignalBus signalBus, ISpriteCanvasController spriteCanvasController,
-            LGGridController gridController, ILGGridInteractionController gridInteractionSystem)
+            LGGridController gridController, ILGGridInteractionController gridInteractionSystem,
+            LGSpawnerController spawnerController)
         {
             _spriteCanvasController = spriteCanvasController;
             _gridController = gridController;
             _gridInteractionController = gridInteractionSystem;
+            _spawnerController = spawnerController;
             signalBus.Subscribe<GameStateReaction>(PlayGame);
         }
 
@@ -110,6 +113,8 @@ namespace LevelGenerator.Controller
                 {
                     Spawners = new List<SpawnerPosition>()
                 };
+
+                LevelData.SpawnerData = _spawnerData;
             }
 
             OnChangeState += ChangeState;
@@ -123,17 +128,16 @@ namespace LevelGenerator.Controller
 
         private void Down(int row, int column)
         {
-            if (row < 0 || column < 0 || row >= _rowLength || column >= _columnLength)
-                return;
-
-            ItemInstance(BoardItem, row, column);
+            ItemInstance(row, column);
             OnChangeState?.Invoke();
         }
 
         private void ChangeState()
         {
             IterateBoardItem(BoardItem, x => x.ReturnToPool());
+            _spawnerController.ReturnToPool();
             CreateBoardItems();
+            CreateSpawner();
             AssignBoardItem();
             IterateBoardItem(BoardItem,
                 x => x.RetrieveFromPool(),
@@ -156,22 +160,30 @@ namespace LevelGenerator.Controller
             }
         }
 
-        private void ItemInstance(IBoardItem[,] boardItem, int row, int column)
+        private void ItemInstance(int row, int column)
         {
             if (TaskLocation == TaskLocation.Board)
             {
-                boardItem[row, column].ReturnToPool();
-                boardItem[row, column] = CreateInstance(SelectedType, row, column, ItemColors) as IBoardItem;
+                if (row < 0 || column < 0 || row >= _rowLength || column >= _columnLength)
+                    return;
+
+                BoardItem[row, column].ReturnToPool();
+                BoardItem[row, column] = CreateInstance(SelectedType, row, column, ItemColors) as IBoardItem;
             }
             else if (TaskLocation == TaskLocation.Spawner)
             {
+                if (column < 0 || column >= _columnLength) return;
+
+                var item = _spawnerData.Spawners.Find(x => x.Row == row && x.Column == column);
+
+                if (item != null) return;
+                
                 var spawnerPosition = new SpawnerPosition()
                 {
                     Row = row,
                     Column = column
                 };
                 _spawnerData.Spawners.Add(spawnerPosition);
-                // _boardItemController.CreateSpawner(spawnerPosition);
             }
         }
 
@@ -240,8 +252,14 @@ namespace LevelGenerator.Controller
         }
 
 
-        public void CreateSpawner(SpawnerPosition spawnerPosition)
+        private void CreateSpawner()
         {
+            foreach (var spawnerDataSpawner in LevelData.SpawnerData.Spawners)
+            {
+                var item = _spawnerController.Retrieve();
+                item.transform.position =
+                    _gridController.CellToLocal(spawnerDataSpawner.Row, spawnerDataSpawner.Column);
+            }
         }
     }
 }

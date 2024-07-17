@@ -1,14 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using LevelGenerator.LGPool.SpawnerPool;
 using LevelGenerator.View;
 using UnityEngine;
 
 public class LGSpawnerController
 {
-    private SpawnerView _spawnerView;
-
-    public LGSpawnerController(SpawnerView spawnerView)
+    public LGSpawnerView Retrieve()
     {
-        _spawnerView = spawnerView;
+        return LGSpawnerPool.Instance.Retrieve();
+    }
+    public void ReturnToPool()
+    {
+        LGSpawnerPool.Instance.Clear();
     }
 }
