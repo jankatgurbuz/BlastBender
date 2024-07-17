@@ -24,8 +24,8 @@ namespace LevelGenerator.Installers
             Container.Bind<ILevelGeneratorController>().To<LevelGeneratorController>().AsSingle().NonLazy();
             Container.Bind<ILGSaveController>().To<LGSaveController>().AsSingle().NonLazy();
             Container.Bind<LGCameraController>().To<LGCameraController>().AsSingle().WithArguments(_camera).NonLazy();
-            Container.Bind<LGBoardItemController>().To<LGBoardItemController>().AsSingle().NonLazy();
-            Container.Bind(typeof(LGBorderController)).To<LGBorderController>().AsSingle().NonLazy();
+            // Container.Bind<LGBoardItemController>().To<LGBoardItemController>().AsSingle().NonLazy();
+
             Container.Bind<ILGGridInteractionController>().To<LGGridInteractionController>().AsSingle()
                 .WithArguments(_camera, true)
                 .NonLazy();
@@ -38,6 +38,7 @@ namespace LevelGenerator.Installers
                 .NonLazy();
 
             Container.BindInterfacesAndSelfTo<LGPointIndicatorController>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<LGBorderController>().AsSingle().NonLazy();
             Container.Bind<LGGridController>().To<LGGridController>().AsSingle().WithArguments(_gridView);
         }
     }

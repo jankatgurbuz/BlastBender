@@ -10,7 +10,7 @@ namespace LevelGenerator.Controller
     {
         private readonly ILevelGeneratorController _levelGeneratorController;
 
-        public LGCameraController(Camera camera, IGridController gridController,
+        public LGCameraController(Camera camera, LGGridController gridController,
             ILevelGeneratorController levelGeneratorController) : base(camera, gridController)
         {
             _levelGeneratorController = levelGeneratorController;

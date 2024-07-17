@@ -27,12 +27,12 @@ namespace LevelGenerator.Controller
             _gridController = gridController;
 
             gridInteractionController.NoneTouch += NoneTouch;
-            levelGeneratorController.OnChangeState += CreateIndicators;
         }
 
         public void Start()
         {
             Initialize();
+            _levelGeneratorController.OnChangeState += CreateIndicators;
         }
 
         private void Initialize()

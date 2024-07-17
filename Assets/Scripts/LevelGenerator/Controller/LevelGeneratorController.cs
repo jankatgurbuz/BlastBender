@@ -5,6 +5,7 @@ using UnityEngine;
 using System;
 using BoardItems.LevelData;
 using System.Linq;
+using System.Reflection;
 using Blast.Controller;
 using BoardItems.Spawner;
 using BoardItems.Void;
@@ -17,55 +18,34 @@ namespace LevelGenerator.Controller
 {
     public interface ILevelGeneratorController : ILGStart
     {
-        public static readonly int MaxLength = 11;
-        public static readonly int MinLength = 3;
-
+        public const int MaxLength = 11;
+        public const int MinLength = 3;
         public event Action OnChangeState;
+        public void Initialize();
         public int RowLength { get; set; }
         public int ColumnLength { get; set; }
         public Type SelectedType { get; set; }
         public ItemColors ItemColors { get; set; }
         public TaskLocation TaskLocation { get; set; }
         public LevelData LevelData { get; }
+        public IBoardItem[,] BoardItem { get; set; }
     }
 
     public class LevelGeneratorController : ILevelGeneratorController
     {
-        private readonly LGBorderController _borderController;
         private readonly ISpriteCanvasController _spriteCanvasController;
         private readonly LGGridController _gridController;
-        private readonly LGBoardItemController _boardItemController;
+        private readonly ILGGridInteractionController _gridInteractionController;
 
         private int _rowLength = 10;
         private int _columnLength = 10;
 
-        private LevelData _levelData;
-        private IBoardItem[,] _boardItem;
         private SpawnerData _spawnerData;
-
-        private Type _selectedType;
-        private ItemColors _itemColors;
-        private TaskLocation _taskLocation;
-
-        public event Action OnChangeState;
-
-        public Type SelectedType
-        {
-            get => _selectedType;
-            set => _selectedType = value;
-        }
-
-        public ItemColors ItemColors
-        {
-            get => _itemColors;
-            set => _itemColors = value;
-        }
-
-        public TaskLocation TaskLocation
-        {
-            get => _taskLocation;
-            set => _taskLocation = value;
-        }
+        public Type SelectedType { get; set; } = typeof(SpaceArea);
+        public ItemColors ItemColors { get; set; }
+        public TaskLocation TaskLocation { get; set; }
+        public IBoardItem[,] BoardItem { get; set; }
+        public LevelData LevelData { get; private set; }
 
         public int RowLength
         {
@@ -93,22 +73,15 @@ namespace LevelGenerator.Controller
             }
         }
 
-        public LevelData LevelData => _levelData;
+        public event Action OnChangeState;
 
-        public LevelGeneratorController(SignalBus signalBus,
-            LGBorderController borderController, ISpriteCanvasController spriteCanvasController,
-            LGGridController gridController, ILGGridInteractionController gridInteractionSystem,
-            LGBoardItemController boardItemController)
+        public LevelGeneratorController(SignalBus signalBus, ISpriteCanvasController spriteCanvasController,
+            LGGridController gridController, ILGGridInteractionController gridInteractionSystem)
         {
-            _borderController = borderController;
             _spriteCanvasController = spriteCanvasController;
             _gridController = gridController;
-            _boardItemController = boardItemController;
-
-            _selectedType = typeof(SpaceArea);
-
+            _gridInteractionController = gridInteractionSystem;
             signalBus.Subscribe<GameStateReaction>(PlayGame);
-            gridInteractionSystem.Down += Down;
         }
 
         private void PlayGame(GameStateReaction reaction)
@@ -129,10 +102,10 @@ namespace LevelGenerator.Controller
 
         public void Start()
         {
-            if (_levelData == null)
+            if (LevelData == null)
             {
-                _levelData = ScriptableObject.CreateInstance<LevelData>();
-                _boardItem = new IBoardItem[RowLength, ColumnLength];
+                LevelData = ScriptableObject.CreateInstance<LevelData>();
+                BoardItem = new IBoardItem[RowLength, ColumnLength];
                 _spawnerData = new()
                 {
                     Spawners = new List<SpawnerPosition>()
@@ -140,6 +113,11 @@ namespace LevelGenerator.Controller
             }
 
             OnChangeState += ChangeState;
+            _gridInteractionController.Down += Down;
+        }
+
+        public void Initialize()
+        {
             OnChangeState?.Invoke();
         }
 
@@ -148,19 +126,16 @@ namespace LevelGenerator.Controller
             if (row < 0 || column < 0 || row >= _rowLength || column >= _columnLength)
                 return;
 
-            ItemInstance(_boardItem, row, column);
+            ItemInstance(BoardItem, row, column);
             OnChangeState?.Invoke();
         }
 
         private void ChangeState()
         {
-            ForeachBoardItem(_boardItem, x => x.ReturnToPool());
-            _boardItemController.CreateBoardItems(ref _boardItem, _rowLength, _columnLength);
-            _boardItemController.AssignBoardItem(_levelData, _boardItem);
-            _borderController.CreateBorderMatrix(_levelData, _rowLength, _columnLength);
-            _borderController.CreateBorder(_levelData.Border);
-            // _gridController.CreateIndicators();
-            ForeachBoardItem(_boardItem,
+            IterateBoardItem(BoardItem, x => x.ReturnToPool());
+            CreateBoardItems();
+            AssignBoardItem();
+            IterateBoardItem(BoardItem,
                 x => x.RetrieveFromPool(),
                 x => x.SetPosition(_gridController.CellToLocal(x.Row, x.Column)),
                 x => x.BoardVisitor?.Bead?.SetColorAndAddSprite(),
@@ -168,7 +143,7 @@ namespace LevelGenerator.Controller
         }
 
 
-        public void ForeachBoardItem(IBoardItem[,] boardItem, params Action<IBoardItem>[] itemActions)
+        public void IterateBoardItem(IBoardItem[,] boardItem, params Action<IBoardItem>[] itemActions)
         {
             foreach (var item in boardItem)
             {
@@ -186,10 +161,7 @@ namespace LevelGenerator.Controller
             if (TaskLocation == TaskLocation.Board)
             {
                 boardItem[row, column].ReturnToPool();
-                boardItem[row, column] =
-                    _boardItemController.CreateInstance(_selectedType, row, column, _itemColors) as IBoardItem;
-
-                Debug.Log(_selectedType + " <---- type");
+                boardItem[row, column] = CreateInstance(SelectedType, row, column, ItemColors) as IBoardItem;
             }
             else if (TaskLocation == TaskLocation.Spawner)
             {
@@ -199,8 +171,77 @@ namespace LevelGenerator.Controller
                     Column = column
                 };
                 _spawnerData.Spawners.Add(spawnerPosition);
-                _boardItemController.CreateSpawner(spawnerPosition);
+                // _boardItemController.CreateSpawner(spawnerPosition);
             }
+        }
+
+        private void CreateBoardItems()
+        {
+            var tempBoardItem = new IBoardItem[RowLength, ColumnLength];
+
+
+            for (int i = 0; i < RowLength; i++)
+            {
+                if (i >= BoardItem.GetLength(0))
+                    continue;
+
+                for (int j = 0; j < ColumnLength; j++)
+                {
+                    if (j >= BoardItem.GetLength(1))
+                        continue;
+
+                    tempBoardItem[i, j] = BoardItem[i, j];
+                }
+            }
+
+            BoardItem = tempBoardItem;
+
+            for (int i = 0; i < RowLength; i++)
+            {
+                for (int j = 0; j < ColumnLength; j++)
+                {
+                    if (BoardItem[i, j] == null)
+                    {
+                        BoardItem[i, j] = CreateInstance<VoidArea>(i, j);
+                    }
+                }
+            }
+        }
+
+        public object CreateInstance(Type type, params object[] constructorArgs)
+        {
+            ConstructorInfo[] constructors = type.GetConstructors();
+            if (constructors.Length != 0)
+            {
+                ParameterInfo[] paramsInfo = constructors[0].GetParameters();
+                if (paramsInfo.Length < constructorArgs.Length)
+                {
+                    var newConst = new object[paramsInfo.Length];
+                    for (int i = 0; i < newConst.Length; i++)
+                        newConst[i] = constructorArgs[i];
+                    constructorArgs = newConst;
+                }
+            }
+
+            var instance = Activator.CreateInstance(type, constructorArgs);
+            return instance;
+        }
+
+        private void AssignBoardItem()
+        {
+            LevelData.BoardItem = BoardItem.Cast<IBoardItem>().ToArray();
+            LevelData.RowLength = BoardItem.GetLength(0);
+            LevelData.ColumnLength = BoardItem.GetLength(1);
+        }
+
+        private T CreateInstance<T>(params object[] constructorArgs) where T : IBoardItem
+        {
+            return (T)CreateInstance(typeof(T), constructorArgs);
+        }
+
+
+        public void CreateSpawner(SpawnerPosition spawnerPosition)
+        {
         }
     }
 }

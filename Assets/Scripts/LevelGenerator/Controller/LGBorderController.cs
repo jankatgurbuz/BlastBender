@@ -12,15 +12,28 @@ using Zenject;
 
 namespace LevelGenerator.Controller
 {
-    public class LGBorderController : BaseBorderController
+    public class LGBorderController : BaseBorderController, ILGStart
     {
+        private ILevelGeneratorController _levelGeneratorController;
+
         public LGBorderController(SignalBus signalBus, BorderProperties borderProperties,
-            IGridController gridController) : base(borderProperties, gridController)
+            LGGridController gridController, ILevelGeneratorController levelGeneratorController) : base(
+            borderProperties, gridController)
         {
+            _levelGeneratorController = levelGeneratorController;
         }
 
-        public void CreateBorderMatrix(LevelData levelData, int rowLength, int columnLength)
+        public void Start()
         {
+            _levelGeneratorController.OnChangeState += CreateBorderMatrix;
+        }
+
+        private void CreateBorderMatrix()
+        {
+            var rowLength = _levelGeneratorController.RowLength;
+            var columnLength = _levelGeneratorController.ColumnLength;
+            var levelData = _levelGeneratorController.LevelData;
+
             var items = levelData.BoardItem.ToList();
 
             int margin = 1;
@@ -74,6 +87,8 @@ namespace LevelGenerator.Controller
             }
 
             levelData.Border = boardItems.Cast<Border>().ToArray();
+            
+            CreateBorder(levelData.Border);
         }
     }
 }

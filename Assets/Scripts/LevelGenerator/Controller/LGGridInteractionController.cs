@@ -16,7 +16,7 @@ namespace LevelGenerator.Controller
 
     public class LGGridInteractionController : BaseGridInteractionController, ILGGridInteractionController
     {
-        public LGGridInteractionController(Camera camera, bool isContinuousPress, IGridController gridController) :
+        public LGGridInteractionController(Camera camera, bool isContinuousPress, LGGridController gridController) :
             base(camera, isContinuousPress, gridController)
         {
         }
