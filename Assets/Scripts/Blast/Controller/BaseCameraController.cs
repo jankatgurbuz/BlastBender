@@ -6,7 +6,7 @@ namespace Blast.Controller
 {
     public class BaseCameraController
     {
-        protected readonly Camera Camera;
+        public readonly Camera Camera;
         private readonly IGridController _gridController;
 
         protected BaseCameraController(Camera camera, IGridController gridController)
