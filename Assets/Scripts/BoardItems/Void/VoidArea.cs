@@ -5,12 +5,9 @@ namespace BoardItems.Void
 {
     public class VoidArea : BaseBoardItem<VoidPoolView>
     {
-        public sealed override IBoardItemVisitor BoardVisitor { get; set; }
-
         public VoidArea(int row, int column) : base(row, column)
         {
             IsVoidArea = true;
-            BoardVisitor = new BoardItemVisitor(this);
         }
 
         protected override void OnItemLifecycleTransition(bool isActive)

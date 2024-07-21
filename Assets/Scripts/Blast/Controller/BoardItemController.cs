@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using BoardItems;
+using BoardItems.Bead;
 using BoardItems.Void;
 using Cysharp.Threading.Tasks;
 using Global.Controller;
@@ -51,7 +52,11 @@ namespace Blast.Controller
             {
                 var temp = _boardItems[item.Row, item.Column] = item.Copy();
                 temp.RetrieveFromPool();
-                temp.BoardVisitor?.Bead?.SetColorAndAddSprite();
+                if (temp is Bead bead)
+                {
+                    bead.SetColorAndAddSprite();
+                }
+
                 temp.SetSortingOrder(item.Row, item.Column);
                 temp.SetPosition(_gridController.CellToLocal(item.Row, item.Column));
                 temp.SetActive(true);
@@ -70,7 +75,7 @@ namespace Blast.Controller
                 return;
             }
 
-            var color = item.BoardVisitor.Bead.Color;
+            var color = ((Bead)item).Color;
             FindMatches(row, column, color);
 
             switch (_combineItems.Count)
@@ -93,13 +98,18 @@ namespace Blast.Controller
             _combineItems.Clear();
             Array.Clear(_recursiveCheckArray, 0, _recursiveCheckArray.Length);
             FillVoidType(tempGroup);
-            var task = tempGroup.Select(
-                item => item.BoardVisitor?.Bead?.CombineBead
-                        (item.Row, item.Column, clickRow - item.Row,
-                            clickColumn - item.Column)
-                        ?? UniTask.CompletedTask);
 
-            await UniTask.WhenAll(task);
+            var tasks = tempGroup.Select(item =>
+            {
+                if (item is Bead bead)
+                {
+                    return bead.CombineBead(item.Row, item.Column, clickRow - item.Row, clickColumn - item.Column);
+                }
+
+                return UniTask.CompletedTask;
+            });
+
+            await UniTask.WhenAll(tasks);
             tempGroup.ForEach(item => item.ReturnToPool());
             RecalculateBoardElements();
         }
@@ -120,6 +130,7 @@ namespace Blast.Controller
             _combineItems.Clear();
             Array.Clear(_recursiveCheckArray, 0, _recursiveCheckArray.Length);
         }
+
         private void FillVoidType(List<IBoardItem> combineGroup)
         {
             foreach (var item in combineGroup)
@@ -140,29 +151,40 @@ namespace Blast.Controller
 
             void ShiftBeadDown(IBoardItem boardItem)
             {
-                if (!boardItem.IsVoidArea)
+                if (boardItem.IsBead)
                     return;
 
                 var column = boardItem.Column;
                 var row = boardItem.Row;
 
-                if (row >= _rowLength)
+                for (int i = row + 1; i <= _rowLength; i++)
                 {
-                    // todo: Beads falling above
-                }
+                    if (i < _rowLength && _boardItems[i, column].IsBead)
+                    {
+                        var item = _boardItems[row, column] = _boardItems[i, column];
+                        item.SetRowAndColumn(row, column);
+                        item.SetSortingOrder(row, column);
+                        item.IsMove = true;
+                        _movementController.Register(item, i, column);
+                        _boardItems[i, column] = new VoidArea(i, column);
+                        break;
+                    }
 
-                for (int i = row + 1; i < _rowLength; i++)
-                {
-                    if (_boardItems[i, column].IsVoidArea || _boardItems[i, column].IsSpace)
-                        continue;
-                    
-                    //swap
-                    var item = _boardItems[row, column] = _boardItems[i, column];
-                    item.SetRowAndColumn(row, column);
-                    item.IsMove = true;
-                    _movementController.Register(item, i, column);
-                    _boardItems[i, column] = new VoidArea(i, column);
-                    break;
+                    if (i == _rowLength)
+                    {
+                        _boardItems[row, column] = new Bead(row, column, ItemColors.Red);
+                        // (ItemColors)UnityEngine.Random.Range(1, Enum.GetValues(typeof(ItemColors)).Length) - 1);
+                        _boardItems[row, column].RetrieveFromPool();
+
+                        ((Bead)_boardItems[row, column]).SetColorAndAddSprite();
+                        _boardItems[row, column].SetSortingOrder(row, column);
+                        _boardItems[row, column].SetPosition(_gridController.CellToLocal(row + 10, column));
+                        _boardItems[row, column].SetActive(true);
+                        _boardItems[row, column].IsMove = true;
+
+                        _movementController.Register(_boardItems[row, column], i, column);
+                    }
+                    //  (ItemColors)Random.Range(1, Enum.GetValues(typeof(ItemColors)).Length)
                 }
             }
         }
@@ -174,7 +196,7 @@ namespace Blast.Controller
                 return;
 
             _recursiveCheckArray[row, column] = true;
-            var match = _boardItems[row, column].IsBead && _boardItems[row, column].BoardVisitor.Bead.Color == color;
+            var match = _boardItems[row, column].IsBead && ((Bead)_boardItems[row, column]).Color == color;
             if (!match)
                 return;
 

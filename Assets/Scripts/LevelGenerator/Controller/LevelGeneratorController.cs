@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using BoardItems;
 using UnityEngine;
@@ -7,6 +6,7 @@ using BoardItems.LevelData;
 using System.Linq;
 using System.Reflection;
 using Blast.Controller;
+using BoardItems.Bead;
 using BoardItems.Spawner;
 using BoardItems.Void;
 using Zenject;
@@ -142,7 +142,12 @@ namespace LevelGenerator.Controller
             IterateBoardItem(BoardItem,
                 x => x.RetrieveFromPool(),
                 x => x.SetPosition(_gridController.CellToLocal(x.Row, x.Column)),
-                x => x.BoardVisitor?.Bead?.SetColorAndAddSprite(),
+                x => {
+                    if (x is Bead bead)
+                    {
+                        bead.SetColorAndAddSprite();
+                    }
+                },
                 x => x.SetActive(true));
         }
 

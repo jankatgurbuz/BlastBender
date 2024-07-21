@@ -18,7 +18,6 @@ namespace BoardItems
         bool IsMove { get; set; }
         bool IsSpace { get; set; }
         bool IsVoidArea { get; set; }
-        IBoardItemVisitor BoardVisitor { get; set; }
         MovementVisitor MovementVisitor { get; set; }
         void RetrieveFromPool();
         void ReturnToPool();

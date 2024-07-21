@@ -16,7 +16,7 @@ namespace Util.Pool.Bead
         [SerializeField] private SpriteRenderer _spriteRenderer;
         [SerializeField] private BeadSettings _beadSettings;
 
-        private readonly ItemActionHandle _itemActionHandle = new ItemActionHandle();
+        private readonly ItemActionHandle _itemActionHandle = new();
 
         private Transform _transform;
         private GameObject _gameObject;
@@ -109,32 +109,48 @@ namespace Util.Pool.Bead
 
         public void Shake(IMovementStrategy strategy)
         {
-            _itemActionHandle.ReplaceAction(ItemActionHandle.Actions.Shake, strategy.Shake(_transform), false,
-                ResetItem);
+            // _itemActionHandle.ReplaceAction(ItemActionHandle.Actions.Shake, strategy.Shake(_transform), false,
+            //     ResetItem);
+            //
+            // if (!_itemActionHandle.IsPlaying(ItemActionHandle.Actions.Shake))
+            // {
+            //     _itemActionHandle.RestartSequence(ItemActionHandle.Actions.Shake);
+            // }
 
-            if (!_itemActionHandle.IsPlaying(ItemActionHandle.Actions.Shake))
+            if (strategy.IsPlayShake)
             {
-                _itemActionHandle.RestartSequence(ItemActionHandle.Actions.Shake);
+                return;
             }
+            strategy.Shake2(_transform);
         }
 
         public void StartMovement(IMovementStrategy strategy)
         {
-            var movement = strategy.StartMovement(_transform);
-            _itemActionHandle.ReplaceAction(
-                ItemActionHandle.Actions.StartMovement,
-                movement, false, null,
-                ItemActionHandle.Actions.Shake,
-                ItemActionHandle.Actions.FinalMovement);
-            _itemActionHandle.RestartSequence(ItemActionHandle.Actions.StartMovement);
+            if (strategy.IsPlayShake|| strategy.IsPlayFinalMovement)
+            {
+                strategy.Kill = true;
+            }
+            strategy.StartMovement2(_transform);
+            // var movement = strategy.StartMovement(_transform);
+            // _itemActionHandle.ReplaceAction(
+            //     ItemActionHandle.Actions.StartMovement,
+            //     movement, false, null,
+            //     ItemActionHandle.Actions.Shake,
+            //     ItemActionHandle.Actions.FinalMovement);
+            // _itemActionHandle.RestartSequence(ItemActionHandle.Actions.StartMovement);
         }
 
-        public void FinalizeMovementWithBounce(IMovementStrategy t)
+        public void FinalizeMovementWithBounce(IMovementStrategy strategy)
         {
-            if (_itemActionHandle.IsPlaying(ItemActionHandle.Actions.FinalMovement)) return;
-            var move = t.FinalMovement(_transform, _currentScale);
-            _itemActionHandle.ReplaceAction(ItemActionHandle.Actions.FinalMovement, move, true);
-            _itemActionHandle.RestartSequence(ItemActionHandle.Actions.FinalMovement);
+            
+            if (strategy.IsPlayFinalMovement) return;
+            
+            strategy.FinalMovement2(_transform,_currentScale);
+            
+            // if (_itemActionHandle.IsPlaying(ItemActionHandle.Actions.FinalMovement)) return;
+            // var move = t.FinalMovement(_transform, _currentScale);
+            // _itemActionHandle.ReplaceAction(ItemActionHandle.Actions.FinalMovement, move, true);
+            // _itemActionHandle.RestartSequence(ItemActionHandle.Actions.FinalMovement);
         }
 
         public async UniTask CombineBead(int row, int column, int rowOffset, int columnOffset)
