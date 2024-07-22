@@ -24,6 +24,7 @@ namespace BoardItems
         void SetRowAndColumn(int row, int column);
         IBoardItem Copy();
     }
+
     public interface IItemBehavior
     {
         void SetPosition(Vector3 position);
@@ -32,10 +33,12 @@ namespace BoardItems
         void SetSortingOrder(int row, int column);
         void Blast();
     }
+
     public interface IMoveable
     {
-        void StartMovement(IMovementStrategy strategy);
-        void FinalizeMovementWithBounce(IMovementStrategy strategy);
-        void Shake(IMovementStrategy strategy);
+        public Transform GetTransform();
+        // void StartMovement(IMovementStrategy strategy);
+        // void FinalizeMovementWithBounce(IMovementStrategy strategy);
+        // void Shake(IMovementStrategy strategy);
     }
 }

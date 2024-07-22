@@ -1,9 +1,8 @@
-using System.Threading;
 using Cysharp.Threading.Tasks;
-using DG.Tweening;
 using UnityEngine;
+using Util.Movement.States;
 
-namespace Util.Handlers.Strategies
+namespace Util.Movement.Strategies
 {
     public interface IMovementStrategy
     {
@@ -15,6 +14,11 @@ namespace Util.Handlers.Strategies
         UniTask StartMovement2(Transform transform);
         UniTask FinalMovement2(Transform transform, Vector3 currentScale);
 
-        bool Kill {  set; }
+        bool Kill { set; }
+        public IMoveState StartMovement { get; set; }
+        public IMoveState FinishMovement { get; set; }
+        public IMoveState Current { get; set; }
+
+        public void Restart();
     }
 }

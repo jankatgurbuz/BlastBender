@@ -1,21 +1,24 @@
 using System.Threading;
+using Blast.Controller;
+using Blast.View;
+using BoardItems;
 using Cysharp.Threading.Tasks;
-using DG.Tweening;
 using UnityEngine;
-
-
+using Util.Movement.States;
+using Util.Movement.Strategies;
 
 
 namespace Util.Handlers.Strategies
 {
-    public class NormalMovementStrategy : IMovementStrategy
+    public class BaseMovementStrategy : IMovementStrategy
     {
         private CancellationTokenSource _cancellationTokenSource = new();
         public bool IsPlayShake { get; set; }
         public bool IsPlayStartMovement { get; set; }
         public bool IsPlayFinalMovement { get; set; }
-        
+
         private bool _kill;
+
         public bool Kill
         {
             get => _kill;
@@ -83,7 +86,7 @@ namespace Util.Handlers.Strategies
             IsPlayFinalMovement = true;
 
             // todo add movement settings
-            var curve =AnimationCurve.Linear(0,0,1,1);
+            var curve = AnimationCurve.Linear(0, 0, 1, 1);
 
             await UniTask.WhenAll(
                 AnimateScale(transform, targetAnimY, duration, token),
@@ -148,5 +151,18 @@ namespace Util.Handlers.Strategies
 
             transform.localPosition = target;
         }
+
+
+        public IMoveState StartMovement { get; set; } = new StartState();
+        public IMoveState FinishMovement { get; set; } = new FinishState();
+        public IMoveState Current { get; set; }
+
+        public void Restart()
+        {
+            StartMovement.Restart(false);
+            FinishMovement.Restart(false);
+        }
     }
 }
+
+

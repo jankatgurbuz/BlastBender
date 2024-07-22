@@ -7,22 +7,26 @@ using Util.Pool.Bead;
 namespace BoardItems.Bead
 {
     public class Bead : BaseBoardItem<BeadView>
+
     {
         [SerializeField] private ItemColors _color;
         public ItemColors Color => _color;
-        public sealed override MovementVisitor MovementVisitor { get; set; }
+
 
         public Bead(int row, int column, ItemColors color) : base(row, column)
         {
             _color = color;
             IsBead = true;
+
+            MovementVisitor = new MovementVisitor(new BaseMovementStrategy());
         }
 
         protected override void OnItemLifecycleTransition(bool isActive)
         {
             if (!isActive) return;
             
-            MovementVisitor = new MovementVisitor(Item, new NormalMovementStrategy());
+            MovementVisitor.MoveableItem = Item;
+            // MovementVisitor = new MovementVisitor(Item, new NormalMovementStrategy());
         }
 
         public override IBoardItem Copy()

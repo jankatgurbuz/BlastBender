@@ -1,3 +1,4 @@
+using System;
 using BoardItems;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
@@ -6,6 +7,7 @@ using Global.View;
 using UnityEngine;
 using Util.Handlers;
 using Util.Handlers.Strategies;
+using Util.Movement.Strategies;
 using Util.Pool.BeadEffect;
 using Zenject;
 
@@ -105,30 +107,6 @@ namespace Util.Pool.Bead
             beadBurstParticleItem.Burst(_itemColor, _transform.position);
         }
 
-        public void Shake(IMovementStrategy strategy)
-        {
-            if (strategy.IsPlayShake) return;
-
-            strategy.Shake2(_transform);
-        }
-
-        public void StartMovement(IMovementStrategy strategy)
-        {
-            if (strategy.IsPlayShake || strategy.IsPlayFinalMovement)
-            {
-                strategy.Kill = true;
-            }
-
-            strategy.StartMovement2(_transform);
-        }
-
-        public void FinalizeMovementWithBounce(IMovementStrategy strategy)
-        {
-            if (strategy.IsPlayFinalMovement) return;
-
-            strategy.FinalMovement2(_transform, _currentScale);
-        }
-
         public async UniTask CombineBead(int row, int column, int rowOffset, int columnOffset)
         {
             SetLayer(LayersProperties.ItemName.CombineBeads, row, columnOffset);
@@ -154,5 +132,50 @@ namespace Util.Pool.Bead
 
             RectangleBeadCombinationEffectPool.Instance.Return(effect);
         }
+
+
+        //movement
+
+        public void Shake(IMovementStrategy strategy)
+        {
+            if (strategy.IsPlayShake) return;
+
+            strategy.Shake2(_transform);
+        }
+
+
+        public void StartMovement(IMovementStrategy strategy)
+        {
+            // _startMovement = true;
+            // _movementStrategy = strategy;
+            // _movementStrategy.Current = _movementStrategy.StartMovement;
+
+            return;
+
+            if (strategy.IsPlayShake || strategy.IsPlayFinalMovement)
+            {
+                strategy.Kill = true;
+            }
+
+            strategy.StartMovement2(_transform);
+        }
+
+        public void FinalizeMovementWithBounce(IMovementStrategy strategy)
+        {
+            if (strategy.IsPlayFinalMovement) return;
+
+            strategy.FinalMovement2(_transform, _currentScale);
+        }
+
+        // private bool _startMovement = false;
+        // private IMovementStrategy _movementStrategy;
+        //
+        // private void Update()
+        // {
+        //     if (_startMovement)
+        //     {
+        //         _movementStrategy.Current = _movementStrategy.Current.DoState(_movementStrategy, _transform);
+        //     }
+        // }
     }
 }

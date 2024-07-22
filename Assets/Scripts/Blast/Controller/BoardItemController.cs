@@ -126,7 +126,7 @@ namespace Blast.Controller
 
         private void Shake()
         {
-            _combineItems[0].MovementVisitor.Shake();
+            //_combineItems[0].MovementVisitor.Shake(); //todo movement!
             _combineItems.Clear();
             Array.Clear(_recursiveCheckArray, 0, _recursiveCheckArray.Length);
         }
@@ -165,24 +165,38 @@ namespace Blast.Controller
                         item.SetRowAndColumn(row, column);
                         item.SetSortingOrder(row, column);
                         item.IsMove = true;
-                        _movementController.Register(item, i, column);
+                        _movementController.Register(item,i);
                         _boardItems[i, column] = new VoidArea(i, column);
                         break;
                     }
 
                     if (i == _rowLength)
                     {
+
+                        // var temp = _boardItems[row, column] = new Bead(row, column, ItemColors.Red);
+                        // temp.RetrieveFromPool();
+                        // if (temp is Bead bead)
+                        // {
+                        //     bead.SetColorAndAddSprite();
+                        // }
+                        //
+                        // temp.SetSortingOrder(row, column);
+                        // temp.SetPosition(_gridController.CellToLocal(row, column));
+                        // temp.SetActive(true);
+                        // temp.IsMove = true;
+                        //  _movementController.Register(temp,i);
+                        
                         _boardItems[row, column] = new Bead(row, column, ItemColors.Red);
                         // (ItemColors)UnityEngine.Random.Range(1, Enum.GetValues(typeof(ItemColors)).Length) - 1);
                         _boardItems[row, column].RetrieveFromPool();
-
+                        
                         ((Bead)_boardItems[row, column]).SetColorAndAddSprite();
                         _boardItems[row, column].SetSortingOrder(row, column);
                         _boardItems[row, column].SetPosition(_gridController.CellToLocal(row + 10, column));
                         _boardItems[row, column].SetActive(true);
                         _boardItems[row, column].IsMove = true;
-
-                        _movementController.Register(_boardItems[row, column], i, column);
+                        _movementController.Register(_boardItems[row, column],i);
+                        
                     }
                     //  (ItemColors)Random.Range(1, Enum.GetValues(typeof(ItemColors)).Length)
                 }
