@@ -135,6 +135,7 @@ namespace Blast.Controller
         {
             foreach (var item in combineGroup)
             {
+                _movementController.Check(_boardItems[item.Row, item.Column]);
                 _boardItems[item.Row, item.Column] = new VoidArea(item.Row, item.Column);
             }
         }
@@ -161,42 +162,29 @@ namespace Blast.Controller
                 {
                     if (i < _rowLength && _boardItems[i, column].IsBead)
                     {
+                        _movementController.Check(_boardItems[i, column]);
+                        
                         var item = _boardItems[row, column] = _boardItems[i, column];
                         item.SetRowAndColumn(row, column);
                         item.SetSortingOrder(row, column);
-                        item.IsMove = true;
-                        _movementController.Register(item,i);
+                        
+                        _movementController.Register(item);
                         _boardItems[i, column] = new VoidArea(i, column);
                         break;
                     }
 
                     if (i == _rowLength)
                     {
+                        var bead = new Bead(row, column, ItemColors.Red);
+                        _boardItems[row, column] = bead;
 
-                        // var temp = _boardItems[row, column] = new Bead(row, column, ItemColors.Red);
-                        // temp.RetrieveFromPool();
-                        // if (temp is Bead bead)
-                        // {
-                        //     bead.SetColorAndAddSprite();
-                        // }
-                        //
-                        // temp.SetSortingOrder(row, column);
-                        // temp.SetPosition(_gridController.CellToLocal(row, column));
-                        // temp.SetActive(true);
-                        // temp.IsMove = true;
-                        //  _movementController.Register(temp,i);
-                        
-                        _boardItems[row, column] = new Bead(row, column, ItemColors.Red);
-                        // (ItemColors)UnityEngine.Random.Range(1, Enum.GetValues(typeof(ItemColors)).Length) - 1);
-                        _boardItems[row, column].RetrieveFromPool();
-                        
-                        ((Bead)_boardItems[row, column]).SetColorAndAddSprite();
-                        _boardItems[row, column].SetSortingOrder(row, column);
-                        _boardItems[row, column].SetPosition(_gridController.CellToLocal(row + 10, column));
-                        _boardItems[row, column].SetActive(true);
-                        _boardItems[row, column].IsMove = true;
-                        _movementController.Register(_boardItems[row, column],i);
-                        
+                        bead.RetrieveFromPool();
+                        bead.SetColorAndAddSprite();
+                        bead.SetSortingOrder(row, column);
+                        bead.SetPosition(_gridController.CellToLocal(row + 10, column));
+                        bead.SetActive(true);
+
+                        _movementController.Register(bead);
                     }
                     //  (ItemColors)Random.Range(1, Enum.GetValues(typeof(ItemColors)).Length)
                 }

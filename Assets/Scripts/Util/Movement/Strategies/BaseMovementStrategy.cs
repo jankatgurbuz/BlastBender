@@ -154,13 +154,13 @@ namespace Util.Handlers.Strategies
 
 
         public IMoveState StartMovement { get; set; } = new StartState();
-        public IMoveState FinishMovement { get; set; } = new FinishState();
+        public IMoveState FinishMovement { get; set; } = new FinishStateTest();
         public IMoveState Current { get; set; }
 
         public void Restart()
         {
-            StartMovement.Restart(false);
-            FinishMovement.Restart(false);
+            StartMovement.ResetState();
+            FinishMovement.ResetState();
         }
     }
 }

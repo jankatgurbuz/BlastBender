@@ -6,5 +6,6 @@ namespace Blast.View
     public class MovementSettings : ScriptableObject
     {
         public AnimationCurve AnimationCurve;
+        public AnimationCurve FinalMovementAnimationCurve;
     }
 }

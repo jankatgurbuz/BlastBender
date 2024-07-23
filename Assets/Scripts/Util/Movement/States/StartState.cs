@@ -8,8 +8,9 @@ namespace Util.Movement.States
 {
     public class StartState : IMoveState
     {
-        private const float ScaleRate = 0.11f;
-        private const float Duration = 0.2f;
+        private const float ScaleRate = 0.025f;
+        private const float Duration = 0.5f;
+        private const float MovementOffset = 0.35f;
 
         private float _scaleTimeElapsed;
         private float _movementTime;
@@ -17,44 +18,81 @@ namespace Util.Movement.States
         private Vector3 _firstPosition;
         private Vector3 _scaleTarget;
         private Vector3 _targetPosition;
-        public bool Initialize { get; set; }
         public bool AllMovementsComplete { get; set; }
 
-        private void Init(IBoardItem item, IGridController gridController)
+        private bool _isSetupComplete;
+
+        public void Initialize(IMovementStrategy movementStrategy, IBoardItem item,
+            MovementSettings movementSettings, IGridController gridController)
         {
-            var temp = item.MovementVisitor.MoveableItem.GetTransform().localScale;
-            _firstPosition = item.GetPosition();
-            _targetPosition = gridController.CellToLocal(item.Row, item.Column);
-            _scaleTarget = new Vector3(temp.x - ScaleRate, temp.y + ScaleRate, temp.z);
         }
 
         public IMoveState DoState(IMovementStrategy movementStrategy, IBoardItem item,
             MovementSettings movementSettings, IGridController gridController)
         {
-            if (!Initialize)
+            if (!_isSetupComplete)
             {
-                Init(item, gridController);
-                Initialize = true;
+                AssignVariables(item, gridController);
+                _isSetupComplete = true;
+                item.IsMove = true;
             }
 
             Scale(item.MovementVisitor.MoveableItem.GetTransform());
             return Movement(movementStrategy, item, movementSettings);
         }
+
+        public void ResetState()
+        {
+            _scaleTimeElapsed = 0f;
+            _movementTime = 0;
+            _isSetupComplete = false;
+        }
+
+        private void AssignVariables(IBoardItem item, IGridController gridController)
+        {
+            InitializeScale(item);
+            InitializePosition(item, gridController);
+        }
+
+        private void InitializeScale(IBoardItem item)
+        {
+            if (item.IsMove) return;
+
+            var temp = item.MovementVisitor.MoveableItem.GetTransform().localScale;
+            _scaleTarget = new Vector3(temp.x - ScaleRate, temp.y + ScaleRate, temp.z);
+        }
+
+        private void InitializePosition(IBoardItem item, IGridController gridController)
+        {
+            if (item.IsMove)
+            {
+                _targetPosition = gridController.CellToLocal(item.Row, item.Column);
+                return;
+            }
+            
+            _targetPosition = gridController.CellToLocal(item.Row, item.Column);
+            _firstPosition = item.GetPosition();
+        }
+
+        public void Test(IBoardItem item, IGridController gridController)
+        {
+            _targetPosition = gridController.CellToLocal(item.Row, item.Column);
+        }
+
         private IMoveState Movement(IMovementStrategy movementStrategy, IBoardItem boardItem,
             MovementSettings movementSettings)
         {
-            _movementTime += Time.deltaTime * 0.2f;
-            var y = _firstPosition.y -
-                    movementSettings.AnimationCurve.Evaluate(_movementTime);
-            y = Mathf.Clamp(y, _targetPosition.y, 1000);
-            var newPosition = new Vector3(_firstPosition.x, y, _firstPosition.z);
+            _movementTime += Time.deltaTime * MovementOffset;
+            var evaluate = movementSettings.AnimationCurve.Evaluate(_movementTime);
+            var clampedY = Mathf.Clamp(_firstPosition.y - evaluate, _targetPosition.y, 1000);
+            var newPosition = new Vector3(_firstPosition.x, clampedY, _firstPosition.z);
             boardItem.SetPosition(newPosition);
 
-            if (Mathf.Approximately(y, _targetPosition.y))
+            if (Mathf.Approximately(clampedY, _targetPosition.y))
             {
+                boardItem.SetPosition(_targetPosition);
                 boardItem.IsMove = false;
-                AllMovementsComplete = true;
-                return movementStrategy.StartMovement;
+                return movementStrategy.FinishMovement;
             }
 
             return movementStrategy.StartMovement;
@@ -71,17 +109,6 @@ namespace Util.Movement.States
             }
 
             transorm.localScale = _scaleTarget;
-        }
-        public void Restart(bool withoutInitialize)
-        {
-            if (!withoutInitialize)
-            {
-                
-            }
-            AllMovementsComplete = false;
-            Initialize = false;
-            _scaleTimeElapsed = 0f;
-            _movementTime = 0;
         }
     }
 }

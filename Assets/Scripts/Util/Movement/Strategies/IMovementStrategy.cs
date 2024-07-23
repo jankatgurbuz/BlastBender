@@ -19,6 +19,6 @@ namespace Util.Movement.Strategies
         public IMoveState FinishMovement { get; set; }
         public IMoveState Current { get; set; }
 
-        public void Restart();
+        public void Restart(); // todo change name
     }
 }
