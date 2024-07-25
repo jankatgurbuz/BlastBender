@@ -1,4 +1,5 @@
 using System;
+using BoardItems.Util;
 using UnityEngine;
 using Util.Handlers.Visitors;
 using Util.Pool;
@@ -10,7 +11,6 @@ namespace BoardItems
     {
         [SerializeField] private int _row;
         [SerializeField] private int _column;
-
         public TPoolItem Item { get; set; }
         public int Row => _row;
         public int Column => _column;
@@ -18,9 +18,10 @@ namespace BoardItems
         public bool IsSpace { get; set; }
         public bool IsVoidArea { get; set; }
         public bool IsMove { get; set; }
-        public virtual MovementVisitor MovementVisitor { get; set; }// = MovementVisitor.Empty;
+        public virtual MovementVisitor MovementVisitor { get; set; } = MovementVisitor.Empty;
+        public TransformUtilities TransformUtilities { get; set; }
         public abstract IBoardItem Copy();
-        protected abstract void OnItemLifecycleTransition(bool isActive); // todo Movement! kesin ismi degistir
+        protected abstract void HandleItemActivation(bool isActive);
 
         protected BaseBoardItem(int row, int column)
         {
@@ -31,7 +32,8 @@ namespace BoardItems
         public void RetrieveFromPool()
         {
             Item = PoolFactory.Instance.RetrieveFromPool<TPoolItem>();
-            OnItemLifecycleTransition(true);
+            TransformUtilities = Item.TransformUtilities;
+            HandleItemActivation(true);
         }
 
         public void ReturnToPool()
@@ -40,7 +42,8 @@ namespace BoardItems
                 return;
 
             PoolFactory.Instance.ReturnToPool(Item);
-            OnItemLifecycleTransition(false);
+            TransformUtilities = null;
+            HandleItemActivation(false);
         }
 
         public virtual void Blast()
@@ -62,16 +65,6 @@ namespace BoardItems
         public void SetSortingOrder(int row, int column)
         {
             Item?.SetSortingOrder(row, column);
-        }
-
-        public void SetPosition(Vector3 position)
-        {
-            Item?.SetPosition(position);
-        }
-
-        public Vector3 GetPosition()
-        {
-            return Item.GetPosition();
         }
     }
 }

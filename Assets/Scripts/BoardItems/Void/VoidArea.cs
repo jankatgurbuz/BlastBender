@@ -10,7 +10,7 @@ namespace BoardItems.Void
             IsVoidArea = true;
         }
 
-        protected override void OnItemLifecycleTransition(bool isActive)
+        protected override void HandleItemActivation(bool isActive)
         {
         }
 

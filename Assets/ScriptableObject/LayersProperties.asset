@@ -27,4 +27,4 @@ MonoBehaviour:
     OrderInLayer: 899
   - ItemName: 0
     SortingLayer: -761573921
-    OrderInLayer: 0
+    OrderInLayer: 100

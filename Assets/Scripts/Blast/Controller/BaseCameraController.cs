@@ -1,6 +1,7 @@
 using Blast.View;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
-using DG.Tweening;
+
 
 namespace Blast.Controller
 {
@@ -15,7 +16,7 @@ namespace Blast.Controller
             _gridController = gridController;
         }
 
-        protected void FitCameraToGrid(int rowLength, int columnLength, bool isLevelGenerator = false)
+        protected async void FitCameraToGrid(int rowLength, int columnLength, bool isLevelGenerator = false)
         {
             var grid = _gridController.GetGridView<IGridView>().Grid;
 
@@ -39,8 +40,23 @@ namespace Blast.Controller
             }
             else
             {
-                Camera.transform.DOMove(new Vector3(cameraX - screenWidth / 4f, cameraY, c.z), 0.25f);
+                await MoveCameraOverTime(Camera.transform, new Vector3(cameraX - screenWidth / 4f, cameraY, c.z), 0.25f);
             }
+        }
+        
+        private async UniTask MoveCameraOverTime(Transform target, Vector3 endPosition, float duration)
+        {
+            var startPosition = target.position;
+            float elapsedTime = 0;
+
+            while (elapsedTime < duration)
+            {
+                target.position = Vector3.Lerp(startPosition, endPosition, elapsedTime / duration);
+                elapsedTime += Time.deltaTime;
+                await UniTask.Yield(PlayerLoopTiming.Update);
+            }
+
+            target.position = endPosition;
         }
 
         protected void SetOrto(int columnLength)

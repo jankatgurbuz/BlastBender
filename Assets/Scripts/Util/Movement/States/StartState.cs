@@ -18,14 +18,9 @@ namespace Util.Movement.States
         private Vector3 _firstPosition;
         private Vector3 _scaleTarget;
         private Vector3 _targetPosition;
-        public bool AllMovementsComplete { get; set; }
 
         private bool _isSetupComplete;
-
-        public void Initialize(IMovementStrategy movementStrategy, IBoardItem item,
-            MovementSettings movementSettings, IGridController gridController)
-        {
-        }
+        public bool AllMovementsComplete { get; set; }
 
         public IMoveState DoState(IMovementStrategy movementStrategy, IBoardItem item,
             MovementSettings movementSettings, IGridController gridController)
@@ -37,15 +32,8 @@ namespace Util.Movement.States
                 item.IsMove = true;
             }
 
-            Scale(item.MovementVisitor.MoveableItem.GetTransform());
+            Scale(item);
             return Movement(movementStrategy, item, movementSettings);
-        }
-
-        public void ResetState()
-        {
-            _scaleTimeElapsed = 0f;
-            _movementTime = 0;
-            _isSetupComplete = false;
         }
 
         private void AssignVariables(IBoardItem item, IGridController gridController)
@@ -58,7 +46,8 @@ namespace Util.Movement.States
         {
             if (item.IsMove) return;
 
-            var temp = item.MovementVisitor.MoveableItem.GetTransform().localScale;
+            item.TransformUtilities.SetRotation(Vector3.zero);
+            var temp = item.TransformUtilities.GetScale();
             _scaleTarget = new Vector3(temp.x - ScaleRate, temp.y + ScaleRate, temp.z);
         }
 
@@ -69,14 +58,9 @@ namespace Util.Movement.States
                 _targetPosition = gridController.CellToLocal(item.Row, item.Column);
                 return;
             }
-            
-            _targetPosition = gridController.CellToLocal(item.Row, item.Column);
-            _firstPosition = item.GetPosition();
-        }
 
-        public void Test(IBoardItem item, IGridController gridController)
-        {
             _targetPosition = gridController.CellToLocal(item.Row, item.Column);
+            _firstPosition = item.TransformUtilities.GetPosition();
         }
 
         private IMoveState Movement(IMovementStrategy movementStrategy, IBoardItem boardItem,
@@ -86,11 +70,11 @@ namespace Util.Movement.States
             var evaluate = movementSettings.AnimationCurve.Evaluate(_movementTime);
             var clampedY = Mathf.Clamp(_firstPosition.y - evaluate, _targetPosition.y, 1000);
             var newPosition = new Vector3(_firstPosition.x, clampedY, _firstPosition.z);
-            boardItem.SetPosition(newPosition);
+            boardItem.TransformUtilities.SetPosition(newPosition);
 
             if (Mathf.Approximately(clampedY, _targetPosition.y))
             {
-                boardItem.SetPosition(_targetPosition);
+                boardItem.TransformUtilities.SetPosition(_targetPosition);
                 boardItem.IsMove = false;
                 return movementStrategy.FinishMovement;
             }
@@ -98,17 +82,29 @@ namespace Util.Movement.States
             return movementStrategy.StartMovement;
         }
 
-        private void Scale(Transform transorm)
+        private void Scale(IBoardItem item)
         {
             if (_scaleTimeElapsed < Duration)
             {
                 var t = _scaleTimeElapsed / Duration;
-                transorm.localScale = Vector3.Lerp(transorm.localScale, _scaleTarget, t);
+                item.TransformUtilities.SetScale(Vector3.Lerp(item.TransformUtilities.GetScale(), _scaleTarget, t));
                 _scaleTimeElapsed += Time.deltaTime;
                 return;
             }
 
-            transorm.localScale = _scaleTarget;
+            item.TransformUtilities.SetScale(_scaleTarget);
+        }
+
+        public void SetTargetPosition(IBoardItem item, IGridController gridController)
+        {
+            _targetPosition = gridController.CellToLocal(item.Row, item.Column);
+        }
+
+        public void ResetState()
+        {
+            _scaleTimeElapsed = 0f;
+            _movementTime = 0;
+            _isSetupComplete = false;
         }
     }
 }

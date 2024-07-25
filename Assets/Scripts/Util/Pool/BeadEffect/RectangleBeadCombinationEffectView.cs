@@ -1,11 +1,7 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using DG.Tweening;
+using Cysharp.Threading.Tasks;
 using Global.Controller;
 using UnityEngine;
 using Zenject;
-using static UnityEngine.Rendering.DebugUI.Table;
 
 namespace Util.Pool.BeadEffect
 {
@@ -47,13 +43,28 @@ namespace Util.Pool.BeadEffect
 
         public void Inactive()
         {
-            _transform.DOKill();
+            
         }
 
-        public void Movement(Vector3 movePosition, float moveTime, Vector3 position)
+        public async UniTask Movement(Vector3 movePosition, float moveTime, Vector3 startPosition)
         {
-            _transform.position = position;
-            _transform.DOMove(movePosition, moveTime);
+            _transform.position = startPosition;
+            await MoveOverTime(_transform, movePosition, moveTime);
+        }
+
+        private async UniTask MoveOverTime(Transform target, Vector3 endPosition, float duration)
+        {
+            var startPosition = target.position;
+            float elapsedTime = 0;
+
+            while (elapsedTime < duration)
+            {
+                target.position = Vector3.Lerp(startPosition, endPosition, elapsedTime / duration);
+                elapsedTime += Time.deltaTime;
+                await UniTask.Yield(PlayerLoopTiming.Update);
+            }
+
+            target.position = endPosition;
         }
     }
 }

@@ -8,6 +8,7 @@ using Global.Controller;
 using Signals;
 using UnityEngine;
 using Zenject;
+using Random = UnityEngine.Random;
 
 namespace Blast.Controller
 {
@@ -20,6 +21,7 @@ namespace Blast.Controller
         private bool[,] _recursiveCheckArray;
         private List<IBoardItem> _combineItems;
         private int _rowLength, _columnLength;
+        private Dictionary<int, int> _spawnerLocation;
 
         public BoardItemController(SignalBus signalBus, IGridController gridController,
             IInGameController inGameController, MovementController movementController)
@@ -58,8 +60,15 @@ namespace Blast.Controller
                 }
 
                 temp.SetSortingOrder(item.Row, item.Column);
-                temp.SetPosition(_gridController.CellToLocal(item.Row, item.Column));
+                temp.TransformUtilities.SetPosition(_gridController.CellToLocal(item.Row, item.Column));
                 temp.SetActive(true);
+            }
+
+            _spawnerLocation = new Dictionary<int, int>();
+
+            foreach (var item in levelData.SpawnerData.Spawners)
+            {
+                _spawnerLocation.Add(item.Column, item.Row);
             }
         }
 
@@ -83,11 +92,11 @@ namespace Blast.Controller
                 case > 4: // todo: magic number !!
                     BlastForPowerUp(row, column);
                     break;
-                case > 1: // todo: magic number !!
+                case > 1:
                     Blast();
                     break;
                 default:
-                    Shake();
+                    Shake(item);
                     break;
             }
         }
@@ -124,9 +133,9 @@ namespace Blast.Controller
             Array.Clear(_recursiveCheckArray, 0, _recursiveCheckArray.Length);
         }
 
-        private void Shake()
+        private void Shake(IBoardItem item)
         {
-            //_combineItems[0].MovementVisitor.Shake(); //todo movement!
+            _movementController.Register(item, item.MovementVisitor.MovementStrategy.Shake);
             _combineItems.Clear();
             Array.Clear(_recursiveCheckArray, 0, _recursiveCheckArray.Length);
         }
@@ -142,53 +151,81 @@ namespace Blast.Controller
 
         private void RecalculateBoardElements()
         {
-            for (int row = 0; row < _rowLength; row++)
+            for (int column = 0; column < _columnLength; column++)
             {
-                for (int column = 0; column < _columnLength; column++)
+                var isFirstVoidArea = true;
+                var distanceToNextBead = 0;
+                var offset = 0f;
+
+                for (int row = 0; row < _rowLength; row++)
                 {
-                    ShiftBeadDown(_boardItems[row, column]);
+                    if (_boardItems[row, column].IsBead) continue;
+
+                    ShiftBeadOrSpawnNew(_boardItems[row, column], ref isFirstVoidArea,
+                        ref distanceToNextBead, ref offset);
                 }
             }
+        }
 
-            void ShiftBeadDown(IBoardItem boardItem)
+        private void ShiftBeadOrSpawnNew(IBoardItem boardItem, ref bool isFirstVoidArea,
+            ref int distanceToNextBead, ref float verticalOffset)
+        {
+            var column = boardItem.Column;
+            var row = boardItem.Row;
+
+            for (int nonEmptyRowIndex = row + 1; nonEmptyRowIndex <= _rowLength; nonEmptyRowIndex++)
             {
-                if (boardItem.IsBead)
-                    return;
-
-                var column = boardItem.Column;
-                var row = boardItem.Row;
-
-                for (int i = row + 1; i <= _rowLength; i++)
+                if (nonEmptyRowIndex < _rowLength && _boardItems[nonEmptyRowIndex, column].IsBead)
                 {
-                    if (i < _rowLength && _boardItems[i, column].IsBead)
-                    {
-                        _movementController.Check(_boardItems[i, column]);
-                        
-                        var item = _boardItems[row, column] = _boardItems[i, column];
-                        item.SetRowAndColumn(row, column);
-                        item.SetSortingOrder(row, column);
-                        
-                        _movementController.Register(item);
-                        _boardItems[i, column] = new VoidArea(i, column);
-                        break;
-                    }
-
-                    if (i == _rowLength)
-                    {
-                        var bead = new Bead(row, column, ItemColors.Red);
-                        _boardItems[row, column] = bead;
-
-                        bead.RetrieveFromPool();
-                        bead.SetColorAndAddSprite();
-                        bead.SetSortingOrder(row, column);
-                        bead.SetPosition(_gridController.CellToLocal(row + 10, column));
-                        bead.SetActive(true);
-
-                        _movementController.Register(bead);
-                    }
-                    //  (ItemColors)Random.Range(1, Enum.GetValues(typeof(ItemColors)).Length)
+                    TryShiftBeadDown(nonEmptyRowIndex, row, column);
+                    break;
                 }
+
+                if (nonEmptyRowIndex != _rowLength) continue;
+
+
+                SpawnNewBeadInVoidArea(column, row, ref isFirstVoidArea, ref distanceToNextBead, ref verticalOffset);
             }
+        }
+
+        private void TryShiftBeadDown(int nonEmptyRowIndex, int row, int column)
+        {
+            _movementController.Check(_boardItems[nonEmptyRowIndex, column]);
+
+            var item = _boardItems[row, column] = _boardItems[nonEmptyRowIndex, column];
+            item.SetRowAndColumn(row, column);
+            item.SetSortingOrder(row, column);
+
+            _movementController.Register(item, item.MovementVisitor.MovementStrategy.StartMovement);
+            _boardItems[nonEmptyRowIndex, column] = new VoidArea(nonEmptyRowIndex, column);
+        }
+
+        private void SpawnNewBeadInVoidArea(int column, int row, ref bool isFirstVoidArea,
+            ref int distanceToNextBead, ref float verticalOffset)
+        {
+            if (!_spawnerLocation.TryGetValue(column, out int location)) return;
+
+            if (isFirstVoidArea)
+            {
+                distanceToNextBead = location - row;
+                isFirstVoidArea = false;
+            }
+
+            var randomColor = (ItemColors)Random.Range(0, Enum.GetValues(typeof(ItemColors)).Length - 1);
+            var bead = new Bead(row, column, randomColor);
+            _boardItems[row, column] = bead;
+
+            bead.RetrieveFromPool();
+            bead.SetColorAndAddSprite();
+            bead.SetSortingOrder(row, column);
+
+            var position = _gridController.CellToLocal(row + distanceToNextBead, column);
+            verticalOffset += _inGameController.LevelData.SpawnerData.VerticalOffset;
+            position.y += verticalOffset;
+            bead.TransformUtilities.SetPosition(position);
+            bead.SetActive(true);
+
+            _movementController.Register(bead, bead.MovementVisitor.MovementStrategy.StartMovement);
         }
 
         private void FindMatches(int row, int column, ItemColors color)
@@ -198,8 +235,8 @@ namespace Blast.Controller
                 return;
 
             _recursiveCheckArray[row, column] = true;
-            var match = _boardItems[row, column].IsBead && ((Bead)_boardItems[row, column]).Color == color;
-            if (!match)
+
+            if (!_boardItems[row, column].IsBead || ((Bead)_boardItems[row, column]).Color != color)
                 return;
 
             _combineItems.Add(_boardItems[row, column]);

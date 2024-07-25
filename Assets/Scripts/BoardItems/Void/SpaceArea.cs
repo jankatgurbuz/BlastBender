@@ -15,7 +15,7 @@ namespace BoardItems.Void
             return new SpaceArea(Row, Column);
         }
 
-        protected override void OnItemLifecycleTransition(bool isActive)
+        protected override void HandleItemActivation(bool isActive)
         {
         }
     }

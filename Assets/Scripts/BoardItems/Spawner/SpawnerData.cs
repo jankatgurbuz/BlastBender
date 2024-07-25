@@ -6,6 +6,7 @@ namespace BoardItems.Spawner
     public class SpawnerData
     {
         public List<SpawnerPosition> Spawners;
+        public float VerticalOffset;
     }
 
     [System.Serializable]

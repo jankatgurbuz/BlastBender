@@ -1,18 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using Global.View;
 using Global.Controller;
 using UnityEngine;
 using Zenject;
-using DG.Tweening;
 using Cysharp.Threading.Tasks;
 
 namespace Util.Pool.BeadEffect
 {
     public class BeadBurstEffectView : MonoBehaviour, IPoolable
     {
-        [SerializeField]
-        private SpriteRenderer _spriteRenderer;
+        [SerializeField] private SpriteRenderer _spriteRenderer;
 
         private Transform _transform;
         private GameObject _gameObject;
@@ -74,35 +70,78 @@ namespace Util.Pool.BeadEffect
         {
             _transform.position = pos;
         }
+
         private async void Handle()
         {
             var firstScaleTime = 0.1f;
             var firstColorTime = 0.1f;
             var firstMovementTime = 0.5f;
 
-            var scaleTweener = _transform.DOScale(_customScale, firstScaleTime);
-            var colorTweener = _spriteRenderer.DOColor(_customAlphaColor, firstColorTime);
-            var positionTweener = _transform.DOMoveY(0.2f, firstMovementTime).SetRelative();
+           
+            await ScaleOverTime(_transform, _customScale, firstScaleTime);
 
-            await UniTask.WhenAll(
-                scaleTweener.AsyncWaitForCompletion().AsUniTask(),
-                colorTweener.AsyncWaitForCompletion().AsUniTask()
-                );
+            
+            await ChangeColorOverTime(_spriteRenderer, _customAlphaColor, firstColorTime);
 
-            //second 
+           
+            await MoveYOverTime(_transform, 0.2f, firstMovementTime);
+
+           
             var secondScaleTime = 0.1f;
             var secondColorTime = 0.1f;
 
-            scaleTweener = _transform.DOScale(_zeroScale, secondScaleTime);
-             colorTweener = _spriteRenderer.DOColor(_zeroAlphaColor, secondColorTime);
-
             await UniTask.WhenAll(
-               scaleTweener.AsyncWaitForCompletion().AsUniTask(),
-               colorTweener.AsyncWaitForCompletion().AsUniTask(),
-               positionTweener.AsyncWaitForCompletion().AsUniTask());
+                ScaleOverTime(_transform, _zeroScale, secondScaleTime),
+                ChangeColorOverTime(_spriteRenderer, _zeroAlphaColor, secondColorTime)
+            );
 
             BeadBurstEffectPool.Instance.Return(this);
         }
+
+        private async UniTask ScaleOverTime(Transform target, Vector3 targetScale, float duration)
+        {
+            var startScale = target.localScale;
+            float elapsedTime = 0;
+
+            while (elapsedTime < duration)
+            {
+                target.localScale = Vector3.Lerp(startScale, targetScale, elapsedTime / duration);
+                elapsedTime += Time.deltaTime;
+                await UniTask.Yield(PlayerLoopTiming.Update);
+            }
+
+            target.localScale = targetScale;
+        }
+
+        private async UniTask ChangeColorOverTime(SpriteRenderer target, Color targetColor, float duration)
+        {
+            var startColor = target.color;
+            float elapsedTime = 0;
+
+            while (elapsedTime < duration)
+            {
+                target.color = Color.Lerp(startColor, targetColor, elapsedTime / duration);
+                elapsedTime += Time.deltaTime;
+                await UniTask.Yield(PlayerLoopTiming.Update);
+            }
+
+            target.color = targetColor;
+        }
+
+        private async UniTask MoveYOverTime(Transform target, float relativeY, float duration)
+        {
+            var startPosition = target.position;
+            var endPosition = new Vector3(startPosition.x, startPosition.y + relativeY, startPosition.z);
+            float elapsedTime = 0;
+
+            while (elapsedTime < duration)
+            {
+                target.position = Vector3.Lerp(startPosition, endPosition, elapsedTime / duration);
+                elapsedTime += Time.deltaTime;
+                await UniTask.Yield(PlayerLoopTiming.Update);
+            }
+
+            target.position = endPosition;
+        }
     }
 }
-

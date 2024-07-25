@@ -1,5 +1,4 @@
-using UnityEngine;
-using Util.Handlers.Strategies;
+using BoardItems.Util;
 using Util.Handlers.Visitors;
 using Util.Pool;
 
@@ -27,8 +26,7 @@ namespace BoardItems
 
     public interface IItemBehavior
     {
-        void SetPosition(Vector3 position);
-        Vector3 GetPosition();
+        TransformUtilities TransformUtilities { get; set; }
         void SetActive(bool active);
         void SetSortingOrder(int row, int column);
         void Blast();
@@ -36,9 +34,6 @@ namespace BoardItems
 
     public interface IMoveable
     {
-        public Transform GetTransform();
-        // void StartMovement(IMovementStrategy strategy);
-        // void FinalizeMovementWithBounce(IMovementStrategy strategy);
-        // void Shake(IMovementStrategy strategy);
+       
     }
 }

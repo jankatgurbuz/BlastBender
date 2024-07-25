@@ -1,6 +1,5 @@
 using System;
 using Cysharp.Threading.Tasks;
-using DG.Tweening;
 using Global.Controller;
 using UnityEngine;
 using Zenject;
@@ -21,7 +20,6 @@ namespace Blast.Controller
         public async void Initialize()
         {
             Application.targetFrameRate = 60;
-            DOTween.SetTweensCapacity(1250,500);
 
             var controllers = _diContainer.ResolveAll<IStartable>();
 

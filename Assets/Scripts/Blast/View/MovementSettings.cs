@@ -7,5 +7,6 @@ namespace Blast.View
     {
         public AnimationCurve AnimationCurve;
         public AnimationCurve FinalMovementAnimationCurve;
+        public AnimationCurve Shake;
     }
 }

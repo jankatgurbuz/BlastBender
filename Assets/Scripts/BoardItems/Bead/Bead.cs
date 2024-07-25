@@ -1,7 +1,7 @@
 using Cysharp.Threading.Tasks;
 using UnityEngine;
-using Util.Handlers.Strategies;
 using Util.Handlers.Visitors;
+using Util.Movement.Strategies;
 using Util.Pool.Bead;
 
 namespace BoardItems.Bead
@@ -11,8 +11,6 @@ namespace BoardItems.Bead
     {
         [SerializeField] private ItemColors _color;
         public ItemColors Color => _color;
-
-
         public Bead(int row, int column, ItemColors color) : base(row, column)
         {
             _color = color;
@@ -21,12 +19,11 @@ namespace BoardItems.Bead
             MovementVisitor = new MovementVisitor(new BaseMovementStrategy());
         }
 
-        protected override void OnItemLifecycleTransition(bool isActive)
+        protected override void HandleItemActivation(bool isActive)
         {
             if (!isActive) return;
             
             MovementVisitor.MoveableItem = Item;
-            // MovementVisitor = new MovementVisitor(Item, new NormalMovementStrategy());
         }
 
         public override IBoardItem Copy()

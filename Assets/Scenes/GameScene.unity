@@ -179,9 +179,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1394360297
-  m_SortingLayer: 1
-  m_SortingOrder: 0
+  m_SortingLayerID: -761573921
+  m_SortingLayer: 4
+  m_SortingOrder: 25
   m_Sprite: {fileID: 21300000, guid: 90d19bb0badc94e2aac143ea43afecc0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -444,8 +444,8 @@ MonoBehaviour:
   _camera: {fileID: 312358212}
   _planeDistance: 10
   _canvasScaler: 0
-  _sortingLayerName: LevelUI
-  _sortingLayerOrder: 0
+  _sortingLayerName: Items
+  _sortingLayerOrder: 25
   _uIElementProperties:
     _alpha: 1
     _interactable: 1
@@ -523,9 +523,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1394360297
-  m_SortingLayer: 1
-  m_SortingOrder: 0
+  m_SortingLayerID: -761573921
+  m_SortingLayer: 4
+  m_SortingOrder: 175
   m_Sprite: {fileID: 21300000, guid: ba2852294ca59463b98c62c86cd04d7e, type: 3}
   m_Color: {r: 0.7529412, g: 0.21568628, b: 0.30980393, a: 1}
   m_FlipX: 0
@@ -556,7 +556,7 @@ MonoBehaviour:
     _canvasKey: 
     _spriteCanvas: {fileID: 333832017}
   _uIElementProperties:
-    _orderInLayer: 0
+    _orderInLayer: 150
     _ignoreXPosition: 0
     _ignoreYPosition: 0
     _ignoreXScale: 0

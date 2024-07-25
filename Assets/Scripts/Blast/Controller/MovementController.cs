@@ -2,10 +2,8 @@ using System;
 using System.Collections.Generic;
 using Blast.View;
 using BoardItems;
-using BoardItems.Bead;
 using Cysharp.Threading.Tasks;
 using Global.Controller;
-using UnityEngine;
 using Util.Movement.States;
 using Zenject;
 
@@ -33,25 +31,29 @@ namespace Blast.Controller
             await UniTask.CompletedTask;
         }
 
-        public void Register(IBoardItem item)
+        public void Register(IBoardItem item, IMoveState initState)
         {
             var movementStrategy = item.MovementVisitor.MovementStrategy;
-    
+
             if (_list.Add(item))
             {
-                movementStrategy.Current = movementStrategy.StartMovement;
-                movementStrategy.Restart();
+                movementStrategy.Current = initState;
+                movementStrategy.ResetAllStates();
             }
             else
             {
                 switch (movementStrategy.Current)
                 {
-                    case FinishStateTest:
-                        movementStrategy.Restart();
+                    case FinishState:
+                        movementStrategy.ResetAllStates();
                         movementStrategy.Current = movementStrategy.StartMovement;
                         break;
                     case StartState startState:
-                        startState.Test(item, _gridController);
+                        startState.SetTargetPosition(item, _gridController);
+                        break;
+                    case ShakeState:
+                        movementStrategy.ResetAllStates();
+                        movementStrategy.Current = initState;
                         break;
                 }
             }
@@ -84,14 +86,14 @@ namespace Blast.Controller
 
         public void Check(IBoardItem boardItem)
         {
-            if (boardItem.MovementVisitor.MovementStrategy.Current is FinishStateTest)
+            if (boardItem.MovementVisitor.MovementStrategy.Current is FinishState)
             {
                 var check = _list.Contains(boardItem);
                 if (check)
                 {
                     _list.Remove(boardItem);
                 }
-            } 
+            }
         }
     }
 }

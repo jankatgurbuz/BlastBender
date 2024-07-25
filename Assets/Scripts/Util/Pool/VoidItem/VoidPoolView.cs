@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using BoardItems;
+using BoardItems.Util;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
@@ -10,6 +11,8 @@ namespace Util.Pool.NullPtrPool
     {
         private Transform _transform;
         private GameObject _gameObject;
+
+        public TransformUtilities TransformUtilities { get; set; }
 
         public void Awake()
         {
@@ -38,6 +41,7 @@ namespace Util.Pool.NullPtrPool
         public void Inactive()
         {
         }
+
 
         public void SetPosition(Vector3 position)
         {

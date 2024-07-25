@@ -1322,27 +1322,27 @@ MonoBehaviour:
     TopBottomKey: ff
   SpawnerData:
     Spawners:
-    - Row: 11
+    - Row: 16
       Column: 0
-    - Row: 11
+    - Row: 16
       Column: 1
-    - Row: 11
+    - Row: 16
       Column: 2
-    - Row: 11
+    - Row: 16
       Column: 3
-    - Row: 11
+    - Row: 16
       Column: 4
-    - Row: 11
+    - Row: 16
       Column: 5
-    - Row: 11
+    - Row: 16
       Column: 6
-    - Row: 11
+    - Row: 16
       Column: 7
-    - Row: 11
+    - Row: 16
       Column: 8
-    - Row: 11
+    - Row: 16
       Column: 9
-    - Row: 11
+    - Row: 16
       Column: 10
   references:
     version: 2

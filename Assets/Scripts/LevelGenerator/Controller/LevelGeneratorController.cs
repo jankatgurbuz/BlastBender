@@ -141,7 +141,7 @@ namespace LevelGenerator.Controller
             AssignBoardItem();
             IterateBoardItem(BoardItem,
                 x => x.RetrieveFromPool(),
-                x => x.SetPosition(_gridController.CellToLocal(x.Row, x.Column)),
+                x => x.TransformUtilities?.SetPosition(_gridController.CellToLocal(x.Row, x.Column)),
                 x => {
                     if (x is Bead bead)
                     {

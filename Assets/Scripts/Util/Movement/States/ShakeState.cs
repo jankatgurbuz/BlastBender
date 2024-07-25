@@ -7,24 +7,19 @@ using Util.Movement.Strategies;
 
 namespace Util.Movement.States
 {
-    public class FinishState : IMoveState
+    public class ShakeState : IMoveState
     {
-        private float _movementTime;
-
-        private Vector3 _firstPosition;
-        private Vector3 _targetPosition;
         private bool _isSetupComplete;
+        private float _movementTime;
         private float _animationDuration;
         public bool AllMovementsComplete { get; set; }
 
-        private void Initialize(IBoardItem item, MovementSettings movementSettings, IGridController gridController)
+        private void Initialize(IBoardItem item, MovementSettings movementSettings)
         {
             if (_isSetupComplete) return;
 
-            _firstPosition = item.TransformUtilities.GetPosition();
-            _targetPosition = gridController.CellToLocal(item.Row, item.Column);
-
             _animationDuration = movementSettings.Shake.keys.Last().time;
+            item.TransformUtilities.SetRotation(Vector3.zero);
             _isSetupComplete = true;
         }
 
@@ -32,7 +27,7 @@ namespace Util.Movement.States
             MovementSettings movementSettings, IGridController gridController)
         {
             item.TransformUtilities.SetScale(Vector3.one);
-            Initialize(item, movementSettings, gridController);
+            Initialize(item, movementSettings);
             Movement(item, movementSettings);
             return this;
         }
@@ -43,31 +38,31 @@ namespace Util.Movement.States
 
             if (_movementTime >= _animationDuration)
             {
-                CompleteMovement();
+                CompleteMovement(item);
                 return;
             }
 
-            ApplyFinalMovement(item, movementSettings);
+            ApplyShake(item, movementSettings);
         }
 
-        private void CompleteMovement()
+        private void ApplyShake(IBoardItem item, MovementSettings movementSettings)
         {
-            _movementTime = 0;
+            var evaluate = movementSettings.Shake.Evaluate(_movementTime);
+            var newRotation = new Vector3(0, 0, evaluate);
+            item.TransformUtilities.SetRotation(newRotation);
+        }
+
+        private void CompleteMovement(IBoardItem item)
+        {
+            item.TransformUtilities.SetRotation(Vector3.zero);
             AllMovementsComplete = true;
-        }
-
-        private void ApplyFinalMovement(IBoardItem item, MovementSettings movementSettings)
-        {
-            var evaluate = movementSettings.FinalMovementAnimationCurve.Evaluate(_movementTime);
-            var clampedY = Mathf.Clamp(_firstPosition.y - evaluate, _targetPosition.y, 1000);
-            var newPosition = new Vector3(_firstPosition.x, clampedY, _firstPosition.z);
-            item.TransformUtilities.SetPosition(newPosition);
+            _movementTime = 0;
         }
 
         public void ResetState()
         {
-            _isSetupComplete = false;
             AllMovementsComplete = false;
+            _isSetupComplete = false;
             _movementTime = 0;
         }
     }

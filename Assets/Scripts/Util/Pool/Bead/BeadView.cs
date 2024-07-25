@@ -1,13 +1,9 @@
-using System;
 using BoardItems;
+using BoardItems.Util;
 using Cysharp.Threading.Tasks;
-using DG.Tweening;
 using Global.Controller;
 using Global.View;
 using UnityEngine;
-using Util.Handlers;
-using Util.Handlers.Strategies;
-using Util.Movement.Strategies;
 using Util.Pool.BeadEffect;
 using Zenject;
 
@@ -18,24 +14,20 @@ namespace Util.Pool.Bead
         [SerializeField] private SpriteRenderer _spriteRenderer;
         [SerializeField] private BeadSettings _beadSettings;
 
-        private Transform _transform;
         private GameObject _gameObject;
         private ItemColors _itemColor;
         private LayersController _layersController;
 
-        private Quaternion _currentRotation;
-        private Vector3 _currentScale;
+        public TransformUtilities TransformUtilities { get; set; }
 
         public void Awake()
         {
-            _transform = transform;
             _gameObject = gameObject;
+            TransformUtilities = new TransformUtilities(transform);
         }
 
         public void Create()
         {
-            _currentRotation = _transform.rotation;
-            _currentScale = transform.localScale;
             _layersController ??= ProjectContext.Instance.Container.Resolve<LayersController>();
         }
 
@@ -45,8 +37,7 @@ namespace Util.Pool.Bead
 
         public void Inactive()
         {
-            _transform.DOKill();
-            ResetItem();
+            TransformUtilities.ResetItem();
         }
 
         public GameObject GetGameObject()
@@ -56,20 +47,9 @@ namespace Util.Pool.Bead
 
         public Transform GetTransform()
         {
-            return _transform;
+            return TransformUtilities;
         }
-
-        private void ResetItem()
-        {
-            _transform.localScale = _currentScale;
-            _transform.rotation = _currentRotation;
-        }
-
-        public void SetPosition(Vector3 position)
-        {
-            _transform.position = position;
-        }
-
+        
         public void SetColorAndAddSprite(ItemColors color)
         {
             _itemColor = color;
@@ -92,19 +72,14 @@ namespace Util.Pool.Bead
             _spriteRenderer.sortingLayerID = info.SortingLayer;
             _spriteRenderer.sortingOrder = info.OrderInLayer + (row + column);
         }
-
-        public Vector3 GetPosition()
-        {
-            return _transform.position;
-        }
-
+        
         public void Blast()
         {
             var beadBurstEffectItem = BeadBurstEffectPool.Instance.Retrieve();
-            beadBurstEffectItem.SetPosition(_transform.position);
+            beadBurstEffectItem.SetPosition(TransformUtilities.GetPosition());
 
             var beadBurstParticleItem = BeadBurstParticlePool.Instance.Retrieve();
-            beadBurstParticleItem.Burst(_itemColor, _transform.position);
+            beadBurstParticleItem.Burst(_itemColor, TransformUtilities.GetPosition());
         }
 
         public async UniTask CombineBead(int row, int column, int rowOffset, int columnOffset)
@@ -113,69 +88,44 @@ namespace Util.Pool.Bead
 
             const float moveTime = 0.15f;
             const float offset = 0.3f;
-            var tempPos = _transform.position;
+            var tempPos = TransformUtilities.GetPosition();
             var x = tempPos.x - columnOffset * offset;
             var y = tempPos.y - rowOffset * offset;
             var movePosition = new Vector3(x, y, tempPos.z);
 
             var effect = RectangleBeadCombinationEffectPool.Instance.Retrieve();
 
-            effect.Movement(movePosition, moveTime, _transform.position);
-            await _transform.DOMove(movePosition, moveTime).AsyncWaitForCompletion().AsUniTask();
+            effect.Movement(movePosition, moveTime, TransformUtilities.GetPosition()).Forget();
+            
+            float elapsedTime = 0;
+            var startPosition = transform.position;
+
+            while (elapsedTime < moveTime)
+            {
+                transform.position = Vector3.Lerp(startPosition, movePosition, elapsedTime / moveTime);
+                elapsedTime += Time.deltaTime;
+                await UniTask.Yield(PlayerLoopTiming.Update);
+            }
+            transform.position = movePosition;
 
             x = tempPos.x + columnOffset;
             y = tempPos.y + rowOffset;
             movePosition = new Vector3(x, y, tempPos.z);
 
-            effect.Movement(movePosition, moveTime, _transform.position);
-            await _transform.DOMove(movePosition, moveTime).AsyncWaitForCompletion().AsUniTask();
+            effect.Movement(movePosition, moveTime, TransformUtilities.GetPosition()).Forget();
+            
+            elapsedTime = 0;
+            startPosition = transform.position;
+
+            while (elapsedTime < moveTime)
+            {
+                transform.position = Vector3.Lerp(startPosition, movePosition, elapsedTime / moveTime);
+                elapsedTime += Time.deltaTime;
+                await UniTask.Yield(PlayerLoopTiming.Update);
+            }
+            transform.position = movePosition;
 
             RectangleBeadCombinationEffectPool.Instance.Return(effect);
         }
-
-
-        //movement
-
-        public void Shake(IMovementStrategy strategy)
-        {
-            if (strategy.IsPlayShake) return;
-
-            strategy.Shake2(_transform);
-        }
-
-
-        public void StartMovement(IMovementStrategy strategy)
-        {
-            // _startMovement = true;
-            // _movementStrategy = strategy;
-            // _movementStrategy.Current = _movementStrategy.StartMovement;
-
-            return;
-
-            if (strategy.IsPlayShake || strategy.IsPlayFinalMovement)
-            {
-                strategy.Kill = true;
-            }
-
-            strategy.StartMovement2(_transform);
-        }
-
-        public void FinalizeMovementWithBounce(IMovementStrategy strategy)
-        {
-            if (strategy.IsPlayFinalMovement) return;
-
-            strategy.FinalMovement2(_transform, _currentScale);
-        }
-
-        // private bool _startMovement = false;
-        // private IMovementStrategy _movementStrategy;
-        //
-        // private void Update()
-        // {
-        //     if (_startMovement)
-        //     {
-        //         _movementStrategy.Current = _movementStrategy.Current.DoState(_movementStrategy, _transform);
-        //     }
-        // }
     }
 }

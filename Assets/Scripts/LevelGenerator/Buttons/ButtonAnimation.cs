@@ -1,4 +1,4 @@
-using DG.Tweening;
+using Cysharp.Threading.Tasks;
 using SC.Core.UI;
 using UnityEngine;
 
@@ -26,15 +26,29 @@ namespace LevelGenerator.Buttons
             _button.DownEvent.AddListener(OnDown);
         }
 
-        private void OnDown()
+        private async void OnDown()
         {
-            _spriteRenderer.DOColor(_tempColor, 0.1f);
+            await ChangeColorOverTime(_spriteRenderer, _tempColor, 0.1f);
         }
 
-        private void OnClick()
+        private async void OnClick()
         {
-            _spriteRenderer.DOKill();
-            _spriteRenderer.DOColor(_currentColor, 0.1f);
+            await ChangeColorOverTime(_spriteRenderer, _currentColor, 0.1f);
+        }
+
+        private async UniTask ChangeColorOverTime(SpriteRenderer target, Color targetColor, float duration)
+        {
+            var startColor = target.color;
+            float elapsedTime = 0;
+
+            while (elapsedTime < duration)
+            {
+                target.color = Color.Lerp(startColor, targetColor, elapsedTime / duration);
+                elapsedTime += Time.deltaTime;
+                await UniTask.Yield(PlayerLoopTiming.Update);
+            }
+
+            target.color = targetColor;
         }
     }
 }
