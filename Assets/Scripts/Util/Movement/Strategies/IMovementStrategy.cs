@@ -8,6 +8,7 @@ namespace Util.Movement.Strategies
         public IMoveState FinishMovement { get; set; }
         public IMoveState Current { get; set; }
         public IMoveState Shake { get; set; }
+        public IMoveState CombineState { get; set; }
         public void ResetAllStates();
     }
 }

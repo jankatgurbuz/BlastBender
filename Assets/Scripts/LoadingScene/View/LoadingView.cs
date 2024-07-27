@@ -34,27 +34,32 @@ namespace LoadingScene.View
         {
             if (_canvasGroup.alpha == 1) return;
 
-            TweenAlpha(1, BlocksRaycasts);
+            TweenAlpha(1, StartAction,null);
             LoadingTextSpinner();
         }
 
         public void Hide()
         {
             _loadingTextCancellation?.Cancel();
-            TweenAlpha(0, BlocksRaycasts);
+            TweenAlpha(0,null, FinishAction);
         }
-        private void BlocksRaycasts(int check)
+        private void FinishAction(int check)
         {
-            _canvasGroup.blocksRaycasts = check == 0;
+            gameObject.SetActive(false);
         }
-        private async void TweenAlpha(int alpha, Action<int> finishAction)
+        private void StartAction(int check)
+        {
+            gameObject.SetActive(true);
+        }
+        private async void TweenAlpha(int alpha,Action<int> startAction, Action<int> finishAction)
         {
             var elapsedTime = 0f;
             var fadeDuration = 0.1f;
 
             var xorAlpha = alpha ^ 1;
             _canvasGroup.alpha = xorAlpha;
-
+            
+            startAction?.Invoke(xorAlpha);
             while (true)
             {
                 _canvasGroup.alpha = Mathf.Lerp(xorAlpha, alpha, elapsedTime / fadeDuration);
@@ -63,7 +68,7 @@ namespace LoadingScene.View
                 elapsedTime += Time.deltaTime;
                 await UniTask.Yield(PlayerLoopTiming.LastUpdate);
             }
-            finishAction.Invoke(xorAlpha);
+            finishAction?.Invoke(xorAlpha);
         }
         private async void LoadingTextSpinner()
         {

@@ -1,4 +1,3 @@
-using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Util.Handlers.Visitors;
 using Util.Movement.Strategies;
@@ -7,10 +6,10 @@ using Util.Pool.Bead;
 namespace BoardItems.Bead
 {
     public class Bead : BaseBoardItem<BeadView>
-
     {
         [SerializeField] private ItemColors _color;
         public ItemColors Color => _color;
+
         public Bead(int row, int column, ItemColors color) : base(row, column)
         {
             _color = color;
@@ -22,7 +21,7 @@ namespace BoardItems.Bead
         protected override void HandleItemActivation(bool isActive)
         {
             if (!isActive) return;
-            
+
             MovementVisitor.MoveableItem = Item;
         }
 
@@ -36,9 +35,12 @@ namespace BoardItems.Bead
             Item?.SetColorAndAddSprite(_color);
         }
 
-        public UniTask CombineBead(int row, int column, int rowOffset, int columnOffset)
+        public void SetLayer(int row, int columnOffset)
         {
-            return Item == null ? UniTask.CompletedTask : Item.CombineBead(row, column, rowOffset, columnOffset);
+            if (Item != null)
+            {
+                Item.SetLayer(row, columnOffset);
+            }
         }
     }
 }

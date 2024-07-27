@@ -11,6 +11,7 @@ namespace Util.Pool.BeadEffect
         private Transform _transform;
         private GameObject _gameObject;
         private LayersController _layerController;
+
         public void Awake()
         {
             _transform = transform;
@@ -19,13 +20,13 @@ namespace Util.Pool.BeadEffect
 
         public void Active()
         {
-            
         }
 
         public void Create()
         {
             _layerController ??= ProjectContext.Instance.Container.Resolve<LayersController>();
-            var info = _layerController.GetLayerInfo(Global.View.LayersProperties.ItemName.RectangleBeadCombinationEffect);
+            var info = _layerController.GetLayerInfo(Global.View.LayersProperties.ItemName
+                .RectangleBeadCombinationEffect);
 
             _spriteRenderer.sortingLayerID = info.SortingLayer;
             _spriteRenderer.sortingOrder = info.OrderInLayer;
@@ -43,28 +44,11 @@ namespace Util.Pool.BeadEffect
 
         public void Inactive()
         {
-            
         }
 
-        public async UniTask Movement(Vector3 movePosition, float moveTime, Vector3 startPosition)
+        public void SetPosition(Vector3 movePosition)
         {
-            _transform.position = startPosition;
-            await MoveOverTime(_transform, movePosition, moveTime);
-        }
-
-        private async UniTask MoveOverTime(Transform target, Vector3 endPosition, float duration)
-        {
-            var startPosition = target.position;
-            float elapsedTime = 0;
-
-            while (elapsedTime < duration)
-            {
-                target.position = Vector3.Lerp(startPosition, endPosition, elapsedTime / duration);
-                elapsedTime += Time.deltaTime;
-                await UniTask.Yield(PlayerLoopTiming.Update);
-            }
-
-            target.position = endPosition;
+            _transform.position = movePosition;
         }
     }
 }

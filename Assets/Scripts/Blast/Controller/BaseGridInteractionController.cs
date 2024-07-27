@@ -37,12 +37,12 @@ namespace Blast.Controller
             InteractionSystem.Instance.Receiver(OnClick);
         }
 
-        public virtual void OnClick(InteractionPhase phase, Vector2 vector)
+        protected virtual void OnClick(InteractionPhase phase, Vector2 vector)
         {
             Action(phase, vector);
         }
 
-        protected void Action(InteractionPhase phase, Vector3 vec)
+        private void Action(InteractionPhase phase, Vector3 vec)
         {
             if (IsContinuousPress && phase == InteractionPhase.None)
             {
@@ -61,12 +61,12 @@ namespace Blast.Controller
             }
         }
 
-        protected (int, int) GetDrawPosition(Vector3 vec)
+        private (int, int) GetDrawPosition(Vector3 vector)
         {
             var cellSize = _gridController.GetCellSize();
-            var mousePos = Camera.ScreenToWorldPoint(vec);
-            int row = Mathf.RoundToInt(mousePos.x / cellSize.x);
-            int column = Mathf.RoundToInt(mousePos.y / cellSize.y);
+            var mousePosition = Camera.ScreenToWorldPoint(vector);
+            var row = Mathf.RoundToInt(mousePosition.x / cellSize.x);
+            var column = Mathf.RoundToInt(mousePosition.y / cellSize.y);
 
             return (row, column);
         }

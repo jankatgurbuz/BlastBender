@@ -1344,6 +1344,7 @@ MonoBehaviour:
       Column: 9
     - Row: 16
       Column: 10
+    VerticalOffset: 0.5
   references:
     version: 2
     RefIds:

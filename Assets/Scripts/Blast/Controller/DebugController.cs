@@ -27,7 +27,7 @@ namespace Blast.Controller
             return UniTask.CompletedTask;
         }
 
-        private async UniTask ReadKey()
+        private async void ReadKey()
         {
             while (true)
             {

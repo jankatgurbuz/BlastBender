@@ -160,7 +160,7 @@ MonoBehaviour:
     _canvasKey: 
     _spriteCanvas: {fileID: 1513486355}
   _uIElementProperties:
-    _orderInLayer: 3
+    _orderInLayer: 4
     _ignoreXPosition: 0
     _ignoreYPosition: 0
     _ignoreXScale: 0
@@ -223,7 +223,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 4
   m_Sprite: {fileID: 21300000, guid: e36443a7955304d46aef74d24335b5e4, type: 3}
   m_Color: {r: 0.24705882, g: 0.44705883, b: 0.60784316, a: 1}
   m_FlipX: 0
@@ -373,6 +373,10 @@ PrefabInstance:
     - target: {fileID: 5055519883895084697, guid: 31cb647fa8fa14a87a38690f9cf69784, type: 3}
       propertyPath: m_Name
       value: 4Team
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293647783146411572, guid: 31cb647fa8fa14a87a38690f9cf69784, type: 3}
+      propertyPath: _SortingOrder
+      value: 103
       objectReference: {fileID: 0}
     - target: {fileID: 6327254148768021346, guid: 31cb647fa8fa14a87a38690f9cf69784, type: 3}
       propertyPath: m_LocalScale.x
@@ -559,7 +563,7 @@ MonoBehaviour:
     _canvasKey: 
     _spriteCanvas: {fileID: 1513486355}
   _uIElementProperties:
-    _orderInLayer: 2
+    _orderInLayer: 3
     _ignoreXPosition: 0
     _ignoreYPosition: 0
     _ignoreXScale: 0
@@ -624,7 +628,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_Sprite: {fileID: 1304975921}
   m_Color: {r: 0.21568628, g: 0.2901961, b: 0.36078432, a: 1}
   m_FlipX: 0
@@ -1371,6 +1375,10 @@ PrefabInstance:
       propertyPath: _register._spriteCanvas
       value: 
       objectReference: {fileID: 365248816}
+    - target: {fileID: 8912583501659338367, guid: 0bab3e912a56a48d78ad47b1c1ef2a74, type: 3}
+      propertyPath: _SortingOrder
+      value: 103
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1512,7 +1520,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 4
   m_Sprite: {fileID: 21300000, guid: e36443a7955304d46aef74d24335b5e4, type: 3}
   m_Color: {r: 0.24705882, g: 0.44705883, b: 0.60784316, a: 1}
   m_FlipX: 0
@@ -1543,7 +1551,7 @@ MonoBehaviour:
     _canvasKey: 
     _spriteCanvas: {fileID: 1513486355}
   _uIElementProperties:
-    _orderInLayer: 3
+    _orderInLayer: 4
     _ignoreXPosition: 0
     _ignoreYPosition: 0
     _ignoreXScale: 0
@@ -1605,8 +1613,8 @@ Transform:
   m_GameObject: {fileID: 307467831}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -3.1850002, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: -3.1849997, z: 0}
+  m_LocalScale: {x: 1.0000001, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1253517855}
@@ -1651,7 +1659,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: c5ecfcbd1da4d420a816099a5852f027, type: 3}
   m_Color: {r: 0.99215686, g: 0.39607844, b: 0.29411766, a: 1}
   m_FlipX: 0
@@ -1682,7 +1690,7 @@ MonoBehaviour:
     _canvasKey: 
     _spriteCanvas: {fileID: 1513486355}
   _uIElementProperties:
-    _orderInLayer: 2
+    _orderInLayer: 3
     _ignoreXPosition: 0
     _ignoreYPosition: 0
     _ignoreXScale: 0
@@ -1975,9 +1983,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 437492648}
   - {fileID: 1360938651}
   - {fileID: 923104827}
-  - {fileID: 437492648}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &365248818
@@ -2087,7 +2095,7 @@ MonoBehaviour:
     _canvasKey: 
     _spriteCanvas: {fileID: 1513486355}
   _uIElementProperties:
-    _orderInLayer: 2
+    _orderInLayer: 3
     _ignoreXPosition: 0
     _ignoreYPosition: 0
     _ignoreXScale: 0
@@ -2152,7 +2160,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_Sprite: {fileID: 1304975921}
   m_Color: {r: 0.21568628, g: 0.2901961, b: 0.36078432, a: 1}
   m_FlipX: 0
@@ -2277,7 +2285,7 @@ MonoBehaviour:
     _canvasKey: 
     _spriteCanvas: {fileID: 1513486355}
   _uIElementProperties:
-    _orderInLayer: 2
+    _orderInLayer: 3
     _ignoreXPosition: 0
     _ignoreYPosition: 0
     _ignoreXScale: 0
@@ -2342,7 +2350,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_Sprite: {fileID: 1304975921}
   m_Color: {r: 0.21568628, g: 0.2901961, b: 0.36078432, a: 1}
   m_FlipX: 0
@@ -2541,7 +2549,7 @@ MonoBehaviour:
     _canvasKey: 
     _spriteCanvas: {fileID: 1513486355}
   _uIElementProperties:
-    _orderInLayer: 3
+    _orderInLayer: 4
     _ignoreXPosition: 0
     _ignoreYPosition: 0
     _ignoreXScale: 0
@@ -2652,7 +2660,7 @@ MonoBehaviour:
   m_isVolumetricText: 0
   _SortingLayer: 0
   _SortingLayerID: 0
-  _SortingOrder: 3
+  _SortingOrder: 4
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 713234118}
   m_maskType: 0
@@ -2696,7 +2704,7 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 4
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!224 &713234119
 RectTransform:
@@ -2707,7 +2715,7 @@ RectTransform:
   m_GameObject: {fileID: 713234115}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.0000001, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1253517855}
@@ -2921,6 +2929,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 0.020350486
       objectReference: {fileID: 0}
+    - target: {fileID: 9159924248802595349, guid: be8f8206ca8194e3d819137a58b08c2d, type: 3}
+      propertyPath: _SortingOrder
+      value: 103
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3038,7 +3050,7 @@ MonoBehaviour:
     _canvasKey: 
     _spriteCanvas: {fileID: 1513486355}
   _uIElementProperties:
-    _orderInLayer: 4
+    _orderInLayer: 5
     _ignoreXPosition: 0
     _ignoreYPosition: 0
     _ignoreXScale: 0
@@ -3149,7 +3161,7 @@ MonoBehaviour:
   m_isVolumetricText: 0
   _SortingLayer: 0
   _SortingLayerID: 0
-  _SortingOrder: 4
+  _SortingOrder: 5
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 805228029}
   m_maskType: 0
@@ -3193,7 +3205,7 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 5
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!224 &805228030
 RectTransform:
@@ -3307,7 +3319,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ad6c75ab4250a4660b0e49b65843fdc5, type: 2}
+  - {fileID: 2100000, guid: c1885d3a42e5f4057b5717962da176e1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3631,7 +3643,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 196055bf274e44c79b5be8c193aeb024, type: 2}
+  - {fileID: 2109823708560089372, guid: ffab3ee0ec11a412595d1461653da038, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3733,7 +3745,7 @@ MonoBehaviour:
     _canvasKey: 
     _spriteCanvas: {fileID: 1513486355}
   _uIElementProperties:
-    _orderInLayer: 4
+    _orderInLayer: 5
     _ignoreXPosition: 0
     _ignoreYPosition: 0
     _ignoreXScale: 0
@@ -3844,7 +3856,7 @@ MonoBehaviour:
   m_isVolumetricText: 0
   _SortingLayer: 0
   _SortingLayerID: 0
-  _SortingOrder: 4
+  _SortingOrder: 5
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 1056979054}
   m_maskType: 0
@@ -3888,7 +3900,7 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 5
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!224 &1056979055
 RectTransform:
@@ -4502,6 +4514,10 @@ PrefabInstance:
       propertyPath: _register._spriteCanvas
       value: 
       objectReference: {fileID: 365248816}
+    - target: {fileID: 5674001827221782633, guid: b141650c287da4724b9977b0b89aacf5, type: 3}
+      propertyPath: _SortingOrder
+      value: 103
+      objectReference: {fileID: 0}
     - target: {fileID: 5766338313836178751, guid: b141650c287da4724b9977b0b89aacf5, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.30000004
@@ -4947,7 +4963,7 @@ MonoBehaviour:
     _canvasKey: 
     _spriteCanvas: {fileID: 1513486355}
   _uIElementProperties:
-    _orderInLayer: 1
+    _orderInLayer: 2
     _ignoreXPosition: 0
     _ignoreYPosition: 0
     _ignoreXScale: 0
@@ -5010,7 +5026,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 7b0b77c9f362e472fb024d22de0c4b0b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -5032,7 +5048,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.21635514, y: 0.1, z: 1}
+  m_LocalScale: {x: 0.008654205, y: 0.004, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 307467832}
@@ -5077,7 +5093,7 @@ MonoBehaviour:
     _canvasKey: 
     _spriteCanvas: {fileID: 1513486355}
   _uIElementProperties:
-    _orderInLayer: 4
+    _orderInLayer: 5
     _ignoreXPosition: 0
     _ignoreYPosition: 0
     _ignoreXScale: 0
@@ -5188,7 +5204,7 @@ MonoBehaviour:
   m_isVolumetricText: 0
   _SortingLayer: 0
   _SortingLayerID: 0
-  _SortingOrder: 4
+  _SortingOrder: 5
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 1282799350}
   m_maskType: 0
@@ -5232,7 +5248,7 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 5
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!224 &1282799351
 RectTransform:
@@ -5500,7 +5516,7 @@ MonoBehaviour:
     _canvasKey: 
     _spriteCanvas: {fileID: 1513486355}
   _uIElementProperties:
-    _orderInLayer: 3
+    _orderInLayer: 4
     _ignoreXPosition: 0
     _ignoreYPosition: 0
     _ignoreXScale: 0
@@ -5563,7 +5579,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 4
   m_Sprite: {fileID: 21300000, guid: e36443a7955304d46aef74d24335b5e4, type: 3}
   m_Color: {r: 0.24705882, g: 0.44705883, b: 0.60784316, a: 1}
   m_FlipX: 0
@@ -6080,6 +6096,10 @@ PrefabInstance:
       propertyPath: _register._spriteCanvas
       value: 
       objectReference: {fileID: 365248816}
+    - target: {fileID: 4479592797812801452, guid: f906bf73325f44351a074f3742dbfdc0, type: 3}
+      propertyPath: _SortingOrder
+      value: 103
+      objectReference: {fileID: 0}
     - target: {fileID: 4679857210178048869, guid: f906bf73325f44351a074f3742dbfdc0, type: 3}
       propertyPath: m_SortingOrder
       value: 104
@@ -6493,7 +6513,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4.6220303, y: 10, z: 1}
+  m_LocalScale: {x: 115.55076, y: 250, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1253517855}
@@ -6539,9 +6559,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
-  m_Sprite: {fileID: 1304975921}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_SortingOrder: 58
+  m_Sprite: {fileID: 21300000, guid: 681fb490e03b0436ab441495156b5ea4, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -6570,7 +6590,7 @@ MonoBehaviour:
     _canvasKey: 
     _spriteCanvas: {fileID: 1513486355}
   _uIElementProperties:
-    _orderInLayer: 1
+    _orderInLayer: 58
     _ignoreXPosition: 0
     _ignoreYPosition: 0
     _ignoreXScale: 0
@@ -6580,7 +6600,7 @@ MonoBehaviour:
   _itemPosition: {fileID: 1554595337}
   _hasReference: 0
   _referenceElement: {fileID: 0}
-  _alpha: 1
+  _alpha: 0
   _spriteRenderer: {fileID: 1554595338}
   _spriteSize: {x: 1, y: 1, z: 1}
   references:
@@ -7173,7 +7193,7 @@ MonoBehaviour:
   m_isVolumetricText: 0
   _SortingLayer: 0
   _SortingLayerID: 0
-  _SortingOrder: 4
+  _SortingOrder: 5
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 1697061854}
   m_maskType: 0
@@ -7217,7 +7237,7 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 5
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &1697061855
 MonoBehaviour:
@@ -7238,7 +7258,7 @@ MonoBehaviour:
     _canvasKey: 
     _spriteCanvas: {fileID: 1513486355}
   _uIElementProperties:
-    _orderInLayer: 4
+    _orderInLayer: 5
     _ignoreXPosition: 0
     _ignoreYPosition: 0
     _ignoreXScale: 0
@@ -7334,7 +7354,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 4
   m_Sprite: {fileID: 21300000, guid: e36443a7955304d46aef74d24335b5e4, type: 3}
   m_Color: {r: 0.24705882, g: 0.44705883, b: 0.60784316, a: 1}
   m_FlipX: 0
@@ -7365,7 +7385,7 @@ MonoBehaviour:
     _canvasKey: 
     _spriteCanvas: {fileID: 1513486355}
   _uIElementProperties:
-    _orderInLayer: 3
+    _orderInLayer: 4
     _ignoreXPosition: 0
     _ignoreYPosition: 0
     _ignoreXScale: 0
@@ -7463,7 +7483,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 3
   m_Sprite: {fileID: 1304975921}
   m_Color: {r: 0.21568628, g: 0.2901961, b: 0.36078432, a: 1}
   m_FlipX: 0
@@ -7494,7 +7514,7 @@ MonoBehaviour:
     _canvasKey: 
     _spriteCanvas: {fileID: 1513486355}
   _uIElementProperties:
-    _orderInLayer: 1
+    _orderInLayer: 3
     _ignoreXPosition: 0
     _ignoreYPosition: 0
     _ignoreXScale: 0
@@ -8038,7 +8058,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 196055bf274e44c79b5be8c193aeb024, type: 2}
+  - {fileID: 2109823708560089372, guid: ffab3ee0ec11a412595d1461653da038, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
