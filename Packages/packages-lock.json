@@ -19,7 +19,7 @@
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "6471fcff28fdd8eb84063ebd92c796d7420adf69"
+      "hash": "1ec5a59af5b536e1abf50b28d0cb9833f9dac9be"
     },
     "com.marijnzwemmer.unity-toolbar-extender": {
       "version": "https://github.com/marijnz/unity-toolbar-extender.git",
