@@ -4,7 +4,7 @@ using NaughtyAttributes;
 
 namespace BoardItems.Border
 {
-    [CreateAssetMenu(fileName = "NewBorderProperties", menuName = "BorderProperties")]
+    [CreateAssetMenu(fileName = "NewBorderProperties", menuName = "BlastBender/Game/BorderProperties")]
     public class BorderProperties : ScriptableObject
     {
         public List<BorderInfo> CornerBorders;

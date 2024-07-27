@@ -5,7 +5,7 @@ using NaughtyAttributes;
 
 namespace Global.View
 {
-    [CreateAssetMenu(fileName = "LayersProperties", menuName = "LayersProperties", order = 1)]
+    [CreateAssetMenu(fileName = "LayersProperties", menuName = "BlastBender/Game/LayersProperties", order = 1)]
     public class LayersProperties : ScriptableObject
     {
         [SerializeField] private LayerProperties[] _properties;

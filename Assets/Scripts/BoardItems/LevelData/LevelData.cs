@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace BoardItems.LevelData
 {
-    [CreateAssetMenu(fileName = "Level", menuName = "Level")]
+    [CreateAssetMenu(fileName = "Level", menuName = "BlastBender/Game/Level")]
     public class LevelData : ScriptableObject
     {
         public int RowLength;

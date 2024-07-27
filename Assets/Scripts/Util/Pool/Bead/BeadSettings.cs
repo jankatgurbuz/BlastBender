@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Util.Pool.Bead
 {
-    [CreateAssetMenu(fileName = "BeadSettings", menuName = "BeadSettings")]
+    [CreateAssetMenu(fileName = "BeadSettings", menuName = "BlastBender/Game/BeadSettings")]
     public class BeadSettings : ScriptableObject
     {
         [SerializeField] private List<SpriteTable> _spriteTableList;
