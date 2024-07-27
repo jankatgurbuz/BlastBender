@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using BoardItems;
 using BoardItems.Bead;
 using BoardItems.Void;
@@ -108,23 +109,22 @@ namespace Blast.Controller
             Array.Clear(_recursiveCheckArray, 0, _recursiveCheckArray.Length);
             FillVoidType(tempGroup);
 
-            // Todo The UniTask.Select And UniTask.WheenALl systems must be changed
-            var tasks = tempGroup.Select(item =>
+            CombineState combineState = null;
+            foreach (var item in tempGroup)
             {
                 if (item is Bead bead)
                 {
-                    var combineState = item.MovementVisitor.MovementStrategy.CombineState as CombineState;
-                    combineState.SetParam(item.Row, item.Column, clickRow - item.Row, clickColumn - item.Column);
+                    combineState = item.MovementVisitor.MovementStrategy.CombineState as CombineState;
+                    combineState.SetParam(clickRow - item.Row, clickColumn - item.Column);
                     _movementController.Register(item, item.MovementVisitor.MovementStrategy.CombineState);
 
-                    // Todo The layer system must be changed
+                    // Todo Change:The layer system must be changed
                     bead.SetLayer(item.Row, clickColumn - item.Column);
-                    return UniTask.WaitUntil(() => combineState.AllMovementsComplete);
                 }
+            }
 
-                return UniTask.CompletedTask;
-            });
-            await UniTask.WhenAll(tasks);
+            await UniTask.WaitUntil(() => combineState!.AllMovementsComplete);
+
             tempGroup.ForEach(item => item.ReturnToPool());
             RecalculateBoardElements();
         }

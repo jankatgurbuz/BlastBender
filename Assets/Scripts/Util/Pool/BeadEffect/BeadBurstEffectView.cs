@@ -6,6 +6,8 @@ using Cysharp.Threading.Tasks;
 
 namespace Util.Pool.BeadEffect
 {
+    
+    // Todo Change:The BeadBurstEffectView system must be changed
     public class BeadBurstEffectView : MonoBehaviour, IPoolable
     {
         [SerializeField] private SpriteRenderer _spriteRenderer;

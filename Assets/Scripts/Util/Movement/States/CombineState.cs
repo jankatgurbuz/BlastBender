@@ -14,8 +14,7 @@ namespace Util.Movement.States
 
         private bool _isSetupComplete;
         public bool AllMovementsComplete { get; set; }
-        private int _row;
-        private int _column;
+
         private int _rowOffset;
         private int _columnOffset;
         private float _elapsedTime;
@@ -48,10 +47,8 @@ namespace Util.Movement.States
             _rectangleBeadCombinationEffect = RectangleBeadCombinationEffectPool.Instance.Retrieve();
         }
 
-        public void SetParam(int row, int column, int rowOffset, int columnOffset)
+        public void SetParam(int rowOffset, int columnOffset)
         {
-            _row = row;
-            _column = column;
             _rowOffset = rowOffset;
             _columnOffset = columnOffset;
         }
