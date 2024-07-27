@@ -768,7 +768,7 @@ PlayerSettings:
     WebGL: 
     Windows Store Apps: 
     XboxOne: 
-    iPhone: 
+    iPhone: SPRITECANVAS_UNITASK_SUPPORT
     tvOS: 
   additionalCompilerArguments: {}
   platformArchitecture: {}
