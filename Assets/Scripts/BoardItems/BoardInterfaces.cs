@@ -15,6 +15,7 @@ namespace BoardItems
         int Column { get; }
         bool IsBead { get; set; }
         bool IsMove { get; set; }
+        public bool IsPool { get; set; }
         bool IsSpace { get; set; }
         bool IsVoidArea { get; set; }
         MovementVisitor MovementVisitor { get; set; }
@@ -22,6 +23,7 @@ namespace BoardItems
         void ReturnToPool();
         void SetRowAndColumn(int row, int column);
         IBoardItem Copy();
+        
     }
 
     public interface IItemBehavior

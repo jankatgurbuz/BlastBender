@@ -1,3 +1,4 @@
+using BoardItemPoolSystem;
 using UnityEngine;
 using Util.Handlers.Visitors;
 using Util.Movement.Strategies;
@@ -8,7 +9,13 @@ namespace BoardItems.Bead
     public class Bead : BaseBoardItem<BeadView>
     {
         [SerializeField] private ItemColors _color;
-        public ItemColors Color => _color;
+
+
+        public ItemColors Color
+        {
+            get => _color;
+            set => _color = value;
+        }
 
         public Bead(int row, int column, ItemColors color) : base(row, column)
         {
@@ -27,7 +34,7 @@ namespace BoardItems.Bead
 
         public override IBoardItem Copy()
         {
-            return new Bead(Row, Column, _color);
+            return BoardItemPool.Instance.Retrieve<Bead>(Row, Column, _color);
         }
 
         public void SetColorAndAddSprite()

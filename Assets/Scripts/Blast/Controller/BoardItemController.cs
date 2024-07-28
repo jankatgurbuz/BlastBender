@@ -1,13 +1,17 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using BoardItemPoolSystem;
 using BoardItems;
 using BoardItems.Bead;
 using BoardItems.Void;
 using Cysharp.Threading.Tasks;
 using Global.Controller;
 using Signals;
+using UnityEngine;
+using Util.Handlers.Visitors;
 using Util.Movement.States;
+using Util.Movement.Strategies;
 using Zenject;
 using Random = UnityEngine.Random;
 
@@ -151,7 +155,14 @@ namespace Blast.Controller
             foreach (var item in combineGroup)
             {
                 _movementController.Check(_boardItems[item.Row, item.Column]);
-                _boardItems[item.Row, item.Column] = new VoidArea(item.Row, item.Column);
+                var garbage = _boardItems[item.Row, item.Column];
+                BoardItemPool.Instance.Return(garbage);
+
+                // _boardItems[item.Row, item.Column] = new VoidArea(item.Row, item.Column);
+
+
+                _boardItems[item.Row, item.Column] = BoardItemPool.Instance.Retrieve<VoidArea>(item.Row, item.Column);
+                _boardItems[item.Row, item.Column].SetRowAndColumn(item.Row, item.Column);
             }
         }
 
@@ -198,12 +209,17 @@ namespace Blast.Controller
         {
             _movementController.Check(_boardItems[nonEmptyRowIndex, column]);
 
+            var garbage = _boardItems[row, column];
+            BoardItemPool.Instance.Return(garbage);
             var item = _boardItems[row, column] = _boardItems[nonEmptyRowIndex, column];
             item.SetRowAndColumn(row, column);
             item.SetSortingOrder(row, column);
 
             _movementController.Register(item, item.MovementVisitor.MovementStrategy.StartMovement);
-            _boardItems[nonEmptyRowIndex, column] = new VoidArea(nonEmptyRowIndex, column);
+            // _boardItems[nonEmptyRowIndex, column] = new VoidArea(nonEmptyRowIndex, column);
+
+            _boardItems[nonEmptyRowIndex, column] = BoardItemPool.Instance.Retrieve<VoidArea>(nonEmptyRowIndex, column);
+            _boardItems[nonEmptyRowIndex, column].SetRowAndColumn(nonEmptyRowIndex, column);
         }
 
         private void SpawnNewBeadInVoidArea(int column, int row, ref bool isFirstVoidArea,
@@ -218,13 +234,19 @@ namespace Blast.Controller
             }
 
             var randomColor = (ItemColors)Random.Range(0, Enum.GetValues(typeof(ItemColors)).Length - 1);
-            var bead = new Bead(row, column, randomColor);
+
+            var garbage = _boardItems[row, column];
+            BoardItemPool.Instance.Return(garbage);
+
+            var bead = (Bead)BoardItemPool.Instance.Retrieve<Bead>(row, column, randomColor);
+            // Bead bead = new Bead(row, column, ItemColors.Red);
             _boardItems[row, column] = bead;
-
+            bead.Color = ItemColors.Red;
+            bead.SetRowAndColumn(row, column);
             bead.RetrieveFromPool();
-            bead.SetColorAndAddSprite();
             bead.SetSortingOrder(row, column);
-
+            bead.SetColorAndAddSprite();
+            bead.MovementVisitor.MovementStrategy.ResetAllStates();
             var position = _gridController.CellToLocal(row + distanceToNextBead, column);
             verticalOffset += _inGameController.LevelData.SpawnerData.VerticalOffset;
             position.y += verticalOffset;

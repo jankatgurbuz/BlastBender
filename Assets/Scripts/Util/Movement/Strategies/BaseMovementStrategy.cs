@@ -15,6 +15,7 @@ namespace Util.Movement.Strategies
             StartMovement.ResetState();
             FinishMovement.ResetState();
             Shake.ResetState();
+            CombineState.ResetState();
         }
     }
 }
