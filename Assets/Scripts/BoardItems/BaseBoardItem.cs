@@ -14,7 +14,7 @@ namespace BoardItems
         public int Row => _row;
         public int Column => _column;
         public bool IsBead { get; set; }
-        public bool IsPool { get; set; }
+        public bool IsRetrievedItem { get; set; }
         public bool IsSpace { get; set; }
         public bool IsVoidArea { get; set; }
         public bool IsMove { get; set; }
@@ -34,7 +34,7 @@ namespace BoardItems
             Item = PoolFactory.Instance.RetrieveFromPool<TPoolItem>();
             TransformUtilities = Item.TransformUtilities;
             HandleItemActivation(true);
-            IsPool = true;
+            IsRetrievedItem = true;
         }
 
         public void ReturnToPool()
@@ -45,7 +45,7 @@ namespace BoardItems
             PoolFactory.Instance.ReturnToPool(Item);
             TransformUtilities = null;
             HandleItemActivation(false);
-            IsPool = false;
+            IsRetrievedItem = false;
         }
 
         public virtual void Blast()
@@ -62,11 +62,6 @@ namespace BoardItems
         public void SetActive(bool active)
         {
             Item?.SetActive(active);
-        }
-
-        public void SetSortingOrder(int row, int column)
-        {
-            Item?.SetSortingOrder(row, column);
         }
     }
 }

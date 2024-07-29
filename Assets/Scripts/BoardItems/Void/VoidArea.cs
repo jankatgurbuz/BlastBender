@@ -1,4 +1,5 @@
 using Util.Handlers.Visitors;
+using Util.Pool.BoardItemPool;
 using Util.Pool.NullPtrPool;
 
 namespace BoardItems.Void
@@ -16,7 +17,7 @@ namespace BoardItems.Void
 
         public override IBoardItem Copy()
         {
-            return new VoidArea(Row, Column);
+            return BoardItemPool.Instance.Retrieve<VoidArea>(Row, Column);
         }
     }
 }

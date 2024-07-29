@@ -1,4 +1,5 @@
 using Util.Handlers.Visitors;
+using Util.Pool.BoardItemPool;
 using Util.Pool.NullPtrPool;
 
 namespace BoardItems.Void
@@ -12,7 +13,7 @@ namespace BoardItems.Void
 
         public override IBoardItem Copy()
         {
-            return new SpaceArea(Row, Column);
+            return BoardItemPool.Instance.Retrieve<SpaceArea>(Row, Column);
         }
 
         protected override void HandleItemActivation(bool isActive)

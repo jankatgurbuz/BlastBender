@@ -14,7 +14,11 @@ namespace Util.Pool.BoardItemPool
         public IBoardItem Retrieve<TItem>(params object[] args) where TItem : IBoardItem
         {
             var typeKey = typeof(TItem);
+            return Retrieve(typeKey, args);
+        }
 
+        public IBoardItem Retrieve(Type typeKey, params object[] args)
+        {
             if (_boardItemsMap.TryGetValue(typeKey, out BoardItemPoolEntry itemList))
             {
                 return itemList.Retrieve(typeKey, args);
@@ -40,7 +44,7 @@ namespace Util.Pool.BoardItemPool
 
         public void Return<TItem>(TItem item) where TItem : IBoardItem
         {
-            if (item.IsPool)
+            if (item.IsRetrievedItem)
             {
                 Pending(item);
                 return;
@@ -85,7 +89,7 @@ namespace Util.Pool.BoardItemPool
                 for (int i = _pendingList.Count - 1; i >= 0; i--)
                 {
                     var pendingItem = _pendingList[i];
-                    if (pendingItem.IsPool) continue;
+                    if (pendingItem.IsRetrievedItem) continue;
 
                     _pendingList.RemoveAt(i);
                     Return(pendingItem.GetType(), pendingItem);

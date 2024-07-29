@@ -8,13 +8,13 @@ using Zenject;
 
 namespace Util.Pool.Bead
 {
-    public class BeadView : MonoBehaviour, IPoolable, IItemBehavior, IMoveable
+    public class BeadView : MonoBehaviour, IPoolable, IItemBehavior, IMoveable, IVisual
     {
         [SerializeField] private SpriteRenderer _spriteRenderer;
         [SerializeField] private BeadSettings _beadSettings;
 
         private GameObject _gameObject;
-        private ItemColors _itemColor;
+        public ItemColors Color { get; set; }
         private LayersController _layersController;
 
         public TransformUtilities TransformUtilities { get; set; }
@@ -49,9 +49,10 @@ namespace Util.Pool.Bead
             return TransformUtilities;
         }
 
+
         public void SetColorAndAddSprite(ItemColors color)
         {
-            _itemColor = color;
+            Color = color;
             _spriteRenderer.sprite = _beadSettings[color];
         }
 
@@ -78,7 +79,7 @@ namespace Util.Pool.Bead
             beadBurstEffectItem.SetPosition(TransformUtilities.GetPosition());
 
             var beadBurstParticleItem = BeadBurstParticlePool.Instance.Retrieve();
-            beadBurstParticleItem.Burst(_itemColor, TransformUtilities.GetPosition());
+            beadBurstParticleItem.Burst(Color, TransformUtilities.GetPosition());
         }
 
         public void SetLayer(int row, int columnOffset)

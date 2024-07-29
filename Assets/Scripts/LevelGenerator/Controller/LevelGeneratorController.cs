@@ -142,10 +142,11 @@ namespace LevelGenerator.Controller
             IterateBoardItem(BoardItem,
                 x => x.RetrieveFromPool(),
                 x => x.TransformUtilities?.SetPosition(_gridController.CellToLocal(x.Row, x.Column)),
-                x => {
-                    if (x is Bead bead)
+                x =>
+                {
+                    if (x is IVisual itemWithColor)
                     {
-                        bead.SetColorAndAddSprite();
+                        itemWithColor.SetColorAndAddSprite(itemWithColor.Color);
                     }
                 },
                 x => x.SetActive(true));
@@ -182,7 +183,7 @@ namespace LevelGenerator.Controller
                 var item = _spawnerData.Spawners.Find(x => x.Row == row && x.Column == column);
 
                 if (item != null) return;
-                
+
                 var spawnerPosition = new SpawnerPosition()
                 {
                     Row = row,

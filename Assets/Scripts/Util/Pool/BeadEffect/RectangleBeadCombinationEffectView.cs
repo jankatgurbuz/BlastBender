@@ -1,5 +1,5 @@
-using Cysharp.Threading.Tasks;
 using Global.Controller;
+using Global.View;
 using UnityEngine;
 using Zenject;
 
@@ -25,8 +25,7 @@ namespace Util.Pool.BeadEffect
         public void Create()
         {
             _layerController ??= ProjectContext.Instance.Container.Resolve<LayersController>();
-            var info = _layerController.GetLayerInfo(Global.View.LayersProperties.ItemName
-                .RectangleBeadCombinationEffect);
+            var info = _layerController.GetLayerInfo(LayersProperties.ItemName.RectangleBeadCombinationEffect);
 
             _spriteRenderer.sortingLayerID = info.SortingLayer;
             _spriteRenderer.sortingOrder = info.OrderInLayer;

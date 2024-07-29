@@ -15,7 +15,7 @@ namespace BoardItems
         int Column { get; }
         bool IsBead { get; set; }
         bool IsMove { get; set; }
-        public bool IsPool { get; set; }
+        public bool IsRetrievedItem { get; set; }
         bool IsSpace { get; set; }
         bool IsVoidArea { get; set; }
         MovementVisitor MovementVisitor { get; set; }
@@ -23,19 +23,23 @@ namespace BoardItems
         void ReturnToPool();
         void SetRowAndColumn(int row, int column);
         IBoardItem Copy();
-        
     }
 
     public interface IItemBehavior
     {
         TransformUtilities TransformUtilities { get; set; }
         void SetActive(bool active);
-        void SetSortingOrder(int row, int column);
         void Blast();
     }
 
     public interface IMoveable
     {
-       
+    }
+
+    public interface IVisual
+    {
+        public ItemColors Color { get; set; }
+        void SetColorAndAddSprite(ItemColors color);
+        void SetSortingOrder(int row, int column);
     }
 }

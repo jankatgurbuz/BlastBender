@@ -55,13 +55,14 @@ namespace Blast.Controller
             {
                 var temp = _boardItems[item.Row, item.Column] = item.Copy();
                 temp.RetrieveFromPool();
-                if (temp is Bead bead)
+
+                if (temp is IVisual itemWithColor)
                 {
-                    bead.SetColorAndAddSprite();
+                    itemWithColor.SetColorAndAddSprite(itemWithColor.Color);
+                    itemWithColor.SetSortingOrder(item.Row, item.Column);
                 }
 
-                temp.SetSortingOrder(item.Row, item.Column);
-                temp.TransformUtilities.SetPosition(_gridController.CellToLocal(item.Row, item.Column));
+                temp.TransformUtilities?.SetPosition(_gridController.CellToLocal(item.Row, item.Column));
                 temp.SetActive(true);
             }
 
@@ -124,8 +125,6 @@ namespace Blast.Controller
                     combineState = (CombineState)item.MovementVisitor.MovementStrategy.CombineState;
                     combineState.SetParam(clickRow - item.Row, clickColumn - item.Column);
                     _movementController.Register(item, item.MovementVisitor.MovementStrategy.CombineState);
-
-                    // Todo Change:The layer system must be changed
                     bead.SetLayer(item.Row, clickColumn - item.Column);
                 }
             }
@@ -180,6 +179,7 @@ namespace Blast.Controller
                 for (int row = 0; row < _rowLength; row++)
                 {
                     if (_boardItems[row, column].IsBead) continue;
+                    if (_boardItems[row, column].IsSpace) continue;
 
                     ShiftBeadOrSpawnNew(_boardItems[row, column], ref isFirstVoidArea,
                         ref distanceToNextBead, ref offset);
@@ -218,7 +218,7 @@ namespace Blast.Controller
 
             var item = _boardItems[row, column] = _boardItems[nonEmptyRowIndex, column];
             item.SetRowAndColumn(row, column);
-            item.SetSortingOrder(row, column);
+            ((IVisual)item).SetSortingOrder(row, column);
 
             if (!BoardItemPool.Instance.TryRetrieveWithoutParams<VoidArea>(out var voidArea))
             {
@@ -254,27 +254,25 @@ namespace Blast.Controller
             var bead = (Bead)item;
             _boardItems[row, column] = bead;
 
-            bead.Color = randomColor;
-            bead.SetRowAndColumn(row, column);
             bead.RetrieveFromPool();
+            bead.SetRowAndColumn(row, column);
             bead.SetSortingOrder(row, column);
-            bead.SetColorAndAddSprite();
+            bead.SetColorAndAddSprite(randomColor);
             bead.MovementVisitor.MovementStrategy.ResetAllStates();
-
-            AdjustItemPosition(column, row, distanceToNextBead, ref verticalOffset, bead);
-
             bead.SetActive(true);
 
+            AdjustItemPosition(column, row, distanceToNextBead, ref verticalOffset, bead);
             _movementController.Register(bead, bead.MovementVisitor.MovementStrategy.StartMovement);
         }
 
-        private void AdjustItemPosition(int column, int row, int distanceToNextBead, ref float verticalOffset, Bead bead)
+        private void AdjustItemPosition(int column, int row, int distanceToNextBead, ref float verticalOffset,
+            Bead bead)
         {
             var offsetRow = 0;
             for (int i = row - 1; i >= 0; i--)
             {
                 if (!_boardItems[row, column].IsMove) continue;
-                
+
                 offsetRow = i;
                 break;
             }
@@ -288,7 +286,7 @@ namespace Blast.Controller
         private void FindMatches(int row, int column, ItemColors color)
         {
             if (row < 0 || column < 0 || row >= _rowLength || column >= _columnLength ||
-                _recursiveCheckArray[row, column] || _boardItems[row, column].IsMove)
+                _recursiveCheckArray[row, column] || _boardItems[row, column].IsMove )
                 return;
 
             _recursiveCheckArray[row, column] = true;

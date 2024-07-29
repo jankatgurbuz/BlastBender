@@ -6,10 +6,9 @@ using Util.Pool.BoardItemPool;
 
 namespace BoardItems.Bead
 {
-    public class Bead : BaseBoardItem<BeadView>
+    public class Bead : BaseBoardItem<BeadView>, IVisual
     {
         [SerializeField] private ItemColors _color;
-
 
         public ItemColors Color
         {
@@ -37,17 +36,23 @@ namespace BoardItems.Bead
             return BoardItemPool.Instance.Retrieve<Bead>(Row, Column, _color);
         }
 
-        public void SetColorAndAddSprite()
-        {
-            Item?.SetColorAndAddSprite(_color);
-        }
-
         public void SetLayer(int row, int columnOffset)
         {
             if (Item != null)
             {
                 Item.SetLayer(row, columnOffset);
             }
+        }
+
+        public void SetColorAndAddSprite(ItemColors color)
+        {
+            _color = color;
+            Item?.SetColorAndAddSprite(_color);
+        }
+
+        public void SetSortingOrder(int row, int column)
+        {
+            Item?.SetSortingOrder(row,column);
         }
     }
 }
