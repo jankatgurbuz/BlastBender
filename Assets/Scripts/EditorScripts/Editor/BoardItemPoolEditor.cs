@@ -4,7 +4,7 @@ using System.Reflection;
 using BoardItems;
 using UnityEditor;
 using UnityEngine;
-using Util.BoardItemPoolSystem;
+using Util.Pool.BoardItemPool;
 
 namespace EditorScripts.Editor
 {
@@ -42,14 +42,14 @@ namespace EditorScripts.Editor
             var boardItemsMapField = typeof(BoardItemPool).GetField("_boardItemsMap", Flags);
             if (boardItemsMapField == null) return;
 
-            var boardItemsMap = (Dictionary<Type, ItemList>)boardItemsMapField.GetValue(pool);
+            var boardItemsMap = (Dictionary<Type, BoardItemPoolEntry>)boardItemsMapField.GetValue(pool);
 
             foreach (var item in boardItemsMap)
             {
                 EditorGUILayout.LabelField(item.Key.Name, EditorStyles.boldLabel);
 
-                var activeListField = typeof(ItemList).GetField("_activeList", Flags);
-                var inactiveListField = typeof(ItemList).GetField("_inactiveList", Flags);
+                var activeListField = typeof(BoardItemPoolEntry).GetField("_activeList", Flags);
+                var inactiveListField = typeof(BoardItemPoolEntry).GetField("_inactiveList", Flags);
 
                 if (activeListField == null || inactiveListField == null) return;
 

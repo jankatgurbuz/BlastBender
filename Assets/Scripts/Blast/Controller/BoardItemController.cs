@@ -7,8 +7,8 @@ using BoardItems.Void;
 using Cysharp.Threading.Tasks;
 using Global.Controller;
 using Signals;
-using Util.BoardItemPoolSystem;
 using Util.Movement.States;
+using Util.Pool.BoardItemPool;
 using Zenject;
 using Random = UnityEngine.Random;
 

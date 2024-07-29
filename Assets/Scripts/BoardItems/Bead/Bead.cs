@@ -1,8 +1,8 @@
 using UnityEngine;
-using Util.BoardItemPoolSystem;
 using Util.Handlers.Visitors;
 using Util.Movement.Strategies;
 using Util.Pool.Bead;
+using Util.Pool.BoardItemPool;
 
 namespace BoardItems.Bead
 {

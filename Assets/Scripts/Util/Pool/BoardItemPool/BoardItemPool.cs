@@ -1,27 +1,26 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using BoardItems;
 using Cysharp.Threading.Tasks;
 using Util.SingletonSystem;
 
-namespace Util.BoardItemPoolSystem
+namespace Util.Pool.BoardItemPool
 {
     public class BoardItemPool : Singleton<BoardItemPool>
     {
-        private readonly Dictionary<Type, ItemList> _boardItemsMap = new();
+        private readonly Dictionary<Type, BoardItemPoolEntry> _boardItemsMap = new();
         private readonly List<IBoardItem> _pendingList = new();
 
         public IBoardItem Retrieve<TItem>(params object[] args) where TItem : IBoardItem
         {
             var typeKey = typeof(TItem);
 
-            if (_boardItemsMap.TryGetValue(typeKey, out ItemList itemList))
+            if (_boardItemsMap.TryGetValue(typeKey, out BoardItemPoolEntry itemList))
             {
                 return itemList.Retrieve(typeKey, args);
             }
 
-            var item = new ItemList();
+            var item = new BoardItemPoolEntry();
             _boardItemsMap.Add(typeKey, item);
             return item.Retrieve(typeKey, args);
         }
@@ -30,9 +29,9 @@ namespace Util.BoardItemPoolSystem
         {
             var typeKey = typeof(TItem);
 
-            if (_boardItemsMap.TryGetValue(typeKey, out ItemList itemList))
+            if (_boardItemsMap.TryGetValue(typeKey, out var boardItemPoolEntry))
             {
-                return itemList.TryRetrieveWithoutParams(typeKey, out item);
+                return boardItemPoolEntry.TryRetrieveWithoutParams(typeKey, out item);
             }
 
             item = null;
@@ -53,13 +52,13 @@ namespace Util.BoardItemPoolSystem
 
         private void Return(Type type, IBoardItem item)
         {
-            if (_boardItemsMap.TryGetValue(type, out ItemList itemList))
+            if (_boardItemsMap.TryGetValue(type, out var boardItemPoolEntry))
             {
-                itemList.Return(item);
+                boardItemPoolEntry.Return(item);
             }
             else
             {
-                var newItemList = new ItemList();
+                var newItemList = new BoardItemPoolEntry();
                 newItemList.Return(item);
                 _boardItemsMap.Add(type, newItemList);
             }
@@ -92,49 +91,6 @@ namespace Util.BoardItemPoolSystem
                     Return(pendingItem.GetType(), pendingItem);
                 }
             }
-        }
-    }
-
-    public class ItemList
-    {
-        private readonly List<IBoardItem> _activeList = new();
-        private readonly List<IBoardItem> _inactiveList = new();
-
-        public IBoardItem Retrieve(Type type, object[] args)
-        {
-            var instance = _inactiveList.Count > 0 ? GetBoardItem() : Create(type, args);
-            _activeList.Add(instance);
-            return instance;
-        }
-
-        public bool TryRetrieveWithoutParams(Type type, out IBoardItem item)
-        {
-            if (_inactiveList.Count > 0)
-            {
-                item = GetBoardItem();
-                return true;
-            }
-
-            item = null;
-            return false;
-        }
-
-        public void Return(IBoardItem item)
-        {
-            _activeList.Remove(item);
-            _inactiveList.Add(item);
-        }
-
-        private IBoardItem GetBoardItem()
-        {
-            var instance = _inactiveList.First();
-            _inactiveList.Remove(instance);
-            return instance;
-        }
-
-        private IBoardItem Create(Type type, params object[] args)
-        {
-            return (IBoardItem)Activator.CreateInstance(type, args);
         }
     }
 }
