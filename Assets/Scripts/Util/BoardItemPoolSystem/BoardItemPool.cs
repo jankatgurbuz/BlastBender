@@ -26,6 +26,19 @@ namespace Util.BoardItemPoolSystem
             return item.Retrieve(typeKey, args);
         }
 
+        public bool TryRetrieveWithoutParams<TItem>(out IBoardItem item)
+        {
+            var typeKey = typeof(TItem);
+
+            if (_boardItemsMap.TryGetValue(typeKey, out ItemList itemList))
+            {
+                return itemList.TryRetrieveWithoutParams(typeKey, out item);
+            }
+
+            item = null;
+            return false;
+        }
+
         public void Return<TItem>(TItem item) where TItem : IBoardItem
         {
             if (item.IsPool)
@@ -92,6 +105,18 @@ namespace Util.BoardItemPoolSystem
             var instance = _inactiveList.Count > 0 ? GetBoardItem() : Create(type, args);
             _activeList.Add(instance);
             return instance;
+        }
+
+        public bool TryRetrieveWithoutParams(Type type, out IBoardItem item)
+        {
+            if (_inactiveList.Count > 0)
+            {
+                item = GetBoardItem();
+                return true;
+            }
+
+            item = null;
+            return false;
         }
 
         public void Return(IBoardItem item)

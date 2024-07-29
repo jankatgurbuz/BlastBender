@@ -121,7 +121,7 @@ namespace Blast.Controller
             {
                 if (item is Bead bead)
                 {
-                    combineState = item.MovementVisitor.MovementStrategy.CombineState as CombineState;
+                    combineState = (CombineState)item.MovementVisitor.MovementStrategy.CombineState;
                     combineState.SetParam(clickRow - item.Row, clickColumn - item.Column);
                     _movementController.Register(item, item.MovementVisitor.MovementStrategy.CombineState);
 
@@ -159,7 +159,12 @@ namespace Blast.Controller
                 var garbage = _boardItems[item.Row, item.Column];
                 BoardItemPool.Instance.Return(garbage);
 
-                _boardItems[item.Row, item.Column] = BoardItemPool.Instance.Retrieve<VoidArea>(item.Row, item.Column);
+                if (!BoardItemPool.Instance.TryRetrieveWithoutParams<VoidArea>(out var voidArea))
+                {
+                    voidArea = BoardItemPool.Instance.Retrieve<VoidArea>(item.Row, item.Column);
+                }
+
+                _boardItems[item.Row, item.Column] = voidArea;
                 _boardItems[item.Row, item.Column].SetRowAndColumn(item.Row, item.Column);
             }
         }
@@ -215,7 +220,12 @@ namespace Blast.Controller
             item.SetRowAndColumn(row, column);
             item.SetSortingOrder(row, column);
 
-            _boardItems[nonEmptyRowIndex, column] = BoardItemPool.Instance.Retrieve<VoidArea>(nonEmptyRowIndex, column);
+            if (!BoardItemPool.Instance.TryRetrieveWithoutParams<VoidArea>(out var voidArea))
+            {
+                voidArea = BoardItemPool.Instance.Retrieve<VoidArea>(nonEmptyRowIndex, column);
+            }
+
+            _boardItems[nonEmptyRowIndex, column] = voidArea;
             _boardItems[nonEmptyRowIndex, column].SetRowAndColumn(nonEmptyRowIndex, column);
 
             _movementController.Register(item, item.MovementVisitor.MovementStrategy.StartMovement);
@@ -236,7 +246,12 @@ namespace Blast.Controller
             BoardItemPool.Instance.Return(garbage);
 
             var randomColor = (ItemColors)Random.Range(0, Enum.GetValues(typeof(ItemColors)).Length - 1);
-            var bead = (Bead)BoardItemPool.Instance.Retrieve<Bead>(row, column, randomColor);
+            if (!BoardItemPool.Instance.TryRetrieveWithoutParams<Bead>(out var item))
+            {
+                item = BoardItemPool.Instance.Retrieve<Bead>(row, column, randomColor);
+            }
+
+            var bead = (Bead)item;
             _boardItems[row, column] = bead;
 
             bead.Color = randomColor;
