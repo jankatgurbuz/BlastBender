@@ -261,14 +261,28 @@ namespace Blast.Controller
             bead.SetColorAndAddSprite();
             bead.MovementVisitor.MovementStrategy.ResetAllStates();
 
-            var position = _gridController.CellToLocal(row + distanceToNextBead, column);
-            verticalOffset += _inGameController.LevelData.SpawnerData.VerticalOffset;
-            position.y += verticalOffset;
-            bead.TransformUtilities.SetPosition(position);
+            AdjustItemPosition(column, row, distanceToNextBead, ref verticalOffset, bead);
 
             bead.SetActive(true);
 
             _movementController.Register(bead, bead.MovementVisitor.MovementStrategy.StartMovement);
+        }
+
+        private void AdjustItemPosition(int column, int row, int distanceToNextBead, ref float verticalOffset, Bead bead)
+        {
+            var offsetRow = 0;
+            for (int i = row - 1; i >= 0; i--)
+            {
+                if (!_boardItems[row, column].IsMove) continue;
+                
+                offsetRow = i;
+                break;
+            }
+
+            var position = _gridController.CellToLocal(row + distanceToNextBead, column);
+            verticalOffset += _inGameController.LevelData.SpawnerData.VerticalOffset;
+            position.y += verticalOffset + offsetRow;
+            bead.TransformUtilities.SetPosition(position);
         }
 
         private void FindMatches(int row, int column, ItemColors color)
