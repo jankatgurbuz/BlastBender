@@ -1,21 +1,12 @@
-using System;
 using System.Collections.Generic;
-using Cysharp.Threading.Tasks;
 using Global.Controller;
-using MenuScene.Controller;
 using MenuScene.MenuCanvas.View;
 using Zenject;
 using Signals;
 
 namespace MenuScene.MenuCanvas.Controller
 {
-    public interface INavigationCanvasController
-    {
-        public void Show();
-        public void Hide();
-    }
-
-    public class NavigationCanvasController : INavigationCanvasController
+    public class NavigationCanvasController
     {
         private readonly List<NavigationCanvasView> _navigationCanvasViews;
 

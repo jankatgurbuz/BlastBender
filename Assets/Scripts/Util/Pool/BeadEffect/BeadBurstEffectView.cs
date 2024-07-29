@@ -77,18 +77,12 @@ namespace Util.Pool.BeadEffect
         {
             var firstScaleTime = 0.1f;
             var firstColorTime = 0.1f;
-            var firstMovementTime = 0.5f;
-
-           
-            await ScaleOverTime(_transform, _customScale, firstScaleTime);
-
+            var firstMovementTime = 0.1f;
             
+            await ScaleOverTime(_transform, _customScale, firstScaleTime);
             await ChangeColorOverTime(_spriteRenderer, _customAlphaColor, firstColorTime);
-
-           
             await MoveYOverTime(_transform, 0.2f, firstMovementTime);
-
-           
+            
             var secondScaleTime = 0.1f;
             var secondColorTime = 0.1f;
 
