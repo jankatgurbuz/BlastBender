@@ -6,9 +6,11 @@ using Util.Pool.BoardItemPool;
 
 namespace BoardItems.Bead
 {
-    public class Bead : BaseBoardItem<BeadView>, IVisual
+    public class Bead : BaseBoardItem<BeadView>, IVisual ,IMoveable
     {
         [SerializeField] private ItemColors _color;
+        public MovementVisitor MovementVisitor { get; set; }
+       
 
         public ItemColors Color
         {
@@ -27,8 +29,6 @@ namespace BoardItems.Bead
         protected override void HandleItemActivation(bool isActive)
         {
             if (!isActive) return;
-
-            MovementVisitor.MoveableItem = Item;
         }
 
         public override IBoardItem Copy()
@@ -52,7 +52,9 @@ namespace BoardItems.Bead
 
         public void SetSortingOrder(int row, int column)
         {
-            Item?.SetSortingOrder(row,column);
+            Item?.SetSortingOrder(row, column);
         }
+
+        
     }
 }

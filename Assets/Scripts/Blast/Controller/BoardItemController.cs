@@ -77,8 +77,8 @@ namespace Blast.Controller
         public void OnClick(int row, int column)
         {
             var item = _boardItems[row, column];
-            if (item.IsMove)
-                return;
+
+            if (item is IMoveable { IsMove: true }) return;
 
             if (!item.IsBead)
             {
@@ -120,12 +120,13 @@ namespace Blast.Controller
             CombineState combineState = null;
             foreach (var item in tempGroup)
             {
-                if (item is Bead bead)
+                if (item is IMoveable moveableItem)
                 {
-                    combineState = (CombineState)item.MovementVisitor.MovementStrategy.CombineState;
+                    combineState = (CombineState)moveableItem.MovementVisitor.MovementStrategy.CombineState;
                     combineState.SetParam(clickRow - item.Row, clickColumn - item.Column);
-                    _movementController.Register(item, item.MovementVisitor.MovementStrategy.CombineState);
-                    bead.SetLayer(item.Row, clickColumn - item.Column);
+                    _movementController.Register(moveableItem,
+                        moveableItem.MovementVisitor.MovementStrategy.CombineState);
+                    ((Bead)moveableItem).SetLayer(item.Row, clickColumn - item.Column);
                 }
             }
 
@@ -144,16 +145,22 @@ namespace Blast.Controller
 
         private void Shake(IBoardItem item)
         {
-            _movementController.Register(item, item.MovementVisitor.MovementStrategy.Shake);
-            _combineItems.Clear();
-            Array.Clear(_recursiveCheckArray, 0, _recursiveCheckArray.Length);
+            if (item is IMoveable moveableItem)
+            {
+                _movementController.Register(moveableItem, moveableItem.MovementVisitor.MovementStrategy.Shake);
+                _combineItems.Clear();
+                Array.Clear(_recursiveCheckArray, 0, _recursiveCheckArray.Length);
+            }
         }
 
         private void FillVoidType(List<IBoardItem> combineGroup)
         {
             foreach (var item in combineGroup)
             {
-                _movementController.Check(_boardItems[item.Row, item.Column]);
+                if (_boardItems[item.Row, item.Column] is IMoveable iMoveableItem)
+                {
+                    _movementController.Check(iMoveableItem);
+                }
 
                 var garbage = _boardItems[item.Row, item.Column];
                 BoardItemPool.Instance.Return(garbage);
@@ -211,7 +218,10 @@ namespace Blast.Controller
 
         private void TryShiftBeadDown(int nonEmptyRowIndex, int row, int column)
         {
-            _movementController.Check(_boardItems[nonEmptyRowIndex, column]);
+            if (_boardItems[nonEmptyRowIndex, column] is IMoveable iMoveableItem)
+            {
+                _movementController.Check(iMoveableItem);
+            }
 
             var garbage = _boardItems[row, column];
             BoardItemPool.Instance.Return(garbage);
@@ -228,7 +238,8 @@ namespace Blast.Controller
             _boardItems[nonEmptyRowIndex, column] = voidArea;
             _boardItems[nonEmptyRowIndex, column].SetRowAndColumn(nonEmptyRowIndex, column);
 
-            _movementController.Register(item, item.MovementVisitor.MovementStrategy.StartMovement);
+            var moveableItem = (IMoveable)item;
+            _movementController.Register(moveableItem, moveableItem.MovementVisitor.MovementStrategy.StartMovement);
         }
 
         private void SpawnNewBeadInVoidArea(int column, int row, ref bool isFirstVoidArea,
@@ -246,6 +257,7 @@ namespace Blast.Controller
             BoardItemPool.Instance.Return(garbage);
 
             var randomColor = (ItemColors)Random.Range(0, Enum.GetValues(typeof(ItemColors)).Length - 1);
+            randomColor = ItemColors.Red;
             if (!BoardItemPool.Instance.TryRetrieveWithoutParams<Bead>(out var item))
             {
                 item = BoardItemPool.Instance.Retrieve<Bead>(row, column, randomColor);
@@ -271,7 +283,8 @@ namespace Blast.Controller
             var offsetRow = 0;
             for (int i = row - 1; i >= 0; i--)
             {
-                if (!_boardItems[row, column].IsMove) continue;
+                if (_boardItems[row, column] is not IMoveable moveable) continue;
+                if (!moveable.IsMove) continue;
 
                 offsetRow = i;
                 break;
@@ -286,7 +299,8 @@ namespace Blast.Controller
         private void FindMatches(int row, int column, ItemColors color)
         {
             if (row < 0 || column < 0 || row >= _rowLength || column >= _columnLength ||
-                _recursiveCheckArray[row, column] || _boardItems[row, column].IsMove )
+                _recursiveCheckArray[row, column] || _boardItems[row, column] is not IMoveable moveableItem ||
+                moveableItem.IsMove)
                 return;
 
             _recursiveCheckArray[row, column] = true;

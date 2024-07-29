@@ -32,7 +32,7 @@ namespace Util.Movement.States
             Second
         }
 
-        private void Initialize(IBoardItem item)
+        private void Initialize(IMoveable item)
         {
             _startPosition = item.TransformUtilities.GetPosition();
 
@@ -53,7 +53,7 @@ namespace Util.Movement.States
             _columnOffset = columnOffset;
         }
 
-        public IMoveState DoState(IMovementStrategy movementStrategy, IBoardItem item,
+        public IMoveState DoState(IMovementStrategy movementStrategy, IMoveable item,
             MovementSettings movementSettings,
             IGridController gridController)
         {
@@ -76,7 +76,7 @@ namespace Util.Movement.States
             return this;
         }
 
-        private void FirstState(IBoardItem item)
+        private void FirstState(IMoveable item)
         {
             if (_elapsedTime < MoveTime)
             {
@@ -94,7 +94,7 @@ namespace Util.Movement.States
             _combineMovementState = CombineMovementState.Second;
         }
 
-        private void SecondState(IBoardItem item)
+        private void SecondState(IMoveable item)
         {
             if (_elapsedTime < MoveTime)
             {

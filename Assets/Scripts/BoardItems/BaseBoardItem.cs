@@ -18,7 +18,7 @@ namespace BoardItems
         public bool IsSpace { get; set; }
         public bool IsVoidArea { get; set; }
         public bool IsMove { get; set; }
-        public virtual MovementVisitor MovementVisitor { get; set; } = MovementVisitor.Empty;
+        // public virtual MovementVisitor MovementVisitor { get; set; } = MovementVisitor.Empty;
         public TransformUtilities TransformUtilities { get; set; }
         public abstract IBoardItem Copy();
         protected abstract void HandleItemActivation(bool isActive);

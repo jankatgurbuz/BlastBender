@@ -14,11 +14,12 @@ namespace BoardItems
         int Row { get; }
         int Column { get; }
         bool IsBead { get; set; }
-        bool IsMove { get; set; }
         public bool IsRetrievedItem { get; set; }
         bool IsSpace { get; set; }
+
         bool IsVoidArea { get; set; }
-        MovementVisitor MovementVisitor { get; set; }
+
+        // MovementVisitor MovementVisitor { get; set; }
         void RetrieveFromPool();
         void ReturnToPool();
         void SetRowAndColumn(int row, int column);
@@ -34,6 +35,11 @@ namespace BoardItems
 
     public interface IMoveable
     {
+        MovementVisitor MovementVisitor { get; set; }
+        TransformUtilities TransformUtilities { get; set; }
+        int Row { get; }
+        int Column { get; }
+        bool IsMove { get; set; }
     }
 
     public interface IVisual

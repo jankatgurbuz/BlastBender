@@ -22,7 +22,7 @@ namespace Util.Movement.States
         private bool _isSetupComplete;
         public bool AllMovementsComplete { get; set; }
 
-        public IMoveState DoState(IMovementStrategy movementStrategy, IBoardItem item,
+        public IMoveState DoState(IMovementStrategy movementStrategy, IMoveable item,
             MovementSettings movementSettings, IGridController gridController)
         {
             if (!_isSetupComplete)
@@ -36,13 +36,13 @@ namespace Util.Movement.States
             return Movement(movementStrategy, item, movementSettings);
         }
 
-        private void AssignVariables(IBoardItem item, IGridController gridController)
+        private void AssignVariables(IMoveable item, IGridController gridController)
         {
             InitializeScale(item);
             InitializePosition(item, gridController);
         }
 
-        private void InitializeScale(IBoardItem item)
+        private void InitializeScale(IMoveable item)
         {
             if (item.IsMove) return;
 
@@ -51,7 +51,7 @@ namespace Util.Movement.States
             _scaleTarget = new Vector3(temp.x - ScaleRate, temp.y + ScaleRate, temp.z);
         }
 
-        private void InitializePosition(IBoardItem item, IGridController gridController)
+        private void InitializePosition(IMoveable item, IGridController gridController)
         {
             if (item.IsMove)
             {
@@ -63,7 +63,7 @@ namespace Util.Movement.States
             _firstPosition = item.TransformUtilities.GetPosition();
         }
 
-        private IMoveState Movement(IMovementStrategy movementStrategy, IBoardItem boardItem,
+        private IMoveState Movement(IMovementStrategy movementStrategy, IMoveable boardItem,
             MovementSettings movementSettings)
         {
             _movementTime += Time.deltaTime * MovementOffset;
@@ -82,7 +82,7 @@ namespace Util.Movement.States
             return movementStrategy.StartMovement;
         }
 
-        private void Scale(IBoardItem item)
+        private void Scale(IMoveable item)
         {
             if (_scaleTimeElapsed < Duration)
             {
@@ -95,9 +95,9 @@ namespace Util.Movement.States
             item.TransformUtilities.SetScale(_scaleTarget);
         }
 
-        public void SetTargetPosition(IBoardItem item, IGridController gridController)
+        public void SetTargetPosition(int row, int column, IGridController gridController)
         {
-            _targetPosition = gridController.CellToLocal(item.Row, item.Column);
+            _targetPosition = gridController.CellToLocal(row, column);
         }
 
         public void ResetState()
