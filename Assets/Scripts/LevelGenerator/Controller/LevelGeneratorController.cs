@@ -146,6 +146,7 @@ namespace LevelGenerator.Controller
                 {
                     if (x is IVisual itemWithColor)
                     {
+                        itemWithColor.SetSortingOrder(x.Row, x.Column);
                         itemWithColor.SetColorAndAddSprite(itemWithColor.Color);
                     }
                 },
@@ -196,7 +197,6 @@ namespace LevelGenerator.Controller
         private void CreateBoardItems()
         {
             var tempBoardItem = new IBoardItem[RowLength, ColumnLength];
-
 
             for (int i = 0; i < RowLength; i++)
             {

@@ -41,15 +41,6 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Border
-    uniqueID: 3959977181
-    locked: 0
-  - name: LevelUI
-    uniqueID: 1394360297
-    locked: 0
-  - name: LevelGeneratorGrid
-    uniqueID: 2680084225
-    locked: 0
   - name: Items
     uniqueID: 3533393375
     locked: 0
