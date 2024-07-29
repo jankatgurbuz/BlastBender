@@ -1,5 +1,5 @@
 using BoardItems.Util;
-using Util.Handlers.Visitors;
+using Util.Movement.Strategies;
 using Util.Pool;
 
 namespace BoardItems
@@ -35,7 +35,7 @@ namespace BoardItems
 
     public interface IMoveable
     {
-        MovementVisitor MovementVisitor { get; set; }
+        IMovementStrategy MovementStrategy { get; set; }
         TransformUtilities TransformUtilities { get; set; }
         int Row { get; }
         int Column { get; }

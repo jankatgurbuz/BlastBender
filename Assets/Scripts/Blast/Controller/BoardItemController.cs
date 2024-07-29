@@ -160,10 +160,10 @@ namespace Blast.Controller
             {
                 if (item is IMoveable moveableItem)
                 {
-                    combineState = (CombineState)moveableItem.MovementVisitor.MovementStrategy.CombineState;
+                    combineState = (CombineState)moveableItem.MovementStrategy.CombineState;
                     combineState.SetParam(clickRow - item.Row, clickColumn - item.Column);
                     _movementController.Register(moveableItem,
-                        moveableItem.MovementVisitor.MovementStrategy.CombineState);
+                        moveableItem.MovementStrategy.CombineState);
                     ((Bead)moveableItem).SetLayer(item.Row, clickColumn - item.Column);
                 }
             }
@@ -176,7 +176,7 @@ namespace Blast.Controller
         {
             if (item is IMoveable moveableItem)
             {
-                _movementController.Register(moveableItem, moveableItem.MovementVisitor.MovementStrategy.Shake);
+                _movementController.Register(moveableItem, moveableItem.MovementStrategy.Shake);
                 ClearCombineItems();
                 ClearRecursiveCheckArray();
             }
@@ -243,7 +243,7 @@ namespace Blast.Controller
             _boardItems[nonEmptyRowIndex, column].SetRowAndColumn(nonEmptyRowIndex, column);
 
             var moveableItem = (IMoveable)item;
-            _movementController.Register(moveableItem, moveableItem.MovementVisitor.MovementStrategy.StartMovement);
+            _movementController.Register(moveableItem, moveableItem.MovementStrategy.StartMovement);
         }
 
         private void SpawnNewBeadInVoidArea(int column, int row, ref bool isFirstVoidArea,
@@ -274,11 +274,11 @@ namespace Blast.Controller
             bead.SetRowAndColumn(row, column);
             bead.SetSortingOrder(row, column);
             bead.SetColorAndAddSprite(randomColor);
-            bead.MovementVisitor.MovementStrategy.ResetAllStates();
+            bead.MovementStrategy.ResetAllStates();
             bead.SetActive(true);
 
             AdjustItemPosition(column, row, distanceToNextBead, ref verticalOffset, bead);
-            _movementController.Register(bead, bead.MovementVisitor.MovementStrategy.StartMovement);
+            _movementController.Register(bead, bead.MovementStrategy.StartMovement);
         }
 
         private void AdjustItemPosition(int column, int row, int distanceToNextBead,

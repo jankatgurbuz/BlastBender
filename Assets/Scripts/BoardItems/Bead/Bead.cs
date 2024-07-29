@@ -1,16 +1,15 @@
 using UnityEngine;
-using Util.Handlers.Visitors;
 using Util.Movement.Strategies;
 using Util.Pool.Bead;
 using Util.Pool.BoardItemPool;
 
 namespace BoardItems.Bead
 {
-    public class Bead : BaseBoardItem<BeadView>, IVisual ,IMoveable
+    public class Bead : BaseBoardItem<BeadView>, IVisual, IMoveable
     {
         [SerializeField] private ItemColors _color;
-        public MovementVisitor MovementVisitor { get; set; }
-       
+        public IMovementStrategy MovementStrategy { get; set; }
+
 
         public ItemColors Color
         {
@@ -23,7 +22,7 @@ namespace BoardItems.Bead
             _color = color;
             IsBead = true;
 
-            MovementVisitor = new MovementVisitor(new BaseMovementStrategy());
+            MovementStrategy = new BaseMovementStrategy();
         }
 
         protected override void HandleItemActivation(bool isActive)
@@ -54,7 +53,5 @@ namespace BoardItems.Bead
         {
             Item?.SetSortingOrder(row, column);
         }
-
-        
     }
 }

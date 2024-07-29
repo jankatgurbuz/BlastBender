@@ -32,7 +32,7 @@ namespace Blast.Controller
 
         public void Register(IMoveable item, IMoveState initState)
         {
-            var movementStrategy = item.MovementVisitor.MovementStrategy;
+            var movementStrategy = item.MovementStrategy;
 
             if (_list.Add(item))
             {
@@ -65,11 +65,11 @@ namespace Blast.Controller
 
             foreach (var item in _list)
             {
-                item.MovementVisitor.MovementStrategy.Current =
-                    item.MovementVisitor.MovementStrategy.Current.DoState(
-                        item.MovementVisitor.MovementStrategy, item, _movementSettings, _gridController);
+                item.MovementStrategy.Current =
+                    item.MovementStrategy.Current.DoState(
+                        item.MovementStrategy, item, _movementSettings, _gridController);
 
-                if (item.MovementVisitor.MovementStrategy.Current.AllMovementsComplete)
+                if (item.MovementStrategy.Current.AllMovementsComplete)
                 {
                     _removeList.Add(item);
                 }
@@ -85,7 +85,7 @@ namespace Blast.Controller
 
         public void RemoveIfInFinishState(IMoveable boardItem)
         {
-            if (boardItem.MovementVisitor.MovementStrategy.Current is FinishState)
+            if (boardItem.MovementStrategy.Current is FinishState)
             {
                 if (_list.Contains(boardItem))
                 {
