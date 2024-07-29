@@ -16,7 +16,6 @@ namespace Blast.Controller
 
         private HashSet<IMoveable> _list;
         private List<IMoveable> _removeList;
-        private ValueTuple<int, int>[] _keys;
 
         public MovementController(MovementSettings movementSettings, IGridController gridController)
         {
@@ -84,12 +83,11 @@ namespace Blast.Controller
             _removeList.Clear();
         }
 
-        public void Check(IMoveable boardItem)
+        public void RemoveIfInFinishState(IMoveable boardItem)
         {
             if (boardItem.MovementVisitor.MovementStrategy.Current is FinishState)
             {
-                var check = _list.Contains(boardItem);
-                if (check)
+                if (_list.Contains(boardItem))
                 {
                     _list.Remove(boardItem);
                 }

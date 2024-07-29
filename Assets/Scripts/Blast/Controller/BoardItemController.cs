@@ -19,11 +19,13 @@ namespace Blast.Controller
         private readonly IInGameController _inGameController;
         private readonly IGridController _gridController;
         private readonly MovementController _movementController;
-        private IBoardItem[,] _boardItems;
-        private bool[,] _recursiveCheckArray;
-        private List<IBoardItem> _combineItems;
+
         private int _rowLength, _columnLength;
+
         private Dictionary<int, int> _spawnerLocation;
+        private IBoardItem[,] _boardItems;
+        private List<IBoardItem> _combineItems;
+        private bool[,] _recursiveCheckArray;
 
         public BoardItemController(SignalBus signalBus, IGridController gridController,
             IInGameController inGameController, MovementController movementController)
@@ -38,20 +40,26 @@ namespace Blast.Controller
         {
             if (reaction.GameStatus == GameStatus.GameInitialize)
             {
+                SetupBoardItems();
                 AdjustBoardItems();
+                AdjustSpawnerLocation();
             }
         }
 
-        private void AdjustBoardItems()
+        private void SetupBoardItems()
         {
-            var levelData = _inGameController.LevelData;
-            _rowLength = levelData.RowLength;
-            _columnLength = levelData.ColumnLength;
+            _rowLength = _inGameController.LevelData.RowLength;
+            _columnLength = _inGameController.LevelData.ColumnLength;
 
             _boardItems = new IBoardItem[_rowLength, _columnLength];
             _recursiveCheckArray = new bool[_rowLength, _columnLength];
             _combineItems = new List<IBoardItem>(_rowLength * _columnLength);
-            foreach (var item in levelData.BoardItem)
+            _spawnerLocation = new Dictionary<int, int>();
+        }
+
+        private void AdjustBoardItems()
+        {
+            foreach (var item in _inGameController.LevelData.BoardItem)
             {
                 var temp = _boardItems[item.Row, item.Column] = item.Copy();
                 temp.RetrieveFromPool();
@@ -65,10 +73,11 @@ namespace Blast.Controller
                 temp.TransformUtilities?.SetPosition(_gridController.CellToLocal(item.Row, item.Column));
                 temp.SetActive(true);
             }
+        }
 
-            _spawnerLocation = new Dictionary<int, int>();
-
-            foreach (var item in levelData.SpawnerData.Spawners)
+        private void AdjustSpawnerLocation()
+        {
+            foreach (var item in _inGameController.LevelData.SpawnerData.Spawners)
             {
                 _spawnerLocation.Add(item.Column, item.Row);
             }
@@ -103,16 +112,45 @@ namespace Blast.Controller
             }
         }
 
+        private void Blast()
+        {
+            _combineItems.ForEach(item => item.Blast());
+            _combineItems.ForEach(item => item.ReturnToPool());
+            _combineItems.ForEach(ReplaceWithVoidArea);
+
+            RecalculateBoardElements();
+            ClearCombineItems();
+            ClearRecursiveCheckArray();
+        }
+
         private async void BlastForPowerUp(int clickRow, int clickColumn)
         {
             var tempGroup = new List<IBoardItem>(_combineItems);
-            _combineItems.Clear();
-            Array.Clear(_recursiveCheckArray, 0, _recursiveCheckArray.Length);
 
-            FillVoidType(tempGroup);
+            ClearCombineItems();
+            ClearRecursiveCheckArray();
+
+            tempGroup.ForEach(ReplaceWithVoidArea);
             await Combine(clickRow, clickColumn, tempGroup);
             tempGroup.ForEach(item => item.ReturnToPool());
+
             RecalculateBoardElements();
+        }
+
+        private void ReplaceWithVoidArea(IBoardItem item)
+        {
+            RemoveIfInFinishState(item);
+
+            var garbage = _boardItems[item.Row, item.Column];
+            BoardItemPool.Instance.Return(garbage);
+
+            if (!BoardItemPool.Instance.TryRetrieveWithoutParams<VoidArea>(out var voidArea))
+            {
+                voidArea = BoardItemPool.Instance.Retrieve<VoidArea>(item.Row, item.Column);
+            }
+
+            _boardItems[item.Row, item.Column] = voidArea;
+            _boardItems[item.Row, item.Column].SetRowAndColumn(item.Row, item.Column);
         }
 
         private async Task Combine(int clickRow, int clickColumn, List<IBoardItem> tempGroup)
@@ -133,45 +171,14 @@ namespace Blast.Controller
             await UniTask.WaitUntil(() => combineState!.AllMovementsComplete);
         }
 
-        private void Blast()
-        {
-            _combineItems.ForEach(item => item.Blast());
-            _combineItems.ForEach(item => item.ReturnToPool());
-            FillVoidType(_combineItems);
-            RecalculateBoardElements();
-            _combineItems.Clear();
-            Array.Clear(_recursiveCheckArray, 0, _recursiveCheckArray.Length);
-        }
 
         private void Shake(IBoardItem item)
         {
             if (item is IMoveable moveableItem)
             {
                 _movementController.Register(moveableItem, moveableItem.MovementVisitor.MovementStrategy.Shake);
-                _combineItems.Clear();
-                Array.Clear(_recursiveCheckArray, 0, _recursiveCheckArray.Length);
-            }
-        }
-
-        private void FillVoidType(List<IBoardItem> combineGroup)
-        {
-            foreach (var item in combineGroup)
-            {
-                if (_boardItems[item.Row, item.Column] is IMoveable iMoveableItem)
-                {
-                    _movementController.Check(iMoveableItem);
-                }
-
-                var garbage = _boardItems[item.Row, item.Column];
-                BoardItemPool.Instance.Return(garbage);
-
-                if (!BoardItemPool.Instance.TryRetrieveWithoutParams<VoidArea>(out var voidArea))
-                {
-                    voidArea = BoardItemPool.Instance.Retrieve<VoidArea>(item.Row, item.Column);
-                }
-
-                _boardItems[item.Row, item.Column] = voidArea;
-                _boardItems[item.Row, item.Column].SetRowAndColumn(item.Row, item.Column);
+                ClearCombineItems();
+                ClearRecursiveCheckArray();
             }
         }
 
@@ -218,10 +225,7 @@ namespace Blast.Controller
 
         private void TryShiftBeadDown(int nonEmptyRowIndex, int row, int column)
         {
-            if (_boardItems[nonEmptyRowIndex, column] is IMoveable iMoveableItem)
-            {
-                _movementController.Check(iMoveableItem);
-            }
+            RemoveIfInFinishState(_boardItems[nonEmptyRowIndex, column]);
 
             var garbage = _boardItems[row, column];
             BoardItemPool.Instance.Return(garbage);
@@ -257,7 +261,7 @@ namespace Blast.Controller
             BoardItemPool.Instance.Return(garbage);
 
             var randomColor = (ItemColors)Random.Range(0, Enum.GetValues(typeof(ItemColors)).Length - 1);
-            randomColor = ItemColors.Red;
+            // randomColor = ItemColors.Red; // Test
             if (!BoardItemPool.Instance.TryRetrieveWithoutParams<Bead>(out var item))
             {
                 item = BoardItemPool.Instance.Retrieve<Bead>(row, column, randomColor);
@@ -277,8 +281,8 @@ namespace Blast.Controller
             _movementController.Register(bead, bead.MovementVisitor.MovementStrategy.StartMovement);
         }
 
-        private void AdjustItemPosition(int column, int row, int distanceToNextBead, ref float verticalOffset,
-            Bead bead)
+        private void AdjustItemPosition(int column, int row, int distanceToNextBead,
+            ref float verticalOffset, Bead bead)
         {
             var offsetRow = 0;
             for (int i = row - 1; i >= 0; i--)
@@ -314,6 +318,24 @@ namespace Blast.Controller
             FindMatches(row - 1, column, color);
             FindMatches(row, column + 1, color);
             FindMatches(row, column - 1, color);
+        }
+
+        private void ClearCombineItems()
+        {
+            _combineItems.Clear();
+        }
+
+        private void ClearRecursiveCheckArray()
+        {
+            Array.Clear(_recursiveCheckArray, 0, _recursiveCheckArray.Length);
+        }
+
+        private void RemoveIfInFinishState(IBoardItem item)
+        {
+            if (_boardItems[item.Row, item.Column] is IMoveable iMoveableItem)
+            {
+                _movementController.RemoveIfInFinishState(iMoveableItem);
+            }
         }
     }
 }
