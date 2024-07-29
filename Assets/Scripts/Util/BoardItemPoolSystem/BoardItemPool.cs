@@ -2,30 +2,28 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using BoardItems;
-using BoardItems.Bead;
 using Cysharp.Threading.Tasks;
-using UnityEngine;
 using Util.SingletonSystem;
 
-namespace BoardItemPoolSystem
+namespace Util.BoardItemPoolSystem
 {
     public class BoardItemPool : Singleton<BoardItemPool>
     {
-        private Dictionary<Type, ItemList> _boardItemsMap = new();
+        private readonly Dictionary<Type, ItemList> _boardItemsMap = new();
         private readonly List<IBoardItem> _pendingList = new();
 
-        public TItem Retrieve<TItem>(params object[] args) where TItem : IBoardItem
+        public IBoardItem Retrieve<TItem>(params object[] args) where TItem : IBoardItem
         {
             var typeKey = typeof(TItem);
 
             if (_boardItemsMap.TryGetValue(typeKey, out ItemList itemList))
             {
-                return (TItem)itemList.Retrieve(args);
+                return itemList.Retrieve(typeKey, args);
             }
 
-            var item = new ItemList(typeKey);
+            var item = new ItemList();
             _boardItemsMap.Add(typeKey, item);
-            return (TItem)item.Retrieve(args);
+            return item.Retrieve(typeKey, args);
         }
 
         public void Return<TItem>(TItem item) where TItem : IBoardItem
@@ -36,22 +34,11 @@ namespace BoardItemPoolSystem
                 return;
             }
 
-
             var typeKey = item.GetType();
-            // Debug.Log("Return Type:" + typeof(TItem));
-            if (_boardItemsMap.TryGetValue(typeKey, out ItemList itemList))
-            {
-                itemList.Return(item);
-            }
-            else
-            {
-                var newItemList = new ItemList(typeKey);
-                newItemList.Return(item);
-                _boardItemsMap.Add(typeKey, newItemList);
-            }
+            Return(typeKey, item);
         }
 
-        public void Return(Type type, IBoardItem item)
+        private void Return(Type type, IBoardItem item)
         {
             if (_boardItemsMap.TryGetValue(type, out ItemList itemList))
             {
@@ -59,7 +46,7 @@ namespace BoardItemPoolSystem
             }
             else
             {
-                var newItemList = new ItemList(type);
+                var newItemList = new ItemList();
                 newItemList.Return(item);
                 _boardItemsMap.Add(type, newItemList);
             }
@@ -81,13 +68,11 @@ namespace BoardItemPoolSystem
         {
             while (_pendingList.Count != 0)
             {
-                await UniTask.Delay(200);
+                await UniTask.Delay(250);
 
                 for (int i = _pendingList.Count - 1; i >= 0; i--)
                 {
                     var pendingItem = _pendingList[i];
-                    // Debug.Log(_pendingList.Count + "--- row -> " + pendingItem.Row + "---- column " +
-                    //           pendingItem.Column + "--- i:" + i);
                     if (pendingItem.IsPool) continue;
 
                     _pendingList.RemoveAt(i);
@@ -95,71 +80,34 @@ namespace BoardItemPoolSystem
                 }
             }
         }
-
-        public class ItemList
-        {
-            private readonly Type _itemType;
-            private readonly List<IBoardItem> _activeList = new();
-            private readonly List<IBoardItem> _inactiveList = new();
-
-            public ItemList(Type itemType)
-            {
-                _itemType = itemType;
-            }
-
-            private IBoardItem GetInstance(object[] args)
-            {
-                IBoardItem instance;
-
-                if (_inactiveList.Count > 0)
-                {
-                    instance = _inactiveList.First();
-                    _inactiveList.Remove(instance);
-                }
-                else
-                {
-                    instance = Create(_itemType, args);
-                }
-
-                ActivateItem(instance);
-                return instance;
-            }
-
-            private void ActivateItem(IBoardItem item)
-            {
-                // item.Active();
-                _activeList.Add(item);
-            }
-
-            private IBoardItem Create(Type type, params object[] args)
-            {
-                return BoardItemFactory.CreateAnimal(type, args);
-            }
-
-            private void PushForInactivation(IBoardItem item)
-            {
-                _inactiveList.Add(item);
-                // item.Inactive();
-            }
-
-            public IBoardItem Retrieve(object[] args)
-            {
-                var instance = GetInstance(args);
-                return instance;
-            }
-
-            public void Return(IBoardItem item)
-            {
-                _activeList.Remove(item);
-                PushForInactivation(item);
-            }
-        }
     }
 
-
-    public static class BoardItemFactory
+    public class ItemList
     {
-        public static IBoardItem CreateAnimal(Type type, params object[] args)
+        private readonly List<IBoardItem> _activeList = new();
+        private readonly List<IBoardItem> _inactiveList = new();
+
+        public IBoardItem Retrieve(Type type, object[] args)
+        {
+            var instance = _inactiveList.Count > 0 ? GetBoardItem() : Create(type, args);
+            _activeList.Add(instance);
+            return instance;
+        }
+
+        public void Return(IBoardItem item)
+        {
+            _activeList.Remove(item);
+            _inactiveList.Add(item);
+        }
+
+        private IBoardItem GetBoardItem()
+        {
+            var instance = _inactiveList.First();
+            _inactiveList.Remove(instance);
+            return instance;
+        }
+
+        private IBoardItem Create(Type type, params object[] args)
         {
             return (IBoardItem)Activator.CreateInstance(type, args);
         }
