@@ -8,7 +8,7 @@ namespace Util.Handlers.Visitors
         public static readonly MovementVisitor Empty = new(false);
         public bool IsFinish = false;
         public bool IsMovementSupported { get; }
-        public IMovementStrategy MovementStrategy { get; }
+        public IMovementStrategy MovementStrategy { get; set; }
         public IMoveable MoveableItem { get; set; }
 
         public MovementVisitor(IMovementStrategy movementStrategy)

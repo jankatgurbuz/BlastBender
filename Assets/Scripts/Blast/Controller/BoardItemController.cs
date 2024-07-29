@@ -1,13 +1,18 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using BoardItems;
 using BoardItems.Bead;
 using BoardItems.Void;
 using Cysharp.Threading.Tasks;
 using Global.Controller;
 using Signals;
+using UnityEngine;
+using Util.BoardItemPoolSystem;
+using Util.Handlers.Visitors;
 using Util.Movement.States;
+using Util.Movement.Strategies;
 using Zenject;
 using Random = UnityEngine.Random;
 
@@ -49,8 +54,7 @@ namespace Blast.Controller
 
             _boardItems = new IBoardItem[_rowLength, _columnLength];
             _recursiveCheckArray = new bool[_rowLength, _columnLength];
-            _combineItems = new List<IBoardItem>();
-
+            _combineItems = new List<IBoardItem>(_rowLength * _columnLength);
             foreach (var item in levelData.BoardItem)
             {
                 var temp = _boardItems[item.Row, item.Column] = item.Copy();
@@ -107,8 +111,15 @@ namespace Blast.Controller
             var tempGroup = new List<IBoardItem>(_combineItems);
             _combineItems.Clear();
             Array.Clear(_recursiveCheckArray, 0, _recursiveCheckArray.Length);
-            FillVoidType(tempGroup);
 
+            FillVoidType(tempGroup);
+            await Combine(clickRow, clickColumn, tempGroup);
+            tempGroup.ForEach(item => item.ReturnToPool());
+            RecalculateBoardElements();
+        }
+
+        private async Task Combine(int clickRow, int clickColumn, List<IBoardItem> tempGroup)
+        {
             CombineState combineState = null;
             foreach (var item in tempGroup)
             {
@@ -124,9 +135,6 @@ namespace Blast.Controller
             }
 
             await UniTask.WaitUntil(() => combineState!.AllMovementsComplete);
-
-            tempGroup.ForEach(item => item.ReturnToPool());
-            RecalculateBoardElements();
         }
 
         private void Blast()
@@ -151,7 +159,12 @@ namespace Blast.Controller
             foreach (var item in combineGroup)
             {
                 _movementController.Check(_boardItems[item.Row, item.Column]);
-                _boardItems[item.Row, item.Column] = new VoidArea(item.Row, item.Column);
+
+                var garbage = _boardItems[item.Row, item.Column];
+                BoardItemPool.Instance.Return(garbage);
+
+                _boardItems[item.Row, item.Column] = BoardItemPool.Instance.Retrieve<VoidArea>(item.Row, item.Column);
+                _boardItems[item.Row, item.Column].SetRowAndColumn(item.Row, item.Column);
             }
         }
 
@@ -187,10 +200,11 @@ namespace Blast.Controller
                     break;
                 }
 
-                if (nonEmptyRowIndex != _rowLength) continue;
-
-
-                SpawnNewBeadInVoidArea(column, row, ref isFirstVoidArea, ref distanceToNextBead, ref verticalOffset);
+                if (nonEmptyRowIndex == _rowLength)
+                {
+                    SpawnNewBeadInVoidArea(column, row, ref isFirstVoidArea, ref distanceToNextBead,
+                        ref verticalOffset);
+                }
             }
         }
 
@@ -198,12 +212,17 @@ namespace Blast.Controller
         {
             _movementController.Check(_boardItems[nonEmptyRowIndex, column]);
 
+            var garbage = _boardItems[row, column];
+            BoardItemPool.Instance.Return(garbage);
+
             var item = _boardItems[row, column] = _boardItems[nonEmptyRowIndex, column];
             item.SetRowAndColumn(row, column);
             item.SetSortingOrder(row, column);
 
+            _boardItems[nonEmptyRowIndex, column] = BoardItemPool.Instance.Retrieve<VoidArea>(nonEmptyRowIndex, column);
+            _boardItems[nonEmptyRowIndex, column].SetRowAndColumn(nonEmptyRowIndex, column);
+
             _movementController.Register(item, item.MovementVisitor.MovementStrategy.StartMovement);
-            _boardItems[nonEmptyRowIndex, column] = new VoidArea(nonEmptyRowIndex, column);
         }
 
         private void SpawnNewBeadInVoidArea(int column, int row, ref bool isFirstVoidArea,
@@ -217,18 +236,25 @@ namespace Blast.Controller
                 isFirstVoidArea = false;
             }
 
+            var garbage = _boardItems[row, column];
+            BoardItemPool.Instance.Return(garbage);
+
             var randomColor = (ItemColors)Random.Range(0, Enum.GetValues(typeof(ItemColors)).Length - 1);
-            var bead = new Bead(row, column, randomColor);
+            var bead = (Bead)BoardItemPool.Instance.Retrieve<Bead>(row, column, randomColor);
             _boardItems[row, column] = bead;
 
+            bead.Color = randomColor;
+            bead.SetRowAndColumn(row, column);
             bead.RetrieveFromPool();
-            bead.SetColorAndAddSprite();
             bead.SetSortingOrder(row, column);
+            bead.SetColorAndAddSprite();
+            bead.MovementVisitor.MovementStrategy.ResetAllStates();
 
             var position = _gridController.CellToLocal(row + distanceToNextBead, column);
             verticalOffset += _inGameController.LevelData.SpawnerData.VerticalOffset;
             position.y += verticalOffset;
             bead.TransformUtilities.SetPosition(position);
+
             bead.SetActive(true);
 
             _movementController.Register(bead, bead.MovementVisitor.MovementStrategy.StartMovement);

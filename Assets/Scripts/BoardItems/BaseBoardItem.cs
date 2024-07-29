@@ -14,6 +14,7 @@ namespace BoardItems
         public int Row => _row;
         public int Column => _column;
         public bool IsBead { get; set; }
+        public bool IsPool { get; set; }
         public bool IsSpace { get; set; }
         public bool IsVoidArea { get; set; }
         public bool IsMove { get; set; }
@@ -33,6 +34,7 @@ namespace BoardItems
             Item = PoolFactory.Instance.RetrieveFromPool<TPoolItem>();
             TransformUtilities = Item.TransformUtilities;
             HandleItemActivation(true);
+            IsPool = true;
         }
 
         public void ReturnToPool()
@@ -43,6 +45,7 @@ namespace BoardItems
             PoolFactory.Instance.ReturnToPool(Item);
             TransformUtilities = null;
             HandleItemActivation(false);
+            IsPool = false;
         }
 
         public virtual void Blast()
