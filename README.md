@@ -12,6 +12,10 @@
 
 ## Introduction
 Welcome! This repository is a clone inspired by popular blast games. This project aims to implement clean coding principles and use various design patterns to create dynamic game mechanics using C# and Unity.
+
+<p align="center">
+  <img src="Assets/Documentation/Images/InGame.gif?raw=true" alt="Blast Bender" width="213.3px" height="378.6px"/>
+</p>
 ## Dependencies
 This project integrates numerous external libraries. Zenject, a robust framework, has been utilized for managing dependencies.This framework enhances the modularity and sustainability of the code, making significant contributions to the project's architecture. UniTask has been used for asynchronous operations, while Toolbar Extender have been employed to enhance the Unity editor.
 - [Zenject](https://github.com/modesttree/Zenject)
