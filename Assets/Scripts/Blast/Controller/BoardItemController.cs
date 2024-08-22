@@ -153,7 +153,7 @@ namespace Blast.Controller
             _boardItems[item.Row, item.Column].SetRowAndColumn(item.Row, item.Column);
         }
 
-        private async Task Combine(int clickRow, int clickColumn, List<IBoardItem> tempGroup)
+        private async UniTask Combine(int clickRow, int clickColumn, List<IBoardItem> tempGroup)
         {
             CombineState combineState = null;
             foreach (var item in tempGroup)
