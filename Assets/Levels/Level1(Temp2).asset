@@ -10,111 +10,132 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cb94e20e947474e5e950948daa6fc382, type: 3}
-  m_Name: Level1
+  m_Name: Level1(Temp2)
   m_EditorClassIdentifier: 
-  RowLength: 10
-  ColumnLength: 10
+  RowLength: 11
+  ColumnLength: 11
   BoardItem:
-  - rid: 1831807789335576576
-  - rid: 1831807789335576577
-  - rid: 1831807789335576578
-  - rid: 1831807789335576579
-  - rid: 1831807789335576580
-  - rid: 1831807789335576581
-  - rid: 1831807789335576582
-  - rid: 1831807789335576583
-  - rid: 1831807789335576584
-  - rid: 1831807789335576585
-  - rid: 1831807789335576586
-  - rid: 1831807789335576587
-  - rid: 1831807789335576588
-  - rid: 1831807789335576589
-  - rid: 1831807789335576590
-  - rid: 1831807789335576591
-  - rid: 1831807789335576592
-  - rid: 1831807789335576593
-  - rid: 1831807789335576594
-  - rid: 1831807789335576595
-  - rid: 1831807789335576596
-  - rid: 1831807789335576597
-  - rid: 1831807789335576598
-  - rid: 1831807789335576599
-  - rid: 1831807789335576600
-  - rid: 1831807789335576601
-  - rid: 1831807789335576602
-  - rid: 1831807789335576603
-  - rid: 1831807789335576604
-  - rid: 1831807789335576605
-  - rid: 1831807789335576606
-  - rid: 1831807789335576607
-  - rid: 1831807789335576608
-  - rid: 1831807789335576609
-  - rid: 1831807789335576610
-  - rid: 1831807789335576611
-  - rid: 1831807789335576612
-  - rid: 1831807789335576613
-  - rid: 1831807789335576614
-  - rid: 1831807789335576615
-  - rid: 1831807789335576616
-  - rid: 1831807789335576617
-  - rid: 1831807789335576618
-  - rid: 1831807789335576619
-  - rid: 1831807789335576620
-  - rid: 1831807789335576621
-  - rid: 1831807789335576622
-  - rid: 1831807789335576623
-  - rid: 1831807789335576624
-  - rid: 1831807789335576625
-  - rid: 1831807789335576626
-  - rid: 1831807789335576627
-  - rid: 1831807789335576628
-  - rid: 1831807789335576629
-  - rid: 1831807789335576630
-  - rid: 1831807789335576631
-  - rid: 1831807789335576632
-  - rid: 1831807789335576633
-  - rid: 1831807789335576634
-  - rid: 1831807789335576635
-  - rid: 1831807789335576636
-  - rid: 1831807789335576637
-  - rid: 1831807789335576638
-  - rid: 1831807789335576639
-  - rid: 1831807789335576640
-  - rid: 1831807789335576641
-  - rid: 1831807789335576642
-  - rid: 1831807789335576643
-  - rid: 1831807789335576644
-  - rid: 1831807789335576645
-  - rid: 1831807789335576646
-  - rid: 1831807789335576647
-  - rid: 1831807789335576648
-  - rid: 1831807789335576649
-  - rid: 1831807789335576650
-  - rid: 1831807789335576651
-  - rid: 1831807789335576652
-  - rid: 1831807789335576653
-  - rid: 1831807789335576654
-  - rid: 1831807789335576655
-  - rid: 1831807789335576656
-  - rid: 1831807789335576657
-  - rid: 1831807789335576658
-  - rid: 1831807789335576659
-  - rid: 1831807789335576660
-  - rid: 1831807789335576661
-  - rid: 1831807789335576662
-  - rid: 1831807789335576663
-  - rid: 1831807789335576664
-  - rid: 1831807789335576665
-  - rid: 1831807789335576666
-  - rid: 1831807789335576667
-  - rid: 1831807789335576668
-  - rid: 1831807789335576669
-  - rid: 1831807789335576670
-  - rid: 1831807789335576671
-  - rid: 1831807789335576672
-  - rid: 1831807789335576673
-  - rid: 1831807789335576674
-  - rid: 1831807789335576675
+  - rid: 8357453150387176024
+  - rid: 8357453150387176025
+  - rid: 8357453150387176026
+  - rid: 8357453150387176027
+  - rid: 8357453150387176028
+  - rid: 8357453150387176029
+  - rid: 8357453150387176030
+  - rid: 8357453150387176031
+  - rid: 8357453150387176032
+  - rid: 8357453150387176033
+  - rid: 8357453150387176034
+  - rid: 8357453150387176035
+  - rid: 8357453150387176036
+  - rid: 8357453150387176037
+  - rid: 8357453150387176038
+  - rid: 8357453150387176039
+  - rid: 8357453150387176040
+  - rid: 8357453150387176041
+  - rid: 8357453150387176042
+  - rid: 8357453150387176043
+  - rid: 8357453150387176044
+  - rid: 8357453150387176045
+  - rid: 8357453150387176046
+  - rid: 8357453150387176047
+  - rid: 8357453150387176048
+  - rid: 8357453150387176049
+  - rid: 8357453150387176050
+  - rid: 8357453150387176051
+  - rid: 8357453150387176052
+  - rid: 8357453150387176053
+  - rid: 8357453150387176054
+  - rid: 8357453150387176055
+  - rid: 8357453150387176056
+  - rid: 8357453150387176057
+  - rid: 8357453150387176058
+  - rid: 8357453150387176059
+  - rid: 8357453150387176060
+  - rid: 8357453150387176061
+  - rid: 8357453150387176062
+  - rid: 8357453150387176063
+  - rid: 8357453150387176064
+  - rid: 8357453150387176065
+  - rid: 8357453150387176066
+  - rid: 8357453150387176067
+  - rid: 8357453150387176068
+  - rid: 8357453150387176069
+  - rid: 8357453150387176070
+  - rid: 8357453150387176071
+  - rid: 8357453150387176072
+  - rid: 8357453150387176073
+  - rid: 8357453150387176074
+  - rid: 8357453150387176075
+  - rid: 8357453150387176076
+  - rid: 8357453150387176077
+  - rid: 8357453150387176078
+  - rid: 8357453150387176079
+  - rid: 8357453150387176080
+  - rid: 8357453150387176081
+  - rid: 8357453150387176082
+  - rid: 8357453150387176083
+  - rid: 8357453150387176084
+  - rid: 8357453150387176085
+  - rid: 8357453150387176086
+  - rid: 8357453150387176087
+  - rid: 8357453150387176088
+  - rid: 8357453150387176089
+  - rid: 8357453150387176090
+  - rid: 8357453150387176091
+  - rid: 8357453150387176092
+  - rid: 8357453150387176093
+  - rid: 8357453150387176094
+  - rid: 8357453150387176095
+  - rid: 8357453150387176096
+  - rid: 8357453150387176097
+  - rid: 8357453150387176098
+  - rid: 8357453150387176099
+  - rid: 8357453150387176100
+  - rid: 8357453150387176101
+  - rid: 8357453150387176102
+  - rid: 8357453150387176103
+  - rid: 8357453150387176104
+  - rid: 8357453150387176105
+  - rid: 8357453150387176106
+  - rid: 8357453150387176107
+  - rid: 8357453150387176108
+  - rid: 8357453150387176109
+  - rid: 8357453150387176110
+  - rid: 8357453150387176111
+  - rid: 8357453150387176112
+  - rid: 8357453150387176113
+  - rid: 8357453150387176114
+  - rid: 8357453150387176115
+  - rid: 8357453150387176116
+  - rid: 8357453150387176117
+  - rid: 8357453150387176118
+  - rid: 8357453150387176119
+  - rid: 8357453150387176120
+  - rid: 8357453150387176121
+  - rid: 8357453150387176122
+  - rid: 8357453150387176123
+  - rid: 8357453150387176124
+  - rid: 8357453150387176125
+  - rid: 8357453150387176126
+  - rid: 8357453150387176127
+  - rid: 8357453150387176128
+  - rid: 8357453150387176129
+  - rid: 8357453150387176130
+  - rid: 8357453150387176131
+  - rid: 8357453150387176132
+  - rid: 8357453150387176133
+  - rid: 8357453150387176134
+  - rid: 8357453150387176135
+  - rid: 8357453150387176136
+  - rid: 8357453150387176137
+  - rid: 8357453150387176138
+  - rid: 8357453150387176139
+  - rid: 8357453150387176140
+  - rid: 8357453150387176141
+  - rid: 8357453150387176142
+  - rid: 8357453150387176143
+  - rid: 8357453150387176144
   Border:
   - Row: -1
     Column: -1
@@ -200,6 +221,13 @@ MonoBehaviour:
     CornerKey: 
     LeftRightKey: 
     TopBottomKey: 
+  - Row: -1
+    Column: 11
+    HasNeighbors: 0
+    IsEmpty: 1
+    CornerKey: 
+    LeftRightKey: 
+    TopBottomKey: 
   - Row: 0
     Column: -1
     HasNeighbors: 0
@@ -217,470 +245,505 @@ MonoBehaviour:
   - Row: 0
     Column: 1
     HasNeighbors: 1
-    IsEmpty: 1
-    CornerKey: ftff
-    LeftRightKey: ft
-    TopBottomKey: ff
-  - Row: 0
-    Column: 2
-    HasNeighbors: 1
     IsEmpty: 0
-    CornerKey: tfff
-    LeftRightKey: tf
-    TopBottomKey: tf
-  - Row: 0
-    Column: 3
-    HasNeighbors: 1
-    IsEmpty: 1
-    CornerKey: ftff
-    LeftRightKey: ft
-    TopBottomKey: ff
-  - Row: 0
-    Column: 4
-    HasNeighbors: 1
-    IsEmpty: 1
-    CornerKey: ffff
-    LeftRightKey: ff
-    TopBottomKey: ff
-  - Row: 0
-    Column: 5
-    HasNeighbors: 1
-    IsEmpty: 1
-    CornerKey: ffff
-    LeftRightKey: ff
-    TopBottomKey: ff
-  - Row: 0
-    Column: 6
-    HasNeighbors: 1
-    IsEmpty: 1
-    CornerKey: ffff
-    LeftRightKey: ff
-    TopBottomKey: ff
-  - Row: 0
-    Column: 7
-    HasNeighbors: 1
-    IsEmpty: 0
-    CornerKey: tfff
-    LeftRightKey: tf
-    TopBottomKey: tf
-  - Row: 0
-    Column: 8
-    HasNeighbors: 1
-    IsEmpty: 1
-    CornerKey: ftff
-    LeftRightKey: ft
-    TopBottomKey: ff
-  - Row: 0
-    Column: 9
-    HasNeighbors: 1
-    IsEmpty: 0
-    CornerKey: tfff
-    LeftRightKey: tf
-    TopBottomKey: tf
-  - Row: 0
-    Column: 10
-    HasNeighbors: 0
-    IsEmpty: 1
-    CornerKey: ftff
-    LeftRightKey: ft
-    TopBottomKey: ff
-  - Row: 1
-    Column: -1
-    HasNeighbors: 0
-    IsEmpty: 1
-    CornerKey: 
-    LeftRightKey: 
-    TopBottomKey: 
-  - Row: 1
-    Column: 0
-    HasNeighbors: 1
-    IsEmpty: 0
-    CornerKey: tfft
-    LeftRightKey: tf
-    TopBottomKey: tt
-  - Row: 1
-    Column: 1
-    HasNeighbors: 1
-    IsEmpty: 1
-    CornerKey: fttf
-    LeftRightKey: ft
-    TopBottomKey: ff
-  - Row: 1
-    Column: 2
-    HasNeighbors: 1
-    IsEmpty: 0
-    CornerKey: tfft
-    LeftRightKey: tf
-    TopBottomKey: tt
-  - Row: 1
-    Column: 3
-    HasNeighbors: 1
-    IsEmpty: 0
-    CornerKey: tttf
+    CornerKey: ttff
     LeftRightKey: tt
     TopBottomKey: tf
-  - Row: 1
+  - Row: 0
+    Column: 2
+    HasNeighbors: 1
+    IsEmpty: 0
+    CornerKey: ttff
+    LeftRightKey: tt
+    TopBottomKey: tf
+  - Row: 0
+    Column: 3
+    HasNeighbors: 1
+    IsEmpty: 0
+    CornerKey: ttff
+    LeftRightKey: tt
+    TopBottomKey: tf
+  - Row: 0
     Column: 4
     HasNeighbors: 1
     IsEmpty: 0
     CornerKey: ttff
     LeftRightKey: tt
     TopBottomKey: tf
-  - Row: 1
+  - Row: 0
     Column: 5
     HasNeighbors: 1
     IsEmpty: 0
     CornerKey: ttff
     LeftRightKey: tt
     TopBottomKey: tf
-  - Row: 1
+  - Row: 0
     Column: 6
     HasNeighbors: 1
     IsEmpty: 0
     CornerKey: ttff
     LeftRightKey: tt
     TopBottomKey: tf
-  - Row: 1
+  - Row: 0
     Column: 7
     HasNeighbors: 1
     IsEmpty: 0
-    CornerKey: ttft
-    LeftRightKey: tt
-    TopBottomKey: tt
-  - Row: 1
-    Column: 8
-    HasNeighbors: 1
-    IsEmpty: 1
-    CornerKey: fttf
-    LeftRightKey: ft
-    TopBottomKey: ff
-  - Row: 1
-    Column: 9
-    HasNeighbors: 1
-    IsEmpty: 0
-    CornerKey: tfft
-    LeftRightKey: tf
-    TopBottomKey: tt
-  - Row: 1
-    Column: 10
-    HasNeighbors: 0
-    IsEmpty: 1
-    CornerKey: fttf
-    LeftRightKey: ft
-    TopBottomKey: ff
-  - Row: 2
-    Column: -1
-    HasNeighbors: 0
-    IsEmpty: 1
-    CornerKey: 
-    LeftRightKey: 
-    TopBottomKey: 
-  - Row: 2
-    Column: 0
-    HasNeighbors: 1
-    IsEmpty: 0
-    CornerKey: tfft
-    LeftRightKey: tf
-    TopBottomKey: tt
-  - Row: 2
-    Column: 1
-    HasNeighbors: 1
-    IsEmpty: 1
-    CornerKey: fttf
-    LeftRightKey: ft
-    TopBottomKey: ff
-  - Row: 2
-    Column: 2
-    HasNeighbors: 1
-    IsEmpty: 0
-    CornerKey: tfft
-    LeftRightKey: tf
-    TopBottomKey: tt
-  - Row: 2
-    Column: 3
-    HasNeighbors: 1
-    IsEmpty: 0
-    CornerKey: tttt
-    LeftRightKey: tt
-    TopBottomKey: tt
-  - Row: 2
-    Column: 4
-    HasNeighbors: 1
-    IsEmpty: 0
-    CornerKey: tttt
-    LeftRightKey: tt
-    TopBottomKey: tt
-  - Row: 2
-    Column: 5
-    HasNeighbors: 1
-    IsEmpty: 0
-    CornerKey: tttt
-    LeftRightKey: tt
-    TopBottomKey: tt
-  - Row: 2
-    Column: 6
-    HasNeighbors: 1
-    IsEmpty: 0
-    CornerKey: tttt
-    LeftRightKey: tt
-    TopBottomKey: tt
-  - Row: 2
-    Column: 7
-    HasNeighbors: 1
-    IsEmpty: 0
-    CornerKey: tttt
-    LeftRightKey: tt
-    TopBottomKey: tt
-  - Row: 2
-    Column: 8
-    HasNeighbors: 1
-    IsEmpty: 1
-    CornerKey: fttf
-    LeftRightKey: ft
-    TopBottomKey: ff
-  - Row: 2
-    Column: 9
-    HasNeighbors: 1
-    IsEmpty: 0
-    CornerKey: tfft
-    LeftRightKey: tf
-    TopBottomKey: tt
-  - Row: 2
-    Column: 10
-    HasNeighbors: 0
-    IsEmpty: 1
-    CornerKey: fttf
-    LeftRightKey: ft
-    TopBottomKey: ff
-  - Row: 3
-    Column: -1
-    HasNeighbors: 0
-    IsEmpty: 1
-    CornerKey: 
-    LeftRightKey: 
-    TopBottomKey: 
-  - Row: 3
-    Column: 0
-    HasNeighbors: 1
-    IsEmpty: 0
-    CornerKey: tfft
-    LeftRightKey: tf
-    TopBottomKey: tt
-  - Row: 3
-    Column: 1
-    HasNeighbors: 1
-    IsEmpty: 0
-    CornerKey: tttf
+    CornerKey: ttff
     LeftRightKey: tt
     TopBottomKey: tf
-  - Row: 3
-    Column: 2
-    HasNeighbors: 1
-    IsEmpty: 0
-    CornerKey: ttft
-    LeftRightKey: tt
-    TopBottomKey: tt
-  - Row: 3
-    Column: 3
-    HasNeighbors: 1
-    IsEmpty: 0
-    CornerKey: tttt
-    LeftRightKey: tt
-    TopBottomKey: tt
-  - Row: 3
-    Column: 4
-    HasNeighbors: 1
-    IsEmpty: 0
-    CornerKey: tttt
-    LeftRightKey: tt
-    TopBottomKey: tt
-  - Row: 3
-    Column: 5
-    HasNeighbors: 1
-    IsEmpty: 0
-    CornerKey: tttt
-    LeftRightKey: tt
-    TopBottomKey: tt
-  - Row: 3
-    Column: 6
-    HasNeighbors: 1
-    IsEmpty: 0
-    CornerKey: tttt
-    LeftRightKey: tt
-    TopBottomKey: tt
-  - Row: 3
-    Column: 7
-    HasNeighbors: 1
-    IsEmpty: 0
-    CornerKey: tttt
-    LeftRightKey: tt
-    TopBottomKey: tt
-  - Row: 3
+  - Row: 0
     Column: 8
     HasNeighbors: 1
     IsEmpty: 0
-    CornerKey: tttf
+    CornerKey: ttff
     LeftRightKey: tt
     TopBottomKey: tf
-  - Row: 3
+  - Row: 0
     Column: 9
     HasNeighbors: 1
     IsEmpty: 0
-    CornerKey: ttft
-    LeftRightKey: tt
-    TopBottomKey: tt
-  - Row: 3
-    Column: 10
-    HasNeighbors: 0
-    IsEmpty: 1
-    CornerKey: fttf
-    LeftRightKey: ft
-    TopBottomKey: ff
-  - Row: 4
-    Column: -1
-    HasNeighbors: 0
-    IsEmpty: 1
-    CornerKey: 
-    LeftRightKey: 
-    TopBottomKey: 
-  - Row: 4
-    Column: 0
-    HasNeighbors: 1
-    IsEmpty: 0
-    CornerKey: tfft
-    LeftRightKey: tf
-    TopBottomKey: tt
-  - Row: 4
-    Column: 1
-    HasNeighbors: 1
-    IsEmpty: 0
-    CornerKey: tttt
-    LeftRightKey: tt
-    TopBottomKey: tt
-  - Row: 4
-    Column: 2
-    HasNeighbors: 1
-    IsEmpty: 0
-    CornerKey: tttt
-    LeftRightKey: tt
-    TopBottomKey: tt
-  - Row: 4
-    Column: 3
-    HasNeighbors: 1
-    IsEmpty: 1
-    CornerKey: fttt
-    LeftRightKey: ft
-    TopBottomKey: ft
-  - Row: 4
-    Column: 4
-    HasNeighbors: 1
-    IsEmpty: 1
-    CornerKey: fftt
-    LeftRightKey: ff
-    TopBottomKey: ft
-  - Row: 4
-    Column: 5
-    HasNeighbors: 1
-    IsEmpty: 1
-    CornerKey: fftt
-    LeftRightKey: ff
-    TopBottomKey: ft
-  - Row: 4
-    Column: 6
-    HasNeighbors: 1
-    IsEmpty: 1
-    CornerKey: fftt
-    LeftRightKey: ff
-    TopBottomKey: ft
-  - Row: 4
-    Column: 7
-    HasNeighbors: 1
-    IsEmpty: 0
-    CornerKey: tftt
-    LeftRightKey: tf
-    TopBottomKey: tt
-  - Row: 4
-    Column: 8
-    HasNeighbors: 1
-    IsEmpty: 0
-    CornerKey: tttt
-    LeftRightKey: tt
-    TopBottomKey: tt
-  - Row: 4
-    Column: 9
-    HasNeighbors: 1
-    IsEmpty: 0
-    CornerKey: tttt
-    LeftRightKey: tt
-    TopBottomKey: tt
-  - Row: 4
-    Column: 10
-    HasNeighbors: 0
-    IsEmpty: 1
-    CornerKey: fttf
-    LeftRightKey: ft
-    TopBottomKey: ff
-  - Row: 5
-    Column: -1
-    HasNeighbors: 0
-    IsEmpty: 1
-    CornerKey: 
-    LeftRightKey: 
-    TopBottomKey: 
-  - Row: 5
-    Column: 0
-    HasNeighbors: 1
-    IsEmpty: 0
-    CornerKey: tfft
-    LeftRightKey: tf
-    TopBottomKey: tt
-  - Row: 5
-    Column: 1
-    HasNeighbors: 1
-    IsEmpty: 0
-    CornerKey: tttt
-    LeftRightKey: tt
-    TopBottomKey: tt
-  - Row: 5
-    Column: 2
-    HasNeighbors: 1
-    IsEmpty: 0
-    CornerKey: tttt
-    LeftRightKey: tt
-    TopBottomKey: tt
-  - Row: 5
-    Column: 3
-    HasNeighbors: 1
-    IsEmpty: 0
-    CornerKey: tttf
+    CornerKey: ttff
     LeftRightKey: tt
     TopBottomKey: tf
-  - Row: 5
-    Column: 4
+  - Row: 0
+    Column: 10
     HasNeighbors: 1
+    IsEmpty: 0
+    CornerKey: ttff
+    LeftRightKey: tt
+    TopBottomKey: tf
+  - Row: 0
+    Column: 11
+    HasNeighbors: 0
     IsEmpty: 1
     CornerKey: ftff
     LeftRightKey: ft
     TopBottomKey: ff
+  - Row: 1
+    Column: -1
+    HasNeighbors: 0
+    IsEmpty: 1
+    CornerKey: 
+    LeftRightKey: 
+    TopBottomKey: 
+  - Row: 1
+    Column: 0
+    HasNeighbors: 1
+    IsEmpty: 0
+    CornerKey: tfft
+    LeftRightKey: tf
+    TopBottomKey: tt
+  - Row: 1
+    Column: 1
+    HasNeighbors: 1
+    IsEmpty: 0
+    CornerKey: tttt
+    LeftRightKey: tt
+    TopBottomKey: tt
+  - Row: 1
+    Column: 2
+    HasNeighbors: 1
+    IsEmpty: 0
+    CornerKey: tttt
+    LeftRightKey: tt
+    TopBottomKey: tt
+  - Row: 1
+    Column: 3
+    HasNeighbors: 1
+    IsEmpty: 0
+    CornerKey: tttt
+    LeftRightKey: tt
+    TopBottomKey: tt
+  - Row: 1
+    Column: 4
+    HasNeighbors: 1
+    IsEmpty: 0
+    CornerKey: tttt
+    LeftRightKey: tt
+    TopBottomKey: tt
+  - Row: 1
+    Column: 5
+    HasNeighbors: 1
+    IsEmpty: 0
+    CornerKey: tttt
+    LeftRightKey: tt
+    TopBottomKey: tt
+  - Row: 1
+    Column: 6
+    HasNeighbors: 1
+    IsEmpty: 0
+    CornerKey: tttt
+    LeftRightKey: tt
+    TopBottomKey: tt
+  - Row: 1
+    Column: 7
+    HasNeighbors: 1
+    IsEmpty: 0
+    CornerKey: tttt
+    LeftRightKey: tt
+    TopBottomKey: tt
+  - Row: 1
+    Column: 8
+    HasNeighbors: 1
+    IsEmpty: 0
+    CornerKey: tttt
+    LeftRightKey: tt
+    TopBottomKey: tt
+  - Row: 1
+    Column: 9
+    HasNeighbors: 1
+    IsEmpty: 0
+    CornerKey: tttt
+    LeftRightKey: tt
+    TopBottomKey: tt
+  - Row: 1
+    Column: 10
+    HasNeighbors: 1
+    IsEmpty: 0
+    CornerKey: tttt
+    LeftRightKey: tt
+    TopBottomKey: tt
+  - Row: 1
+    Column: 11
+    HasNeighbors: 0
+    IsEmpty: 1
+    CornerKey: fttf
+    LeftRightKey: ft
+    TopBottomKey: ff
+  - Row: 2
+    Column: -1
+    HasNeighbors: 0
+    IsEmpty: 1
+    CornerKey: 
+    LeftRightKey: 
+    TopBottomKey: 
+  - Row: 2
+    Column: 0
+    HasNeighbors: 1
+    IsEmpty: 0
+    CornerKey: tfft
+    LeftRightKey: tf
+    TopBottomKey: tt
+  - Row: 2
+    Column: 1
+    HasNeighbors: 1
+    IsEmpty: 0
+    CornerKey: tttt
+    LeftRightKey: tt
+    TopBottomKey: tt
+  - Row: 2
+    Column: 2
+    HasNeighbors: 1
+    IsEmpty: 0
+    CornerKey: tttt
+    LeftRightKey: tt
+    TopBottomKey: tt
+  - Row: 2
+    Column: 3
+    HasNeighbors: 1
+    IsEmpty: 0
+    CornerKey: tttt
+    LeftRightKey: tt
+    TopBottomKey: tt
+  - Row: 2
+    Column: 4
+    HasNeighbors: 1
+    IsEmpty: 0
+    CornerKey: tttt
+    LeftRightKey: tt
+    TopBottomKey: tt
+  - Row: 2
+    Column: 5
+    HasNeighbors: 1
+    IsEmpty: 0
+    CornerKey: tttt
+    LeftRightKey: tt
+    TopBottomKey: tt
+  - Row: 2
+    Column: 6
+    HasNeighbors: 1
+    IsEmpty: 0
+    CornerKey: tttt
+    LeftRightKey: tt
+    TopBottomKey: tt
+  - Row: 2
+    Column: 7
+    HasNeighbors: 1
+    IsEmpty: 0
+    CornerKey: tttt
+    LeftRightKey: tt
+    TopBottomKey: tt
+  - Row: 2
+    Column: 8
+    HasNeighbors: 1
+    IsEmpty: 0
+    CornerKey: tttt
+    LeftRightKey: tt
+    TopBottomKey: tt
+  - Row: 2
+    Column: 9
+    HasNeighbors: 1
+    IsEmpty: 0
+    CornerKey: tttt
+    LeftRightKey: tt
+    TopBottomKey: tt
+  - Row: 2
+    Column: 10
+    HasNeighbors: 1
+    IsEmpty: 0
+    CornerKey: tttt
+    LeftRightKey: tt
+    TopBottomKey: tt
+  - Row: 2
+    Column: 11
+    HasNeighbors: 0
+    IsEmpty: 1
+    CornerKey: fttf
+    LeftRightKey: ft
+    TopBottomKey: ff
+  - Row: 3
+    Column: -1
+    HasNeighbors: 0
+    IsEmpty: 1
+    CornerKey: 
+    LeftRightKey: 
+    TopBottomKey: 
+  - Row: 3
+    Column: 0
+    HasNeighbors: 1
+    IsEmpty: 0
+    CornerKey: tfft
+    LeftRightKey: tf
+    TopBottomKey: tt
+  - Row: 3
+    Column: 1
+    HasNeighbors: 1
+    IsEmpty: 0
+    CornerKey: tttt
+    LeftRightKey: tt
+    TopBottomKey: tt
+  - Row: 3
+    Column: 2
+    HasNeighbors: 1
+    IsEmpty: 0
+    CornerKey: tttt
+    LeftRightKey: tt
+    TopBottomKey: tt
+  - Row: 3
+    Column: 3
+    HasNeighbors: 1
+    IsEmpty: 0
+    CornerKey: tttt
+    LeftRightKey: tt
+    TopBottomKey: tt
+  - Row: 3
+    Column: 4
+    HasNeighbors: 1
+    IsEmpty: 0
+    CornerKey: tttt
+    LeftRightKey: tt
+    TopBottomKey: tt
+  - Row: 3
+    Column: 5
+    HasNeighbors: 1
+    IsEmpty: 0
+    CornerKey: tttt
+    LeftRightKey: tt
+    TopBottomKey: tt
+  - Row: 3
+    Column: 6
+    HasNeighbors: 1
+    IsEmpty: 0
+    CornerKey: tttt
+    LeftRightKey: tt
+    TopBottomKey: tt
+  - Row: 3
+    Column: 7
+    HasNeighbors: 1
+    IsEmpty: 0
+    CornerKey: tttt
+    LeftRightKey: tt
+    TopBottomKey: tt
+  - Row: 3
+    Column: 8
+    HasNeighbors: 1
+    IsEmpty: 0
+    CornerKey: tttt
+    LeftRightKey: tt
+    TopBottomKey: tt
+  - Row: 3
+    Column: 9
+    HasNeighbors: 1
+    IsEmpty: 0
+    CornerKey: tttt
+    LeftRightKey: tt
+    TopBottomKey: tt
+  - Row: 3
+    Column: 10
+    HasNeighbors: 1
+    IsEmpty: 0
+    CornerKey: tttt
+    LeftRightKey: tt
+    TopBottomKey: tt
+  - Row: 3
+    Column: 11
+    HasNeighbors: 0
+    IsEmpty: 1
+    CornerKey: fttf
+    LeftRightKey: ft
+    TopBottomKey: ff
+  - Row: 4
+    Column: -1
+    HasNeighbors: 0
+    IsEmpty: 1
+    CornerKey: 
+    LeftRightKey: 
+    TopBottomKey: 
+  - Row: 4
+    Column: 0
+    HasNeighbors: 1
+    IsEmpty: 0
+    CornerKey: tfft
+    LeftRightKey: tf
+    TopBottomKey: tt
+  - Row: 4
+    Column: 1
+    HasNeighbors: 1
+    IsEmpty: 0
+    CornerKey: tttt
+    LeftRightKey: tt
+    TopBottomKey: tt
+  - Row: 4
+    Column: 2
+    HasNeighbors: 1
+    IsEmpty: 0
+    CornerKey: tttt
+    LeftRightKey: tt
+    TopBottomKey: tt
+  - Row: 4
+    Column: 3
+    HasNeighbors: 1
+    IsEmpty: 0
+    CornerKey: tttt
+    LeftRightKey: tt
+    TopBottomKey: tt
+  - Row: 4
+    Column: 4
+    HasNeighbors: 1
+    IsEmpty: 0
+    CornerKey: tttt
+    LeftRightKey: tt
+    TopBottomKey: tt
+  - Row: 4
+    Column: 5
+    HasNeighbors: 1
+    IsEmpty: 0
+    CornerKey: tttt
+    LeftRightKey: tt
+    TopBottomKey: tt
+  - Row: 4
+    Column: 6
+    HasNeighbors: 1
+    IsEmpty: 0
+    CornerKey: tttt
+    LeftRightKey: tt
+    TopBottomKey: tt
+  - Row: 4
+    Column: 7
+    HasNeighbors: 1
+    IsEmpty: 0
+    CornerKey: tttt
+    LeftRightKey: tt
+    TopBottomKey: tt
+  - Row: 4
+    Column: 8
+    HasNeighbors: 1
+    IsEmpty: 0
+    CornerKey: tttt
+    LeftRightKey: tt
+    TopBottomKey: tt
+  - Row: 4
+    Column: 9
+    HasNeighbors: 1
+    IsEmpty: 0
+    CornerKey: tttt
+    LeftRightKey: tt
+    TopBottomKey: tt
+  - Row: 4
+    Column: 10
+    HasNeighbors: 1
+    IsEmpty: 0
+    CornerKey: tttt
+    LeftRightKey: tt
+    TopBottomKey: tt
+  - Row: 4
+    Column: 11
+    HasNeighbors: 0
+    IsEmpty: 1
+    CornerKey: fttf
+    LeftRightKey: ft
+    TopBottomKey: ff
+  - Row: 5
+    Column: -1
+    HasNeighbors: 0
+    IsEmpty: 1
+    CornerKey: 
+    LeftRightKey: 
+    TopBottomKey: 
+  - Row: 5
+    Column: 0
+    HasNeighbors: 1
+    IsEmpty: 0
+    CornerKey: tfft
+    LeftRightKey: tf
+    TopBottomKey: tt
+  - Row: 5
+    Column: 1
+    HasNeighbors: 1
+    IsEmpty: 0
+    CornerKey: tttt
+    LeftRightKey: tt
+    TopBottomKey: tt
+  - Row: 5
+    Column: 2
+    HasNeighbors: 1
+    IsEmpty: 0
+    CornerKey: tttt
+    LeftRightKey: tt
+    TopBottomKey: tt
+  - Row: 5
+    Column: 3
+    HasNeighbors: 1
+    IsEmpty: 0
+    CornerKey: tttt
+    LeftRightKey: tt
+    TopBottomKey: tt
+  - Row: 5
+    Column: 4
+    HasNeighbors: 1
+    IsEmpty: 0
+    CornerKey: tttt
+    LeftRightKey: tt
+    TopBottomKey: tt
   - Row: 5
     Column: 5
     HasNeighbors: 1
-    IsEmpty: 1
-    CornerKey: ffff
-    LeftRightKey: ff
-    TopBottomKey: ff
+    IsEmpty: 0
+    CornerKey: tttt
+    LeftRightKey: tt
+    TopBottomKey: tt
   - Row: 5
     Column: 6
     HasNeighbors: 1
     IsEmpty: 0
-    CornerKey: tfff
-    LeftRightKey: tf
-    TopBottomKey: tf
+    CornerKey: tttt
+    LeftRightKey: tt
+    TopBottomKey: tt
   - Row: 5
     Column: 7
     HasNeighbors: 1
     IsEmpty: 0
-    CornerKey: ttft
+    CornerKey: tttt
     LeftRightKey: tt
     TopBottomKey: tt
   - Row: 5
@@ -699,6 +762,13 @@ MonoBehaviour:
     TopBottomKey: tt
   - Row: 5
     Column: 10
+    HasNeighbors: 1
+    IsEmpty: 0
+    CornerKey: tttt
+    LeftRightKey: tt
+    TopBottomKey: tt
+  - Row: 5
+    Column: 11
     HasNeighbors: 0
     IsEmpty: 1
     CornerKey: fttf
@@ -742,23 +812,23 @@ MonoBehaviour:
   - Row: 6
     Column: 4
     HasNeighbors: 1
-    IsEmpty: 1
-    CornerKey: fttf
-    LeftRightKey: ft
-    TopBottomKey: ff
+    IsEmpty: 0
+    CornerKey: tttt
+    LeftRightKey: tt
+    TopBottomKey: tt
   - Row: 6
     Column: 5
     HasNeighbors: 1
-    IsEmpty: 1
-    CornerKey: ffff
-    LeftRightKey: ff
-    TopBottomKey: ff
+    IsEmpty: 0
+    CornerKey: tttt
+    LeftRightKey: tt
+    TopBottomKey: tt
   - Row: 6
     Column: 6
     HasNeighbors: 1
     IsEmpty: 0
-    CornerKey: tfft
-    LeftRightKey: tf
+    CornerKey: tttt
+    LeftRightKey: tt
     TopBottomKey: tt
   - Row: 6
     Column: 7
@@ -783,6 +853,13 @@ MonoBehaviour:
     TopBottomKey: tt
   - Row: 6
     Column: 10
+    HasNeighbors: 1
+    IsEmpty: 0
+    CornerKey: tttt
+    LeftRightKey: tt
+    TopBottomKey: tt
+  - Row: 6
+    Column: 11
     HasNeighbors: 0
     IsEmpty: 1
     CornerKey: fttf
@@ -827,21 +904,21 @@ MonoBehaviour:
     Column: 4
     HasNeighbors: 1
     IsEmpty: 0
-    CornerKey: tttf
+    CornerKey: tttt
     LeftRightKey: tt
-    TopBottomKey: tf
+    TopBottomKey: tt
   - Row: 7
     Column: 5
     HasNeighbors: 1
     IsEmpty: 0
-    CornerKey: ttff
+    CornerKey: tttt
     LeftRightKey: tt
-    TopBottomKey: tf
+    TopBottomKey: tt
   - Row: 7
     Column: 6
     HasNeighbors: 1
     IsEmpty: 0
-    CornerKey: ttft
+    CornerKey: tttt
     LeftRightKey: tt
     TopBottomKey: tt
   - Row: 7
@@ -867,6 +944,13 @@ MonoBehaviour:
     TopBottomKey: tt
   - Row: 7
     Column: 10
+    HasNeighbors: 1
+    IsEmpty: 0
+    CornerKey: tttt
+    LeftRightKey: tt
+    TopBottomKey: tt
+  - Row: 7
+    Column: 11
     HasNeighbors: 0
     IsEmpty: 1
     CornerKey: fttf
@@ -951,6 +1035,13 @@ MonoBehaviour:
     TopBottomKey: tt
   - Row: 8
     Column: 10
+    HasNeighbors: 1
+    IsEmpty: 0
+    CornerKey: tttt
+    LeftRightKey: tt
+    TopBottomKey: tt
+  - Row: 8
+    Column: 11
     HasNeighbors: 0
     IsEmpty: 1
     CornerKey: fttf
@@ -1035,6 +1126,13 @@ MonoBehaviour:
     TopBottomKey: tt
   - Row: 9
     Column: 10
+    HasNeighbors: 1
+    IsEmpty: 0
+    CornerKey: tttt
+    LeftRightKey: tt
+    TopBottomKey: tt
+  - Row: 9
+    Column: 11
     HasNeighbors: 0
     IsEmpty: 1
     CornerKey: fttf
@@ -1048,77 +1146,175 @@ MonoBehaviour:
     LeftRightKey: 
     TopBottomKey: 
   - Row: 10
+    Column: 0
+    HasNeighbors: 1
+    IsEmpty: 0
+    CornerKey: tfft
+    LeftRightKey: tf
+    TopBottomKey: tt
+  - Row: 10
+    Column: 1
+    HasNeighbors: 1
+    IsEmpty: 0
+    CornerKey: tttt
+    LeftRightKey: tt
+    TopBottomKey: tt
+  - Row: 10
+    Column: 2
+    HasNeighbors: 1
+    IsEmpty: 0
+    CornerKey: tttt
+    LeftRightKey: tt
+    TopBottomKey: tt
+  - Row: 10
+    Column: 3
+    HasNeighbors: 1
+    IsEmpty: 0
+    CornerKey: tttt
+    LeftRightKey: tt
+    TopBottomKey: tt
+  - Row: 10
+    Column: 4
+    HasNeighbors: 1
+    IsEmpty: 0
+    CornerKey: tttt
+    LeftRightKey: tt
+    TopBottomKey: tt
+  - Row: 10
+    Column: 5
+    HasNeighbors: 1
+    IsEmpty: 0
+    CornerKey: tttt
+    LeftRightKey: tt
+    TopBottomKey: tt
+  - Row: 10
+    Column: 6
+    HasNeighbors: 1
+    IsEmpty: 0
+    CornerKey: tttt
+    LeftRightKey: tt
+    TopBottomKey: tt
+  - Row: 10
+    Column: 7
+    HasNeighbors: 1
+    IsEmpty: 0
+    CornerKey: tttt
+    LeftRightKey: tt
+    TopBottomKey: tt
+  - Row: 10
+    Column: 8
+    HasNeighbors: 1
+    IsEmpty: 0
+    CornerKey: tttt
+    LeftRightKey: tt
+    TopBottomKey: tt
+  - Row: 10
+    Column: 9
+    HasNeighbors: 1
+    IsEmpty: 0
+    CornerKey: tttt
+    LeftRightKey: tt
+    TopBottomKey: tt
+  - Row: 10
+    Column: 10
+    HasNeighbors: 1
+    IsEmpty: 0
+    CornerKey: tttt
+    LeftRightKey: tt
+    TopBottomKey: tt
+  - Row: 10
+    Column: 11
+    HasNeighbors: 0
+    IsEmpty: 1
+    CornerKey: fttf
+    LeftRightKey: ft
+    TopBottomKey: ff
+  - Row: 11
+    Column: -1
+    HasNeighbors: 0
+    IsEmpty: 1
+    CornerKey: 
+    LeftRightKey: 
+    TopBottomKey: 
+  - Row: 11
     Column: 0
     HasNeighbors: 0
     IsEmpty: 1
     CornerKey: ffft
     LeftRightKey: ff
     TopBottomKey: ft
-  - Row: 10
+  - Row: 11
     Column: 1
     HasNeighbors: 0
     IsEmpty: 1
     CornerKey: fftt
     LeftRightKey: ff
     TopBottomKey: ft
-  - Row: 10
+  - Row: 11
     Column: 2
     HasNeighbors: 0
     IsEmpty: 1
     CornerKey: fftt
     LeftRightKey: ff
     TopBottomKey: ft
-  - Row: 10
+  - Row: 11
     Column: 3
     HasNeighbors: 0
     IsEmpty: 1
     CornerKey: fftt
     LeftRightKey: ff
     TopBottomKey: ft
-  - Row: 10
+  - Row: 11
     Column: 4
     HasNeighbors: 0
     IsEmpty: 1
     CornerKey: fftt
     LeftRightKey: ff
     TopBottomKey: ft
-  - Row: 10
+  - Row: 11
     Column: 5
     HasNeighbors: 0
     IsEmpty: 1
     CornerKey: fftt
     LeftRightKey: ff
     TopBottomKey: ft
-  - Row: 10
+  - Row: 11
     Column: 6
     HasNeighbors: 0
     IsEmpty: 1
     CornerKey: fftt
     LeftRightKey: ff
     TopBottomKey: ft
-  - Row: 10
+  - Row: 11
     Column: 7
     HasNeighbors: 0
     IsEmpty: 1
     CornerKey: fftt
     LeftRightKey: ff
     TopBottomKey: ft
-  - Row: 10
+  - Row: 11
     Column: 8
     HasNeighbors: 0
     IsEmpty: 1
     CornerKey: fftt
     LeftRightKey: ff
     TopBottomKey: ft
-  - Row: 10
+  - Row: 11
     Column: 9
     HasNeighbors: 0
     IsEmpty: 1
     CornerKey: fftt
     LeftRightKey: ff
     TopBottomKey: ft
-  - Row: 10
+  - Row: 11
     Column: 10
+    HasNeighbors: 0
+    IsEmpty: 1
+    CornerKey: fftt
+    LeftRightKey: ff
+    TopBottomKey: ft
+  - Row: 11
+    Column: 11
     HasNeighbors: 0
     IsEmpty: 1
     CornerKey: fftf
@@ -1126,599 +1322,755 @@ MonoBehaviour:
     TopBottomKey: ff
   SpawnerData:
     Spawners:
-    - Row: 10
+    - Row: 16
       Column: 0
-    - Row: 10
+    - Row: 16
       Column: 1
-    - Row: 10
+    - Row: 16
       Column: 2
-    - Row: 10
+    - Row: 16
       Column: 3
-    - Row: 10
+    - Row: 16
       Column: 4
-    - Row: 10
+    - Row: 16
       Column: 5
-    - Row: 10
+    - Row: 16
       Column: 6
-    - Row: 10
+    - Row: 16
       Column: 7
-    - Row: 10
+    - Row: 16
       Column: 8
-    - Row: 10
+    - Row: 16
       Column: 9
-    VerticalOffset: 0
+    - Row: 16
+      Column: 10
+    VerticalOffset: 0.5
   references:
     version: 2
     RefIds:
-    - rid: 1831807789335576576
+    - rid: 8357453150387176024
       type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
       data:
         _row: 0
-        _column: 0
-        _color: 1
-    - rid: 1831807789335576577
-      type: {class: SpaceArea, ns: BoardItems.Void, asm: Assembly-CSharp}
-      data:
-        _row: 0
-        _column: 1
-    - rid: 1831807789335576578
-      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
-      data:
-        _row: 0
-        _column: 2
-        _color: 1
-    - rid: 1831807789335576579
-      type: {class: SpaceArea, ns: BoardItems.Void, asm: Assembly-CSharp}
-      data:
-        _row: 0
-        _column: 3
-    - rid: 1831807789335576580
-      type: {class: SpaceArea, ns: BoardItems.Void, asm: Assembly-CSharp}
-      data:
-        _row: 0
-        _column: 4
-    - rid: 1831807789335576581
-      type: {class: SpaceArea, ns: BoardItems.Void, asm: Assembly-CSharp}
-      data:
-        _row: 0
-        _column: 5
-    - rid: 1831807789335576582
-      type: {class: SpaceArea, ns: BoardItems.Void, asm: Assembly-CSharp}
-      data:
-        _row: 0
-        _column: 6
-    - rid: 1831807789335576583
-      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
-      data:
-        _row: 0
-        _column: 7
-        _color: 1
-    - rid: 1831807789335576584
-      type: {class: SpaceArea, ns: BoardItems.Void, asm: Assembly-CSharp}
-      data:
-        _row: 0
-        _column: 8
-    - rid: 1831807789335576585
-      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
-      data:
-        _row: 0
-        _column: 9
-        _color: 1
-    - rid: 1831807789335576586
-      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
-      data:
-        _row: 1
-        _column: 0
-        _color: 1
-    - rid: 1831807789335576587
-      type: {class: SpaceArea, ns: BoardItems.Void, asm: Assembly-CSharp}
-      data:
-        _row: 1
-        _column: 1
-    - rid: 1831807789335576588
-      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
-      data:
-        _row: 1
-        _column: 2
-        _color: 1
-    - rid: 1831807789335576589
-      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
-      data:
-        _row: 1
-        _column: 3
-        _color: 2
-    - rid: 1831807789335576590
-      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
-      data:
-        _row: 1
-        _column: 4
-        _color: 4
-    - rid: 1831807789335576591
-      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
-      data:
-        _row: 1
-        _column: 5
-        _color: 4
-    - rid: 1831807789335576592
-      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
-      data:
-        _row: 1
-        _column: 6
-        _color: 2
-    - rid: 1831807789335576593
-      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
-      data:
-        _row: 1
-        _column: 7
-        _color: 1
-    - rid: 1831807789335576594
-      type: {class: SpaceArea, ns: BoardItems.Void, asm: Assembly-CSharp}
-      data:
-        _row: 1
-        _column: 8
-    - rid: 1831807789335576595
-      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
-      data:
-        _row: 1
-        _column: 9
-        _color: 1
-    - rid: 1831807789335576596
-      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
-      data:
-        _row: 2
-        _column: 0
-        _color: 1
-    - rid: 1831807789335576597
-      type: {class: SpaceArea, ns: BoardItems.Void, asm: Assembly-CSharp}
-      data:
-        _row: 2
-        _column: 1
-    - rid: 1831807789335576598
-      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
-      data:
-        _row: 2
-        _column: 2
-        _color: 1
-    - rid: 1831807789335576599
-      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
-      data:
-        _row: 2
-        _column: 3
-        _color: 2
-    - rid: 1831807789335576600
-      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
-      data:
-        _row: 2
-        _column: 4
-        _color: 4
-    - rid: 1831807789335576601
-      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
-      data:
-        _row: 2
-        _column: 5
-        _color: 4
-    - rid: 1831807789335576602
-      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
-      data:
-        _row: 2
-        _column: 6
-        _color: 2
-    - rid: 1831807789335576603
-      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
-      data:
-        _row: 2
-        _column: 7
-        _color: 1
-    - rid: 1831807789335576604
-      type: {class: SpaceArea, ns: BoardItems.Void, asm: Assembly-CSharp}
-      data:
-        _row: 2
-        _column: 8
-    - rid: 1831807789335576605
-      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
-      data:
-        _row: 2
-        _column: 9
-        _color: 1
-    - rid: 1831807789335576606
-      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
-      data:
-        _row: 3
-        _column: 0
-        _color: 1
-    - rid: 1831807789335576607
-      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
-      data:
-        _row: 3
-        _column: 1
-        _color: 2
-    - rid: 1831807789335576608
-      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
-      data:
-        _row: 3
-        _column: 2
-        _color: 1
-    - rid: 1831807789335576609
-      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
-      data:
-        _row: 3
-        _column: 3
-        _color: 2
-    - rid: 1831807789335576610
-      type: {class: Duck, ns: BoardItems.Obstacles, asm: Assembly-CSharp}
-      data:
-        _row: 3
-        _column: 4
-    - rid: 1831807789335576611
-      type: {class: Duck, ns: BoardItems.Obstacles, asm: Assembly-CSharp}
-      data:
-        _row: 3
-        _column: 5
-    - rid: 1831807789335576612
-      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
-      data:
-        _row: 3
-        _column: 6
-        _color: 2
-    - rid: 1831807789335576613
-      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
-      data:
-        _row: 3
-        _column: 7
-        _color: 1
-    - rid: 1831807789335576614
-      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
-      data:
-        _row: 3
-        _column: 8
-        _color: 2
-    - rid: 1831807789335576615
-      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
-      data:
-        _row: 3
-        _column: 9
-        _color: 1
-    - rid: 1831807789335576616
-      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
-      data:
-        _row: 4
-        _column: 0
-        _color: 2
-    - rid: 1831807789335576617
-      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
-      data:
-        _row: 4
-        _column: 1
-        _color: 2
-    - rid: 1831807789335576618
-      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
-      data:
-        _row: 4
-        _column: 2
-        _color: 2
-    - rid: 1831807789335576619
-      type: {class: SpaceArea, ns: BoardItems.Void, asm: Assembly-CSharp}
-      data:
-        _row: 4
-        _column: 3
-    - rid: 1831807789335576620
-      type: {class: SpaceArea, ns: BoardItems.Void, asm: Assembly-CSharp}
-      data:
-        _row: 4
-        _column: 4
-    - rid: 1831807789335576621
-      type: {class: SpaceArea, ns: BoardItems.Void, asm: Assembly-CSharp}
-      data:
-        _row: 4
-        _column: 5
-    - rid: 1831807789335576622
-      type: {class: SpaceArea, ns: BoardItems.Void, asm: Assembly-CSharp}
-      data:
-        _row: 4
-        _column: 6
-    - rid: 1831807789335576623
-      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
-      data:
-        _row: 4
-        _column: 7
-        _color: 2
-    - rid: 1831807789335576624
-      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
-      data:
-        _row: 4
-        _column: 8
-        _color: 2
-    - rid: 1831807789335576625
-      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
-      data:
-        _row: 4
-        _column: 9
-        _color: 2
-    - rid: 1831807789335576626
-      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
-      data:
-        _row: 5
-        _column: 0
-        _color: 4
-    - rid: 1831807789335576627
-      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
-      data:
-        _row: 5
-        _column: 1
-        _color: 4
-    - rid: 1831807789335576628
-      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
-      data:
-        _row: 5
-        _column: 2
-        _color: 4
-    - rid: 1831807789335576629
-      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
-      data:
-        _row: 5
-        _column: 3
-        _color: 4
-    - rid: 1831807789335576630
-      type: {class: SpaceArea, ns: BoardItems.Void, asm: Assembly-CSharp}
-      data:
-        _row: 5
-        _column: 4
-    - rid: 1831807789335576631
-      type: {class: SpaceArea, ns: BoardItems.Void, asm: Assembly-CSharp}
-      data:
-        _row: 5
-        _column: 5
-    - rid: 1831807789335576632
-      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
-      data:
-        _row: 5
-        _column: 6
-        _color: 4
-    - rid: 1831807789335576633
-      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
-      data:
-        _row: 5
-        _column: 7
-        _color: 4
-    - rid: 1831807789335576634
-      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
-      data:
-        _row: 5
-        _column: 8
-        _color: 4
-    - rid: 1831807789335576635
-      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
-      data:
-        _row: 5
-        _column: 9
-        _color: 4
-    - rid: 1831807789335576636
-      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
-      data:
-        _row: 6
-        _column: 0
-        _color: 4
-    - rid: 1831807789335576637
-      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
-      data:
-        _row: 6
-        _column: 1
-        _color: 4
-    - rid: 1831807789335576638
-      type: {class: Duck, ns: BoardItems.Obstacles, asm: Assembly-CSharp}
-      data:
-        _row: 6
-        _column: 2
-    - rid: 1831807789335576639
-      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
-      data:
-        _row: 6
-        _column: 3
-        _color: 5
-    - rid: 1831807789335576640
-      type: {class: SpaceArea, ns: BoardItems.Void, asm: Assembly-CSharp}
-      data:
-        _row: 6
-        _column: 4
-    - rid: 1831807789335576641
-      type: {class: SpaceArea, ns: BoardItems.Void, asm: Assembly-CSharp}
-      data:
-        _row: 6
-        _column: 5
-    - rid: 1831807789335576642
-      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
-      data:
-        _row: 6
-        _column: 6
-        _color: 5
-    - rid: 1831807789335576643
-      type: {class: Duck, ns: BoardItems.Obstacles, asm: Assembly-CSharp}
-      data:
-        _row: 6
-        _column: 7
-    - rid: 1831807789335576644
-      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
-      data:
-        _row: 6
-        _column: 8
-        _color: 4
-    - rid: 1831807789335576645
-      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
-      data:
-        _row: 6
-        _column: 9
-        _color: 4
-    - rid: 1831807789335576646
-      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
-      data:
-        _row: 7
-        _column: 0
-        _color: 4
-    - rid: 1831807789335576647
-      type: {class: Duck, ns: BoardItems.Obstacles, asm: Assembly-CSharp}
-      data:
-        _row: 7
-        _column: 1
-    - rid: 1831807789335576648
-      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
-      data:
-        _row: 7
-        _column: 2
-        _color: 5
-    - rid: 1831807789335576649
-      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
-      data:
-        _row: 7
-        _column: 3
-        _color: 5
-    - rid: 1831807789335576650
-      type: {class: Duck, ns: BoardItems.Obstacles, asm: Assembly-CSharp}
-      data:
-        _row: 7
-        _column: 4
-    - rid: 1831807789335576651
-      type: {class: Duck, ns: BoardItems.Obstacles, asm: Assembly-CSharp}
-      data:
-        _row: 7
-        _column: 5
-    - rid: 1831807789335576652
-      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
-      data:
-        _row: 7
-        _column: 6
-        _color: 5
-    - rid: 1831807789335576653
-      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
-      data:
-        _row: 7
-        _column: 7
-        _color: 5
-    - rid: 1831807789335576654
-      type: {class: Duck, ns: BoardItems.Obstacles, asm: Assembly-CSharp}
-      data:
-        _row: 7
-        _column: 8
-    - rid: 1831807789335576655
-      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
-      data:
-        _row: 7
-        _column: 9
-        _color: 4
-    - rid: 1831807789335576656
-      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
-      data:
-        _row: 8
         _column: 0
         _color: 3
-    - rid: 1831807789335576657
+    - rid: 8357453150387176025
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 0
+        _column: 1
+        _color: 3
+    - rid: 8357453150387176026
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 0
+        _column: 2
+        _color: 3
+    - rid: 8357453150387176027
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 0
+        _column: 3
+        _color: 3
+    - rid: 8357453150387176028
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 0
+        _column: 4
+        _color: 3
+    - rid: 8357453150387176029
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 0
+        _column: 5
+        _color: 3
+    - rid: 8357453150387176030
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 0
+        _column: 6
+        _color: 3
+    - rid: 8357453150387176031
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 0
+        _column: 7
+        _color: 3
+    - rid: 8357453150387176032
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 0
+        _column: 8
+        _color: 3
+    - rid: 8357453150387176033
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 0
+        _column: 9
+        _color: 3
+    - rid: 8357453150387176034
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 0
+        _column: 10
+        _color: 3
+    - rid: 8357453150387176035
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 1
+        _column: 0
+        _color: 3
+    - rid: 8357453150387176036
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 1
+        _column: 1
+        _color: 0
+    - rid: 8357453150387176037
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 1
+        _column: 2
+        _color: 0
+    - rid: 8357453150387176038
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 1
+        _column: 3
+        _color: 0
+    - rid: 8357453150387176039
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 1
+        _column: 4
+        _color: 0
+    - rid: 8357453150387176040
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 1
+        _column: 5
+        _color: 5
+    - rid: 8357453150387176041
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 1
+        _column: 6
+        _color: 2
+    - rid: 8357453150387176042
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 1
+        _column: 7
+        _color: 2
+    - rid: 8357453150387176043
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 1
+        _column: 8
+        _color: 2
+    - rid: 8357453150387176044
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 1
+        _column: 9
+        _color: 2
+    - rid: 8357453150387176045
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 1
+        _column: 10
+        _color: 3
+    - rid: 8357453150387176046
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 2
+        _column: 0
+        _color: 3
+    - rid: 8357453150387176047
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 2
+        _column: 1
+        _color: 0
+    - rid: 8357453150387176048
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 2
+        _column: 2
+        _color: 0
+    - rid: 8357453150387176049
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 2
+        _column: 3
+        _color: 0
+    - rid: 8357453150387176050
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 2
+        _column: 4
+        _color: 0
+    - rid: 8357453150387176051
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 2
+        _column: 5
+        _color: 5
+    - rid: 8357453150387176052
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 2
+        _column: 6
+        _color: 2
+    - rid: 8357453150387176053
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 2
+        _column: 7
+        _color: 2
+    - rid: 8357453150387176054
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 2
+        _column: 8
+        _color: 2
+    - rid: 8357453150387176055
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 2
+        _column: 9
+        _color: 2
+    - rid: 8357453150387176056
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 2
+        _column: 10
+        _color: 3
+    - rid: 8357453150387176057
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 3
+        _column: 0
+        _color: 3
+    - rid: 8357453150387176058
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 3
+        _column: 1
+        _color: 0
+    - rid: 8357453150387176059
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 3
+        _column: 2
+        _color: 0
+    - rid: 8357453150387176060
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 3
+        _column: 3
+        _color: 0
+    - rid: 8357453150387176061
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 3
+        _column: 4
+        _color: 5
+    - rid: 8357453150387176062
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 3
+        _column: 5
+        _color: 5
+    - rid: 8357453150387176063
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 3
+        _column: 6
+        _color: 5
+    - rid: 8357453150387176064
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 3
+        _column: 7
+        _color: 2
+    - rid: 8357453150387176065
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 3
+        _column: 8
+        _color: 2
+    - rid: 8357453150387176066
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 3
+        _column: 9
+        _color: 2
+    - rid: 8357453150387176067
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 3
+        _column: 10
+        _color: 3
+    - rid: 8357453150387176068
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 4
+        _column: 0
+        _color: 3
+    - rid: 8357453150387176069
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 4
+        _column: 1
+        _color: 0
+    - rid: 8357453150387176070
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 4
+        _column: 2
+        _color: 0
+    - rid: 8357453150387176071
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 4
+        _column: 3
+        _color: 5
+    - rid: 8357453150387176072
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 4
+        _column: 4
+        _color: 5
+    - rid: 8357453150387176073
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 4
+        _column: 5
+        _color: 5
+    - rid: 8357453150387176074
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 4
+        _column: 6
+        _color: 5
+    - rid: 8357453150387176075
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 4
+        _column: 7
+        _color: 5
+    - rid: 8357453150387176076
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 4
+        _column: 8
+        _color: 2
+    - rid: 8357453150387176077
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 4
+        _column: 9
+        _color: 2
+    - rid: 8357453150387176078
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 4
+        _column: 10
+        _color: 3
+    - rid: 8357453150387176079
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 5
+        _column: 0
+        _color: 4
+    - rid: 8357453150387176080
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 5
+        _column: 1
+        _color: 4
+    - rid: 8357453150387176081
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 5
+        _column: 2
+        _color: 4
+    - rid: 8357453150387176082
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 5
+        _column: 3
+        _color: 0
+    - rid: 8357453150387176083
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 5
+        _column: 4
+        _color: 0
+    - rid: 8357453150387176084
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 5
+        _column: 5
+        _color: 1
+    - rid: 8357453150387176085
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 5
+        _column: 6
+        _color: 2
+    - rid: 8357453150387176086
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 5
+        _column: 7
+        _color: 2
+    - rid: 8357453150387176087
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 5
+        _column: 8
+        _color: 4
+    - rid: 8357453150387176088
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 5
+        _column: 9
+        _color: 4
+    - rid: 8357453150387176089
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 5
+        _column: 10
+        _color: 4
+    - rid: 8357453150387176090
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 6
+        _column: 0
+        _color: 4
+    - rid: 8357453150387176091
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 6
+        _column: 1
+        _color: 4
+    - rid: 8357453150387176092
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 6
+        _column: 2
+        _color: 4
+    - rid: 8357453150387176093
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 6
+        _column: 3
+        _color: 0
+    - rid: 8357453150387176094
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 6
+        _column: 4
+        _color: 0
+    - rid: 8357453150387176095
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 6
+        _column: 5
+        _color: 1
+    - rid: 8357453150387176096
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 6
+        _column: 6
+        _color: 2
+    - rid: 8357453150387176097
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 6
+        _column: 7
+        _color: 2
+    - rid: 8357453150387176098
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 6
+        _column: 8
+        _color: 4
+    - rid: 8357453150387176099
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 6
+        _column: 9
+        _color: 4
+    - rid: 8357453150387176100
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 6
+        _column: 10
+        _color: 4
+    - rid: 8357453150387176101
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 7
+        _column: 0
+        _color: 5
+    - rid: 8357453150387176102
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 7
+        _column: 1
+        _color: 5
+    - rid: 8357453150387176103
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 7
+        _column: 2
+        _color: 5
+    - rid: 8357453150387176104
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 7
+        _column: 3
+        _color: 5
+    - rid: 8357453150387176105
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 7
+        _column: 4
+        _color: 0
+    - rid: 8357453150387176106
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 7
+        _column: 5
+        _color: 1
+    - rid: 8357453150387176107
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 7
+        _column: 6
+        _color: 2
+    - rid: 8357453150387176108
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 7
+        _column: 7
+        _color: 5
+    - rid: 8357453150387176109
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 7
+        _column: 8
+        _color: 5
+    - rid: 8357453150387176110
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 7
+        _column: 9
+        _color: 5
+    - rid: 8357453150387176111
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 7
+        _column: 10
+        _color: 5
+    - rid: 8357453150387176112
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 8
+        _column: 0
+        _color: 5
+    - rid: 8357453150387176113
       type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
       data:
         _row: 8
         _column: 1
-        _color: 3
-    - rid: 1831807789335576658
+        _color: 5
+    - rid: 8357453150387176114
       type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
       data:
         _row: 8
         _column: 2
-        _color: 2
-    - rid: 1831807789335576659
+        _color: 5
+    - rid: 8357453150387176115
       type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
       data:
         _row: 8
         _column: 3
-        _color: 2
-    - rid: 1831807789335576660
+        _color: 5
+    - rid: 8357453150387176116
       type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
       data:
         _row: 8
         _column: 4
         _color: 5
-    - rid: 1831807789335576661
+    - rid: 8357453150387176117
       type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
       data:
         _row: 8
         _column: 5
-        _color: 5
-    - rid: 1831807789335576662
+        _color: 1
+    - rid: 8357453150387176118
       type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
       data:
         _row: 8
         _column: 6
-        _color: 2
-    - rid: 1831807789335576663
+        _color: 5
+    - rid: 8357453150387176119
       type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
       data:
         _row: 8
         _column: 7
-        _color: 2
-    - rid: 1831807789335576664
+        _color: 5
+    - rid: 8357453150387176120
       type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
       data:
         _row: 8
         _column: 8
-        _color: 3
-    - rid: 1831807789335576665
+        _color: 5
+    - rid: 8357453150387176121
       type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
       data:
         _row: 8
         _column: 9
-        _color: 3
-    - rid: 1831807789335576666
-      type: {class: Duck, ns: BoardItems.Obstacles, asm: Assembly-CSharp}
+        _color: 5
+    - rid: 8357453150387176122
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 8
+        _column: 10
+        _color: 5
+    - rid: 8357453150387176123
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
       data:
         _row: 9
         _column: 0
-    - rid: 1831807789335576667
+        _color: 5
+    - rid: 8357453150387176124
       type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
       data:
         _row: 9
         _column: 1
-        _color: 3
-    - rid: 1831807789335576668
+        _color: 5
+    - rid: 8357453150387176125
       type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
       data:
         _row: 9
         _column: 2
-        _color: 2
-    - rid: 1831807789335576669
+        _color: 5
+    - rid: 8357453150387176126
       type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
       data:
         _row: 9
         _column: 3
-        _color: 2
-    - rid: 1831807789335576670
+        _color: 5
+    - rid: 8357453150387176127
       type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
       data:
         _row: 9
         _column: 4
         _color: 5
-    - rid: 1831807789335576671
+    - rid: 8357453150387176128
       type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
       data:
         _row: 9
         _column: 5
-        _color: 5
-    - rid: 1831807789335576672
+        _color: 1
+    - rid: 8357453150387176129
       type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
       data:
         _row: 9
         _column: 6
-        _color: 2
-    - rid: 1831807789335576673
+        _color: 5
+    - rid: 8357453150387176130
       type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
       data:
         _row: 9
         _column: 7
-        _color: 2
-    - rid: 1831807789335576674
+        _color: 5
+    - rid: 8357453150387176131
       type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
       data:
         _row: 9
         _column: 8
-        _color: 3
-    - rid: 1831807789335576675
-      type: {class: Duck, ns: BoardItems.Obstacles, asm: Assembly-CSharp}
+        _color: 5
+    - rid: 8357453150387176132
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
       data:
         _row: 9
         _column: 9
+        _color: 5
+    - rid: 8357453150387176133
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 9
+        _column: 10
+        _color: 5
+    - rid: 8357453150387176134
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 10
+        _column: 0
+        _color: 1
+    - rid: 8357453150387176135
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 10
+        _column: 1
+        _color: 1
+    - rid: 8357453150387176136
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 10
+        _column: 2
+        _color: 2
+    - rid: 8357453150387176137
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 10
+        _column: 3
+        _color: 2
+    - rid: 8357453150387176138
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 10
+        _column: 4
+        _color: 2
+    - rid: 8357453150387176139
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 10
+        _column: 5
+        _color: 1
+    - rid: 8357453150387176140
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 10
+        _column: 6
+        _color: 2
+    - rid: 8357453150387176141
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 10
+        _column: 7
+        _color: 2
+    - rid: 8357453150387176142
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 10
+        _column: 8
+        _color: 2
+    - rid: 8357453150387176143
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 10
+        _column: 9
+        _color: 1
+    - rid: 8357453150387176144
+      type: {class: Bead, ns: BoardItems.Bead, asm: Assembly-CSharp}
+      data:
+        _row: 10
+        _column: 10
+        _color: 1

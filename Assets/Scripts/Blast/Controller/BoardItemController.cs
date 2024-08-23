@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using BoardItems;
 using BoardItems.Bead;
+using BoardItems.Obstacles;
 using BoardItems.Void;
 using Cysharp.Threading.Tasks;
 using Global.Controller;
 using Signals;
+using UnityEngine;
 using Util.Movement.States;
 using Util.Pool.BoardItemPool;
 using Zenject;
@@ -192,24 +194,20 @@ namespace Blast.Controller
 
                 for (int row = 0; row < _rowLength; row++)
                 {
-                    if (_boardItems[row, column].IsBead) continue;
-                    if (_boardItems[row, column].IsSpace) continue;
+                    if (!_boardItems[row, column].IsVoidArea) continue;
 
-                    ShiftBeadOrSpawnNew(_boardItems[row, column], ref isFirstVoidArea,
+                    ShiftBeadOrSpawnNew(row, column, ref isFirstVoidArea,
                         ref distanceToNextBead, ref offset);
                 }
             }
         }
 
-        private void ShiftBeadOrSpawnNew(IBoardItem boardItem, ref bool isFirstVoidArea,
+        private void ShiftBeadOrSpawnNew(int row, int column, ref bool isFirstVoidArea,
             ref int distanceToNextBead, ref float verticalOffset)
         {
-            var column = boardItem.Column;
-            var row = boardItem.Row;
-
             for (int nonEmptyRowIndex = row + 1; nonEmptyRowIndex <= _rowLength; nonEmptyRowIndex++)
             {
-                if (nonEmptyRowIndex < _rowLength && _boardItems[nonEmptyRowIndex, column].IsBead)
+                if (nonEmptyRowIndex < _rowLength && _boardItems[nonEmptyRowIndex, column] is IMoveable)
                 {
                     TryShiftBeadDown(nonEmptyRowIndex, row, column);
                     break;
@@ -243,6 +241,7 @@ namespace Blast.Controller
             _boardItems[nonEmptyRowIndex, column].SetRowAndColumn(nonEmptyRowIndex, column);
 
             var moveableItem = (IMoveable)item;
+
             _movementController.Register(moveableItem, moveableItem.MovementStrategy.StartMovement);
         }
 
