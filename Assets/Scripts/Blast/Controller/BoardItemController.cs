@@ -1,14 +1,11 @@
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using BoardItems;
 using BoardItems.Bead;
-using BoardItems.Obstacles;
 using BoardItems.Void;
 using Cysharp.Threading.Tasks;
 using Global.Controller;
 using Signals;
-using UnityEngine;
 using Util.Movement.States;
 using Util.Pool.BoardItemPool;
 using Zenject;
@@ -28,6 +25,8 @@ namespace Blast.Controller
         private IBoardItem[,] _boardItems;
         private List<IBoardItem> _combineItems;
         private bool[,] _recursiveCheckArray;
+
+        public IBoardItem[,] BoardItems => _boardItems;
 
         public BoardItemController(SignalBus signalBus, IGridController gridController,
             IInGameController inGameController, MovementController movementController)
@@ -65,13 +64,14 @@ namespace Blast.Controller
             {
                 var temp = _boardItems[item.Row, item.Column] = item.Copy();
                 temp.RetrieveFromPool();
+                temp.BoardItemController = this;
 
                 if (temp is IVisual itemWithColor)
                 {
                     itemWithColor.SetColorAndAddSprite(itemWithColor.Color);
                     itemWithColor.SetSortingOrder(item.Row, item.Column);
                 }
-
+                
                 temp.TransformUtilities?.SetPosition(_gridController.CellToLocal(item.Row, item.Column));
                 temp.SetActive(true);
             }
@@ -114,7 +114,7 @@ namespace Blast.Controller
             }
         }
 
-        private void Blast()
+        public void Blast()
         {
             _combineItems.ForEach(item => item.Blast());
             _combineItems.ForEach(item => item.ReturnToPool());
@@ -241,8 +241,34 @@ namespace Blast.Controller
             _boardItems[nonEmptyRowIndex, column].SetRowAndColumn(nonEmptyRowIndex, column);
 
             var moveableItem = (IMoveable)item;
-
             _movementController.Register(moveableItem, moveableItem.MovementStrategy.StartMovement);
+            moveableItem.MovementStrategy.AllMovementComplete = AllMovementComplete;
+        }
+
+        private void AllMovementComplete(IMoveable item)
+        {
+            if (item is IRowEnd r)
+            {
+                if (r.RowEnd(out int row,out int column))
+                {
+                    _boardItems[row, column].ReturnToPool();
+
+                    var garbage = _boardItems[row, column];
+                    BoardItemPool.Instance.Return(garbage);
+
+                    if (!BoardItemPool.Instance.TryRetrieveWithoutParams<VoidArea>(out var voidArea))
+                    {
+                        voidArea = BoardItemPool.Instance.Retrieve<VoidArea>(row, column);
+                    }
+
+                    _boardItems[row, column] = voidArea;
+                    _boardItems[row, column].SetRowAndColumn(row, column);
+
+                    RecalculateBoardElements();
+                    ClearCombineItems();
+                    ClearRecursiveCheckArray();
+                }
+            }
         }
 
         private void SpawnNewBeadInVoidArea(int column, int row, ref bool isFirstVoidArea,
@@ -278,6 +304,7 @@ namespace Blast.Controller
 
             AdjustItemPosition(column, row, distanceToNextBead, ref verticalOffset, bead);
             _movementController.Register(bead, bead.MovementStrategy.StartMovement);
+            bead.MovementStrategy.AllMovementComplete = AllMovementComplete;
         }
 
         private void AdjustItemPosition(int column, int row, int distanceToNextBead,

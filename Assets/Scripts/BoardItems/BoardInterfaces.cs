@@ -1,3 +1,4 @@
+using Blast.Controller;
 using BoardItems.Util;
 using Util.Movement.Strategies;
 using Util.Pool;
@@ -13,15 +14,17 @@ namespace BoardItems
     {
         int Row { get; }
         int Column { get; }
+
         bool IsBead { get; set; }
-        public bool IsRetrievedItem { get; set; }
         bool IsSpace { get; set; }
-
         bool IsVoidArea { get; set; }
+        public bool IsRetrievedItem { get; set; }
 
-        // MovementVisitor MovementVisitor { get; set; }
+        public BoardItemController BoardItemController { get; set; }
+
         void RetrieveFromPool();
         void ReturnToPool();
+
         void SetRowAndColumn(int row, int column);
         IBoardItem Copy();
     }
@@ -47,5 +50,10 @@ namespace BoardItems
         public ItemColors Color { get; set; }
         void SetColorAndAddSprite(ItemColors color);
         void SetSortingOrder(int row, int column);
+    }
+
+    public interface IRowEnd
+    {
+        bool RowEnd(out int row,out int column);
     }
 }
