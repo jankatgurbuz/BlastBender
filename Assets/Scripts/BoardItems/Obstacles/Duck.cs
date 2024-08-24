@@ -21,11 +21,6 @@ namespace BoardItems.Obstacles
         }
 
 
-        protected override void HandleItemActivation(bool isActive)
-        {
-        }
-
-
         public void SetColorAndAddSprite(ItemColors color)
         {
         }

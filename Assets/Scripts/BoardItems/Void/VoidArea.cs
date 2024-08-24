@@ -10,10 +10,6 @@ namespace BoardItems.Void
             IsVoidArea = true;
         }
 
-        protected override void HandleItemActivation(bool isActive)
-        {
-        }
-
         public override IBoardItem Copy()
         {
             return BoardItemPool.Instance.Retrieve<VoidArea>(Row, Column);

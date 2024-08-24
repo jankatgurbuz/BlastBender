@@ -14,9 +14,5 @@ namespace BoardItems.Void
         {
             return BoardItemPool.Instance.Retrieve<SpaceArea>(Row, Column);
         }
-
-        protected override void HandleItemActivation(bool isActive)
-        {
-        }
     }
 }

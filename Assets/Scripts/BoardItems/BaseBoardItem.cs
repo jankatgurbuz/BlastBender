@@ -20,7 +20,6 @@ namespace BoardItems
         public bool IsVoidArea { get; set; }
         public TransformUtilities TransformUtilities { get; set; }
         public abstract IBoardItem Copy();
-        protected abstract void HandleItemActivation(bool isActive);
         
         protected BaseBoardItem(int row, int column)
         {
@@ -32,7 +31,6 @@ namespace BoardItems
         {
             Item = PoolFactory.Instance.RetrieveFromPool<TPoolItem>();
             TransformUtilities = Item.TransformUtilities;
-            HandleItemActivation(true);
             IsRetrievedItem = true;
         }
 
@@ -43,7 +41,6 @@ namespace BoardItems
 
             PoolFactory.Instance.ReturnToPool(Item);
             TransformUtilities = null;
-            HandleItemActivation(false);
             IsRetrievedItem = false;
         }
 

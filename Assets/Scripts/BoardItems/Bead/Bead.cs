@@ -26,11 +26,6 @@ namespace BoardItems.Bead
             MovementStrategy = new BaseMovementStrategy();
         }
 
-        protected override void HandleItemActivation(bool isActive)
-        {
-            if (!isActive) return;
-        }
-
         public override IBoardItem Copy()
         {
             return BoardItemPool.Instance.Retrieve<Bead>(Row, Column, _color);
