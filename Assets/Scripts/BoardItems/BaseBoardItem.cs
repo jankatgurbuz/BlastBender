@@ -1,3 +1,4 @@
+using Blast.Controller;
 using BoardItems.Util;
 using UnityEngine;
 using Util.Pool;
@@ -14,14 +15,13 @@ namespace BoardItems
         public int Column => _column;
         public bool IsBead { get; set; }
         public bool IsRetrievedItem { get; set; }
+        public BoardItemController BoardItemController { get; set; }
         public bool IsSpace { get; set; }
         public bool IsVoidArea { get; set; }
-        public bool IsMove { get; set; }
-        // public virtual MovementVisitor MovementVisitor { get; set; } = MovementVisitor.Empty;
         public TransformUtilities TransformUtilities { get; set; }
         public abstract IBoardItem Copy();
         protected abstract void HandleItemActivation(bool isActive);
-
+        
         protected BaseBoardItem(int row, int column)
         {
             _row = row;

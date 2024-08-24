@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using BoardItems;
 using BoardItems.Bead;
 using BoardItems.Void;
@@ -26,6 +25,8 @@ namespace Blast.Controller
         private IBoardItem[,] _boardItems;
         private List<IBoardItem> _combineItems;
         private bool[,] _recursiveCheckArray;
+
+        public IBoardItem[,] BoardItems => _boardItems;
 
         public BoardItemController(SignalBus signalBus, IGridController gridController,
             IInGameController inGameController, MovementController movementController)
@@ -63,13 +64,14 @@ namespace Blast.Controller
             {
                 var temp = _boardItems[item.Row, item.Column] = item.Copy();
                 temp.RetrieveFromPool();
+                temp.BoardItemController = this;
 
                 if (temp is IVisual itemWithColor)
                 {
                     itemWithColor.SetColorAndAddSprite(itemWithColor.Color);
                     itemWithColor.SetSortingOrder(item.Row, item.Column);
                 }
-
+                
                 temp.TransformUtilities?.SetPosition(_gridController.CellToLocal(item.Row, item.Column));
                 temp.SetActive(true);
             }
@@ -112,7 +114,7 @@ namespace Blast.Controller
             }
         }
 
-        private void Blast()
+        public void Blast()
         {
             _combineItems.ForEach(item => item.Blast());
             _combineItems.ForEach(item => item.ReturnToPool());
@@ -192,24 +194,20 @@ namespace Blast.Controller
 
                 for (int row = 0; row < _rowLength; row++)
                 {
-                    if (_boardItems[row, column].IsBead) continue;
-                    if (_boardItems[row, column].IsSpace) continue;
+                    if (!_boardItems[row, column].IsVoidArea) continue;
 
-                    ShiftBeadOrSpawnNew(_boardItems[row, column], ref isFirstVoidArea,
+                    ShiftBeadOrSpawnNew(row, column, ref isFirstVoidArea,
                         ref distanceToNextBead, ref offset);
                 }
             }
         }
 
-        private void ShiftBeadOrSpawnNew(IBoardItem boardItem, ref bool isFirstVoidArea,
+        private void ShiftBeadOrSpawnNew(int row, int column, ref bool isFirstVoidArea,
             ref int distanceToNextBead, ref float verticalOffset)
         {
-            var column = boardItem.Column;
-            var row = boardItem.Row;
-
             for (int nonEmptyRowIndex = row + 1; nonEmptyRowIndex <= _rowLength; nonEmptyRowIndex++)
             {
-                if (nonEmptyRowIndex < _rowLength && _boardItems[nonEmptyRowIndex, column].IsBead)
+                if (nonEmptyRowIndex < _rowLength && _boardItems[nonEmptyRowIndex, column] is IMoveable)
                 {
                     TryShiftBeadDown(nonEmptyRowIndex, row, column);
                     break;
@@ -244,6 +242,33 @@ namespace Blast.Controller
 
             var moveableItem = (IMoveable)item;
             _movementController.Register(moveableItem, moveableItem.MovementStrategy.StartMovement);
+            moveableItem.MovementStrategy.AllMovementComplete = AllMovementComplete;
+        }
+
+        private void AllMovementComplete(IMoveable item)
+        {
+            if (item is IRowEnd r)
+            {
+                if (r.RowEnd(out int row,out int column))
+                {
+                    _boardItems[row, column].ReturnToPool();
+
+                    var garbage = _boardItems[row, column];
+                    BoardItemPool.Instance.Return(garbage);
+
+                    if (!BoardItemPool.Instance.TryRetrieveWithoutParams<VoidArea>(out var voidArea))
+                    {
+                        voidArea = BoardItemPool.Instance.Retrieve<VoidArea>(row, column);
+                    }
+
+                    _boardItems[row, column] = voidArea;
+                    _boardItems[row, column].SetRowAndColumn(row, column);
+
+                    RecalculateBoardElements();
+                    ClearCombineItems();
+                    ClearRecursiveCheckArray();
+                }
+            }
         }
 
         private void SpawnNewBeadInVoidArea(int column, int row, ref bool isFirstVoidArea,
@@ -279,6 +304,7 @@ namespace Blast.Controller
 
             AdjustItemPosition(column, row, distanceToNextBead, ref verticalOffset, bead);
             _movementController.Register(bead, bead.MovementStrategy.StartMovement);
+            bead.MovementStrategy.AllMovementComplete = AllMovementComplete;
         }
 
         private void AdjustItemPosition(int column, int row, int distanceToNextBead,

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Blast.View;
 using BoardItems;
@@ -78,6 +77,11 @@ namespace Blast.Controller
             foreach (var item in _removeList)
             {
                 _list.Remove(item);
+            }
+
+            foreach (var item in _removeList)
+            {
+                item.MovementStrategy.AllMovementComplete?.Invoke(item);
             }
 
             _removeList.Clear();

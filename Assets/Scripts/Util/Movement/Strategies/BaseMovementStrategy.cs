@@ -1,6 +1,8 @@
+using System;
+using BoardItems;
 using Util.Movement.States;
 
-namespace Util.Movement.Strategies 
+namespace Util.Movement.Strategies
 {
     public class BaseMovementStrategy : IMovementStrategy
     {
@@ -17,5 +19,7 @@ namespace Util.Movement.Strategies
             Shake.ResetState();
             CombineState.ResetState();
         }
+
+        public Action<IMoveable> AllMovementComplete { get; set; }
     }
 }

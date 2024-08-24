@@ -9,6 +9,7 @@ namespace BoardItems.Bead
     {
         [SerializeField] private ItemColors _color;
         public IMovementStrategy MovementStrategy { get; set; }
+        public bool IsMove { get; set; }
 
 
         public ItemColors Color
