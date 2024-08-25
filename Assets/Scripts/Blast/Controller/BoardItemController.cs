@@ -68,10 +68,14 @@ namespace Blast.Controller
 
                 if (temp is IVisual itemWithColor)
                 {
-                    itemWithColor.SetColorAndAddSprite(itemWithColor.Color);
-                    itemWithColor.SetSortingOrder(item.Row, item.Column);
+                    itemWithColor.SetSortingOrder(item.GetType().FullName,item.Row, item.Column);
                 }
-                
+
+                if (temp is IColorable color)
+                {
+                    color.Color = ((IColorable)item).Color;
+                }
+
                 temp.TransformUtilities?.SetPosition(_gridController.CellToLocal(item.Row, item.Column));
                 temp.SetActive(true);
             }
@@ -166,7 +170,7 @@ namespace Blast.Controller
                     combineState.SetParam(clickRow - item.Row, clickColumn - item.Column);
                     _movementController.Register(moveableItem,
                         moveableItem.MovementStrategy.CombineState);
-                    ((Bead)moveableItem).SetLayer(item.Row, clickColumn - item.Column);
+                    ((Bead)moveableItem).SetSortingOrder("CombineBeads",item.Row, clickColumn - item.Column);
                 }
             }
 
@@ -230,7 +234,7 @@ namespace Blast.Controller
 
             var item = _boardItems[row, column] = _boardItems[nonEmptyRowIndex, column];
             item.SetRowAndColumn(row, column);
-            ((IVisual)item).SetSortingOrder(row, column);
+            ((IVisual)item).SetSortingOrder(item.GetType().FullName,row, column);
 
             if (!BoardItemPool.Instance.TryRetrieveWithoutParams<VoidArea>(out var voidArea))
             {
@@ -249,7 +253,7 @@ namespace Blast.Controller
         {
             if (item is IRowEnd r)
             {
-                if (r.RowEnd(out int row,out int column))
+                if (r.RowEnd(out int row, out int column))
                 {
                     _boardItems[row, column].ReturnToPool();
 
@@ -297,8 +301,8 @@ namespace Blast.Controller
 
             bead.RetrieveFromPool();
             bead.SetRowAndColumn(row, column);
-            bead.SetSortingOrder(row, column);
-            bead.SetColorAndAddSprite(randomColor);
+            bead.SetSortingOrder(item.GetType().FullName,row, column);
+            bead.Color = randomColor;
             bead.MovementStrategy.ResetAllStates();
             bead.SetActive(true);
 

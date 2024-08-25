@@ -27,7 +27,7 @@ namespace BoardItems
             _column = column;
         }
 
-        public void RetrieveFromPool()
+        public virtual void RetrieveFromPool()
         {
             Item = PoolFactory.Instance.RetrieveFromPool<TPoolItem>();
             TransformUtilities = Item.TransformUtilities;

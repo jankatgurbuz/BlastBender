@@ -1,14 +1,8 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using BoardItems;
 using Cysharp.Threading.Tasks;
 using Global.Controller;
-using Global.View;
-using NaughtyAttributes;
 using UnityEngine;
-using UnityEngine.UIElements;
-using Util.Pool.Bead;
 using Zenject;
 
 namespace Util.Pool.BeadEffect
@@ -20,6 +14,7 @@ namespace Util.Pool.BeadEffect
         private Dictionary<ItemColors, BeadBurstParticleProp> _particles;
         private LayersController _layersController;
         [SerializeField] private List<BeadBurstParticleProp> _particleList;
+        private const string LayerKey = "BeadBurstParticle";
 
         public void Awake()
         {
@@ -43,7 +38,7 @@ namespace Util.Pool.BeadEffect
         public void Create()
         {
             _layersController ??= ProjectContext.Instance.Container.Resolve<LayersController>();
-            var info = _layersController.GetLayerInfo(LayersProperties.ItemName.BeadBurstParticle);
+            var info = _layersController.GetLayerInfo(LayerKey);
 
             _particles = new Dictionary<ItemColors, BeadBurstParticleProp>();
 

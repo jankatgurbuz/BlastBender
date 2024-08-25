@@ -8,16 +8,27 @@ using Zenject;
 
 namespace Util.Pool.Bead
 {
-    public class BeadView : MonoBehaviour, IPoolable, IItemBehavior, IVisual
+    public class BeadView : MonoBehaviour, IPoolable, IItemBehavior, IColorable
     {
         [SerializeField] private SpriteRenderer _spriteRenderer;
         [SerializeField] private BeadSettings _beadSettings;
 
         private GameObject _gameObject;
-        public ItemColors Color { get; set; }
+        private ItemColors _color;
+
         private LayersController _layersController;
 
         public TransformUtilities TransformUtilities { get; set; }
+
+        public ItemColors Color
+        {
+            get => _color;
+            set
+            {
+                _color = value;
+                _spriteRenderer.sprite = _beadSettings[_color];
+            }
+        }
 
         public void Awake()
         {
@@ -48,25 +59,18 @@ namespace Util.Pool.Bead
         {
             return TransformUtilities;
         }
-
-
-        public void SetColorAndAddSprite(ItemColors color)
-        {
-            Color = color;
-            _spriteRenderer.sprite = _beadSettings[color];
-        }
-
+        
         public void SetActive(bool active)
         {
             _gameObject.SetActive(active);
         }
 
-        public void SetSortingOrder(int row, int column)
+        public void SetSortingOrder(string layerKey,int row, int column)
         {
-            SetLayer(LayersProperties.ItemName.Bead, row, column);
+            SetLayer(layerKey, row, column);
         }
 
-        private void SetLayer(LayersProperties.ItemName item, int row, int column)
+        private void SetLayer(string item, int row, int column)
         {
             var info = _layersController.GetLayerInfo(item);
             _spriteRenderer.sortingLayerID = info.SortingLayer;
@@ -84,7 +88,7 @@ namespace Util.Pool.Bead
 
         public void SetLayer(int row, int columnOffset)
         {
-            SetLayer(LayersProperties.ItemName.CombineBeads, row, columnOffset);
+            SetLayer("BoardItems.Bead.Bead", row, columnOffset);
         }
     }
 }

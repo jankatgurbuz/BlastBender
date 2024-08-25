@@ -13,18 +13,27 @@ MonoBehaviour:
   m_Name: LayersProperties
   m_EditorClassIdentifier: 
   _properties:
-  - ItemName: 3
+  - IsBoardItemKey: 0
+    Type: CombineBeads
     SortingLayer: -761573921
     OrderInLayer: 1000
-  - ItemName: 4
+  - IsBoardItemKey: 0
+    Type: RectangleBeadCombinationEffect
     SortingLayer: -761573921
     OrderInLayer: 900
-  - ItemName: 1
+  - IsBoardItemKey: 0
+    Type: BeadBurstEffect
     SortingLayer: -761573921
     OrderInLayer: 900
-  - ItemName: 2
+  - IsBoardItemKey: 0
+    Type: BeadBurstParticle
     SortingLayer: -761573921
     OrderInLayer: 899
-  - ItemName: 0
+  - IsBoardItemKey: 1
+    Type: BoardItems.Bead.Bead
+    SortingLayer: -761573921
+    OrderInLayer: 100
+  - IsBoardItemKey: 1
+    Type: BoardItems.Obstacles.Duck
     SortingLayer: -761573921
     OrderInLayer: 100

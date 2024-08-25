@@ -146,8 +146,8 @@ namespace LevelGenerator.Controller
                 {
                     if (x is IVisual itemWithColor)
                     {
-                        itemWithColor.SetSortingOrder(x.Row, x.Column);
-                        itemWithColor.SetColorAndAddSprite(itemWithColor.Color);
+                        itemWithColor.SetSortingOrder(itemWithColor.GetType().FullName,x.Row, x.Column);
+                        // itemWithColor.SetColorAndAddSprite(itemWithColor.Color);
                     }
                 },
                 x => x.SetActive(true));

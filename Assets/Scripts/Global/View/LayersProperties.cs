@@ -1,5 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
+using Attributes;
 using UnityEngine;
 using NaughtyAttributes;
 
@@ -10,21 +10,22 @@ namespace Global.View
     {
         [SerializeField] private LayerProperties[] _properties;
 
-        private Dictionary<ItemName, LayerProperties> _layerPropertiesLookup;
+        private Dictionary<string, LayerProperties> _layerPropertiesLookup;
 
         //lazy
-        public LayerProperties this[ItemName itemName]
+        public LayerProperties this[string itemName]
         {
             get
             {
                 if (_layerPropertiesLookup == null)
                 {
-                    _layerPropertiesLookup = new Dictionary<ItemName, LayerProperties>();
+                    _layerPropertiesLookup = new Dictionary<string, LayerProperties>();
                     foreach (LayerProperties property in _properties)
                     {
-                        _layerPropertiesLookup.Add(property.ItemName, property);
+                        _layerPropertiesLookup.Add(property.Type, property);
                     }
                 }
+                Debug.Log(itemName);
                 return _layerPropertiesLookup[itemName];
             }
         }
@@ -33,19 +34,19 @@ namespace Global.View
         [System.Serializable]
         public class LayerProperties
         {
-            public ItemName ItemName;
-            [SortingLayer]
-            public int SortingLayer;
+            public bool IsBoardItemKey = true;
+            [BoardItemSelector("IsBoardItemKey")] public string Type;
+            [SortingLayer] public int SortingLayer;
             public int OrderInLayer;
         }
-        public enum ItemName
-        {
-            Bead,
-            BeadBurstEffect,
-            BeadBurstParticle,
-            CombineBeads,
-            RectangleBeadCombinationEffect
-        }
+
+        // public enum ItemName
+        // {
+        //     Bead,
+        //     BeadBurstEffect,
+        //     BeadBurstParticle,
+        //     CombineBeads,
+        //     RectangleBeadCombinationEffect
+        // }
     }
 }
-

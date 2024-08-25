@@ -42,11 +42,11 @@ namespace BoardItems.Obstacles
             return check;
         }
 
-        public void SetSortingOrder(int row, int column)
+        public void SetSortingOrder(string layerKey,int row, int column)
         {
             if (Item != null)
             {
-                Item.SetSortingOrder(row, column);
+                Item.SetSortingOrder(layerKey,row, column);
             }
         }
     }

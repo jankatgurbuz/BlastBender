@@ -10,7 +10,7 @@ namespace Global.Controller
             _layersProperties = layersProperties;
         }
 
-        public LayersProperties.LayerProperties GetLayerInfo(LayersProperties.ItemName itemName)
+        public LayersProperties.LayerProperties GetLayerInfo(string itemName)
         {
             return _layersProperties[itemName];
         }

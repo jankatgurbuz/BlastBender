@@ -1,19 +1,19 @@
 using BoardItems;
 using BoardItems.Util;
 using Global.Controller;
-using Global.View;
 using UnityEngine;
 using Zenject;
 
 namespace Util.Pool.Duck
 {
-    public class DuckView : MonoBehaviour, IPoolable, IItemBehavior, IVisual
+    public class DuckView : MonoBehaviour, IPoolable, IItemBehavior
     {
         [SerializeField] private SpriteRenderer _spriteRenderer;
         private GameObject _gameObject;
         private LayersController _layersController;
         public TransformUtilities TransformUtilities { get; set; }
         public ItemColors Color { get; set; }
+        
         public void Awake()
         {
             _gameObject = gameObject;
@@ -27,12 +27,10 @@ namespace Util.Pool.Duck
 
         public void Active()
         {
-            
         }
 
         public void Inactive()
         {
-            
         }
 
         public GameObject GetGameObject()
@@ -45,7 +43,7 @@ namespace Util.Pool.Duck
             return TransformUtilities;
         }
 
-     
+
         public void SetActive(bool active)
         {
             _gameObject.SetActive(active);
@@ -53,18 +51,16 @@ namespace Util.Pool.Duck
 
         public void Blast()
         {
-            
         }
 
-        
+
         public void SetColorAndAddSprite(ItemColors color)
         {
-            
         }
 
-        public void SetSortingOrder(int row, int column)
+        public void SetSortingOrder(string layerKey,int row, int column)
         {
-            var info = _layersController.GetLayerInfo(LayersProperties.ItemName.CombineBeads);
+            var info = _layersController.GetLayerInfo(layerKey);
             _spriteRenderer.sortingLayerID = info.SortingLayer;
             _spriteRenderer.sortingOrder = info.OrderInLayer + (row + column);
         }

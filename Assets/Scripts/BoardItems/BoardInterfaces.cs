@@ -47,9 +47,13 @@ namespace BoardItems
 
     public interface IVisual
     {
+        // void SetSortingOrder(LayersProperties.ItemName layerProperty,int row, int column);
+        void SetSortingOrder(string layerKey,int row, int column);
+    }
+
+    public interface IColorable
+    {
         public ItemColors Color { get; set; }
-        void SetColorAndAddSprite(ItemColors color);
-        void SetSortingOrder(int row, int column);
     }
 
     public interface IRowEnd

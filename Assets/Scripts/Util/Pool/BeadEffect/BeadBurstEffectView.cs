@@ -1,4 +1,3 @@
-using Global.View;
 using Global.Controller;
 using UnityEngine;
 using Zenject;
@@ -23,6 +22,8 @@ namespace Util.Pool.BeadEffect
         private Vector3 _currentScale;
         private Vector3 _customScale;
         private Vector3 _zeroScale = Vector3.zero;
+        
+        private const string LayerKey = "BeadBurstEffect";
 
         public void Awake()
         {
@@ -33,7 +34,7 @@ namespace Util.Pool.BeadEffect
         public void Create()
         {
             _layersController ??= ProjectContext.Instance.Container.Resolve<LayersController>();
-            var info = _layersController.GetLayerInfo(LayersProperties.ItemName.BeadBurstEffect);
+            var info = _layersController.GetLayerInfo(LayerKey);
             _spriteRenderer.sortingLayerID = info.SortingLayer;
             _spriteRenderer.sortingOrder = info.OrderInLayer;
 

@@ -1,5 +1,4 @@
 using Global.Controller;
-using Global.View;
 using UnityEngine;
 using Zenject;
 
@@ -11,6 +10,8 @@ namespace Util.Pool.BeadEffect
         private Transform _transform;
         private GameObject _gameObject;
         private LayersController _layerController;
+
+        private const string LayerKey = "RectangleBeadCombinationEffect";
 
         public void Awake()
         {
@@ -25,7 +26,7 @@ namespace Util.Pool.BeadEffect
         public void Create()
         {
             _layerController ??= ProjectContext.Instance.Container.Resolve<LayersController>();
-            var info = _layerController.GetLayerInfo(LayersProperties.ItemName.RectangleBeadCombinationEffect);
+            var info = _layerController.GetLayerInfo(LayerKey);
 
             _spriteRenderer.sortingLayerID = info.SortingLayer;
             _spriteRenderer.sortingOrder = info.OrderInLayer;
