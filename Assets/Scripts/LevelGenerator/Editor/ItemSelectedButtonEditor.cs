@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using BoardItems;
-using EditorScripts;
+using Editor.Utility;
 using LevelGenerator.Buttons;
 using UnityEditor;
 

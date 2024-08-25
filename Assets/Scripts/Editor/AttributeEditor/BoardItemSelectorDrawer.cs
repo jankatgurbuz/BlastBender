@@ -5,7 +5,7 @@ using BoardItems;
 using UnityEditor;
 using UnityEngine;
 
-namespace EditorScripts.Editor.AttributeEditor
+namespace Editor.AttributeEditor
 {
     [CustomPropertyDrawer(typeof(BoardItemSelectorAttribute))]
     public class BoardItemSelectorDrawer : PropertyDrawer

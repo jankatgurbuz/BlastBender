@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityToolbarExtender;
 using Zenject;
 
-namespace EditorScripts.Editor
+namespace Editor.Utility
 {
     [InitializeOnLoad]
     public class EditorToolbarIntegrator
@@ -29,7 +29,7 @@ namespace EditorScripts.Editor
         private static void LoadGUISkin()
         {
             _toolbarSkin = AssetDatabase.LoadAssetAtPath<GUISkin>(
-                "Assets/Scripts/EditorScripts/ToolBarSkin.guiskin");
+                "Assets/Scripts/Editor/ToolBarSkin.guiskin");
             if (_toolbarSkin == null)
                 Debug.LogError("Failed to load GUISkin!");
         }

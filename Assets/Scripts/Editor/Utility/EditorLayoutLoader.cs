@@ -1,9 +1,8 @@
-#if UNITY_EDITOR
 using System.IO;
 using UnityEditor;
 using UnityEngine;
 
-namespace EditorScripts
+namespace Editor.Utility
 {
     public static class EditorLayoutLoader
     {
@@ -16,7 +15,7 @@ namespace EditorScripts
         public static void LoadLayout(LayoutType layoutType)
         {
             var fileName = layoutType == LayoutType.Portrait ? "Portrait.wlt" : "Landscape.wlt";
-            var filePath = Path.Combine(Application.dataPath, "Editor", "Layouts", fileName);
+            var filePath = Path.Combine(Application.dataPath, "Scripts", "Editor", "Layouts", fileName);
 
             if (File.Exists(filePath))
             {
@@ -29,4 +28,3 @@ namespace EditorScripts
         }
     }
 }
-#endif

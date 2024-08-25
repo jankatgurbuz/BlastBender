@@ -6,7 +6,7 @@ using UnityEditor;
 using UnityEngine;
 using Util.Pool.BoardItemPool;
 
-namespace EditorScripts.Editor
+namespace Editor.Inspector
 {
     [CustomEditor(typeof(BoardItemPool))]
     public class BoardItemPoolEditor : UnityEditor.Editor

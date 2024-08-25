@@ -2,7 +2,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
-namespace EditorScripts.Editor.DefineSymbol
+namespace Editor.DefineSymbol
 {
     [InitializeOnLoad]
     public class DefineSymbolChecker

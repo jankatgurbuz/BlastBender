@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace EditorScripts.Editor
+namespace Editor.MenuBar
 {
     public class DeleteAllSave : EditorWindow
     {

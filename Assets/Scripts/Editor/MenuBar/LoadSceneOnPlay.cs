@@ -4,7 +4,7 @@ using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace EditorScripts.Editor
+namespace Editor.MenuBar
 {
     public class LoadSceneOnPlay : EditorWindow
     {
