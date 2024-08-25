@@ -25,7 +25,6 @@ namespace Global.View
                         _layerPropertiesLookup.Add(property.Type, property);
                     }
                 }
-                Debug.Log(itemName);
                 return _layerPropertiesLookup[itemName];
             }
         }
