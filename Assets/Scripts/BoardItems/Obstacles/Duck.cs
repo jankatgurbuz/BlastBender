@@ -6,7 +6,6 @@ namespace BoardItems.Obstacles
 {
     public class Duck : BaseBoardItem<DuckView>, IVisual, IMoveable, IRowEnd
     {
-        public ItemColors Color { get; set; }
         public IMovementStrategy MovementStrategy { get; set; }
         public bool IsMove { get; set; }
 
@@ -20,12 +19,7 @@ namespace BoardItems.Obstacles
             return BoardItemPool.Instance.Retrieve<Duck>(Row, Column);
         }
 
-
-        public void SetColorAndAddSprite(ItemColors color)
-        {
-        }
-
-        public bool RowEnd(out int row,out int column)
+        public bool RowEnd(out int row, out int column)
         {
             var boardItems = BoardItemController.BoardItems;
             var check = true;
@@ -42,11 +36,11 @@ namespace BoardItems.Obstacles
             return check;
         }
 
-        public void SetSortingOrder(string layerKey,int row, int column)
+        public void SetSortingOrder(string layerKey, int row, int column)
         {
             if (Item != null)
             {
-                Item.SetSortingOrder(layerKey,row, column);
+                Item.SetSortingOrder(layerKey, row, column);
             }
         }
     }

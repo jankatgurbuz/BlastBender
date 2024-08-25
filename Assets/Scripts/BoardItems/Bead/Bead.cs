@@ -34,23 +34,14 @@ namespace BoardItems.Bead
             SetBeadColor();
         }
 
-
         public override IBoardItem Copy()
         {
             return BoardItemPool.Instance.Retrieve<Bead>(Row, Column, _color);
         }
-        //
-        // public void SetLayer(int row, int columnOffset)
-        // {
-        //     if (Item != null)
-        //     {
-        //         Item.SetLayer(row, columnOffset);
-        //     }
-        // }
 
-        public void SetSortingOrder(string layerKey,int row, int column)
+        public void SetSortingOrder(string layerKey, int row, int column)
         {
-            Item?.SetSortingOrder(layerKey,row, column);
+            Item?.SetSortingOrder(layerKey, row, column);
         }
 
         private void SetBeadColor()

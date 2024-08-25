@@ -13,7 +13,7 @@ namespace Util.Pool.Duck
         private LayersController _layersController;
         public TransformUtilities TransformUtilities { get; set; }
         public ItemColors Color { get; set; }
-        
+
         public void Awake()
         {
             _gameObject = gameObject;
@@ -53,12 +53,7 @@ namespace Util.Pool.Duck
         {
         }
 
-
-        public void SetColorAndAddSprite(ItemColors color)
-        {
-        }
-
-        public void SetSortingOrder(string layerKey,int row, int column)
+        public void SetSortingOrder(string layerKey, int row, int column)
         {
             var info = _layersController.GetLayerInfo(layerKey);
             _spriteRenderer.sortingLayerID = info.SortingLayer;

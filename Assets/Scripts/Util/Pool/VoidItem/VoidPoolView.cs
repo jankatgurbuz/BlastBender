@@ -42,35 +42,8 @@ namespace Util.Pool.NullPtrPool
         {
         }
 
-
-        public void SetPosition(Vector3 position)
-        {
-        }
-
-        public Vector3 GetPosition()
-        {
-            return _transform.position;
-        }
-
-        public void ConfigureItemProperties(ItemColors color)
-        {
-        }
-
         public void SetActive(bool active)
         {
-        }
-
-        public void SetSortingOrder(int row, int column)
-        {
-        }
-
-        public void Shake()
-        {
-        }
-
-        public async UniTask FinalizeMovementWithBounce()
-        {
-            await UniTask.CompletedTask;
         }
 
         public void Blast()

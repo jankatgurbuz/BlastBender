@@ -1,14 +1,13 @@
 using BoardItems;
 using BoardItems.Util;
 using Global.Controller;
-using Global.View;
 using UnityEngine;
 using Util.Pool.BeadEffect;
 using Zenject;
 
 namespace Util.Pool.Bead
 {
-    public class BeadView : MonoBehaviour, IPoolable, IItemBehavior, IColorable
+    public class BeadView : MonoBehaviour, IPoolable, IItemBehavior
     {
         [SerializeField] private SpriteRenderer _spriteRenderer;
         [SerializeField] private BeadSettings _beadSettings;
@@ -17,7 +16,6 @@ namespace Util.Pool.Bead
         private ItemColors _color;
 
         private LayersController _layersController;
-
         public TransformUtilities TransformUtilities { get; set; }
 
         public ItemColors Color
@@ -59,20 +57,15 @@ namespace Util.Pool.Bead
         {
             return TransformUtilities;
         }
-        
+
         public void SetActive(bool active)
         {
             _gameObject.SetActive(active);
         }
 
-        public void SetSortingOrder(string layerKey,int row, int column)
+        public void SetSortingOrder(string layerKey, int row, int column)
         {
-            SetLayer(layerKey, row, column);
-        }
-
-        private void SetLayer(string item, int row, int column)
-        {
-            var info = _layersController.GetLayerInfo(item);
+            var info = _layersController.GetLayerInfo(layerKey);
             _spriteRenderer.sortingLayerID = info.SortingLayer;
             _spriteRenderer.sortingOrder = info.OrderInLayer + (row + column);
         }
@@ -84,11 +77,6 @@ namespace Util.Pool.Bead
 
             var beadBurstParticleItem = BeadBurstParticlePool.Instance.Retrieve();
             beadBurstParticleItem.Burst(Color, TransformUtilities.GetPosition());
-        }
-
-        public void SetLayer(int row, int columnOffset)
-        {
-            SetLayer("BoardItems.Bead.Bead", row, columnOffset);
         }
     }
 }
