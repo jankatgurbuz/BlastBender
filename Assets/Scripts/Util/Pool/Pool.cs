@@ -12,13 +12,24 @@ namespace Util.Pool
 {
     public interface IPoolable
     {
-        void Awake();
-        void Create();
-        void Active();
-        void Inactive();
         GameObject GetGameObject();
         Transform GetTransform();
     }
+
+    public interface IActivatable
+    {
+        void Active();
+    }
+    public interface IDeactivatable
+    {
+        void Deactivate();
+    }
+
+    public interface IInitializable
+    {
+        void Initialize();
+    }
+
 
     public abstract class Pool<T> : Singleton<Pool<T>> where T : IPoolable
     {
@@ -90,7 +101,10 @@ namespace Util.Pool
                 item.GetGameObject().SetActive(true);
             }
 
-            item.Active();
+            if (item is IActivatable a)
+            {
+                a.Active();
+            }
             item.GetTransform().SetParent(_active);
 
             _activeList.Add(item);
@@ -101,14 +115,23 @@ namespace Util.Pool
             var inst = Instantiate((Object)obj, _inactive) as IPoolable;
             inst.GetGameObject().SetActive(false);
             T data = (T)inst;
-            data.Create();
-
+            
+            if (data is IInitializable init)
+            {
+                init.Initialize();
+            }
+            
             return data;
         }
         private void PushForInactivation(T item)
         {
             _inactiveList.Add(item);
-            item.Inactive();
+            
+            if (item is IDeactivatable d)
+            {
+                d.Deactivate();
+            }
+        
             item.GetGameObject().SetActive(false);
             item.GetTransform().SetParent(_inactive);
         }

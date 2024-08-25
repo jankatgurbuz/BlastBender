@@ -27,18 +27,6 @@ namespace Util.Pool.Border
             return _transform;
         }
 
-        public void Active()
-        {
-        }
-
-        public void Create()
-        {
-        }
-
-        public void Inactive()
-        {
-        }
-
         public void SetSprite(Sprite sprite)
         {
             _spriteRenderer.sprite = sprite;

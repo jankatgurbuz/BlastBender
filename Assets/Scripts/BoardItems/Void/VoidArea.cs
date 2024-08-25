@@ -1,5 +1,5 @@
 using Util.Pool.BoardItemPool;
-using Util.Pool.NullPtrPool;
+using Util.Pool.VoidItem;
 
 namespace BoardItems.Void
 {

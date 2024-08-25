@@ -6,13 +6,12 @@ using Zenject;
 
 namespace Util.Pool.Duck
 {
-    public class DuckView : MonoBehaviour, IPoolable, IItemBehavior
+    public class DuckView : MonoBehaviour, IPoolable, IItemBehavior,IInitializable
     {
         [SerializeField] private SpriteRenderer _spriteRenderer;
         private GameObject _gameObject;
         private LayersController _layersController;
         public TransformUtilities TransformUtilities { get; set; }
-        public ItemColors Color { get; set; }
 
         public void Awake()
         {
@@ -20,19 +19,11 @@ namespace Util.Pool.Duck
             TransformUtilities = new TransformUtilities(transform);
         }
 
-        public void Create()
+        public void Initialize()
         {
             _layersController ??= ProjectContext.Instance.Container.Resolve<LayersController>();
         }
-
-        public void Active()
-        {
-        }
-
-        public void Inactive()
-        {
-        }
-
+        
         public GameObject GetGameObject()
         {
             return _gameObject;

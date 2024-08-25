@@ -1,11 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using BoardItems;
 using BoardItems.Util;
-using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-namespace Util.Pool.NullPtrPool
+namespace Util.Pool.VoidItem
 {
     public class VoidPoolView : MonoBehaviour, IPoolable, IItemBehavior
     {
@@ -19,15 +16,6 @@ namespace Util.Pool.NullPtrPool
             _transform = transform;
             _gameObject = gameObject;
         }
-
-        public void Active()
-        {
-        }
-
-        public void Create()
-        {
-        }
-
         public GameObject GetGameObject()
         {
             return _gameObject;
@@ -37,13 +25,9 @@ namespace Util.Pool.NullPtrPool
         {
             return _transform;
         }
-
-        public void Inactive()
-        {
-        }
-
         public void SetActive(bool active)
         {
+            _gameObject.SetActive(active);
         }
 
         public void Blast()

@@ -4,7 +4,7 @@ using Zenject;
 
 namespace Util.Pool.BeadEffect
 {
-    public class RectangleBeadCombinationEffectView : MonoBehaviour, IPoolable
+    public class RectangleBeadCombinationEffectView : MonoBehaviour, IPoolable,IInitializable
     {
         [SerializeField] private SpriteRenderer _spriteRenderer;
         private Transform _transform;
@@ -18,12 +18,7 @@ namespace Util.Pool.BeadEffect
             _transform = transform;
             _gameObject = gameObject;
         }
-
-        public void Active()
-        {
-        }
-
-        public void Create()
+        public void Initialize()
         {
             _layerController ??= ProjectContext.Instance.Container.Resolve<LayersController>();
             var info = _layerController.GetLayerInfo(LayerKey);
@@ -40,10 +35,6 @@ namespace Util.Pool.BeadEffect
         public Transform GetTransform()
         {
             return _transform;
-        }
-
-        public void Inactive()
-        {
         }
 
         public void SetPosition(Vector3 movePosition)

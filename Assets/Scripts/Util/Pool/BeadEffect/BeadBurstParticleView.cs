@@ -7,10 +7,11 @@ using Zenject;
 
 namespace Util.Pool.BeadEffect
 {
-    public class BeadBurstParticleView : MonoBehaviour, IPoolable
+    public class BeadBurstParticleView : MonoBehaviour, IPoolable, IInitializable, IDeactivatable
     {
         private Transform _transform;
-        private GameObject _gameobject;
+        private GameObject _gameObject;
+        
         private Dictionary<ItemColors, BeadBurstParticleProp> _particles;
         private LayersController _layersController;
         [SerializeField] private List<BeadBurstParticleProp> _particleList;
@@ -19,23 +20,20 @@ namespace Util.Pool.BeadEffect
         public void Awake()
         {
             _transform = transform;
-            _gameobject = gameObject;
+            _gameObject = gameObject;
         }
 
         public GameObject GetGameObject()
         {
-            return _gameobject;
+            return _gameObject;
         }
 
         public Transform GetTransform()
         {
             return _transform;
         }
-        public void Active()
-        {
 
-        }
-        public void Create()
+        public void Initialize()
         {
             _layersController ??= ProjectContext.Instance.Container.Resolve<LayersController>();
             var info = _layersController.GetLayerInfo(LayerKey);
@@ -51,7 +49,8 @@ namespace Util.Pool.BeadEffect
 
             DisableAllItems();
         }
-        public void Inactive()
+
+        public void Deactivate()
         {
             DisableAllItems();
         }

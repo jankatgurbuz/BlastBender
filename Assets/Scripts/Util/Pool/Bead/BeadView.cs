@@ -7,7 +7,7 @@ using Zenject;
 
 namespace Util.Pool.Bead
 {
-    public class BeadView : MonoBehaviour, IPoolable, IItemBehavior
+    public class BeadView : MonoBehaviour, IPoolable, IInitializable,IDeactivatable, IItemBehavior
     {
         [SerializeField] private SpriteRenderer _spriteRenderer;
         [SerializeField] private BeadSettings _beadSettings;
@@ -34,16 +34,11 @@ namespace Util.Pool.Bead
             TransformUtilities = new TransformUtilities(transform);
         }
 
-        public void Create()
+        public void Initialize()
         {
             _layersController ??= ProjectContext.Instance.Container.Resolve<LayersController>();
         }
-
-        public void Active()
-        {
-        }
-
-        public void Inactive()
+        public void Deactivate()
         {
             TransformUtilities.ResetItem();
         }

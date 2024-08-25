@@ -5,9 +5,8 @@ using Cysharp.Threading.Tasks;
 
 namespace Util.Pool.BeadEffect
 {
-    
     // Todo Change:The BeadBurstEffectView system must be changed
-    public class BeadBurstEffectView : MonoBehaviour, IPoolable
+    public class BeadBurstEffectView : MonoBehaviour, IPoolable, IInitializable, IDeactivatable, IActivatable
     {
         [SerializeField] private SpriteRenderer _spriteRenderer;
 
@@ -22,7 +21,7 @@ namespace Util.Pool.BeadEffect
         private Vector3 _currentScale;
         private Vector3 _customScale;
         private Vector3 _zeroScale = Vector3.zero;
-        
+
         private const string LayerKey = "BeadBurstEffect";
 
         public void Awake()
@@ -31,7 +30,7 @@ namespace Util.Pool.BeadEffect
             _gameObject = gameObject;
         }
 
-        public void Create()
+        public void Initialize()
         {
             _layersController ??= ProjectContext.Instance.Container.Resolve<LayersController>();
             var info = _layersController.GetLayerInfo(LayerKey);
@@ -53,7 +52,7 @@ namespace Util.Pool.BeadEffect
             Handle();
         }
 
-        public void Inactive()
+        public void Deactivate()
         {
             _spriteRenderer.color = _currentColor;
             _transform.localScale = _currentScale;
@@ -79,11 +78,11 @@ namespace Util.Pool.BeadEffect
             var firstScaleTime = 0.1f;
             var firstColorTime = 0.1f;
             var firstMovementTime = 0.1f;
-            
+
             await ScaleOverTime(_transform, _customScale, firstScaleTime);
             await ChangeColorOverTime(_spriteRenderer, _customAlphaColor, firstColorTime);
             await MoveYOverTime(_transform, 0.2f, firstMovementTime);
-            
+
             var secondScaleTime = 0.1f;
             var secondColorTime = 0.1f;
 
