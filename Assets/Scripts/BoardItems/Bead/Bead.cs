@@ -5,11 +5,11 @@ using Util.Pool.BoardItemPool;
 
 namespace BoardItems.Bead
 {
-    public class Bead : BaseBoardItem<BeadView>, IColorable, IVisual, IMoveable
+    public class Bead : BaseBoardItem<BeadView>, IColorable, ISortingOrder, IMovable
     {
         [SerializeField] private ItemColors _color;
         public IMovementStrategy MovementStrategy { get; set; }
-        public bool IsMove { get; set; }
+        public bool IsMoving { get; set; }
 
         public ItemColors Color
         {
@@ -50,6 +50,11 @@ namespace BoardItems.Bead
             {
                 Item.Color = _color;
             }
+        }
+
+        public void Pop()
+        {
+            Item.Blast();
         }
     }
 }

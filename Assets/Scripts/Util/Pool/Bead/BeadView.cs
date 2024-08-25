@@ -7,7 +7,7 @@ using Zenject;
 
 namespace Util.Pool.Bead
 {
-    public class BeadView : MonoBehaviour, IPoolable, IInitializable,IDeactivatable, IItemBehavior
+    public class BeadView : MonoBehaviour, IPoolable, IInitializable,IDeactivatable, IItemUtility
     {
         [SerializeField] private SpriteRenderer _spriteRenderer;
         [SerializeField] private BeadSettings _beadSettings;

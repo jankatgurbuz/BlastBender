@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Util.Pool.VoidItem
 {
-    public class VoidPoolView : MonoBehaviour, IPoolable, IItemBehavior
+    public class VoidPoolView : MonoBehaviour, IPoolable, IItemUtility
     {
         public TransformUtilities TransformUtilities { get; set; }
         public GameObject GameObject { get; private set; }

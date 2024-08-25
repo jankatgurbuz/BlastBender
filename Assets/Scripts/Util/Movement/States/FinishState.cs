@@ -17,7 +17,7 @@ namespace Util.Movement.States
         private float _animationDuration;
         public bool AllMovementsComplete { get; set; }
 
-        private void Initialize(IMoveable item, MovementSettings movementSettings, IGridController gridController)
+        private void Initialize(IMovable item, MovementSettings movementSettings, IGridController gridController)
         {
             if (_isSetupComplete) return;
 
@@ -28,7 +28,7 @@ namespace Util.Movement.States
             _isSetupComplete = true;
         }
 
-        public IMoveState DoState(IMovementStrategy movementStrategy, IMoveable item,
+        public IMoveState DoState(IMovementStrategy movementStrategy, IMovable item,
             MovementSettings movementSettings, IGridController gridController)
         {
             item.TransformUtilities.SetScale(Vector3.one);
@@ -37,7 +37,7 @@ namespace Util.Movement.States
             return this;
         }
 
-        private void Movement(IMoveable item, MovementSettings movementSettings)
+        private void Movement(IMovable item, MovementSettings movementSettings)
         {
             _movementTime += Time.deltaTime;
 
@@ -56,7 +56,7 @@ namespace Util.Movement.States
             AllMovementsComplete = true;
         }
 
-        private void ApplyFinalMovement(IMoveable item, MovementSettings movementSettings)
+        private void ApplyFinalMovement(IMovable item, MovementSettings movementSettings)
         {
             var evaluate = movementSettings.FinalMovementAnimationCurve.Evaluate(_movementTime);
             var clampedY = Mathf.Clamp(_firstPosition.y - evaluate, _targetPosition.y, 1000);

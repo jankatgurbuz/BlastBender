@@ -11,6 +11,6 @@ namespace Util.Movement.Strategies
         public IMoveState Shake { get; set; }
         public IMoveState CombineState { get; set; }
         public void ResetAllStates();
-        System.Action<IMoveable> AllMovementComplete { get; set; }
+        System.Action<IMovable> AllMovementComplete { get; set; }
     }
 }

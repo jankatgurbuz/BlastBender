@@ -14,7 +14,7 @@ namespace Util.Movement.States
         private float _animationDuration;
         public bool AllMovementsComplete { get; set; }
 
-        private void Initialize(IMoveable item, MovementSettings movementSettings)
+        private void Initialize(IMovable item, MovementSettings movementSettings)
         {
             if (_isSetupComplete) return;
 
@@ -23,7 +23,7 @@ namespace Util.Movement.States
             _isSetupComplete = true;
         }
 
-        public IMoveState DoState(IMovementStrategy movementStrategy, IMoveable item,
+        public IMoveState DoState(IMovementStrategy movementStrategy, IMovable item,
             MovementSettings movementSettings, IGridController gridController)
         {
             item.TransformUtilities.SetScale(Vector3.one);
@@ -32,7 +32,7 @@ namespace Util.Movement.States
             return this;
         }
 
-        private void Movement(IMoveable item, MovementSettings movementSettings)
+        private void Movement(IMovable item, MovementSettings movementSettings)
         {
             _movementTime += Time.deltaTime;
 
@@ -45,14 +45,14 @@ namespace Util.Movement.States
             ApplyShake(item, movementSettings);
         }
 
-        private void ApplyShake(IMoveable item, MovementSettings movementSettings)
+        private void ApplyShake(IMovable item, MovementSettings movementSettings)
         {
             var evaluate = movementSettings.Shake.Evaluate(_movementTime);
             var newRotation = new Vector3(0, 0, evaluate);
             item.TransformUtilities.SetRotation(newRotation);
         }
 
-        private void CompleteMovement(IMoveable item)
+        private void CompleteMovement(IMovable item)
         {
             item.TransformUtilities.SetRotation(Vector3.zero);
             AllMovementsComplete = true;

@@ -6,7 +6,7 @@ using Zenject;
 
 namespace Util.Pool.Duck
 {
-    public class DuckView : MonoBehaviour, IPoolable, IItemBehavior, IInitializable
+    public class DuckView : MonoBehaviour, IPoolable, IItemUtility, IInitializable
     {
         [SerializeField] private SpriteRenderer _spriteRenderer;
         

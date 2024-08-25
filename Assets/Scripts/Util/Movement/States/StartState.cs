@@ -22,38 +22,38 @@ namespace Util.Movement.States
         private bool _isSetupComplete;
         public bool AllMovementsComplete { get; set; }
 
-        public IMoveState DoState(IMovementStrategy movementStrategy, IMoveable item,
+        public IMoveState DoState(IMovementStrategy movementStrategy, IMovable item,
             MovementSettings movementSettings, IGridController gridController)
         {
             if (!_isSetupComplete)
             {
                 AssignVariables(item, gridController);
                 _isSetupComplete = true;
-                item.IsMove = true;
+                item.IsMoving = true;
             }
 
             Scale(item);
             return Movement(movementStrategy, item, movementSettings);
         }
 
-        private void AssignVariables(IMoveable item, IGridController gridController)
+        private void AssignVariables(IMovable item, IGridController gridController)
         {
             InitializeScale(item);
             InitializePosition(item, gridController);
         }
 
-        private void InitializeScale(IMoveable item)
+        private void InitializeScale(IMovable item)
         {
-            if (item.IsMove) return;
+            if (item.IsMoving) return;
 
             item.TransformUtilities.SetRotation(Vector3.zero);
             var temp = item.TransformUtilities.GetScale();
             _scaleTarget = new Vector3(temp.x - ScaleRate, temp.y + ScaleRate, temp.z);
         }
 
-        private void InitializePosition(IMoveable item, IGridController gridController)
+        private void InitializePosition(IMovable item, IGridController gridController)
         {
-            if (item.IsMove)
+            if (item.IsMoving)
             {
                 _targetPosition = gridController.CellToLocal(item.Row, item.Column);
                 return;
@@ -63,7 +63,7 @@ namespace Util.Movement.States
             _firstPosition = item.TransformUtilities.GetPosition();
         }
 
-        private IMoveState Movement(IMovementStrategy movementStrategy, IMoveable boardItem,
+        private IMoveState Movement(IMovementStrategy movementStrategy, IMovable boardItem,
             MovementSettings movementSettings)
         {
             _movementTime += Time.deltaTime * MovementOffset;
@@ -75,14 +75,14 @@ namespace Util.Movement.States
             if (Mathf.Approximately(clampedY, _targetPosition.y))
             {
                 boardItem.TransformUtilities.SetPosition(_targetPosition);
-                boardItem.IsMove = false;
+                boardItem.IsMoving = false;
                 return movementStrategy.FinishMovement;
             }
 
             return movementStrategy.StartMovement;
         }
 
-        private void Scale(IMoveable item)
+        private void Scale(IMovable item)
         {
             if (_scaleTimeElapsed < Duration)
             {

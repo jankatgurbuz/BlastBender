@@ -10,7 +10,7 @@ namespace BoardItems
         public TPoolItem Item { get; set; }
     }
 
-    public interface IBoardItem : IItemBehavior
+    public interface IBoardItem : IItemUtility
     {
         int Row { get; }
         int Column { get; }
@@ -29,25 +29,24 @@ namespace BoardItems
         IBoardItem Copy();
     }
 
-    public interface IItemBehavior
+    public interface IItemUtility
     {
-        TransformUtilities TransformUtilities { get; set; }
+        TransformUtilities TransformUtilities { get; }
         void SetActive(bool active);
-        void Blast();
     }
 
-    public interface IMoveable
+    public interface IMovable
     {
         IMovementStrategy MovementStrategy { get; set; }
         TransformUtilities TransformUtilities { get; set; }
         int Row { get; }
         int Column { get; }
-        bool IsMove { get; set; }
+        bool IsMoving { get; set; }
     }
 
-    public interface IVisual
+    public interface ISortingOrder
     {
-        void SetSortingOrder(string layerKey,int row, int column);
+        void SetSortingOrder(string layerKey, int row, int column);
     }
 
     public interface IColorable
@@ -57,6 +56,6 @@ namespace BoardItems
 
     public interface IRowEnd
     {
-        bool RowEnd(out int row,out int column);
+        bool RowEnd(out int row, out int column);
     }
 }

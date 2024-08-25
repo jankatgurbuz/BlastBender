@@ -9,7 +9,7 @@ namespace Util.Movement.States
     {
         bool AllMovementsComplete { get; set; }
 
-        IMoveState DoState(IMovementStrategy movementStrategy, IMoveable item,
+        IMoveState DoState(IMovementStrategy movementStrategy, IMovable item,
             MovementSettings movementSettings, IGridController gridController);
 
         void ResetState();

@@ -6,7 +6,7 @@ using Util.Pool.CentralPoolHub;
 
 namespace BoardItems
 {
-    public abstract class BaseBoardItem<TPoolItem> : IBoardItem<TPoolItem> where TPoolItem : IPoolable, IItemBehavior
+    public abstract class BaseBoardItem<TPoolItem> : IBoardItem<TPoolItem> where TPoolItem : IPoolable, IItemUtility
     {
         [SerializeField] private int _row;
         [SerializeField] private int _column;
@@ -20,7 +20,7 @@ namespace BoardItems
         public bool IsVoidArea { get; set; }
         public TransformUtilities TransformUtilities { get; set; }
         public abstract IBoardItem Copy();
-        
+
         protected BaseBoardItem(int row, int column)
         {
             _row = row;
@@ -42,11 +42,6 @@ namespace BoardItems
             PoolFactory.Instance.ReturnToPool(Item);
             TransformUtilities = null;
             IsRetrievedItem = false;
-        }
-
-        public virtual void Blast()
-        {
-            Item?.Blast();
         }
 
         public void SetRowAndColumn(int row, int column)

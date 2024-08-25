@@ -13,8 +13,8 @@ namespace Blast.Controller
         private readonly MovementSettings _movementSettings;
         private readonly IGridController _gridController;
 
-        private HashSet<IMoveable> _list;
-        private List<IMoveable> _removeList;
+        private HashSet<IMovable> _list;
+        private List<IMovable> _removeList;
 
         public MovementController(MovementSettings movementSettings, IGridController gridController)
         {
@@ -24,12 +24,12 @@ namespace Blast.Controller
 
         public async UniTask Start()
         {
-            _list = new HashSet<IMoveable>();
-            _removeList = new List<IMoveable>();
+            _list = new HashSet<IMovable>();
+            _removeList = new List<IMovable>();
             await UniTask.CompletedTask;
         }
 
-        public void Register(IMoveable item, IMoveState initState)
+        public void Register(IMovable item, IMoveState initState)
         {
             var movementStrategy = item.MovementStrategy;
 
@@ -87,7 +87,7 @@ namespace Blast.Controller
             _removeList.Clear();
         }
 
-        public void RemoveIfInFinishState(IMoveable boardItem)
+        public void RemoveIfInFinishState(IMovable boardItem)
         {
             if (boardItem.MovementStrategy.Current is FinishState)
             {

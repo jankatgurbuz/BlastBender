@@ -4,10 +4,10 @@ using Util.Pool.Duck;
 
 namespace BoardItems.Obstacles
 {
-    public class Duck : BaseBoardItem<DuckView>, IVisual, IMoveable, IRowEnd
+    public class Duck : BaseBoardItem<DuckView>, ISortingOrder, IMovable, IRowEnd
     {
         public IMovementStrategy MovementStrategy { get; set; }
-        public bool IsMove { get; set; }
+        public bool IsMoving { get; set; }
 
         public Duck(int row, int column) : base(row, column)
         {

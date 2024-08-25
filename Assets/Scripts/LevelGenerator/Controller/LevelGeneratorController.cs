@@ -144,7 +144,7 @@ namespace LevelGenerator.Controller
                 x => x.TransformUtilities?.SetPosition(_gridController.CellToLocal(x.Row, x.Column)),
                 x =>
                 {
-                    if (x is IVisual itemWithColor)
+                    if (x is ISortingOrder itemWithColor)
                     {
                         itemWithColor.SetSortingOrder(itemWithColor.GetType().FullName,x.Row, x.Column);
                         // itemWithColor.SetColorAndAddSprite(itemWithColor.Color);

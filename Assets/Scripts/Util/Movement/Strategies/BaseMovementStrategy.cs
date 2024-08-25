@@ -20,6 +20,6 @@ namespace Util.Movement.Strategies
             CombineState.ResetState();
         }
 
-        public Action<IMoveable> AllMovementComplete { get; set; }
+        public Action<IMovable> AllMovementComplete { get; set; }
     }
 }

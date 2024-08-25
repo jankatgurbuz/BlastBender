@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace BoardItems.Util
@@ -13,7 +12,6 @@ namespace BoardItems.Util
         {
             return utilities._itemTransform;
         }
-
         public TransformUtilities(Transform itemTransform)
         {
             _itemTransform = itemTransform;
