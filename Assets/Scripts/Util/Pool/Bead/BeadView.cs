@@ -11,12 +11,12 @@ namespace Util.Pool.Bead
     {
         [SerializeField] private SpriteRenderer _spriteRenderer;
         [SerializeField] private BeadSettings _beadSettings;
-
-        private GameObject _gameObject;
+        
         private ItemColors _color;
-
         private LayersController _layersController;
         public TransformUtilities TransformUtilities { get; set; }
+        public GameObject GameObject { get; private set; }
+        public Transform Transform => TransformUtilities;
 
         public ItemColors Color
         {
@@ -30,7 +30,7 @@ namespace Util.Pool.Bead
 
         public void Awake()
         {
-            _gameObject = gameObject;
+            GameObject = gameObject;
             TransformUtilities = new TransformUtilities(transform);
         }
 
@@ -42,20 +42,9 @@ namespace Util.Pool.Bead
         {
             TransformUtilities.ResetItem();
         }
-
-        public GameObject GetGameObject()
-        {
-            return _gameObject;
-        }
-
-        public Transform GetTransform()
-        {
-            return TransformUtilities;
-        }
-
         public void SetActive(bool active)
         {
-            _gameObject.SetActive(active);
+            GameObject.SetActive(active);
         }
 
         public void SetSortingOrder(string layerKey, int row, int column)

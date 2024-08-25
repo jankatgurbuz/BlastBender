@@ -9,30 +9,20 @@ namespace Util.Pool.BeadEffect
 {
     public class BeadBurstParticleView : MonoBehaviour, IPoolable, IInitializable, IDeactivatable
     {
-        private Transform _transform;
-        private GameObject _gameObject;
+        private const string LayerKey = "BeadBurstParticle";
+        
+        [SerializeField] private List<BeadBurstParticleProp> _particleList;
         
         private Dictionary<ItemColors, BeadBurstParticleProp> _particles;
         private LayersController _layersController;
-        [SerializeField] private List<BeadBurstParticleProp> _particleList;
-        private const string LayerKey = "BeadBurstParticle";
+        public GameObject GameObject { get; private set; }
+        public Transform Transform { get; private set; }
 
         public void Awake()
         {
-            _transform = transform;
-            _gameObject = gameObject;
+            Transform = transform;
+            GameObject = gameObject;
         }
-
-        public GameObject GetGameObject()
-        {
-            return _gameObject;
-        }
-
-        public Transform GetTransform()
-        {
-            return _transform;
-        }
-
         public void Initialize()
         {
             _layersController ??= ProjectContext.Instance.Container.Resolve<LayersController>();
@@ -57,7 +47,7 @@ namespace Util.Pool.BeadEffect
 
         public void Burst(ItemColors color, Vector3 position)
         {
-            _transform.position = position;
+            Transform.position = position;
             _particles[color].ParticleObject.SetActive(true);
             WaitForSecond();
         }

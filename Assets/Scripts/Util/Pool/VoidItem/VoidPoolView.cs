@@ -6,28 +6,19 @@ namespace Util.Pool.VoidItem
 {
     public class VoidPoolView : MonoBehaviour, IPoolable, IItemBehavior
     {
-        private Transform _transform;
-        private GameObject _gameObject;
-
         public TransformUtilities TransformUtilities { get; set; }
+        public GameObject GameObject { get; private set; }
+        public Transform Transform { get; private set; }
 
         public void Awake()
         {
-            _transform = transform;
-            _gameObject = gameObject;
-        }
-        public GameObject GetGameObject()
-        {
-            return _gameObject;
+            Transform = transform;
+            GameObject = gameObject;
         }
 
-        public Transform GetTransform()
-        {
-            return _transform;
-        }
         public void SetActive(bool active)
         {
-            _gameObject.SetActive(active);
+            GameObject.SetActive(active);
         }
 
         public void Blast()

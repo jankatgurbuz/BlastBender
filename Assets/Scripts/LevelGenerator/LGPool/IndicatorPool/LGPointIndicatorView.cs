@@ -3,44 +3,24 @@ using Util.Pool;
 
 namespace LevelGenerator.LGPool.IndicatorPool
 {
-    public class LGPointIndicatorView : MonoBehaviour,IPoolable
+    public class LGPointIndicatorView : MonoBehaviour, IPoolable
     {
-        private Transform _transform;
-        private GameObject _gameObject;
         private SpriteRenderer _spriteRenderer;
+        public GameObject GameObject { get; private set; }
+        public Transform Transform { get; private set; }
 
         public void Awake()
         {
-            _transform = transform;
-            _gameObject = gameObject;
+            Transform = transform;
+            GameObject = gameObject;
             _spriteRenderer = GetComponent<SpriteRenderer>();
         }
 
-        public GameObject GetGameObject()
-        {
-            return _gameObject;
-        }
-
-        public Transform GetTransform()
-        {
-            return _transform;
-        }
-
-        public void Active()
-        {
-        }
-
-        public void Create()
-        {
-        }
-
-        public void Inactive()
-        {
-        }
         public void SetPosition(Vector3 vec)
         {
-            _transform.position = vec;
+            Transform.position = vec;
         }
+
         public void SetColor(Color color)
         {
             _spriteRenderer.color = color;

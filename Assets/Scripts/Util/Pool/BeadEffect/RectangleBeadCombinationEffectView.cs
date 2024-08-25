@@ -4,20 +4,22 @@ using Zenject;
 
 namespace Util.Pool.BeadEffect
 {
-    public class RectangleBeadCombinationEffectView : MonoBehaviour, IPoolable,IInitializable
+    public class RectangleBeadCombinationEffectView : MonoBehaviour, IPoolable, IInitializable
     {
-        [SerializeField] private SpriteRenderer _spriteRenderer;
-        private Transform _transform;
-        private GameObject _gameObject;
-        private LayersController _layerController;
-
         private const string LayerKey = "RectangleBeadCombinationEffect";
+
+        [SerializeField] private SpriteRenderer _spriteRenderer;
+        public GameObject GameObject { get; private set; }
+        public Transform Transform { get; private set; }
+
+        private LayersController _layerController;
 
         public void Awake()
         {
-            _transform = transform;
-            _gameObject = gameObject;
+            Transform = transform;
+            GameObject = gameObject;
         }
+
         public void Initialize()
         {
             _layerController ??= ProjectContext.Instance.Container.Resolve<LayersController>();
@@ -27,19 +29,9 @@ namespace Util.Pool.BeadEffect
             _spriteRenderer.sortingOrder = info.OrderInLayer;
         }
 
-        public GameObject GetGameObject()
-        {
-            return _gameObject;
-        }
-
-        public Transform GetTransform()
-        {
-            return _transform;
-        }
-
         public void SetPosition(Vector3 movePosition)
         {
-            _transform.position = movePosition;
+            Transform.position = movePosition;
         }
     }
 }

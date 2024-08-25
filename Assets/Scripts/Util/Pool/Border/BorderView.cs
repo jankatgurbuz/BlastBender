@@ -8,23 +8,14 @@ namespace Util.Pool.Border
     public class BorderView : MonoBehaviour, IPoolable
     {
         [SerializeField] private SpriteRenderer _spriteRenderer;
-        private Transform _transform;
-        private GameObject _gameobject;
+
+        public GameObject GameObject { get; private set; }
+        public Transform Transform { get; private set; }
 
         public void Awake()
         {
-            _transform = transform;
-            _gameobject = gameObject;
-        }
-
-        public GameObject GetGameObject()
-        {
-            return _gameobject;
-        }
-
-        public Transform GetTransform()
-        {
-            return _transform;
+            Transform = transform;
+            GameObject = gameObject;
         }
 
         public void SetSprite(Sprite sprite)
@@ -34,7 +25,7 @@ namespace Util.Pool.Border
 
         public void SetPosition(Vector3 vec)
         {
-            _transform.position = vec;
+            Transform.position = vec;
         }
     }
 }

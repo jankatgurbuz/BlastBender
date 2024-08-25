@@ -1,9 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using BoardItems;
-using NaughtyAttributes;
-using Unity.Collections;
 using UnityEngine;
 using Util.Pool.CentralPoolHub;
 using Util.SingletonSystem;
@@ -12,8 +8,8 @@ namespace Util.Pool
 {
     public interface IPoolable
     {
-        GameObject GetGameObject();
-        Transform GetTransform();
+        GameObject GameObject { get; }
+        Transform Transform { get; }
     }
 
     public interface IActivatable
@@ -98,14 +94,14 @@ namespace Util.Pool
         {
             if (_activateOnRetrieve)
             {
-                item.GetGameObject().SetActive(true);
+                item.GameObject.SetActive(true);
             }
 
             if (item is IActivatable a)
             {
                 a.Active();
             }
-            item.GetTransform().SetParent(_active);
+            item.Transform.SetParent(_active);
 
             _activeList.Add(item);
         }
@@ -113,7 +109,7 @@ namespace Util.Pool
         {
             IPoolable obj = _instantiatedItem;
             var inst = Instantiate((Object)obj, _inactive) as IPoolable;
-            inst.GetGameObject().SetActive(false);
+            inst.GameObject.SetActive(false);
             T data = (T)inst;
             
             if (data is IInitializable init)
@@ -132,8 +128,8 @@ namespace Util.Pool
                 d.Deactivate();
             }
         
-            item.GetGameObject().SetActive(false);
-            item.GetTransform().SetParent(_inactive);
+            item.GameObject.SetActive(false);
+            item.Transform.SetParent(_inactive);
         }
 
         public T Retrieve()

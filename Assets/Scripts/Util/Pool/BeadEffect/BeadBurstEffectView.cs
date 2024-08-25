@@ -8,10 +8,10 @@ namespace Util.Pool.BeadEffect
     // Todo Change:The BeadBurstEffectView system must be changed
     public class BeadBurstEffectView : MonoBehaviour, IPoolable, IInitializable, IDeactivatable, IActivatable
     {
+        private const string LayerKey = "BeadBurstEffect";
+
         [SerializeField] private SpriteRenderer _spriteRenderer;
 
-        private Transform _transform;
-        private GameObject _gameObject;
         private LayersController _layersController;
 
         private Color _currentColor;
@@ -22,12 +22,13 @@ namespace Util.Pool.BeadEffect
         private Vector3 _customScale;
         private Vector3 _zeroScale = Vector3.zero;
 
-        private const string LayerKey = "BeadBurstEffect";
+        public GameObject GameObject { get; private set; }
+        public Transform Transform { get; private set; }
 
         public void Awake()
         {
-            _transform = transform;
-            _gameObject = gameObject;
+            Transform = transform;
+            GameObject = gameObject;
         }
 
         public void Initialize()
@@ -43,7 +44,7 @@ namespace Util.Pool.BeadEffect
             _zeroAlphaColor.a = 0;
             _customAlphaColor.a = 0.2f;
 
-            _currentScale = _transform.localScale;
+            _currentScale = Transform.localScale;
             _customScale = _currentScale * 0.6f;
         }
 
@@ -55,22 +56,12 @@ namespace Util.Pool.BeadEffect
         public void Deactivate()
         {
             _spriteRenderer.color = _currentColor;
-            _transform.localScale = _currentScale;
-        }
-
-        public GameObject GetGameObject()
-        {
-            return _gameObject;
-        }
-
-        public Transform GetTransform()
-        {
-            return _transform;
+            Transform.localScale = _currentScale;
         }
 
         public void SetPosition(Vector3 pos)
         {
-            _transform.position = pos;
+            Transform.position = pos;
         }
 
         private async void Handle()
@@ -79,15 +70,15 @@ namespace Util.Pool.BeadEffect
             var firstColorTime = 0.1f;
             var firstMovementTime = 0.1f;
 
-            await ScaleOverTime(_transform, _customScale, firstScaleTime);
+            await ScaleOverTime(Transform, _customScale, firstScaleTime);
             await ChangeColorOverTime(_spriteRenderer, _customAlphaColor, firstColorTime);
-            await MoveYOverTime(_transform, 0.2f, firstMovementTime);
+            await MoveYOverTime(Transform, 0.2f, firstMovementTime);
 
             var secondScaleTime = 0.1f;
             var secondColorTime = 0.1f;
 
             await UniTask.WhenAll(
-                ScaleOverTime(_transform, _zeroScale, secondScaleTime),
+                ScaleOverTime(Transform, _zeroScale, secondScaleTime),
                 ChangeColorOverTime(_spriteRenderer, _zeroAlphaColor, secondColorTime)
             );
 
