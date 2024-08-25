@@ -2,11 +2,11 @@
 # Blast Bender
 
 <p align="center">
-  <img src="Assets/Documentation/Images/logo.png?raw=true" alt="Blast Bender" width="271.25px" height="116.25px"/>
+  <img src="Assets/Documentation~/Images/logo.png?raw=true" alt="Blast Bender" width="271.25px" height="116.25px"/>
 </p>
 
 <p align="center">
-  <img src="Assets/Documentation/Images/1.png?raw=true" alt="Blast Bender" width="400px" height="400px"/>
+  <img src="Assets/Documentation~/Images/1.png?raw=true" alt="Blast Bender" width="400px" height="400px"/>
     <!--<img src="Assets/Documentation~/Images/2.png?raw=true" alt="Blast Bender" width="350px" height="350px"/>-->
 </p>
 
@@ -14,7 +14,7 @@
 Welcome! This repository is a clone inspired by popular blast games. This project aims to implement clean coding principles and use various design patterns to create dynamic game mechanics using C# and Unity.
 
 <p align="center">
-  <img src="Assets/Documentation/Images/InGame.gif?raw=true" alt="Blast Bender" width="213.3px" height="378.6px"/>
+  <img src="Assets/Documentation~/Images/InGame.gif?raw=true" alt="Blast Bender" width="213.3px" height="378.6px"/>
 </p>
 
 ## Dependencies
@@ -30,7 +30,7 @@ Successful games need more than good code and design; they also require well-tho
 - Main Game: Where players can play.
 - Level Generator: Where new levels are created.
 
-<img src="Assets/Documentation/Images/scenes.png?raw=true" style="margin: 10 0 10px 50px;" alt="Zenject" width="200px" height="102px"/>
+<img src="Assets/Documentation~/Images/scenes.png?raw=true" style="margin: 10 0 10px 50px;" alt="Zenject" width="200px" height="102px"/>
 
 
 Scenes in the game are created only once and persist throughout the game. They are not created or deleted during gameplay. Each scene performs its specific function. Scenes do not open or close themselves; instead, objects are either pooled or toggled on and off.
