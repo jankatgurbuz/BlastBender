@@ -6,7 +6,7 @@ using Util.Movement.Strategies;
 
 namespace Util.Movement.States
 {
-    public class StartState : IMoveState
+    public class StartState : IMoveState,IPositionSetter
     {
         private const float ScaleRate = 0.025f;
         private const float Duration = 0.5f;
@@ -21,6 +21,8 @@ namespace Util.Movement.States
 
         private bool _isSetupComplete;
         public bool AllMovementsComplete { get; set; }
+        public bool IsLastMovement { get; set; }
+        public bool IsFirstMovement { get; set; }
 
         public IMoveState DoState(IMovementStrategy movementStrategy, IMovable item,
             MovementSettings movementSettings, IGridController gridController)
@@ -30,6 +32,7 @@ namespace Util.Movement.States
                 AssignVariables(item, gridController);
                 _isSetupComplete = true;
                 item.IsMoving = true;
+                IsFirstMovement = true;
             }
 
             Scale(item);
@@ -95,9 +98,9 @@ namespace Util.Movement.States
             item.TransformUtilities.SetScale(_scaleTarget);
         }
 
-        public void SetTargetPosition(int row, int column, IGridController gridController)
+        public void SetTargetPosition(Vector3 position)
         {
-            _targetPosition = gridController.CellToLocal(row, column);
+            _targetPosition = position;
         }
 
         public void ResetState()

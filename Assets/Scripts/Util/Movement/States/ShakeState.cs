@@ -13,6 +13,8 @@ namespace Util.Movement.States
         private float _movementTime;
         private float _animationDuration;
         public bool AllMovementsComplete { get; set; }
+        public bool IsLastMovement { get; set; }
+        public bool IsFirstMovement { get; set; }
 
         private void Initialize(IMovable item, MovementSettings movementSettings)
         {

@@ -14,6 +14,8 @@ namespace Util.Movement.States
 
         private bool _isSetupComplete;
         public bool AllMovementsComplete { get; set; }
+        public bool IsLastMovement { get; set; }
+        public bool IsFirstMovement { get; set; }
 
         private int _rowOffset;
         private int _columnOffset;
@@ -24,7 +26,6 @@ namespace Util.Movement.States
 
         private CombineMovementState _combineMovementState = CombineMovementState.First;
         private RectangleBeadCombinationEffectView _rectangleBeadCombinationEffect;
-
 
         private enum CombineMovementState
         {
@@ -47,7 +48,7 @@ namespace Util.Movement.States
             _rectangleBeadCombinationEffect = RectangleBeadCombinationEffectPool.Instance.Retrieve();
         }
 
-        public void SetParam(int rowOffset, int columnOffset)
+        public void SetOffsets(int rowOffset, int columnOffset)
         {
             _rowOffset = rowOffset;
             _columnOffset = columnOffset;

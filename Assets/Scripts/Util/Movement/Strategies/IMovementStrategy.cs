@@ -8,9 +8,17 @@ namespace Util.Movement.Strategies
         public IMoveState StartMovement { get; set; }
         public IMoveState FinishMovement { get; set; }
         public IMoveState Current { get; set; }
-        public IMoveState Shake { get; set; }
-        public IMoveState CombineState { get; set; }
         public void ResetAllStates();
         System.Action<IMovable> AllMovementComplete { get; set; }
+    }
+    public interface IShakable
+    {
+        IMoveState Shake { get; set; }
+    }
+
+    public interface ICombinable
+    {
+        IMoveState CombineState { get; set; }
+        void SetOffsets(int rowOffset, int columnOffset);
     }
 }

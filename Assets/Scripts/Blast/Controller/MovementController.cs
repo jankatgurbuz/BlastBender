@@ -40,19 +40,15 @@ namespace Blast.Controller
             }
             else
             {
-                switch (movementStrategy.Current)
+                if (movementStrategy.Current.IsFirstMovement)
                 {
-                    case FinishState:
-                        movementStrategy.ResetAllStates();
-                        movementStrategy.Current = movementStrategy.StartMovement;
-                        break;
-                    case StartState startState:
-                        startState.SetTargetPosition(item.Row, item.Column, _gridController);
-                        break;
-                    case ShakeState:
-                        movementStrategy.ResetAllStates();
-                        movementStrategy.Current = initState;
-                        break;
+                    var position = _gridController.CellToLocal(item.Row, item.Column);
+                    ((IPositionSetter)movementStrategy.Current).SetTargetPosition(position);
+                }
+                else
+                {
+                    movementStrategy.ResetAllStates();
+                    movementStrategy.Current = initState;
                 }
             }
         }
@@ -89,7 +85,9 @@ namespace Blast.Controller
 
         public void RemoveIfInFinishState(IMovable boardItem)
         {
-            if (boardItem.MovementStrategy.Current is FinishState)
+            if (boardItem.MovementStrategy.Current == null) return;
+
+            if (boardItem.MovementStrategy.Current.IsLastMovement)
             {
                 if (_list.Contains(boardItem))
                 {

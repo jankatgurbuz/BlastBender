@@ -16,6 +16,8 @@ namespace Util.Movement.States
         private bool _isSetupComplete;
         private float _animationDuration;
         public bool AllMovementsComplete { get; set; }
+        public bool IsLastMovement { get; set; }
+        public bool IsFirstMovement { get; set; }
 
         private void Initialize(IMovable item, MovementSettings movementSettings, IGridController gridController)
         {
@@ -26,6 +28,7 @@ namespace Util.Movement.States
 
             _animationDuration = movementSettings.Shake.keys.Last().time;
             _isSetupComplete = true;
+            IsLastMovement = true;
         }
 
         public IMoveState DoState(IMovementStrategy movementStrategy, IMovable item,

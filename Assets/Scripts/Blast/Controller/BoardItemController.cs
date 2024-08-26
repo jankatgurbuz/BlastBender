@@ -6,7 +6,7 @@ using BoardItems.Void;
 using Cysharp.Threading.Tasks;
 using Global.Controller;
 using Signals;
-using Util.Movement.States;
+using Util.Movement.Strategies;
 using Util.Pool.BoardItemPool;
 using Zenject;
 using Random = UnityEngine.Random;
@@ -162,34 +162,31 @@ namespace Blast.Controller
 
         private async UniTask Combine(int clickRow, int clickColumn, List<IBoardItem> tempGroup)
         {
-            //Todo interface segregation
-            CombineState combineState = null;
+            ICombinable combineState = null;
             foreach (var item in tempGroup)
             {
-                if (item is IMovable moveableItem)
-                {
-                    combineState = (CombineState)moveableItem.MovementStrategy.CombineState;
-                    combineState.SetParam(clickRow - item.Row, clickColumn - item.Column);
+                if (item is not IMovable moveableItem) continue;
 
-                    _movementController.Register(moveableItem, moveableItem.MovementStrategy.CombineState);
+                combineState = (ICombinable)moveableItem.MovementStrategy;
+                combineState.SetOffsets(clickRow - item.Row, clickColumn - item.Column);
 
-                    ((Bead)moveableItem).SetSortingOrder(SortingOrderKeyForCombineBeads, item.Row,
-                        clickColumn - item.Column);
-                }
+                _movementController.Register(moveableItem, combineState.CombineState);
+
+                ((Bead)moveableItem).SetSortingOrder(SortingOrderKeyForCombineBeads, item.Row,
+                    clickColumn - item.Column);
             }
 
-            await UniTask.WaitUntil(() => combineState!.AllMovementsComplete);
+            await UniTask.WaitUntil(() => combineState!.CombineState.AllMovementsComplete);
         }
 
 
         private void Shake(IBoardItem item)
         {
-            if (item is IMovable moveableItem)
-            {
-                _movementController.Register(moveableItem, moveableItem.MovementStrategy.Shake);
-                ClearCombineItems();
-                ClearRecursiveCheckArray();
-            }
+            if (item is not IMovable moveableItem) return;
+
+            _movementController.Register(moveableItem, ((IShakable)moveableItem.MovementStrategy).Shake);
+            ClearCombineItems();
+            ClearRecursiveCheckArray();
         }
 
         private void RecalculateBoardElements()
