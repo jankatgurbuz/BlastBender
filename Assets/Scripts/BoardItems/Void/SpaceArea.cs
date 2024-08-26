@@ -1,5 +1,5 @@
-using Util.Pool.BoardItemPool;
-using Util.Pool.VoidItem;
+using Gameplay.Pool.BoardItemPool;
+using Gameplay.Pool.VoidItem;
 
 namespace BoardItems.Void
 {

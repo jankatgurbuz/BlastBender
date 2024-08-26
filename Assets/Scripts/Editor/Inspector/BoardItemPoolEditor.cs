@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using BoardItems;
+using Gameplay.Pool.BoardItemPool;
 using UnityEditor;
 using UnityEngine;
-using Util.Pool.BoardItemPool;
 
 namespace Editor.Inspector
 {

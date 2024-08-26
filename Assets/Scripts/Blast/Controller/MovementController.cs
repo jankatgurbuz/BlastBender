@@ -2,8 +2,8 @@ using System.Collections.Generic;
 using Blast.View;
 using BoardItems;
 using Cysharp.Threading.Tasks;
+using Gameplay.Movement.States.BaseState;
 using Global.Controller;
-using Util.Movement.States;
 using Zenject;
 
 namespace Blast.Controller

@@ -1,9 +1,8 @@
-using LevelGenerator.LGPool.IndicatorPool;
-using Util.Pool;
-namespace LevelGenerator.LGPool
+using Gameplay.Pool;
+
+namespace LevelGenerator.LGPool.IndicatorPool
 {
-    public sealed class LGPointIndicatorPool : Pool<LGPointIndicatorView>
+    public class LGPointIndicatorPool : Pool<LGPointIndicatorView>
     {
-        
     }
 }

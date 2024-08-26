@@ -7,7 +7,6 @@ using BoardItems.LevelData;
 using BoardItems.Void;
 using Signals;
 using UnityEngine;
-using Util.Pool.Border;
 using Zenject;
 
 namespace LevelGenerator.Controller

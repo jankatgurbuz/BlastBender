@@ -1,8 +1,6 @@
 using System;
-using LevelGenerator.Controller;
 using UnityEngine;
 using Util.Interaction;
-using Util.Pool;
 
 namespace Blast.Controller
 {

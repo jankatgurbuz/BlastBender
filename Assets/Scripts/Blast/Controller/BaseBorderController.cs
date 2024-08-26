@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using BoardItems.Border;
 using BoardItems.LevelData;
-using Util.Pool.Border;
+using Gameplay.Pool.Border;
 
 namespace Blast.Controller
 {

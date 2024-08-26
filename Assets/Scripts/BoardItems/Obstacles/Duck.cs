@@ -1,6 +1,6 @@
-using Util.Movement.Strategies;
-using Util.Pool.BoardItemPool;
-using Util.Pool.Duck;
+using Gameplay.Movement.Strategies;
+using Gameplay.Pool.BoardItemPool;
+using Gameplay.Pool.Duck;
 
 namespace BoardItems.Obstacles
 {
@@ -11,7 +11,8 @@ namespace BoardItems.Obstacles
 
         public Duck(int row, int column) : base(row, column)
         {
-            MovementStrategy = new BaseMovementStrategy();
+            //todo DuckMovementStrategy
+            MovementStrategy = new BeadMovementStrategy();
         }
 
         public override IBoardItem Copy()

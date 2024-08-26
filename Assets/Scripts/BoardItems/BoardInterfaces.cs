@@ -1,7 +1,7 @@
 using Blast.Controller;
 using BoardItems.Util;
-using Util.Movement.Strategies;
-using Util.Pool;
+using Gameplay.Movement.Strategies;
+using Gameplay.Pool;
 
 namespace BoardItems
 {

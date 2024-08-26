@@ -4,10 +4,10 @@ using BoardItems;
 using BoardItems.Bead;
 using BoardItems.Void;
 using Cysharp.Threading.Tasks;
+using Gameplay.Movement.Strategies;
+using Gameplay.Pool.BoardItemPool;
 using Global.Controller;
 using Signals;
-using Util.Movement.Strategies;
-using Util.Pool.BoardItemPool;
 using Zenject;
 using Random = UnityEngine.Random;
 

@@ -1,7 +1,7 @@
+using Gameplay.Movement.Strategies;
+using Gameplay.Pool.Bead;
+using Gameplay.Pool.BoardItemPool;
 using UnityEngine;
-using Util.Movement.Strategies;
-using Util.Pool.Bead;
-using Util.Pool.BoardItemPool;
 
 namespace BoardItems.Bead
 {
@@ -25,7 +25,7 @@ namespace BoardItems.Bead
         {
             Color = color;
             IsBead = true;
-            MovementStrategy = new BaseMovementStrategy();
+            MovementStrategy = new BeadMovementStrategy();
         }
 
         public override void RetrieveFromPool()
