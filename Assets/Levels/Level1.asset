@@ -1126,27 +1126,27 @@ MonoBehaviour:
     TopBottomKey: ff
   SpawnerData:
     Spawners:
-    - Row: 10
+    - Row: 16
       Column: 0
-    - Row: 10
+    - Row: 16
       Column: 1
-    - Row: 10
+    - Row: 16
       Column: 2
-    - Row: 10
+    - Row: 16
       Column: 3
-    - Row: 10
+    - Row: 16
       Column: 4
-    - Row: 10
+    - Row: 16
       Column: 5
-    - Row: 10
+    - Row: 16
       Column: 6
-    - Row: 10
+    - Row: 16
       Column: 7
-    - Row: 10
+    - Row: 16
       Column: 8
-    - Row: 10
+    - Row: 16
       Column: 9
-    VerticalOffset: 0
+    VerticalOffset: 1
   references:
     version: 2
     RefIds:

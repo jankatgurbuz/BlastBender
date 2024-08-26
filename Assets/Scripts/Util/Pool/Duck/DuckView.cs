@@ -31,10 +31,6 @@ namespace Util.Pool.Duck
             GameObject.SetActive(active);
         }
 
-        public void Blast()
-        {
-        }
-
         public void SetSortingOrder(string layerKey, int row, int column)
         {
             var info = _layersController.GetLayerInfo(layerKey);

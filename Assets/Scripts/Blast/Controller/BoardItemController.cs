@@ -15,6 +15,7 @@ namespace Blast.Controller
 {
     public class BoardItemController
     {
+        private const string SortingOrderKeyForCombineBeads = "CombineBeads";
         private readonly IInGameController _inGameController;
         private readonly IGridController _gridController;
         private readonly MovementController _movementController;
@@ -93,8 +94,15 @@ namespace Blast.Controller
         {
             var item = _boardItems[row, column];
 
+            if (item.IsBead)
+            {
+                ClickBead(item, row, column);
+            }
+        }
+
+        private void ClickBead(IBoardItem item, int row, int column)
+        {
             if (item is IMovable { IsMoving: true }) return;
-            if (!item.IsBead) return;
 
             var color = ((Bead)item).Color;
             FindMatches(row, column, color);
@@ -120,6 +128,7 @@ namespace Blast.Controller
                 var beadItem = (Bead)item;
                 beadItem.Pop();
                 beadItem.ReturnToPool();
+                RemoveIfInFinishState(item);
                 ReplaceWithVoidArea(item);
             }
 
@@ -135,31 +144,25 @@ namespace Blast.Controller
             ClearCombineItems();
             ClearRecursiveCheckArray();
 
-            tempGroup.ForEach(ReplaceWithVoidArea);
+            foreach (var item in tempGroup)
+            {
+                RemoveIfInFinishState(item);
+                ReplaceWithVoidArea(item);
+            }
+
             await Combine(clickRow, clickColumn, tempGroup);
-            tempGroup.ForEach(item => item.ReturnToPool());
+
+            foreach (var item in tempGroup)
+            {
+                item.ReturnToPool();
+            }
 
             RecalculateBoardElements();
         }
 
-        private void ReplaceWithVoidArea(IBoardItem item)
-        {
-            RemoveIfInFinishState(item);
-
-            var garbage = _boardItems[item.Row, item.Column];
-            BoardItemPool.Instance.Return(garbage);
-
-            if (!BoardItemPool.Instance.TryRetrieveWithoutParams<VoidArea>(out var voidArea))
-            {
-                voidArea = BoardItemPool.Instance.Retrieve<VoidArea>(item.Row, item.Column);
-            }
-
-            _boardItems[item.Row, item.Column] = voidArea;
-            _boardItems[item.Row, item.Column].SetRowAndColumn(item.Row, item.Column);
-        }
-
         private async UniTask Combine(int clickRow, int clickColumn, List<IBoardItem> tempGroup)
         {
+            //Todo interface segregation
             CombineState combineState = null;
             foreach (var item in tempGroup)
             {
@@ -167,9 +170,11 @@ namespace Blast.Controller
                 {
                     combineState = (CombineState)moveableItem.MovementStrategy.CombineState;
                     combineState.SetParam(clickRow - item.Row, clickColumn - item.Column);
-                    _movementController.Register(moveableItem,
-                        moveableItem.MovementStrategy.CombineState);
-                    ((Bead)moveableItem).SetSortingOrder("CombineBeads", item.Row, clickColumn - item.Column);
+
+                    _movementController.Register(moveableItem, moveableItem.MovementStrategy.CombineState);
+
+                    ((Bead)moveableItem).SetSortingOrder(SortingOrderKeyForCombineBeads, item.Row,
+                        clickColumn - item.Column);
                 }
             }
 
@@ -226,23 +231,23 @@ namespace Blast.Controller
 
         private void TryShiftBeadDown(int nonEmptyRowIndex, int row, int column)
         {
+            // If in finish state, remove from movement list
             RemoveIfInFinishState(_boardItems[nonEmptyRowIndex, column]);
 
-            var garbage = _boardItems[row, column];
-            BoardItemPool.Instance.Return(garbage);
+            // Send the object to the pool
+            ReturnPool(_boardItems[row, column]);
 
+            // Perform the swap operation
             var item = _boardItems[row, column] = _boardItems[nonEmptyRowIndex, column];
             item.SetRowAndColumn(row, column);
             ((ISortingOrder)item).SetSortingOrder(item.GetType().FullName, row, column);
 
-            if (!BoardItemPool.Instance.TryRetrieveWithoutParams<VoidArea>(out var voidArea))
-            {
-                voidArea = BoardItemPool.Instance.Retrieve<VoidArea>(nonEmptyRowIndex, column);
-            }
-
+            // The second part of the swap operation
+            var voidArea = RetrievePool<VoidArea>(nonEmptyRowIndex, column);
             _boardItems[nonEmptyRowIndex, column] = voidArea;
             _boardItems[nonEmptyRowIndex, column].SetRowAndColumn(nonEmptyRowIndex, column);
 
+            // Register for movement push
             var moveableItem = (IMovable)item;
             _movementController.Register(moveableItem, moveableItem.MovementStrategy.StartMovement);
             moveableItem.MovementStrategy.AllMovementComplete = AllMovementComplete;
@@ -252,25 +257,18 @@ namespace Blast.Controller
         {
             if (item is IRowEnd r)
             {
-                if (r.RowEnd(out int row, out int column))
-                {
-                    _boardItems[row, column].ReturnToPool();
+                if (!r.RowEnd(out int row, out int column)) return;
 
-                    var garbage = _boardItems[row, column];
-                    BoardItemPool.Instance.Return(garbage);
+                _boardItems[row, column].ReturnToPool();
+                ReturnPool(_boardItems[row, column]);
 
-                    if (!BoardItemPool.Instance.TryRetrieveWithoutParams<VoidArea>(out var voidArea))
-                    {
-                        voidArea = BoardItemPool.Instance.Retrieve<VoidArea>(row, column);
-                    }
+                var voidArea = RetrievePool<VoidArea>(row, column);
+                _boardItems[row, column] = voidArea;
+                _boardItems[row, column].SetRowAndColumn(row, column);
 
-                    _boardItems[row, column] = voidArea;
-                    _boardItems[row, column].SetRowAndColumn(row, column);
-
-                    RecalculateBoardElements();
-                    ClearCombineItems();
-                    ClearRecursiveCheckArray();
-                }
+                RecalculateBoardElements();
+                ClearCombineItems();
+                ClearRecursiveCheckArray();
             }
         }
 
@@ -285,15 +283,10 @@ namespace Blast.Controller
                 isFirstVoidArea = false;
             }
 
-            var garbage = _boardItems[row, column];
-            BoardItemPool.Instance.Return(garbage);
+            ReturnPool(_boardItems[row, column]);
 
-            var randomColor = (ItemColors)Random.Range(0, Enum.GetValues(typeof(ItemColors)).Length - 1);
-            // randomColor = ItemColors.Red; // Test
-            if (!BoardItemPool.Instance.TryRetrieveWithoutParams<Bead>(out var item))
-            {
-                item = BoardItemPool.Instance.Retrieve<Bead>(row, column, randomColor);
-            }
+            var randomColor = GenerateRandomColor();
+            var item = RetrievePool<Bead>(row, column, randomColor);
 
             var bead = (Bead)item;
             _boardItems[row, column] = bead;
@@ -309,6 +302,7 @@ namespace Blast.Controller
             _movementController.Register(bead, bead.MovementStrategy.StartMovement);
             bead.MovementStrategy.AllMovementComplete = AllMovementComplete;
         }
+
 
         private void AdjustItemPosition(int column, int row, int distanceToNextBead,
             ref float verticalOffset, Bead bead)
@@ -349,6 +343,55 @@ namespace Blast.Controller
             FindMatches(row, column - 1, color);
         }
 
+        // Helpers
+        private void RemoveIfInFinishState(IBoardItem item)
+        {
+            if (_boardItems[item.Row, item.Column] is IMovable iMoveableItem)
+            {
+                _movementController.RemoveIfInFinishState(iMoveableItem);
+            }
+        }
+
+        private void ReplaceWithVoidArea(IBoardItem item)
+        {
+            ReturnPool(item);
+            var voidArea = RetrievePool<VoidArea>(item.Row, item.Column);
+
+            _boardItems[item.Row, item.Column] = voidArea;
+            _boardItems[item.Row, item.Column].SetRowAndColumn(item.Row, item.Column);
+        }
+
+        private IBoardItem RetrievePool<T>(int row, int column) where T : IBoardItem
+        {
+            if (!BoardItemPool.Instance.TryRetrieveWithoutParams<T>(out var voidArea))
+            {
+                voidArea = BoardItemPool.Instance.Retrieve<T>(row, column);
+            }
+
+            return voidArea;
+        }
+
+        private IBoardItem RetrievePool<T>(int row, int column, object param1) where T : IBoardItem
+        {
+            if (!BoardItemPool.Instance.TryRetrieveWithoutParams<T>(out var voidArea))
+            {
+                voidArea = BoardItemPool.Instance.Retrieve<T>(row, column, param1);
+            }
+
+            return voidArea;
+        }
+
+        private void ReturnPool(IBoardItem item)
+        {
+            var garbage = _boardItems[item.Row, item.Column];
+            BoardItemPool.Instance.Return(garbage);
+        }
+
+        private ItemColors GenerateRandomColor()
+        {
+            return (ItemColors)Random.Range(0, Enum.GetValues(typeof(ItemColors)).Length - 1);
+        }
+
         private void ClearCombineItems()
         {
             _combineItems.Clear();
@@ -357,14 +400,6 @@ namespace Blast.Controller
         private void ClearRecursiveCheckArray()
         {
             Array.Clear(_recursiveCheckArray, 0, _recursiveCheckArray.Length);
-        }
-
-        private void RemoveIfInFinishState(IBoardItem item)
-        {
-            if (_boardItems[item.Row, item.Column] is IMovable iMoveableItem)
-            {
-                _movementController.RemoveIfInFinishState(iMoveableItem);
-            }
         }
     }
 }
