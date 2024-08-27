@@ -1,4 +1,6 @@
 using Blast.Controller;
+using Blast.Factory;
+using Blast.Installer;
 using BoardItems.Util;
 using Gameplay.Movement.Strategies;
 using Gameplay.Pool;
@@ -18,15 +20,12 @@ namespace BoardItems
         bool IsBead { get; set; }
         bool IsSpace { get; set; }
         bool IsVoidArea { get; set; }
-        public bool IsRetrievedItem { get; set; }
-
-        public BoardItemController BoardItemController { get; set; }
-
+         bool IsRetrievedItem { get; set; }
         void RetrieveFromPool();
         void ReturnToPool();
 
         void SetRowAndColumn(int row, int column);
-        IBoardItem Copy();
+        IBoardItem Copy(BoardItemFactory factory);
     }
 
     public interface IItemUtility
