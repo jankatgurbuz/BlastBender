@@ -2,6 +2,7 @@ using Blast.Controller;
 using Blast.Factory;
 using Gameplay.Movement.Strategies;
 using Gameplay.Pool.Duck;
+using Zenject;
 
 namespace BoardItems.Obstacles
 {
@@ -11,7 +12,8 @@ namespace BoardItems.Obstacles
         public IMovementStrategy MovementStrategy { get; set; }
         public bool IsMoving { get; set; }
 
-        public Duck(int row, int column, IMovementStrategy movementStrategy,BoardItemController boardItemController) : base(row, column)
+        public Duck(int row, int column, IMovementStrategy movementStrategy,
+            [Inject(Optional = true)] BoardItemController boardItemController) : base(row, column)
         {
             MovementStrategy = movementStrategy;
             _boardItemController = boardItemController;

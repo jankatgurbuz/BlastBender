@@ -12,7 +12,6 @@ namespace Blast.Installer
     {
         public override void InstallBindings()
         {
-            
             Container.Bind<IMovementStrategy>().To<BeadMovementStrategy>().AsTransient().WhenInjectedInto<Bead>();
             Container.Bind<IMovementStrategy>().To<DuckMovementStrategy>().AsTransient().WhenInjectedInto<Duck>();
 
