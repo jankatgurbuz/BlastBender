@@ -98,6 +98,10 @@ namespace Blast.Controller
             {
                 ClickBead(item, row, column);
             }
+            else
+            {
+                Shake(item);
+            }
         }
 
         private void ClickBead(IBoardItem item, int row, int column)

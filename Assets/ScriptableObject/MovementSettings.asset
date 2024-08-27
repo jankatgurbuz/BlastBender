@@ -147,3 +147,54 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  DuckShake:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 2.2123387
+      outSlope: 2.2123387
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.08995415
+      value: 1.1990091
+      inSlope: -0.0051580984
+      outSlope: -0.0051580984
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.49487212
+      outWeight: 0.45243478
+    - serializedVersion: 3
+      time: 0.14025177
+      value: 1.1043864
+      inSlope: 0.0032850204
+      outSlope: 0.0032850204
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 1
+      outWeight: 1
+    - serializedVersion: 3
+      time: 0.18978167
+      value: 1.1981179
+      inSlope: -0.0112593835
+      outSlope: -0.0112593835
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 1
+    - serializedVersion: 3
+      time: 0.30125308
+      value: 1.0011902
+      inSlope: -1.7666203
+      outSlope: -1.7666203
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

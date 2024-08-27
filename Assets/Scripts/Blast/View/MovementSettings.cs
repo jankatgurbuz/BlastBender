@@ -1,3 +1,4 @@
+using NaughtyAttributes;
 using UnityEngine;
 
 namespace Blast.View
@@ -8,5 +9,8 @@ namespace Blast.View
         public AnimationCurve AnimationCurve;
         public AnimationCurve FinalMovementAnimationCurve;
         public AnimationCurve Shake;
+        
+        [HorizontalLine]
+        public AnimationCurve DuckShake;
     }
 }

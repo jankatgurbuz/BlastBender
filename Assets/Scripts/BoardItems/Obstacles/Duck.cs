@@ -11,8 +11,7 @@ namespace BoardItems.Obstacles
 
         public Duck(int row, int column) : base(row, column)
         {
-            //todo DuckMovementStrategy
-            MovementStrategy = new BeadMovementStrategy();
+            MovementStrategy = new DuckMovementStrategy();
         }
 
         public override IBoardItem Copy()
