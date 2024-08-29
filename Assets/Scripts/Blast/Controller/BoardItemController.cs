@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using Blast.Factory;
+using Blast.Installer;
 using BoardItems;
 using BoardItems.Bead;
 using BoardItems.Void;
@@ -16,6 +18,7 @@ namespace Blast.Controller
     public class BoardItemController
     {
         private const string SortingOrderKeyForCombineBeads = "CombineBeads";
+        
         private readonly IInGameController _inGameController;
         private readonly IGridController _gridController;
         private readonly MovementController _movementController;
@@ -29,12 +32,15 @@ namespace Blast.Controller
 
         public IBoardItem[,] BoardItems => _boardItems;
 
+        private BoardItemFactory _boardItemFactory;
+
         public BoardItemController(SignalBus signalBus, IGridController gridController,
-            IInGameController inGameController, MovementController movementController)
+            IInGameController inGameController, MovementController movementController, BoardItemFactory boardItemFactory)
         {
             _gridController = gridController;
             _inGameController = inGameController;
             _movementController = movementController;
+            _boardItemFactory = boardItemFactory;
             signalBus.Subscribe<GameStateReaction>(OnReaction);
         }
 
@@ -63,10 +69,9 @@ namespace Blast.Controller
         {
             foreach (var item in _inGameController.LevelData.BoardItem)
             {
-                var temp = _boardItems[item.Row, item.Column] = item.Copy();
+                var temp = _boardItems[item.Row, item.Column] = item.Copy(_boardItemFactory);
                 temp.RetrieveFromPool();
-                temp.BoardItemController = this;
-
+                
                 if (temp is ISortingOrder itemWithColor)
                 {
                     itemWithColor.SetSortingOrder(item.GetType().FullName, item.Row, item.Column);
@@ -366,7 +371,8 @@ namespace Blast.Controller
         {
             if (!BoardItemPool.Instance.TryRetrieveWithoutParams<T>(out var voidArea))
             {
-                voidArea = BoardItemPool.Instance.Retrieve<T>(row, column);
+                // voidArea = BoardItemPool.Instance.Retrieve<T>(row, column);
+                voidArea = _boardItemFactory.Create(typeof(T), new object[] { row, column });
             }
 
             return voidArea;
@@ -376,7 +382,7 @@ namespace Blast.Controller
         {
             if (!BoardItemPool.Instance.TryRetrieveWithoutParams<T>(out var voidArea))
             {
-                voidArea = BoardItemPool.Instance.Retrieve<T>(row, column, param1);
+                voidArea = _boardItemFactory.Create(typeof(T), new object[] { row, column, param1 });
             }
 
             return voidArea;

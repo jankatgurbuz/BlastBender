@@ -1,3 +1,5 @@
+using Blast.Factory;
+using Blast.Installer;
 using Gameplay.Pool.BoardItemPool;
 using Gameplay.Pool.VoidItem;
 
@@ -10,9 +12,9 @@ namespace BoardItems.Void
             IsSpace = true;
         }
 
-        public override IBoardItem Copy()
+        public override IBoardItem Copy(BoardItemFactory factory)
         {
-            return BoardItemPool.Instance.Retrieve<SpaceArea>(Row, Column);
+            return factory.Create(GetType(), new object[] { Row, Column });
         }
     }
 }

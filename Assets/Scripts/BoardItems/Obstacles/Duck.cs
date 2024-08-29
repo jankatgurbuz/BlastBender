@@ -1,27 +1,32 @@
+using Blast.Controller;
+using Blast.Factory;
 using Gameplay.Movement.Strategies;
-using Gameplay.Pool.BoardItemPool;
 using Gameplay.Pool.Duck;
+using Zenject;
 
 namespace BoardItems.Obstacles
 {
     public class Duck : BaseBoardItem<DuckView>, ISortingOrder, IMovable, IRowEnd
     {
+        private BoardItemController _boardItemController;
         public IMovementStrategy MovementStrategy { get; set; }
         public bool IsMoving { get; set; }
 
-        public Duck(int row, int column) : base(row, column)
+        public Duck(int row, int column, IMovementStrategy movementStrategy,
+            [Inject(Optional = true)] BoardItemController boardItemController) : base(row, column)
         {
-            MovementStrategy = new DuckMovementStrategy();
+            MovementStrategy = movementStrategy;
+            _boardItemController = boardItemController;
         }
 
-        public override IBoardItem Copy()
+        public override IBoardItem Copy(BoardItemFactory factory)
         {
-            return BoardItemPool.Instance.Retrieve<Duck>(Row, Column);
+            return factory.Create(GetType(), new object[] { Row, Column });
         }
 
         public bool RowEnd(out int row, out int column)
         {
-            var boardItems = BoardItemController.BoardItems;
+            var boardItems = _boardItemController.BoardItems;
             var check = true;
             for (int i = Row - 1; i >= 0; i--)
             {

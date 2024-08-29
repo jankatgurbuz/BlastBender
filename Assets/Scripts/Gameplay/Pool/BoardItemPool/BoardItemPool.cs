@@ -11,24 +11,7 @@ namespace Gameplay.Pool.BoardItemPool
         private readonly Dictionary<Type, BoardItemPoolEntry> _boardItemsMap = new();
         private readonly List<IBoardItem> _pendingList = new();
 
-        public IBoardItem Retrieve<TItem>(params object[] args) where TItem : IBoardItem
-        {
-            var typeKey = typeof(TItem);
-            return Retrieve(typeKey, args);
-        }
-
-        public IBoardItem Retrieve(Type typeKey, params object[] args)
-        {
-            if (_boardItemsMap.TryGetValue(typeKey, out BoardItemPoolEntry itemList))
-            {
-                return itemList.Retrieve(typeKey, args);
-            }
-
-            var item = new BoardItemPoolEntry();
-            _boardItemsMap.Add(typeKey, item);
-            return item.Retrieve(typeKey, args);
-        }
-
+       
         public bool TryRetrieveWithoutParams<TItem>(out IBoardItem item)
         {
             var typeKey = typeof(TItem);

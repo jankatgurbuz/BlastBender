@@ -1,8 +1,11 @@
 using Blast.Controller;
+using Blast.Factory;
+using Blast.Installer;
 using BoardItems.Util;
-using Gameplay.Pool;
 using Gameplay.Pool.CentralPoolHub;
 using UnityEngine;
+using Zenject;
+using IPoolable = Gameplay.Pool.IPoolable;
 
 namespace BoardItems
 {
@@ -15,11 +18,10 @@ namespace BoardItems
         public int Column => _column;
         public bool IsBead { get; set; }
         public bool IsRetrievedItem { get; set; }
-        public BoardItemController BoardItemController { get; set; }
         public bool IsSpace { get; set; }
         public bool IsVoidArea { get; set; }
         public TransformUtilities TransformUtilities { get; set; }
-        public abstract IBoardItem Copy();
+        public abstract IBoardItem Copy(BoardItemFactory factory);
 
         protected BaseBoardItem(int row, int column)
         {

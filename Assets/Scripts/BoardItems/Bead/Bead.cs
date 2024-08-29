@@ -1,3 +1,5 @@
+using Blast.Factory;
+using Blast.Installer;
 using Gameplay.Movement.Strategies;
 using Gameplay.Pool.Bead;
 using Gameplay.Pool.BoardItemPool;
@@ -21,11 +23,11 @@ namespace BoardItems.Bead
             }
         }
 
-        public Bead(int row, int column, ItemColors color) : base(row, column)
+        public Bead(int row, int column, ItemColors color, IMovementStrategy movementStrategy) : base(row, column)
         {
             Color = color;
             IsBead = true;
-            MovementStrategy = new BeadMovementStrategy();
+            MovementStrategy = movementStrategy;
         }
 
         public override void RetrieveFromPool()
@@ -34,9 +36,9 @@ namespace BoardItems.Bead
             SetBeadColor();
         }
 
-        public override IBoardItem Copy()
+        public override IBoardItem Copy(BoardItemFactory factory)
         {
-            return BoardItemPool.Instance.Retrieve<Bead>(Row, Column, _color);
+            return factory.Create(GetType(), new object[] { Row, Column, _color });
         }
 
         public void SetSortingOrder(string layerKey, int row, int column)

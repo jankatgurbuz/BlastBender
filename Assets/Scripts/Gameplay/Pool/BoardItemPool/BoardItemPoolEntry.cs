@@ -10,13 +10,6 @@ namespace Gameplay.Pool.BoardItemPool
         private readonly List<IBoardItem> _activeList = new();
         private readonly List<IBoardItem> _inactiveList = new();
 
-        public IBoardItem Retrieve(Type type, object[] args)
-        {
-            var instance = _inactiveList.Count > 0 ? GetBoardItem() : Create(type, args);
-            _activeList.Add(instance);
-            return instance;
-        }
-
         public bool TryRetrieveWithoutParams(Type type, out IBoardItem item)
         {
             if (_inactiveList.Count > 0)
@@ -40,11 +33,6 @@ namespace Gameplay.Pool.BoardItemPool
             var instance = _inactiveList.First();
             _inactiveList.Remove(instance);
             return instance;
-        }
-
-        private IBoardItem Create(Type type, params object[] args)
-        {
-            return (IBoardItem)Activator.CreateInstance(type, args);
         }
     }
 }
