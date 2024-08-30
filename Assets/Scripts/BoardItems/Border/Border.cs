@@ -8,9 +8,9 @@ namespace BoardItems.Border
         public bool HasNeighbors;
         public bool IsEmpty;
 
-        public string CornerKey;
-        public string LeftRightKey;
-        public string TopBottomKey;
+        public int CornerKey;
+        public int LeftRightKey;
+        public int TopBottomKey;
 
         public Border(bool hasNeighbors, bool isEmpty, int row, int column)
         {

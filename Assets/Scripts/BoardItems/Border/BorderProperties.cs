@@ -16,7 +16,9 @@ namespace BoardItems.Border
         public class BorderInfo
         {
             [HorizontalLine(color: EColor.Orange)]
-            public string Key;
+            public BordersType Key;
+            
+            
             [ShowAssetPreview(32, 32)]
             public Sprite Sprite;
             public Vector3 Offset;

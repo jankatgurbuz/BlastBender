@@ -9,7 +9,6 @@ namespace BoardItems.LevelData
         public int RowLength;
         public int ColumnLength;
         [SerializeReference] public IBoardItem[] BoardItem;
-        public Border.Border[] Border;
         public SpawnerData SpawnerData;
     }
 }

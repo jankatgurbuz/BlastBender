@@ -27,8 +27,9 @@ namespace Blast.Controller
         private void PlayGame(GameStateReaction reaction)
         {
             if (reaction.GameStatus != GameStatus.GameInitialize) return;
+
             var levelData = _inGameController.LevelData;
-            CreateBorder(levelData.Border);
+            CreateBorderMatrix(levelData.RowLength, levelData.ColumnLength, levelData);
         }
     }
 }
