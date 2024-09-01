@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Reflection;
 using Cysharp.Threading.Tasks;
 using Global.Controller;
@@ -12,11 +13,15 @@ namespace Editor.Utility
     [InitializeOnLoad]
     public class EditorToolbarIntegrator
     {
+        private const string SaveKey = "Editor-EditorToolbarIntegrator";
+        private const string ToolBarPath = "Assets/Scripts/Editor/ToolBarSkin.guiskin";
+        private const string LevelGeneratorScenePath = "Assets/Scenes/LevelGenerator.unity";
+
         private static double _lastTimeChecked = 0.0d;
         private static readonly float _checkInterval = 1;
 
-        private const string _saveKey = "Editor-EditorToolbarIntegrator";
-        private static GUISkin _toolbarSkin;
+        private static GUIStyle _guiStyle;
+        private static GUIContent _guiContent;
 
         static EditorToolbarIntegrator()
         {
@@ -28,50 +33,43 @@ namespace Editor.Utility
 
         private static void LoadGUISkin()
         {
-            _toolbarSkin = AssetDatabase.LoadAssetAtPath<GUISkin>(
-                "Assets/Scripts/Editor/ToolBarSkin.guiskin");
-            if (_toolbarSkin == null)
+            var toolbarSkin = AssetDatabase.LoadAssetAtPath<GUISkin>(ToolBarPath);
+
+            if (toolbarSkin == null)
                 Debug.LogError("Failed to load GUISkin!");
+
+            _guiStyle = new GUIStyle(toolbarSkin.button);
+            _guiContent = new GUIContent("Play Level Generator", "Start Level Generator Scene");
         }
 
         private static void OnToolbarGUI()
         {
             GUILayout.FlexibleSpace();
-            var style = new GUIStyle(_toolbarSkin.button);
-            var cont = new GUIContent("Play Level Generator", "Start Level Generator Scene");
 
-            if (GUILayout.Button(cont, style))
+
+            if (!GUILayout.Button(_guiContent, _guiStyle)) return;
+
+            if (CheckGameViewOrientation())
             {
-                if (CheckGameViewOrientation())
-                {
-                    ShowExitPlayModeDialog();
-                }
-                else
-                {
-                    EnablePlayMode();
-                }
+                ShowExitPlayModeDialog();
+            }
+            else
+            {
+                EnablePlayMode();
             }
         }
 
-        private static void HandleOnPlayModeChanged(PlayModeStateChange state)
+        private static bool CheckGameViewOrientation()
         {
-            if (state == PlayModeStateChange.EnteredPlayMode && GetSave())
-            {
-                AddLevelGenerator();
-            }
-        }
+            var editorType = Type.GetType("UnityEditor.GameView,UnityEditor");
 
-        private static async void AddLevelGenerator()
-        {
-            IGameController gameController;
-            do
-            {
-                await UniTask.Yield();
-                gameController = ProjectContext.Instance.Container.TryResolve<IGameController>();
-            } while (gameController == null);
+            var gameViewInfo = editorType?.GetMethod("GetSizeOfMainGameView",
+                BindingFlags.NonPublic | BindingFlags.Static);
 
-            await UniTask.WaitUntil(() => gameController.InitializationComplete);
-            await gameController.LevelGeneratorInitialize();
+            var r = gameViewInfo?.Invoke(null, null);
+
+            var resolution = (Vector2)r!;
+            return resolution.x < resolution.y;
         }
 
         private static void ShowExitPlayModeDialog()
@@ -95,14 +93,66 @@ namespace Editor.Utility
             }
         }
 
+        private static void HandleOnPlayModeChanged(PlayModeStateChange state)
+        {
+            if (state == PlayModeStateChange.ExitingEditMode && GetSave())
+            {
+                AddSceneToBuildSettings();
+            }
+
+            if (state == PlayModeStateChange.EnteredPlayMode && GetSave())
+            {
+                AddLevelGenerator();
+            }
+
+            if (state == PlayModeStateChange.ExitingPlayMode)
+            {
+                DeleteLevelGeneratorFromEditorBuildSettings();
+            }
+        }
+
+        private static async void AddLevelGenerator()
+        {
+            IGameController gameController;
+            do
+            {
+                await UniTask.Yield();
+                gameController = ProjectContext.Instance.Container.TryResolve<IGameController>();
+            } while (gameController == null);
+
+            await UniTask.WaitUntil(() => gameController.InitializationComplete);
+            await gameController.LevelGeneratorInitialize();
+        }
+
+        private static void AddSceneToBuildSettings()
+        {
+            if (EditorBuildSettings.scenes.Any(scene => scene.path == LevelGeneratorScenePath)) return;
+
+            var scenes = EditorBuildSettings.scenes.ToList();
+            scenes.Add(new EditorBuildSettingsScene(LevelGeneratorScenePath, true));
+            EditorBuildSettings.scenes = scenes.ToArray();
+        }
+
+        private static void DeleteLevelGeneratorFromEditorBuildSettings()
+        {
+            var scenes = EditorBuildSettings.scenes.ToList();
+
+            var sceneToRemove = scenes.FirstOrDefault(scene => scene.path == LevelGeneratorScenePath);
+            if (sceneToRemove != null)
+            {
+                scenes.Remove(sceneToRemove);
+                EditorBuildSettings.scenes = scenes.ToArray();
+            }
+        }
+
         private static void SetSave(bool active)
         {
-            PlayerPrefs.SetInt(_saveKey, active ? 1 : 0);
+            PlayerPrefs.SetInt(SaveKey, active ? 1 : 0);
         }
 
         private static bool GetSave()
         {
-            return PlayerPrefs.GetInt(_saveKey, 0) == 1;
+            return PlayerPrefs.GetInt(SaveKey, 0) == 1;
         }
 
         private static void EnablePlayMode()
@@ -115,16 +165,6 @@ namespace Editor.Utility
         {
             SetSave(false);
             EditorApplication.isPlaying = false;
-        }
-
-        private static bool CheckGameViewOrientation()
-        {
-            var editorType = Type.GetType("UnityEditor.GameView,UnityEditor");
-            MethodInfo gameviewInfo = editorType.GetMethod("GetSizeOfMainGameView",
-                BindingFlags.NonPublic | BindingFlags.Static);
-            object res = gameviewInfo.Invoke(null, null);
-            var resolution = (Vector2)res;
-            return resolution.x < resolution.y;
         }
 
         private static void OnUpdate()
