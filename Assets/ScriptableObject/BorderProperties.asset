@@ -13,72 +13,72 @@ MonoBehaviour:
   m_Name: BorderProperties
   m_EditorClassIdentifier: 
   CornerBorders:
-  - Key: 0
+  - Key: 1111
     Sprite: {fileID: 21300000, guid: 2f4a6fba23ef24c678d014f14fd8f5c4, type: 3}
-    Offset: {x: 0.5, y: 0.5, z: 0}
+    Offset: {x: -0.5, y: -0.5, z: 0}
   - Key: 1000
     Sprite: {fileID: 21300000, guid: c9cee4e234fa3453ea70dc6ba4846505, type: 3}
-    Offset: {x: 0.43, y: 0.48, z: 0}
+    Offset: {x: -0.43, y: -0.48, z: 0}
   - Key: 1100
     Sprite: {fileID: 21300000, guid: a5cef31e6cb9b440eae61a27b5f10cbd, type: 3}
-    Offset: {x: 0.5, y: 0.48, z: 0}
+    Offset: {x: -0.5, y: -0.48, z: 0}
   - Key: 1110
     Sprite: {fileID: 21300000, guid: 2b36f2d96a9d646caa5545798a5bcc96, type: 3}
-    Offset: {x: 0.5, y: 0.5, z: 0}
+    Offset: {x: -0.5, y: -0.5, z: 0}
   - Key: 1101
     Sprite: {fileID: 21300000, guid: 3771f22865f514cb3b8d0d4e19ec4933, type: 3}
-    Offset: {x: 0.5, y: 0.5, z: 0}
+    Offset: {x: -0.5, y: -0.5, z: 0}
   - Key: 1011
     Sprite: {fileID: 21300000, guid: b94d83bc25e1a4a0c813d203a55e4233, type: 3}
-    Offset: {x: 0.5, y: 0.5, z: 0}
+    Offset: {x: -0.5, y: -0.5, z: 0}
   - Key: 1001
     Sprite: {fileID: 21300000, guid: 24403dd81c2504af3b0febc63f0c36e4, type: 3}
-    Offset: {x: 0.43, y: 0.5, z: 0}
+    Offset: {x: -0.43, y: -0.5, z: 0}
   - Key: 1010
     Sprite: {fileID: 21300000, guid: fad056940b4ab4fe8aedd0a182c79922, type: 3}
-    Offset: {x: 0.5, y: 0.5, z: 0}
+    Offset: {x: -0.5, y: -0.5, z: 0}
   - Key: 1
     Sprite: {fileID: 21300000, guid: 8a4f9482c1dbe4eb0adb989b90a2a140, type: 3}
-    Offset: {x: 0.43, y: 0.52, z: 0}
+    Offset: {x: -0.43, y: -0.52, z: 0}
   - Key: 111
     Sprite: {fileID: 21300000, guid: b3b6a1952c5954a3e8281ee82e2f686f, type: 3}
-    Offset: {x: 0.5, y: 0.5, z: 0}
+    Offset: {x: -0.5, y: -0.5, z: 0}
   - Key: 11
     Sprite: {fileID: 21300000, guid: 80b2040be6fbd42a3a8ec79e4c257df2, type: 3}
-    Offset: {x: 0.5, y: 0.52, z: 0}
+    Offset: {x: -0.5, y: -0.52, z: 0}
   - Key: 10
     Sprite: {fileID: 21300000, guid: 34bf83dbaef1c486cbcb9b08d4fc0b3f, type: 3}
-    Offset: {x: 0.57, y: 0.52, z: 0}
+    Offset: {x: -0.57, y: -0.52, z: 0}
   - Key: 110
     Sprite: {fileID: 21300000, guid: ee63b5579c89b41199e2a904c92cf2ce, type: 3}
-    Offset: {x: 0.57, y: 0.5, z: 0}
+    Offset: {x: -0.57, y: -0.5, z: 0}
   - Key: 101
     Sprite: {fileID: 21300000, guid: 8510b6ae690a8422897666539753a116, type: 3}
-    Offset: {x: 0.5, y: 0.5, z: 0}
+    Offset: {x: -0.5, y: -0.5, z: 0}
   - Key: 100
     Sprite: {fileID: 21300000, guid: cabd9f8420ee54b3fb52d0889aca7d79, type: 3}
-    Offset: {x: 0.57, y: 0.48, z: 0}
+    Offset: {x: -0.57, y: -0.48, z: 0}
   HorizontalBorders:
   - Key: 102
     Sprite: {fileID: 21300000, guid: 24403dd81c2504af3b0febc63f0c36e4, type: 3}
-    Offset: {x: 0.43, y: 0, z: 0}
+    Offset: {x: -0.43, y: 0, z: 0}
   - Key: 112
     Sprite: {fileID: 21300000, guid: 2f4a6fba23ef24c678d014f14fd8f5c4, type: 3}
-    Offset: {x: 0.5, y: 0, z: 0}
+    Offset: {x: -0.5, y: 0, z: 0}
   - Key: 12
     Sprite: {fileID: 21300000, guid: ee63b5579c89b41199e2a904c92cf2ce, type: 3}
-    Offset: {x: 0.57, y: 0, z: 0}
+    Offset: {x: -0.57, y: 0, z: 0}
   VerticalBorders:
   - Key: 103
     Sprite: {fileID: 21300000, guid: a5cef31e6cb9b440eae61a27b5f10cbd, type: 3}
-    Offset: {x: 0, y: 0.48, z: 0}
+    Offset: {x: 0, y: -0.48, z: 0}
   - Key: 113
     Sprite: {fileID: 21300000, guid: 2f4a6fba23ef24c678d014f14fd8f5c4, type: 3}
-    Offset: {x: 0, y: 0.5, z: 0}
+    Offset: {x: 0, y: -0.5, z: 0}
   - Key: 13
     Sprite: {fileID: 21300000, guid: 80b2040be6fbd42a3a8ec79e4c257df2, type: 3}
-    Offset: {x: 0, y: 0.52, z: 0}
+    Offset: {x: 0, y: -0.52, z: 0}
   Center:
-  - Key: 0
+  - Key: 1111
     Sprite: {fileID: 21300000, guid: 2f4a6fba23ef24c678d014f14fd8f5c4, type: 3}
     Offset: {x: 0, y: 0, z: 0}
