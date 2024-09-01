@@ -1,13 +1,7 @@
-using System;
 using System.Collections.Generic;
 using Blast.Controller;
-using Blast.Factory;
 using Blast.View;
-using BoardItems;
-using BoardItems.Bead;
 using BoardItems.Border;
-using BoardItems.Obstacles;
-using Gameplay.Movement.Strategies;
 using SC.Core.UI;
 using UnityEngine;
 using Zenject;
@@ -28,7 +22,6 @@ namespace Blast.Installer
             Container.Bind<ISpriteCanvasController>().To<SpriteCanvasController>().AsSingle().WithArguments(_canvases);
             Container.Bind<CameraController>().To<CameraController>().AsSingle().WithArguments(_camera, _canvases)
                 .NonLazy();
-
             Container.BindInterfacesAndSelfTo<BoardClickController>().AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<MovementController>().AsSingle().WithArguments(_movementSettings)
                 .NonLazy();

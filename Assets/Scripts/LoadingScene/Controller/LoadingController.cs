@@ -1,4 +1,3 @@
-using Cysharp.Threading.Tasks;
 using Global.Controller;
 using LoadingScene.View;
 using Signals;
@@ -6,22 +5,14 @@ using Zenject;
 
 namespace LoadingScene.Controller
 {
-    public interface ILoadingController
-    {
-        public void Show();
-        public void Hide();
-    }
-    public class LoadingController : ILoadingController
+    public class LoadingController
     {
         private readonly LoadingView _loadingView;
-        private readonly SignalBus _signalBus;
 
-        public LoadingController(LoadingView loadingView, SignalBus signalBus,GameController gameController)
+        public LoadingController(LoadingView loadingView, SignalBus signalBus)
         {
             _loadingView = loadingView;
-            _signalBus = signalBus;
-            _signalBus.Subscribe<GameStateReaction>(OnReaction);
-            gameController.LoadNextScene().Forget();
+            signalBus.Subscribe<GameStateReaction>(OnReaction);
         }
 
         private void OnReaction(GameStateReaction reaction)

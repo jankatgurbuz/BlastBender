@@ -4,7 +4,6 @@ using BoardItems.Border;
 using BoardItems.LevelData;
 using BoardItems.Void;
 using Gameplay.Pool.Border;
-using UnityEngine;
 
 namespace Blast.Controller
 {
@@ -112,7 +111,6 @@ namespace Blast.Controller
                 topBottomKey = JoinNumber(topBottomKey, GetKeyFragment(!boardItems[bottom, column].IsEmpty));
                 topBottomKey = JoinNumber(topBottomKey, 3);
                 item.TopBottomKey = topBottomKey;
-                Debug.Log(item.TopBottomKey);
             }
 
             CreateBorder(boardItems.Cast<Border>().ToArray());

@@ -1,6 +1,5 @@
 using LoadingScene.Controller;
 using LoadingScene.View;
-using NaughtyAttributes;
 using UnityEngine;
 using Zenject;
 
@@ -12,9 +11,8 @@ namespace LoadingScene.Installer
 
         public override void InstallBindings()
         {
-            Container.BindInterfacesTo<LoadingController>(). AsSingle().
-                WithArguments(_loadingView).NonLazy();
+            Container.Bind<LoadingController>().AsSingle().WithArguments(_loadingView).NonLazy();
+            Container.BindInterfacesTo<LoadingSceneInitializer>().AsSingle().NonLazy();
         }
     }
 }
-
